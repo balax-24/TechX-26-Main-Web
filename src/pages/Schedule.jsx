@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Clock, Moon, Sun, ArrowRight, Zap, CheckCircle2, GitFork } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import TechAtmosphere from '../components/TechAtmosphere';
 import { scheduleData } from '../data/schedule';
 
-export default function Schedule({ onOpenRegister }) {
+export default function Schedule() {
   const [activeDay, setActiveDay] = useState('day1');
 
   const currentSchedule = scheduleData[activeDay];
@@ -153,10 +154,10 @@ export default function Schedule({ onOpenRegister }) {
               <h3>READY TO PARTICIPATE IN THESE SESSIONS?</h3>
               <p>Reserve your track entry early before seat limits are reached.</p>
             </div>
-            <button onClick={onOpenRegister} className="btn btn-primary">
+            <Link to="/register" className="btn btn-primary">
               <span>REGISTER FOR SESSIONS</span>
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

@@ -7,7 +7,7 @@ import {
 import TechAtmosphere from '../components/TechAtmosphere';
 import { eventsData, ticketPricing } from '../data/events';
 
-export default function Events({ onOpenRegister }) {
+export default function Events() {
   const [selectedDayTab, setSelectedDayTab] = useState('all');
 
   const day1Events = eventsData.filter(evt => evt.day === 1);
@@ -407,10 +407,10 @@ export default function Events({ onOpenRegister }) {
               </div>
 
               <div className="pricing-card-action">
-                <button onClick={onOpenRegister} className="btn btn-primary" style={{ width: '100%' }}>
+                <Link to="/register" className="btn btn-primary" style={{ width: '100%' }}>
                   <span>REGISTER FOR DAY 1</span>
                   <ArrowRight size={16} />
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -450,10 +450,10 @@ export default function Events({ onOpenRegister }) {
               </div>
 
               <div className="pricing-card-action">
-                <button onClick={onOpenRegister} className="btn btn-primary" style={{ width: '100%' }}>
+                <Link to="/register" className="btn btn-primary" style={{ width: '100%' }}>
                   <span>REGISTER FOR DAY 2</span>
                   <ArrowRight size={16} />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

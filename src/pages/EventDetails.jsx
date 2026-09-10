@@ -8,7 +8,7 @@ import {
 import TechAtmosphere from '../components/TechAtmosphere';
 import { eventsData } from '../data/events';
 
-export default function EventDetails({ onOpenRegister }) {
+export default function EventDetails() {
   const { id } = useParams();
 
   // Backward compatibility alias redirects
@@ -73,10 +73,10 @@ export default function EventDetails({ onOpenRegister }) {
               </div>
 
               <div className="detail-hero-actions">
-                <button onClick={onOpenRegister} className="btn btn-primary">
+                <Link to={`/register?event=${event.id}`} className="btn btn-primary">
                   <span>REGISTER FOR EVENT</span>
                   <ArrowRight size={18} />
-                </button>
+                </Link>
                 <Link to="/schedule" className="btn btn-secondary">
                   <span>VIEW SCHEDULE</span>
                 </Link>
@@ -120,9 +120,9 @@ export default function EventDetails({ onOpenRegister }) {
               </div>
 
               <div className="spec-card-footer">
-                <button onClick={onOpenRegister} className="btn btn-primary" style={{ width: '100%' }}>
+                <Link to={`/register?event=${event.id}`} className="btn btn-primary" style={{ width: '100%' }}>
                   REGISTER FOR {event.publicTitle || event.title}
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -785,10 +785,10 @@ export default function EventDetails({ onOpenRegister }) {
               <h3>READY TO COMPETE IN {event.title}?</h3>
               <p>14–15 October 2026 • Sri Sai Ram Institute of Technology</p>
             </div>
-            <button onClick={onOpenRegister} className="btn btn-primary">
+            <Link to={`/register?event=${event.id}`} className="btn btn-primary">
               <span>REGISTER FOR TECHX'26</span>
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

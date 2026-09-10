@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Award } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import { leadershipData, techxJourney, techxAward } from '../data/leadership';
 import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
 
-export default function About({ onOpenRegister }) {
+export default function About() {
   return (
     <div className="about-page-root">
       <TechAtmosphere showArch={false} />
@@ -218,10 +219,10 @@ export default function About({ onOpenRegister }) {
               <h3>BE PART OF OUR 2026 MILESTONE</h3>
               <p>Experience the culmination of rigorous student-driven technology leadership.</p>
             </div>
-            <button onClick={onOpenRegister} className="btn btn-primary">
+            <Link to="/register" className="btn btn-primary">
               <span>JOIN TECHX'26</span>
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

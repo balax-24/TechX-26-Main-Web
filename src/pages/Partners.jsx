@@ -4,7 +4,7 @@ import TechAtmosphere from '../components/TechAtmosphere';
 import { partners } from '../data/partners';
 import { eventMeta } from '../data/contacts';
 
-export default function Partners({ onOpenRegister }) {
+export default function Partners() {
   return (
     <div className="partners-page-root">
       <TechAtmosphere showArch={false} />

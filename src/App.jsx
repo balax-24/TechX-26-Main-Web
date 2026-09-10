@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
-import RegistrationModal from './components/RegistrationModal';
 
 // Pages
 import Home from './pages/Home';
@@ -17,6 +16,7 @@ import Partners from './pages/Partners';
 import About from './pages/About';
 import Venue from './pages/Venue';
 import Contact from './pages/Contact';
+import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
@@ -29,15 +29,6 @@ function ScrollToTop() {
 
 export default function App() {
   const [loading, setLoading] = useState(true);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-
-  const handleOpenRegister = () => {
-    setIsRegisterModalOpen(true);
-  };
-
-  const handleCloseRegister = () => {
-    setIsRegisterModalOpen(false);
-  };
 
   return (
     <BrowserRouter>
@@ -50,32 +41,27 @@ export default function App() {
       <ScrollToTop />
 
       {/* Global Navbar */}
-      <Navbar onOpenRegister={handleOpenRegister} />
+      <Navbar />
 
       {/* Main Routed Content */}
       <main className="main-content-wrapper">
         <Routes>
-          <Route path="/" element={<Home onOpenRegister={handleOpenRegister} />} />
-          <Route path="/events" element={<Events onOpenRegister={handleOpenRegister} />} />
-          <Route path="/events/:id" element={<EventDetails onOpenRegister={handleOpenRegister} />} />
-          <Route path="/schedule" element={<Schedule onOpenRegister={handleOpenRegister} />} />
-          <Route path="/speakers" element={<Speakers onOpenRegister={handleOpenRegister} />} />
-          <Route path="/partners" element={<Partners onOpenRegister={handleOpenRegister} />} />
-          <Route path="/about" element={<About onOpenRegister={handleOpenRegister} />} />
-          <Route path="/venue" element={<Venue onOpenRegister={handleOpenRegister} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/speakers" element={<Speakers />} />
+          <Route path="/partners" element={<Partners />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/venue" element={<Venue />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
       {/* Global Footer */}
-      <Footer onOpenRegister={handleOpenRegister} />
-
-      {/* Global Registration Modal */}
-      <RegistrationModal 
-        isOpen={isRegisterModalOpen} 
-        onClose={handleCloseRegister} 
-      />
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -4,7 +4,7 @@ import { ArrowUpRight, Mail, MapPin, Calendar, Heart, Shield } from 'lucide-reac
 import logoImg from '../assets/logo/techx-logo-cropped.png';
 import { eventMeta } from '../data/contacts';
 
-export default function Footer({ onOpenRegister }) {
+export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -46,6 +46,8 @@ export default function Footer({ onOpenRegister }) {
           <Link to="/venue">VENUE</Link>
           <span className="nav-dot">•</span>
           <Link to="/contact">CONTACT</Link>
+          <span className="nav-dot">•</span>
+          <Link to="/register">REGISTER</Link>
         </nav>
 
         {/* Liaison & Copyright Strip */}

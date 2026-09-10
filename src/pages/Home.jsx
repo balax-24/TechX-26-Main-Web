@@ -8,7 +8,7 @@ import { eventMeta } from '../data/contacts';
 import logoImg from '../assets/logo/techx-logo-cropped.png';
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 
-export default function Home({ onOpenRegister }) {
+export default function Home() {
   // 7 Official TechX'26 Events
   const officialEvents = eventsData;
 
@@ -75,10 +75,10 @@ export default function Home({ onOpenRegister }) {
 
             {/* 6. Primary and Secondary CTAs */}
             <div className="hero-actions-group">
-              <button onClick={onOpenRegister} className="btn btn-primary hero-cta-btn">
+              <Link to="/register" className="btn btn-primary hero-cta-btn">
                 <span>REGISTER NOW</span>
                 <ArrowRight size={16} />
-              </button>
+              </Link>
               <Link to="/events" className="btn btn-secondary hero-cta-btn">
                 <span>EXPLORE EVENTS</span>
                 <ChevronRight size={16} />
@@ -449,10 +449,10 @@ export default function Home({ onOpenRegister }) {
               14 — 15 OCTOBER 2026 • SRI SAI RAM INSTITUTE OF TECHNOLOGY
             </p>
             <div className="final-cta-actions">
-              <button onClick={onOpenRegister} className="btn btn-primary" style={{ padding: '1.1rem 2.5rem', fontSize: '0.95rem' }}>
+              <Link to="/register" className="btn btn-primary" style={{ padding: '1.1rem 2.5rem', fontSize: '0.95rem' }}>
                 <span>REGISTER FOR TECHX'26</span>
                 <ArrowRight size={18} />
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import logoImg from '../assets/logo/techx-logo-cropped.png';
 
-export default function Navbar({ onOpenRegister }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -45,6 +45,7 @@ export default function Navbar({ onOpenRegister }) {
     { to: '/about', label: 'ABOUT' },
     { to: '/venue', label: 'VENUE' },
     { to: '/contact', label: 'CONTACT' },
+    { to: '/register', label: 'REGISTER' },
   ];
 
   return (
@@ -77,14 +78,14 @@ export default function Navbar({ onOpenRegister }) {
 
           {/* Right Action */}
           <div className="navbar-actions">
-            <button 
-              onClick={onOpenRegister} 
+            <Link 
+              to="/register" 
               className="btn btn-primary nav-register-btn"
               aria-label="Register for TechX'26"
             >
               <span>REGISTER</span>
               <ArrowRight size={14} />
-            </button>
+            </Link>
 
             {/* Mobile Hamburger Toggle */}
             <button 
@@ -134,16 +135,14 @@ export default function Navbar({ onOpenRegister }) {
             </div>
 
             <div className="mobile-nav-footer">
-              <button 
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenRegister();
-                }} 
+              <Link 
+                to="/register"
+                onClick={() => setMobileMenuOpen(false)} 
                 className="btn btn-purple mobile-register-btn"
               >
                 <span>REGISTER NOW</span>
                 <ArrowRight size={16} />
-              </button>
+              </Link>
 
               <div className="mobile-organizer-info">
                 <span>IEEE COMPUTER SOCIETY STUDENT BRANCH CHAPTER</span>

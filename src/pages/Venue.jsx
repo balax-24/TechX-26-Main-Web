@@ -5,7 +5,7 @@ import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-bu
 import sairamFountainImg from '../assets/architecture/sairam-fountain.png';
 import { eventMeta } from '../data/contacts';
 
-export default function Venue({ onOpenRegister }) {
+export default function Venue() {
   return (
     <div className="venue-page-root">
       <TechAtmosphere showArch={false} />

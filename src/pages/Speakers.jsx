@@ -4,7 +4,7 @@ import SectionHeading from '../components/SectionHeading';
 import TechAtmosphere from '../components/TechAtmosphere';
 import { speakerCategories, keynoteSpeakers, industryMentors, juryPanels } from '../data/speakers';
 
-export default function Speakers({ onOpenRegister }) {
+export default function Speakers() {
   const [activeTab, setActiveTab] = useState('all');
 
   return (
