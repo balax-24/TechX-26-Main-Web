@@ -1,0 +1,616 @@
+import React from 'react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import TechAtmosphere from '../components/TechAtmosphere';
+import { leadershipData, techxJourney } from '../data/leadership';
+import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
+
+export default function About({ onOpenRegister }) {
+  return (
+    <div className="about-page-root">
+      <TechAtmosphere showArch={false} />
+
+      {/* Hero */}
+      <section className="about-hero-section">
+        <div className="container">
+          <span className="section-eyebrow">TECHX MADRAS 2026</span>
+          <h1 className="about-hero-title">
+            ABOUT TECHX
+          </h1>
+          <p className="about-hero-sub">
+            TECHX MADRAS is a technology-focused initiative by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+          </p>
+        </div>
+      </section>
+
+      {/* What is TechX & Architectural Focus */}
+      <section className="about-overview-section">
+        <div className="container">
+          <div className="overview-editorial-grid">
+            <div className="editorial-copy">
+              <span className="section-eyebrow">THE FOUNDATION</span>
+              <h2 className="overview-heading">WHAT IS TECHX?</h2>
+              
+              <p className="overview-lead">
+                TECHX MADRAS is a technology-focused initiative organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+              </p>
+              
+              <p className="overview-body">
+                It brings together students, technology enthusiasts, mentors and industry professionals through hands-on technical experiences, competitions, workshops and innovation-driven challenges.
+              </p>
+
+              <p className="overview-body">
+                Conceived as an arena for deep technical rigor rather than routine symposium presentations, TechX centers on real execution: 24-hour endurance software engineering, vulnerability exploitation and threat analysis, on-device TinyML deployment, and viable business ideation.
+              </p>
+
+              <div className="overview-pillars">
+                <div className="pillar-item">
+                  <CheckCircle2 size={16} color="var(--purple-light)" />
+                  <span>Hands-on Engineering & 24H Championship</span>
+                </div>
+                <div className="pillar-item">
+                  <CheckCircle2 size={16} color="var(--purple-light)" />
+                  <span>Global IEEE Professional Standards</span>
+                </div>
+                <div className="pillar-item">
+                  <CheckCircle2 size={16} color="var(--purple-light)" />
+                  <span>Frontier Hardware & Embedded TinyML</span>
+                </div>
+                <div className="pillar-item">
+                  <CheckCircle2 size={16} color="var(--purple-light)" />
+                  <span>Direct Industry Mentorship Roster</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Architectural Heritage Visual Detail */}
+            <div className="editorial-visual-col">
+              <div className="arch-blueprint-card">
+                <div className="arch-card-frame">
+                  <img 
+                    src={sairamHeritageBuildingImg} 
+                    alt="Sri Sai Ram Institute of Technology Architectural Heritage" 
+                    className="heritage-arch-img"
+                    loading="lazy"
+                  />
+                  <div className="arch-frame-fade"></div>
+                </div>
+                <div className="arch-card-meta">
+                  <div className="meta-left">
+                    <span className="campus-label">HOST INSTITUTION</span>
+                    <strong>SRI SAI RAM INSTITUTE OF TECHNOLOGY</strong>
+                  </div>
+                  <span className="meta-tag">CHENNAI, TAMIL NADU</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Journey: TechX 2025 -> TechX 2026 (Small Historical Reference) */}
+      <section className="section journey-transition-section">
+        <div className="container">
+          <div className="journey-head">
+            <span className="section-eyebrow">THE JOURNEY</span>
+            <h2 className="journey-title">TECHX'25 → TECHX'26</h2>
+            <p className="journey-sub">
+              TechX Madras 2025 laid the foundation for the next chapter.
+            </p>
+          </div>
+
+          <div className="journey-transition-grid">
+            {techxJourney.map((j, idx) => (
+              <div key={idx} className={`journey-milestone-card ${j.year === '2026' ? 'milestone-current' : ''}`}>
+                <div className="milestone-top">
+                  <span className="milestone-year">{j.year}</span>
+                  <span className="milestone-tag">{j.tagline}</span>
+                </div>
+                <h3 className="milestone-event">{j.event}</h3>
+                <p className="milestone-summary">{j.summary}</p>
+                {j.year === '2026' && (
+                  <div className="current-chapter-badge">
+                    <Sparkles size={14} color="var(--purple-light)" />
+                    <span>THE NEXT CHAPTER BEGINS • 14 — 15 OCT 2026</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* IEEE CS Student Branch Chapter Charter */}
+      <section className="about-chapter-section">
+        <div className="container">
+          <div className="chapter-banner-card">
+            <div className="chapter-text-content">
+              <span className="section-eyebrow">ORGANIZING BODY</span>
+              <h2 className="chapter-title">IEEE COMPUTER SOCIETY STUDENT BRANCH CHAPTER</h2>
+              <p className="chapter-lead">
+                The IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology provides an enduring launchpad for student researchers, developers, and builders.
+              </p>
+              <p className="chapter-desc">
+                Operating under the world's premier computing society, the chapter fosters academic excellence, peer-led research, hackathon culture, and direct professional development through global IEEE programs, certifications, and technical symposiums.
+              </p>
+            </div>
+            <div className="chapter-badge-side">
+              <div className="chapter-seal-box">
+                <ShieldCheck size={36} color="var(--purple-light)" />
+                <span className="seal-code">IEEE CS SBC</span>
+                <span className="seal-sub">SIT CHENNAI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Institutional Leadership */}
+      <section className="section leadership-section">
+        <div className="container">
+          <div className="leadership-head">
+            <span className="section-eyebrow">EXECUTIVE PATRONS</span>
+            <h2 className="leadership-title">INSTITUTIONAL LEADERSHIP</h2>
+            <p className="leadership-sub">
+              Visionary guidance providing the bedrock for engineering excellence and student innovation at Sri Sai Ram Institute of Technology.
+            </p>
+          </div>
+
+          <div className="leadership-grid">
+            {leadershipData.map((leader) => (
+              <div key={leader.name} className="leader-card">
+                <div className="leader-avatar-frame">
+                  <div className="leader-placeholder-box">
+                    <span className="leader-seal">SSIT</span>
+                  </div>
+                </div>
+
+                <div className="leader-info">
+                  <h3 className="leader-name">{leader.name}</h3>
+                  <span className="leader-role">{leader.role}</span>
+                  <span className="leader-org">{leader.organization}</span>
+                  <p className="leader-desc">{leader.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="about-footer-banner">
+            <div>
+              <h3>BE PART OF OUR 2026 MILESTONE</h3>
+              <p>Experience the culmination of rigorous student-driven technology leadership.</p>
+            </div>
+            <button onClick={onOpenRegister} className="btn btn-primary">
+              <span>JOIN TECHX'26</span>
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        .about-page-root {
+          padding-top: var(--nav-height);
+          background: #000000;
+          min-height: 100vh;
+        }
+        .about-hero-section {
+          padding: 5rem 0 3.5rem;
+          border-bottom: 1px solid var(--border-subtle);
+          position: relative;
+        }
+        .about-hero-title {
+          font-family: var(--font-display);
+          font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+          line-height: 0.95;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+          margin: 1rem 0 1.5rem;
+        }
+        .about-hero-sub {
+          font-size: 1.15rem;
+          max-width: 740px;
+        }
+
+        /* Overview Editorial */
+        .about-overview-section {
+          padding: 5.5rem 0;
+        }
+        .overview-editorial-grid {
+          display: grid;
+          grid-template-columns: 1.25fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+        @media (max-width: 1024px) {
+          .overview-editorial-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+          }
+        }
+        .overview-heading {
+          font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+          text-transform: uppercase;
+          margin-bottom: 1.5rem;
+        }
+        .overview-lead {
+          font-size: 1.2rem;
+          font-weight: 500;
+          color: var(--white);
+          margin-bottom: 1.25rem;
+          line-height: 1.6;
+        }
+        .overview-body {
+          font-size: 1rem;
+          color: var(--muted);
+          line-height: 1.7;
+          margin-bottom: 1.25rem;
+        }
+        .overview-pillars {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          margin-top: 2rem;
+        }
+        @media (max-width: 600px) {
+          .overview-pillars {
+            grid-template-columns: 1fr;
+          }
+        }
+        .pillar-item {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          font-size: 0.88rem;
+          color: var(--off-white);
+        }
+
+        /* Architecture Heritage Visual Card */
+        .arch-blueprint-card {
+          background: #0B0714;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          transition: var(--transition-normal);
+        }
+        .arch-blueprint-card:hover {
+          border-color: var(--purple-light);
+          box-shadow: 0 10px 35px rgba(138, 43, 226, 0.2);
+        }
+        .arch-card-frame {
+          position: relative;
+          height: 380px;
+          background: #060408;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .heritage-arch-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(100%) contrast(110%) brightness(85%);
+          opacity: 0.85;
+          transition: transform 0.5s ease;
+        }
+        .arch-blueprint-card:hover .heritage-arch-img {
+          transform: scale(1.03);
+          opacity: 0.95;
+        }
+        .arch-frame-fade {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(11, 7, 20, 0.95) 0%, transparent 60%);
+        }
+        .arch-card-meta {
+          padding: 1.25rem 1.75rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+          border-top: 1px solid var(--border);
+        }
+        .meta-left {
+          display: flex;
+          flex-direction: column;
+        }
+        .campus-label {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: var(--purple-light);
+          letter-spacing: 0.1em;
+        }
+        .meta-left strong {
+          font-size: 0.95rem;
+          color: var(--white);
+        }
+        .meta-tag {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--muted);
+        }
+
+        /* Chapter Banner */
+        .about-chapter-section {
+          padding: 2rem 0 5rem;
+        }
+        .chapter-banner-card {
+          background: #090510;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 3.5rem;
+          display: grid;
+          grid-template-columns: 1.5fr 1fr;
+          gap: 3rem;
+          align-items: center;
+        }
+        @media (max-width: 900px) {
+          .chapter-banner-card {
+            grid-template-columns: 1fr;
+            padding: 2.5rem 2rem;
+          }
+        }
+        @media (max-width: 600px) {
+          .chapter-banner-card {
+            padding: 1.75rem 1.25rem !important;
+          }
+          .chapter-seal-box {
+            padding: 1.5rem 1rem !important;
+            width: 100%;
+          }
+          .arch-card-frame {
+            height: 240px !important;
+          }
+          .arch-card-meta {
+            padding: 1rem 1.25rem !important;
+          }
+          .journey-milestone-card {
+            padding: 1.75rem 1.25rem !important;
+          }
+          .leader-card {
+            padding: 1.75rem 1.25rem !important;
+          }
+        }
+        .chapter-title {
+          font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+          text-transform: uppercase;
+          margin-bottom: 1.25rem;
+        }
+        .chapter-lead {
+          font-size: 1.1rem;
+          color: var(--off-white);
+          margin-bottom: 1rem;
+          line-height: 1.6;
+        }
+        .chapter-desc {
+          font-size: 0.95rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+        .chapter-badge-side {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .chapter-seal-box {
+          padding: 2.5rem;
+          border-radius: var(--radius-md);
+          background: rgba(138, 43, 226, 0.08);
+          border: 1px dashed var(--purple-light);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+          text-align: center;
+        }
+        .seal-code {
+          font-family: var(--font-display);
+          font-size: 1.6rem;
+          letter-spacing: 0.08em;
+          color: var(--white);
+        }
+        .seal-sub {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--purple-light);
+          letter-spacing: 0.15em;
+        }
+
+        /* The Journey Transition */
+        .journey-transition-section {
+          background: #060408;
+          padding: 6rem 0;
+          border-top: 1px solid var(--border-subtle);
+          border-bottom: 1px solid var(--border-subtle);
+        }
+        .journey-head {
+          text-align: center;
+          max-width: 650px;
+          margin: 0 auto 3.5rem;
+        }
+        .journey-title {
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+        }
+        .journey-transition-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+          .journey-transition-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .journey-milestone-card {
+          background: #0B0714;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: var(--transition-normal);
+        }
+        .milestone-current {
+          border-color: var(--purple-light);
+          background: #0E081A;
+          box-shadow: 0 0 30px rgba(138, 43, 226, 0.15);
+        }
+        .milestone-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+        }
+        .milestone-year {
+          font-family: var(--font-display);
+          font-size: 3rem;
+          color: var(--purple-light);
+          line-height: 1;
+        }
+        .milestone-tag {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          letter-spacing: 0.1em;
+          color: var(--muted);
+          text-transform: uppercase;
+        }
+        .milestone-event {
+          font-size: 1.4rem;
+          color: var(--white);
+          margin-bottom: 0.75rem;
+        }
+        .milestone-summary {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--muted);
+        }
+        .current-chapter-badge {
+          margin-top: 1.5rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--purple-light);
+          background: rgba(138, 43, 226, 0.15);
+          padding: 0.4rem 0.85rem;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border);
+        }
+
+        /* Leadership */
+        .leadership-section {
+          padding: 6rem 0;
+          background: #000000;
+        }
+        .leadership-head {
+          text-align: center;
+          max-width: 680px;
+          margin: 0 auto 3.5rem;
+        }
+        .leadership-title {
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+        }
+        .leadership-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+          max-width: 1200px;
+          margin: 0 auto 5rem;
+        }
+        @media (max-width: 1024px) {
+          .leadership-grid {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+          }
+        }
+        .leader-card {
+          background: #0B0714;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          transition: var(--transition-normal);
+        }
+        .leader-card:hover {
+          border-color: var(--purple-light);
+          transform: translateY(-4px);
+          box-shadow: 0 10px 35px rgba(138, 43, 226, 0.2);
+        }
+        .leader-avatar-frame {
+          margin-bottom: 1.5rem;
+        }
+        .leader-placeholder-box {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          background: rgba(138, 43, 226, 0.12);
+          border: 2px dashed var(--border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .leader-seal {
+          font-family: var(--font-display);
+          font-size: 1.4rem;
+          color: var(--purple-light);
+          letter-spacing: 0.08em;
+        }
+        .leader-name {
+          font-size: 1.35rem;
+          margin-bottom: 0.25rem;
+          color: var(--white);
+        }
+        .leader-role {
+          display: block;
+          font-family: var(--font-heading);
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: var(--purple-light);
+          margin-bottom: 0.25rem;
+        }
+        .leader-org {
+          display: block;
+          font-size: 0.82rem;
+          color: var(--muted);
+          margin-bottom: 1.25rem;
+        }
+        .leader-desc {
+          font-size: 0.9rem;
+          line-height: 1.6;
+          color: #CCC6D2;
+        }
+
+        /* Bottom Banner */
+        .about-footer-banner {
+          background: rgba(14, 9, 24, 0.7);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2.5rem 3rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 2rem;
+          flex-wrap: wrap;
+        }
+        .about-footer-banner h3 {
+          font-size: 1.5rem;
+          text-transform: uppercase;
+          margin-bottom: 0.35rem;
+        }
+      `}</style>
+    </div>
+  );
+}

@@ -1,0 +1,662 @@
+import React from 'react';
+import { MapPin, Navigation, Car, Train, Bus, Plane, Calendar, ArrowRight, Compass } from 'lucide-react';
+import TechAtmosphere from '../components/TechAtmosphere';
+import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
+import sairamFountainImg from '../assets/architecture/sairam-fountain.png';
+import { eventMeta } from '../data/contacts';
+
+export default function Venue({ onOpenRegister }) {
+  const transitModes = [
+    {
+      mode: "BY ROAD",
+      icon: <Car size={22} color="var(--purple-light)" />,
+      status: "Information coming soon",
+      desc: "Detailed driving routes, parking arrangements, and campus arterial gate instructions will be posted before the event."
+    },
+    {
+      mode: "BY TRAIN",
+      icon: <Train size={22} color="var(--purple-light)" />,
+      status: "Information coming soon",
+      desc: "Information regarding nearest major railway hubs (Tambaram / Chennai Central / Egmore) and shuttle coordinates to be provided."
+    },
+    {
+      mode: "BY BUS",
+      icon: <Bus size={22} color="var(--purple-light)" />,
+      status: "Information coming soon",
+      desc: "Designated institutional bus transit routes and metropolitan bus numbers will be announced prior to delegate arrival."
+    },
+    {
+      mode: "BY AIR",
+      icon: <Plane size={22} color="var(--purple-light)" />,
+      status: "Information coming soon",
+      desc: "Travel guidance for interstate and international IEEE delegates arriving via Chennai International Airport (MAA) to campus."
+    }
+  ];
+
+  return (
+    <div className="venue-page-root">
+      <TechAtmosphere showArch={false} />
+
+      {/* Hero */}
+      <section className="venue-hero-section">
+        <div className="container">
+          <span className="section-eyebrow">HOST CAMPUS & ARENA</span>
+          <h1 className="venue-hero-title">
+            THE VENUE<br />
+            <span className="text-purple-highlight">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
+          </h1>
+          <div className="venue-hero-meta-bar">
+            <div className="meta-pill">
+              <Calendar size={15} color="var(--purple-light)" />
+              <span>14 — 15 OCTOBER 2026</span>
+            </div>
+            <div className="meta-pill">
+              <MapPin size={15} color="var(--purple-light)" />
+              <span>CHENNAI, TAMIL NADU</span>
+            </div>
+            <div className="meta-pill">
+              <Compass size={15} color="var(--purple-light)" />
+              <span>IEEE COMPUTER SOCIETY SBC</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Primary Architectural Showcase: Heritage Building & Fountain */}
+      <section className="venue-architectural-section">
+        <div className="container">
+          <div className="venue-monument-grid">
+            {/* Main Heritage Building Artwork */}
+            <div className="monument-main-frame">
+              <div className="monument-image-wrapper">
+                <img 
+                  src={sairamHeritageBuildingImg} 
+                  alt="Sri Sai Ram Institute of Technology Heritage Architecture" 
+                  className="monument-image"
+                />
+                <div className="monument-gradient-overlay"></div>
+                <div className="monument-spec-label">
+                  <span className="spec-mono">ARCHITECTURAL IDENTITY // SEAT OF INNOVATION</span>
+                  <strong>SRI SAI RAM INSTITUTE OF TECHNOLOGY</strong>
+                </div>
+              </div>
+            </div>
+
+            {/* Fountain Motif & Campus Identity */}
+            <div className="monument-motif-frame">
+              <div className="fountain-wrapper">
+                <img 
+                  src={sairamFountainImg} 
+                  alt="Sri Sai Ram Institute of Technology Campus Fountain" 
+                  className="fountain-image"
+                />
+                <div className="fountain-glow-radial"></div>
+              </div>
+              <div className="fountain-caption">
+                <span className="fountain-tag">CAMPUS MOTIF</span>
+                <h4>THE PLACE WHERE TECHX'26 TAKES SHAPE</h4>
+                <p>
+                  A timeless center point connecting innovation labs, auditoriums, and open collaborative squares across the campus grounds.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Location & Details Card */}
+      <section className="venue-details-section">
+        <div className="container">
+          <div className="venue-info-grid">
+            {/* Address Specification */}
+            <div className="venue-card-primary">
+              <div className="venue-badge">EVENT DESTINATION</div>
+              <h2 className="venue-h2">LOCATION & DETAILS</h2>
+
+              <div className="venue-spec-list">
+                <div className="spec-row">
+                  <span className="spec-title">VENUE</span>
+                  <strong className="spec-val">Sri Sai Ram Institute of Technology</strong>
+                </div>
+
+                <div className="spec-row">
+                  <span className="spec-title">DATES</span>
+                  <strong className="spec-val">14th & 15th October 2026</strong>
+                </div>
+
+                <div className="spec-row highlight-row">
+                  <span className="spec-title">FULL ADDRESS</span>
+                  <strong className="spec-val addr-status">Coming soon</strong>
+                  <p className="spec-hint">
+                    Official address coordinates, designated gate numbers, and campus building blocks will be provided along with confirmed entry passes.
+                  </p>
+                </div>
+              </div>
+
+              <div className="venue-amenities-pills">
+                <span className="amenity-badge">• High-Speed Hackathon Wi-Fi</span>
+                <span className="amenity-badge">• 24-Hour Continuous Power Infrastructure</span>
+                <span className="amenity-badge">• Air-Conditioned Auditoriums</span>
+                <span className="amenity-badge">• Dedicated Hardware & Embedded Labs</span>
+                <span className="amenity-badge">• On-Campus Refreshments & Dining</span>
+              </div>
+
+              <div className="venue-register-cta">
+                <button onClick={onOpenRegister} className="btn btn-primary" style={{ width: '100%' }}>
+                  <span>REQUEST ENTRY PASS NOTIFICATION</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Map Placeholder */}
+            <div className="map-standin-card">
+              <div className="map-standin-head">
+                <span className="section-eyebrow">GEOGRAPHIC ANCHOR</span>
+                <h3 className="map-standin-title">LOCATION MAP</h3>
+              </div>
+
+              <div className="map-standin-visual">
+                <div className="radar-grid"></div>
+                <div className="radar-ping"></div>
+                <div className="map-center-pin">
+                  <MapPin size={28} color="var(--purple-light)" />
+                  <span className="pin-title">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
+                  <span className="pin-sub">Chennai, Tamil Nadu</span>
+                </div>
+              </div>
+
+              <div className="map-standin-footer">
+                <span className="map-status-pill">Coming soon</span>
+                <p>Interactive satellite map and campus navigation waypoints will be enabled prior to the event.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Transit & Commute */}
+      <section className="section section-light transit-section">
+        <div className="container">
+          <div className="transit-head">
+            <span className="section-eyebrow" style={{ color: 'var(--purple-deep)' }}>ARRIVAL LOGISTICS</span>
+            <h2 className="transit-title" style={{ color: '#0E0918' }}>TRAVEL INFORMATION</h2>
+            <p className="transit-sub" style={{ color: '#554D5D' }}>
+              Travel and commute guidance for regional and outstation delegates arriving at Sri Sai Ram Institute of Technology. (Coming soon)
+            </p>
+          </div>
+
+          <div className="transit-grid">
+            {transitModes.map((t) => (
+              <div key={t.mode} className="transit-card">
+                <div className="transit-top">
+                  <div className="transit-icon-wrap">{t.icon}</div>
+                  <span className="transit-mode-name">{t.mode}</span>
+                </div>
+                
+                <span className="transit-status-badge">{t.status}</span>
+                <p className="transit-desc">{t.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        .venue-page-root {
+          padding-top: var(--nav-height);
+          background: #000000;
+          min-height: 100vh;
+        }
+        .venue-hero-section {
+          padding: 5rem 0 3.5rem;
+          border-bottom: 1px solid var(--border-subtle);
+          position: relative;
+        }
+        .venue-hero-title {
+          font-family: var(--font-display);
+          font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+          line-height: 0.95;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+          margin: 1rem 0 1.5rem;
+        }
+        .venue-hero-meta-bar {
+          display: flex;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+          margin-top: 2rem;
+        }
+        .meta-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          color: var(--white);
+          background: rgba(138, 43, 226, 0.1);
+          border: 1px solid var(--border);
+          padding: 0.45rem 1rem;
+          border-radius: var(--radius-sm);
+        }
+
+        /* Monument Architectural Section */
+        .venue-architectural-section {
+          padding: 4.5rem 0 3rem;
+        }
+        .venue-monument-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+          gap: 2.5rem;
+          align-items: stretch;
+        }
+        @media (max-width: 1024px) {
+          .venue-monument-grid {
+            grid-template-columns: minmax(0, 1fr);
+          }
+        }
+        .monument-main-frame {
+          background: #0B0714;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          position: relative;
+          display: flex;
+        }
+        .monument-image-wrapper {
+          position: relative;
+          width: 100%;
+          min-height: 480px;
+          background: #060408;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .monument-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(100%) contrast(115%) brightness(85%);
+          opacity: 0.85;
+          transition: var(--transition-normal);
+        }
+        .monument-main-frame:hover .monument-image {
+          opacity: 0.95;
+          transform: scale(1.02);
+        }
+        .monument-gradient-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(11, 7, 20, 0.95) 0%, transparent 60%);
+        }
+        .monument-spec-label {
+          position: absolute;
+          bottom: 1.5rem;
+          left: 1.5rem;
+          right: 1.5rem;
+          background: rgba(7, 5, 10, 0.85);
+          border: 1px solid var(--border);
+          padding: 1rem 1.25rem;
+          border-radius: var(--radius-sm);
+          backdrop-filter: blur(8px);
+          display: flex;
+          flex-direction: column;
+        }
+        .spec-mono {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: var(--purple-light);
+          letter-spacing: 0.1em;
+        }
+        .monument-spec-label strong {
+          font-size: 0.95rem;
+          color: var(--white);
+          margin-top: 0.2rem;
+        }
+
+        /* Fountain Motif Frame */
+        .monument-motif-frame {
+          background: #090510;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+        @media (max-width: 600px) {
+          .monument-motif-frame {
+            padding: 1.75rem 1rem;
+          }
+          .monument-image-wrapper {
+            min-height: 260px !important;
+          }
+          .monument-spec-label {
+            left: 0.75rem !important;
+            right: 0.75rem !important;
+            bottom: 0.75rem !important;
+            padding: 0.75rem !important;
+          }
+        }
+        .fountain-wrapper {
+          position: relative;
+          width: 220px;
+          height: 260px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1.5rem;
+        }
+        .fountain-image {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+          filter: grayscale(100%) contrast(120%) brightness(85%);
+          opacity: 0.8;
+          transition: var(--transition-normal);
+        }
+        .monument-motif-frame:hover .fountain-image {
+          opacity: 0.95;
+          transform: translateY(-4px);
+        }
+        .fountain-glow-radial {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, transparent 70%);
+          pointer-events: none;
+        }
+        .fountain-tag {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          letter-spacing: 0.15em;
+          color: var(--purple-light);
+          display: block;
+          margin-bottom: 0.35rem;
+        }
+        .fountain-caption h4 {
+          font-size: 1.3rem;
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+          color: var(--white);
+        }
+        .fountain-caption p {
+          font-size: 0.88rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+
+        /* Details Grid */
+        .venue-details-section {
+          padding: 3rem 0 6rem;
+        }
+        .venue-info-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+          gap: 2.5rem;
+        }
+        @media (max-width: 1024px) {
+          .venue-info-grid {
+            grid-template-columns: minmax(0, 1fr);
+          }
+        }
+        .venue-card-primary {
+          background: #0B0714;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 3rem;
+          max-width: 100%;
+          min-width: 0;
+          box-sizing: border-box;
+        }
+        @media (max-width: 600px) {
+          .venue-card-primary {
+            padding: 1.5rem 1rem;
+          }
+          .venue-card-primary .btn {
+            white-space: normal;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            padding: 0.85rem 1rem;
+          }
+          .map-standin-head {
+            padding: 1.25rem !important;
+          }
+          .map-standin-footer {
+            padding: 1.25rem !important;
+          }
+        }
+        .venue-badge {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 0.5rem;
+        }
+        .venue-h2 {
+          font-size: clamp(1.8rem, 3vw, 2.4rem);
+          text-transform: uppercase;
+          margin-bottom: 2rem;
+          color: var(--white);
+        }
+        .venue-spec-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-bottom: 2.5rem;
+        }
+        .spec-row {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          padding-bottom: 1rem;
+          word-break: break-word;
+        }
+        .spec-title {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--muted);
+          letter-spacing: 0.1em;
+        }
+        .spec-val {
+          font-size: 1.15rem;
+          color: var(--white);
+        }
+        .addr-status {
+          color: var(--purple-light);
+          font-size: 1.25rem;
+        }
+        .spec-hint {
+          font-size: 0.85rem;
+          color: var(--muted);
+          margin-top: 0.35rem;
+          line-height: 1.5;
+        }
+        .venue-amenities-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-bottom: 2.5rem;
+        }
+        .amenity-badge {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
+          padding: 0.4rem 0.85rem;
+          border-radius: var(--radius-sm);
+          color: var(--off-white);
+          max-width: 100%;
+          white-space: normal;
+          word-break: break-word;
+        }
+
+        /* Map Stand-in */
+        .map-standin-card {
+          background: #090510;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+        .map-standin-head {
+          padding: 2rem;
+          border-bottom: 1px solid var(--border);
+        }
+        .map-standin-title {
+          font-size: 1.4rem;
+          text-transform: uppercase;
+          margin-top: 0.25rem;
+        }
+        .map-standin-visual {
+          height: 280px;
+          background: #050308;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+        .radar-grid {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(138, 43, 226, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(138, 43, 226, 0.08) 1px, transparent 1px);
+          background-size: 35px 35px;
+        }
+        .radar-ping {
+          position: absolute;
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          border: 1px solid var(--purple-light);
+          animation: pulseGlow 2.2s infinite;
+        }
+        .map-center-pin {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.35rem;
+        }
+        .pin-title {
+          font-family: var(--font-heading);
+          font-weight: 700;
+          font-size: 0.95rem;
+          color: var(--white);
+        }
+        .pin-sub {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--purple-light);
+        }
+        .map-standin-footer {
+          padding: 1.5rem 2rem;
+          border-top: 1px solid var(--border);
+          background: rgba(0, 0, 0, 0.4);
+        }
+        .map-status-pill {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--purple-light);
+          background: rgba(138, 43, 226, 0.15);
+          padding: 0.25rem 0.65rem;
+          border-radius: var(--radius-sm);
+          margin-bottom: 0.5rem;
+        }
+        .map-standin-footer p {
+          font-size: 0.85rem;
+          color: var(--muted);
+          line-height: 1.5;
+        }
+
+        /* Transit Section */
+        .transit-section {
+          padding: 6rem 0;
+        }
+        .transit-head {
+          text-align: center;
+          max-width: 680px;
+          margin: 0 auto 3.5rem;
+        }
+        .transit-title {
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+        }
+        .transit-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+        }
+        @media (max-width: 1100px) {
+          .transit-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 600px) {
+          .transit-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .transit-card {
+          background: #FFFFFF;
+          border: 1px solid rgba(138, 43, 226, 0.2);
+          border-radius: var(--radius-md);
+          padding: 2.25rem 1.75rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .transit-top {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 1.25rem;
+        }
+        .transit-icon-wrap {
+          width: 44px;
+          height: 44px;
+          border-radius: var(--radius-sm);
+          background: rgba(138, 43, 226, 0.1);
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .transit-mode-name {
+          font-family: var(--font-display);
+          font-size: 1.6rem;
+          color: #0E0918;
+          letter-spacing: 0.04em;
+        }
+        .transit-status-badge {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--purple-deep);
+          background: rgba(138, 43, 226, 0.1);
+          padding: 0.25rem 0.65rem;
+          border-radius: var(--radius-sm);
+          margin-bottom: 1rem;
+          font-weight: 600;
+        }
+        .transit-desc {
+          font-size: 0.88rem;
+          line-height: 1.55;
+          color: #554D5D;
+        }
+      `}</style>
+    </div>
+  );
+}
