@@ -4,16 +4,22 @@ export const techxJourney = [
   {
     event: "TECHX MADRAS 2025",
     year: "2025",
-    tagline: "THE INAUGURAL CHAPTER",
+    tagline: "THE FOUNDATION",
     summary: "TechX Madras 2025 brought together students, technologists, and mentors across the region, laying the foundation for our flagship technology experience."
   },
   {
     event: "TECHX MADRAS 2026",
     year: "2026",
-    tagline: "IGNITE THE CODE. OWN THE FUTURE.",
+    tagline: "THE NEXT CHAPTER",
     summary: "14 — 15 OCTOBER 2026. The next chapter begins with an expanded 24-hour software engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas."
   }
 ];
+
+export const techxAward = {
+  title: "OUTSTANDING HOST AWARD",
+  position: "1st Place — TechX 2025",
+  context: "Recognized by the IEEE Computer Society Students & Young Professionals Committee under the TechX 2025 series."
+};
 
 export const leadershipData = [
   {

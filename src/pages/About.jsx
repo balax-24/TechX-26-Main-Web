@@ -1,7 +1,7 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Award } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
-import { leadershipData, techxJourney } from '../data/leadership';
+import { leadershipData, techxJourney, techxAward } from '../data/leadership';
 import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
 
 export default function About({ onOpenRegister }) {
@@ -87,34 +87,72 @@ export default function About({ onOpenRegister }) {
         </div>
       </section>
 
-      {/* The Journey: TechX 2025 -> TechX 2026 (Small Historical Reference) */}
+      {/* The Journey: TechX 2025 -> Outstanding Host Award -> TechX 2026 */}
       <section className="section journey-transition-section">
         <div className="container">
           <div className="journey-head">
-            <span className="section-eyebrow">THE JOURNEY</span>
-            <h2 className="journey-title">TECHX'25 → TECHX'26</h2>
+            <span className="section-eyebrow">THE TECHX JOURNEY</span>
+            <h2 className="journey-title">THE TECHX JOURNEY</h2>
             <p className="journey-sub">
-              TechX Madras 2025 laid the foundation for the next chapter.
+              From the inaugural foundation to recognized excellence and our premier 2026 edition.
             </p>
           </div>
 
-          <div className="journey-transition-grid">
-            {techxJourney.map((j, idx) => (
-              <div key={idx} className={`journey-milestone-card ${j.year === '2026' ? 'milestone-current' : ''}`}>
-                <div className="milestone-top">
-                  <span className="milestone-year">{j.year}</span>
-                  <span className="milestone-tag">{j.tagline}</span>
-                </div>
-                <h3 className="milestone-event">{j.event}</h3>
-                <p className="milestone-summary">{j.summary}</p>
-                {j.year === '2026' && (
-                  <div className="current-chapter-badge">
-                    <Sparkles size={14} color="var(--purple-light)" />
-                    <span>THE NEXT CHAPTER BEGINS • 14 — 15 OCT 2026</span>
-                  </div>
-                )}
+          <div className="journey-timeline-flow">
+            {/* TechX'25: The Foundation */}
+            <div className="journey-milestone-card milestone-foundation">
+              <div className="milestone-top">
+                <span className="milestone-year">2025</span>
+                <span className="milestone-tag">THE FOUNDATION</span>
               </div>
-            ))}
+              <h3 className="milestone-event">TECHX'25</h3>
+              <p className="milestone-summary">
+                The foundation. TechX Madras 2025 brought together students, technologists, and mentors across the region, establishing our flagship IEEE technology experience.
+              </p>
+            </div>
+
+            {/* Transition Indicator */}
+            <div className="journey-step-indicator" aria-hidden="true">
+              <span className="indicator-arrow">↓</span>
+            </div>
+
+            {/* Verified Historical Achievement: Outstanding Host Award */}
+            <div className="journey-award-card">
+              <div className="award-card-inner">
+                <div className="award-icon-box">
+                  <Award size={34} color="var(--purple-light)" />
+                </div>
+                <div className="award-content">
+                  <div className="award-meta-row">
+                    <span className="award-tag">OFFICIAL RECOGNITION</span>
+                    <span className="award-rank-pill">{techxAward.position}</span>
+                  </div>
+                  <h3 className="award-title">OUTSTANDING HOST AWARD — 1ST PLACE</h3>
+                  <p className="award-context">{techxAward.context}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Transition Indicator */}
+            <div className="journey-step-indicator" aria-hidden="true">
+              <span className="indicator-arrow">↓</span>
+            </div>
+
+            {/* TechX'26: The Next Chapter */}
+            <div className="journey-milestone-card milestone-current">
+              <div className="milestone-top">
+                <span className="milestone-year">2026</span>
+                <span className="milestone-tag">THE NEXT CHAPTER</span>
+              </div>
+              <h3 className="milestone-event">TECHX'26</h3>
+              <p className="milestone-summary">
+                The next chapter. 14 — 15 OCTOBER 2026. TechX'26 expands into a premier 24-hour engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas.
+              </p>
+              <div className="current-chapter-badge">
+                <Sparkles size={14} color="var(--purple-light)" />
+                <span>THE NEXT CHAPTER BEGINS • 14 — 15 OCT 2026</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -418,7 +456,7 @@ export default function About({ onOpenRegister }) {
           letter-spacing: 0.15em;
         }
 
-        /* The Journey Transition */
+        /* The Journey Timeline Flow: 2025 -> Outstanding Host Award -> 2026 */
         .journey-transition-section {
           background: #060408;
           padding: 6rem 0;
@@ -435,27 +473,27 @@ export default function About({ onOpenRegister }) {
           text-transform: uppercase;
           margin-bottom: 0.5rem;
         }
-        .journey-transition-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          max-width: 1000px;
+        .journey-timeline-flow {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          max-width: 860px;
           margin: 0 auto;
-        }
-        @media (max-width: 768px) {
-          .journey-transition-grid {
-            grid-template-columns: 1fr;
-          }
+          gap: 1rem;
         }
         .journey-milestone-card {
+          width: 100%;
           background: #0B0714;
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 2.5rem;
+          padding: 2.25rem 2.5rem;
           display: flex;
           flex-direction: column;
           position: relative;
           transition: var(--transition-normal);
+        }
+        .milestone-foundation {
+          border-color: rgba(255, 255, 255, 0.12);
         }
         .milestone-current {
           border-color: var(--purple-light);
@@ -466,25 +504,25 @@ export default function About({ onOpenRegister }) {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
         .milestone-year {
           font-family: var(--font-display);
-          font-size: 3rem;
+          font-size: 2.8rem;
           color: var(--purple-light);
           line-height: 1;
         }
         .milestone-tag {
           font-family: var(--font-mono);
           font-size: 0.72rem;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.12em;
           color: var(--muted);
           text-transform: uppercase;
         }
         .milestone-event {
-          font-size: 1.4rem;
+          font-size: 1.35rem;
           color: var(--white);
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.5rem;
         }
         .milestone-summary {
           font-size: 0.95rem;
@@ -492,7 +530,7 @@ export default function About({ onOpenRegister }) {
           color: var(--muted);
         }
         .current-chapter-badge {
-          margin-top: 1.5rem;
+          margin-top: 1.25rem;
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
@@ -503,6 +541,112 @@ export default function About({ onOpenRegister }) {
           padding: 0.4rem 0.85rem;
           border-radius: var(--radius-sm);
           border: 1px solid var(--border);
+          width: fit-content;
+        }
+
+        /* Journey Flow Step Indicator */
+        .journey-step-indicator {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.35rem 0;
+        }
+        .indicator-arrow {
+          font-family: var(--font-mono);
+          font-size: 1.4rem;
+          color: var(--purple-light);
+          opacity: 0.8;
+          line-height: 1;
+        }
+
+        /* Award Card */
+        .journey-award-card {
+          width: 100%;
+          background: radial-gradient(ellipse at 50% 0%, rgba(138, 43, 226, 0.15) 0%, rgba(14, 9, 24, 0.95) 75%);
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          border-radius: var(--radius-md);
+          padding: 2rem 2.25rem;
+          box-shadow: 0 8px 32px rgba(138, 43, 226, 0.12);
+          position: relative;
+          overflow: hidden;
+        }
+        .award-card-inner {
+          display: flex;
+          align-items: center;
+          gap: 1.75rem;
+        }
+        .award-icon-box {
+          width: 64px;
+          height: 64px;
+          flex-shrink: 0;
+          border-radius: var(--radius-sm);
+          background: rgba(138, 43, 226, 0.15);
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .award-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          flex: 1;
+        }
+        .award-meta-row {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+          margin-bottom: 0.2rem;
+        }
+        .award-tag {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          text-transform: uppercase;
+        }
+        .award-rank-pill {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          color: #FFDF70;
+          background: rgba(255, 223, 112, 0.12);
+          border: 1px solid rgba(255, 223, 112, 0.3);
+          padding: 0.2rem 0.65rem;
+          border-radius: var(--radius-sm);
+        }
+        .award-title {
+          font-family: var(--font-display);
+          font-size: 1.55rem;
+          letter-spacing: 0.04em;
+          color: var(--white);
+          margin: 0;
+          text-transform: uppercase;
+        }
+        .award-context {
+          font-size: 0.92rem;
+          line-height: 1.55;
+          color: #CCC6D2;
+          margin: 0;
+        }
+        @media (max-width: 600px) {
+          .journey-award-card {
+            padding: 1.5rem 1.25rem;
+          }
+          .award-card-inner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+          }
+          .award-icon-box {
+            width: 50px;
+            height: 50px;
+          }
+          .award-title {
+            font-size: 1.35rem;
+          }
         }
 
         /* Leadership */

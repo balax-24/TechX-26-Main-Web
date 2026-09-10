@@ -10,7 +10,12 @@ export const eventMeta = {
   datesShort: "14 — 15 OCT 2026",
   targetDate: "2026-10-14T09:00:00+05:30",
   venueName: "Sri Sai Ram Institute of Technology",
-  venueAddress: "Full venue address coming soon",
+  venueAddress: "Sairam College Rd, Sai Leo Nagar, West Tambaram, Chennai, Poonthandalam, Tamil Nadu 600132",
+  mapsUrl: "https://maps.app.goo.gl/iFUqvjR3twJ3boHs7",
+  coordinates: {
+    lat: 12.9606471,
+    lng: 80.0532325
+  },
   city: "Chennai, Tamil Nadu",
   organizer: "IEEE Computer Society Student Branch Chapter",
   institution: "Sri Sai Ram Institute of Technology",

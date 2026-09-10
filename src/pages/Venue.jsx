@@ -111,64 +111,86 @@ export default function Venue({ onOpenRegister }) {
             {/* Address Specification */}
             <div className="venue-card-primary">
               <div className="venue-badge">EVENT DESTINATION</div>
-              <h2 className="venue-h2">LOCATION & DETAILS</h2>
+              <h2 className="venue-h2">LOCATION</h2>
 
               <div className="venue-spec-list">
                 <div className="spec-row">
-                  <span className="spec-title">VENUE</span>
+                  <span className="spec-title">INSTITUTION</span>
                   <strong className="spec-val">Sri Sai Ram Institute of Technology</strong>
                 </div>
 
                 <div className="spec-row">
                   <span className="spec-title">DATES</span>
-                  <strong className="spec-val">14th & 15th October 2026</strong>
+                  <strong className="spec-val">14 — 15 OCTOBER 2026</strong>
+                </div>
+
+                <div className="spec-row">
+                  <span className="spec-title">LOCATION</span>
+                  <strong className="spec-val">CHENNAI, TAMIL NADU</strong>
                 </div>
 
                 <div className="spec-row highlight-row">
                   <span className="spec-title">FULL ADDRESS</span>
-                  <strong className="spec-val addr-status">Coming soon</strong>
-                  <p className="spec-hint">
-                    Official address coordinates, designated gate numbers, and campus building blocks will be provided along with confirmed entry passes.
-                  </p>
+                  <div className="venue-full-address">
+                    <strong className="addr-inst">SRI SAI RAM INSTITUTE OF TECHNOLOGY</strong>
+                    <p className="addr-lines">
+                      Sairam College Rd,<br />
+                      Sai Leo Nagar,<br />
+                      West Tambaram,<br />
+                      Chennai,<br />
+                      Poonthandalam,<br />
+                      Tamil Nadu 600132
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="venue-amenities-pills">
-                <span className="amenity-badge">• High-Speed Hackathon Wi-Fi</span>
-                <span className="amenity-badge">• 24-Hour Continuous Power Infrastructure</span>
-                <span className="amenity-badge">• Air-Conditioned Auditoriums</span>
-                <span className="amenity-badge">• Dedicated Hardware & Embedded Labs</span>
-                <span className="amenity-badge">• On-Campus Refreshments & Dining</span>
-              </div>
-
-              <div className="venue-register-cta">
-                <button onClick={onOpenRegister} className="btn btn-primary" style={{ width: '100%' }}>
-                  <span>REQUEST ENTRY PASS NOTIFICATION</span>
+              <div className="venue-directions-cta">
+                <a 
+                  href={eventMeta.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <span>GET DIRECTIONS</span>
                   <ArrowRight size={16} />
-                </button>
+                </a>
               </div>
             </div>
 
-            {/* Map Placeholder */}
+            {/* Interactive Google Map */}
             <div className="map-standin-card">
               <div className="map-standin-head">
                 <span className="section-eyebrow">GEOGRAPHIC ANCHOR</span>
                 <h3 className="map-standin-title">LOCATION MAP</h3>
               </div>
 
-              <div className="map-standin-visual">
-                <div className="radar-grid"></div>
-                <div className="radar-ping"></div>
-                <div className="map-center-pin">
-                  <MapPin size={28} color="var(--purple-light)" />
-                  <span className="pin-title">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
-                  <span className="pin-sub">Chennai, Tamil Nadu</span>
-                </div>
+              <div className="map-embed-wrapper">
+                <iframe
+                  title="Sri Sai Ram Institute of Technology Location Map"
+                  src={`https://maps.google.com/maps?q=${eventMeta.coordinates.lat},${eventMeta.coordinates.lng}&hl=en&z=16&output=embed`}
+                  className="google-map-iframe"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
 
               <div className="map-standin-footer">
-                <span className="map-status-pill">Coming soon</span>
-                <p>Interactive satellite map and campus navigation waypoints will be enabled prior to the event.</p>
+                <div className="map-footer-coords">
+                  <span className="coords-label">COORDINATES</span>
+                  <span className="coords-val">{eventMeta.coordinates.lat}° N, {eventMeta.coordinates.lng}° E</span>
+                </div>
+                <a 
+                  href={eventMeta.mapsUrl}
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn-directions-link"
+                >
+                  <span>GET DIRECTIONS</span>
+                  <ArrowRight size={14} />
+                </a>
               </div>
             </div>
           </div>
@@ -182,7 +204,7 @@ export default function Venue({ onOpenRegister }) {
             <span className="section-eyebrow" style={{ color: 'var(--purple-deep)' }}>ARRIVAL LOGISTICS</span>
             <h2 className="transit-title" style={{ color: '#0E0918' }}>TRAVEL INFORMATION</h2>
             <p className="transit-sub" style={{ color: '#554D5D' }}>
-              Travel and commute guidance for regional and outstation delegates arriving at Sri Sai Ram Institute of Technology. (Coming soon)
+              Travel and commute guidance for regional and outstation delegates arriving at Sri Sai Ram Institute of Technology.
             </p>
           </div>
 
@@ -469,36 +491,30 @@ export default function Venue({ onOpenRegister }) {
           font-size: 1.15rem;
           color: var(--white);
         }
-        .addr-status {
-          color: var(--purple-light);
-          font-size: 1.25rem;
-        }
-        .spec-hint {
-          font-size: 0.85rem;
-          color: var(--muted);
-          margin-top: 0.35rem;
-          line-height: 1.5;
-        }
-        .venue-amenities-pills {
+        .venue-full-address {
           display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          margin-bottom: 2.5rem;
+          flex-direction: column;
+          gap: 0.35rem;
+          margin-top: 0.35rem;
         }
-        .amenity-badge {
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid var(--border-subtle);
-          padding: 0.4rem 0.85rem;
-          border-radius: var(--radius-sm);
-          color: var(--off-white);
-          max-width: 100%;
-          white-space: normal;
-          word-break: break-word;
+        .addr-inst {
+          font-family: var(--font-heading);
+          font-size: 1.05rem;
+          color: var(--white);
+          letter-spacing: 0.02em;
+          line-height: 1.35;
+        }
+        .addr-lines {
+          font-size: 0.95rem;
+          color: #DDD6E5;
+          line-height: 1.65;
+          margin: 0;
+        }
+        .venue-directions-cta {
+          margin-top: 1rem;
         }
 
-        /* Map Stand-in */
+        /* Map Embed Frame */
         .map-standin-card {
           background: #090510;
           border: 1px solid var(--border);
@@ -516,70 +532,67 @@ export default function Venue({ onOpenRegister }) {
           text-transform: uppercase;
           margin-top: 0.25rem;
         }
-        .map-standin-visual {
-          height: 280px;
-          background: #050308;
+        .map-embed-wrapper {
           position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          width: 100%;
+          height: 380px;
+          min-height: 320px;
+          background: #050308;
           overflow: hidden;
         }
-        .radar-grid {
-          position: absolute;
-          inset: 0;
-          background-image: 
-            linear-gradient(to right, rgba(138, 43, 226, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(138, 43, 226, 0.08) 1px, transparent 1px);
-          background-size: 35px 35px;
-        }
-        .radar-ping {
-          position: absolute;
-          width: 90px;
-          height: 90px;
-          border-radius: 50%;
-          border: 1px solid var(--purple-light);
-          animation: pulseGlow 2.2s infinite;
-        }
-        .map-center-pin {
-          position: relative;
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          gap: 0.35rem;
-        }
-        .pin-title {
-          font-family: var(--font-heading);
-          font-weight: 700;
-          font-size: 0.95rem;
-          color: var(--white);
-        }
-        .pin-sub {
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: var(--purple-light);
+        .google-map-iframe {
+          width: 100%;
+          height: 100%;
+          border: 0;
+          display: block;
+          filter: contrast(104%) brightness(96%);
         }
         .map-standin-footer {
-          padding: 1.5rem 2rem;
+          padding: 1.25rem 2rem;
           border-top: 1px solid var(--border);
-          background: rgba(0, 0, 0, 0.4);
+          background: rgba(11, 7, 20, 0.95);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
         }
-        .map-status-pill {
-          display: inline-block;
+        .map-footer-coords {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+        .coords-label {
           font-family: var(--font-mono);
-          font-size: 0.72rem;
+          font-size: 0.68rem;
+          letter-spacing: 0.12em;
           color: var(--purple-light);
-          background: rgba(138, 43, 226, 0.15);
-          padding: 0.25rem 0.65rem;
-          border-radius: var(--radius-sm);
-          margin-bottom: 0.5rem;
         }
-        .map-standin-footer p {
-          font-size: 0.85rem;
-          color: var(--muted);
-          line-height: 1.5;
+        .coords-val {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          color: var(--off-white);
+        }
+        .btn-directions-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          color: var(--purple-light);
+          padding: 0.5rem 1rem;
+          background: rgba(138, 43, 226, 0.12);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          transition: var(--transition-fast);
+          text-decoration: none;
+        }
+        .btn-directions-link:hover {
+          background: var(--purple-primary);
+          color: var(--white);
+          border-color: var(--purple-light);
         }
 
         /* Transit Section */
