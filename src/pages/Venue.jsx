@@ -1,38 +1,11 @@
 import React from 'react';
-import { MapPin, Navigation, Car, Train, Bus, Plane, Calendar, ArrowRight, Compass } from 'lucide-react';
+import { MapPin, Calendar, ArrowRight, Compass } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
 import sairamFountainImg from '../assets/architecture/sairam-fountain.png';
 import { eventMeta } from '../data/contacts';
 
 export default function Venue({ onOpenRegister }) {
-  const transitModes = [
-    {
-      mode: "BY ROAD",
-      icon: <Car size={22} color="var(--purple-light)" />,
-      status: "Information coming soon",
-      desc: "Detailed driving routes, parking arrangements, and campus arterial gate instructions will be posted before the event."
-    },
-    {
-      mode: "BY TRAIN",
-      icon: <Train size={22} color="var(--purple-light)" />,
-      status: "Information coming soon",
-      desc: "Information regarding nearest major railway hubs (Tambaram / Chennai Central / Egmore) and shuttle coordinates to be provided."
-    },
-    {
-      mode: "BY BUS",
-      icon: <Bus size={22} color="var(--purple-light)" />,
-      status: "Information coming soon",
-      desc: "Designated institutional bus transit routes and metropolitan bus numbers will be announced prior to delegate arrival."
-    },
-    {
-      mode: "BY AIR",
-      icon: <Plane size={22} color="var(--purple-light)" />,
-      status: "Information coming soon",
-      desc: "Travel guidance for interstate and international IEEE delegates arriving via Chennai International Airport (MAA) to campus."
-    }
-  ];
-
   return (
     <div className="venue-page-root">
       <TechAtmosphere showArch={false} />
@@ -197,32 +170,7 @@ export default function Venue({ onOpenRegister }) {
         </div>
       </section>
 
-      {/* Transit & Commute */}
-      <section className="section section-light transit-section">
-        <div className="container">
-          <div className="transit-head">
-            <span className="section-eyebrow" style={{ color: 'var(--purple-deep)' }}>ARRIVAL LOGISTICS</span>
-            <h2 className="transit-title" style={{ color: '#0E0918' }}>TRAVEL INFORMATION</h2>
-            <p className="transit-sub" style={{ color: '#554D5D' }}>
-              Travel and commute guidance for regional and outstation delegates arriving at Sri Sai Ram Institute of Technology.
-            </p>
-          </div>
-
-          <div className="transit-grid">
-            {transitModes.map((t) => (
-              <div key={t.mode} className="transit-card">
-                <div className="transit-top">
-                  <div className="transit-icon-wrap">{t.icon}</div>
-                  <span className="transit-mode-name">{t.mode}</span>
-                </div>
-                
-                <span className="transit-status-badge">{t.status}</span>
-                <p className="transit-desc">{t.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Details Grid: Location & Map */}
 
       <style>{`
         .venue-page-root {
@@ -593,81 +541,6 @@ export default function Venue({ onOpenRegister }) {
           background: var(--purple-primary);
           color: var(--white);
           border-color: var(--purple-light);
-        }
-
-        /* Transit Section */
-        .transit-section {
-          padding: 6rem 0;
-        }
-        .transit-head {
-          text-align: center;
-          max-width: 680px;
-          margin: 0 auto 3.5rem;
-        }
-        .transit-title {
-          font-size: clamp(2rem, 4vw, 3.2rem);
-          text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-        .transit-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem;
-        }
-        @media (max-width: 1100px) {
-          .transit-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 600px) {
-          .transit-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-        .transit-card {
-          background: #FFFFFF;
-          border: 1px solid rgba(138, 43, 226, 0.2);
-          border-radius: var(--radius-md);
-          padding: 2.25rem 1.75rem;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-        }
-        .transit-top {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          margin-bottom: 1.25rem;
-        }
-        .transit-icon-wrap {
-          width: 44px;
-          height: 44px;
-          border-radius: var(--radius-sm);
-          background: rgba(138, 43, 226, 0.1);
-          border: 1px solid rgba(138, 43, 226, 0.25);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .transit-mode-name {
-          font-family: var(--font-display);
-          font-size: 1.6rem;
-          color: #0E0918;
-          letter-spacing: 0.04em;
-        }
-        .transit-status-badge {
-          display: inline-block;
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: var(--purple-deep);
-          background: rgba(138, 43, 226, 0.1);
-          padding: 0.25rem 0.65rem;
-          border-radius: var(--radius-sm);
-          margin-bottom: 1rem;
-          font-weight: 600;
-        }
-        .transit-desc {
-          font-size: 0.88rem;
-          line-height: 1.55;
-          color: #554D5D;
         }
       `}</style>
     </div>

@@ -282,7 +282,38 @@ img {
 .tech-input:focus {
   outline: none;
   border-color: var(--purple-light);
-  background: rgba(138, 43, 226, 0.05);
+  background: rgba(138, 43, 226, 0.08);
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+}
+
+/* Dropdown & Select styling - prevents white on white across all browsers */
+select.tech-input,
+.tech-select {
+  cursor: pointer;
+  background-color: #0E0918;
+  color: #FFFFFF;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C084FC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.25rem center;
+  background-size: 16px;
+  padding-right: 3rem;
+}
+
+select.tech-input option,
+.tech-select option {
+  background-color: #0E0918 !important;
+  color: #FFFFFF !important;
+  padding: 0.75rem 1rem;
+}
+
+select.tech-input option:checked,
+.tech-select option:checked {
+  background-color: #23123E !important;
+  color: #C084FC !important;
+  font-weight: 600;
 }
 
 /* Subtle Technical Blueprint Grid - Extremely Low Opacity */

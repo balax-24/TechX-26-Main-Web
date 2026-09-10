@@ -8,7 +8,7 @@ export default function Contact() {
     name: '',
     email: '',
     institution: '',
-    topic: 'General Inquiry',
+    topic: 'General Event Inquiry',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
@@ -104,11 +104,11 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Right Column: Transmission Form */}
+            {/* Right Column: Inquiry Form */}
             <div className="contact-form-col">
               <div className="inquiry-dispatch-card">
                 <span className="section-eyebrow">ELECTRONIC DISPATCH</span>
-                <h3 className="dispatch-title">TRANSMIT AN INQUIRY</h3>
+                <h3 className="dispatch-title">SEND AN INQUIRY</h3>
                 <p className="dispatch-sub">
                   Send your question directly to the TechX'26 organizing desk.
                 </p>
@@ -118,19 +118,19 @@ export default function Contact() {
                     <div className="success-icon-wrap">
                       <CheckCircle2 size={40} color="var(--purple-light)" />
                     </div>
-                    <h4>TRANSMISSION RECEIVED</h4>
+                    <h4>INQUIRY RECEIVED</h4>
                     <p>
                       Thank you, {formData.name}. Your inquiry has been logged with the organizing secretariat. A representative will get back to {formData.email}.
                     </p>
                     <button 
                       onClick={() => {
                         setSubmitted(false);
-                        setFormData({ name: '', email: '', institution: '', topic: 'General Inquiry', message: '' });
+                        setFormData({ name: '', email: '', institution: '', topic: 'General Event Inquiry', message: '' });
                       }}
                       className="btn btn-secondary"
                       style={{ marginTop: '1.25rem' }}
                     >
-                      SEND ANOTHER MESSAGE
+                      SEND ANOTHER INQUIRY
                     </button>
                   </div>
                 ) : (
@@ -181,12 +181,12 @@ export default function Contact() {
                         onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
                         className="tech-input tech-select"
                       >
-                        <option value="General Inquiry">General Event Inquiry</option>
-                        <option value="Championship">Build.Break.Defend Championship</option>
-                        <option value="CipherX">CipherX CTF & Syntax</option>
-                        <option value="Edge AI">Edge AI & TinyML</option>
-                        <option value="Idea Alchemy">Idea Alchemy Pitch</option>
-                        <option value="Partnership">Partnership & Collaboration</option>
+                        <option value="General Event Inquiry">General Event Inquiry</option>
+                        <option value="Build.Break.Defend Championship">Build.Break.Defend Championship</option>
+                        <option value="CipherX CTF & Syntax">CipherX CTF & Syntax</option>
+                        <option value="Edge AI & TinyML">Edge AI & TinyML</option>
+                        <option value="Idea Alchemy Pitch">Idea Alchemy Pitch</option>
+                        <option value="Partnership & Collaboration">Partnership & Collaboration</option>
                       </select>
                     </div>
 
@@ -204,7 +204,7 @@ export default function Contact() {
                     </div>
 
                     <button type="submit" className="btn btn-primary submit-dispatch-btn">
-                      <span>TRANSMIT DISPATCH</span>
+                      <span>SEND INQUIRY</span>
                       <Send size={16} />
                     </button>
                   </form>
@@ -382,6 +382,33 @@ export default function Contact() {
         }
         .tech-select {
           cursor: pointer;
+          background-color: #0E0918;
+          color: #FFFFFF;
+          border: 1px solid var(--border);
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C084FC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1.25rem center;
+          background-size: 16px;
+          padding-right: 3rem;
+        }
+        .tech-select:focus {
+          outline: none;
+          border-color: var(--purple-light);
+          background-color: #130B22;
+          box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.25);
+        }
+        .tech-select option {
+          background-color: #0E0918 !important;
+          color: #FFFFFF !important;
+          padding: 0.85rem 1rem;
+        }
+        .tech-select option:checked {
+          background-color: #241442 !important;
+          color: #C084FC !important;
+          font-weight: 600;
         }
         .tech-textarea {
           resize: vertical;
