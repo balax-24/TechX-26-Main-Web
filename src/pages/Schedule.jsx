@@ -22,7 +22,7 @@ export default function Schedule({ onOpenRegister }) {
             <span className="text-purple-highlight">OPERATIONAL TIMELINE</span>
           </h1>
           <p className="schedule-hero-sub">
-            From the opening keynote to the 24-hour overnight software engineering marathon, explore the full chronological roadmap of TechX Madras 2026.
+            From the inauguration to the 24-hour open-domain hackathon and Day 2 technical tracks, explore the full chronological roadmap of TechX Madras 2026.
           </p>
 
           {/* Day Switcher Tabs */}
@@ -36,7 +36,7 @@ export default function Schedule({ onOpenRegister }) {
                 <span>DAY 01</span>
               </div>
               <strong>WEDNESDAY, 14 OCT 2026</strong>
-              <span className="tab-sub">Flagship Inauguration & 24H Overnight Sprint</span>
+              <span className="tab-sub">Inauguration & 24H Hackathon Commencement</span>
             </button>
 
             <button
@@ -48,7 +48,7 @@ export default function Schedule({ onOpenRegister }) {
                 <span>DAY 02</span>
               </div>
               <strong>THURSDAY, 15 OCT 2026</strong>
-              <span className="tab-sub">Cyber CTF, Edge AI Workshop & Valedictory</span>
+              <span className="tab-sub">Cyber CTF, TinyML Workshop, Pitch & Coding</span>
             </button>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function Schedule({ onOpenRegister }) {
               <span className="overnight-pulse"></span>
               <div className="overnight-content">
                 <strong>24-HOUR OVERNIGHT MARATHON NOTICE</strong>
-                <p>The Build.Break.Defend software championship spans continuously overnight from 01:30 PM on Day 1 through Round 3 Defense on Day 2 morning.</p>
+                <p>The VerdictX: Code & Conquer hackathon spans continuously overnight in Steve Jobs Hall from 01:30 PM on Day 1 through Round 3 Defense on Day 2 morning.</p>
               </div>
             </div>
           )}
@@ -101,9 +101,14 @@ export default function Schedule({ onOpenRegister }) {
                   {/* Event Details Card */}
                   <div className="timeline-content-box">
                     <div className="content-card-inner">
-                      {item.badge && (
-                        <span className="timeline-badge">{item.badge}</span>
-                      )}
+                      <div className="timeline-badge-row">
+                        {item.badge && (
+                          <span className="timeline-badge">{item.badge}</span>
+                        )}
+                        {item.venue && (
+                          <span className="timeline-venue-chip">{item.venue}</span>
+                        )}
+                      </div>
                       <h3 className="timeline-event-title">{item.title}</h3>
                       <p className="timeline-event-desc">{item.desc}</p>
                     </div>
@@ -422,6 +427,13 @@ export default function Schedule({ onOpenRegister }) {
           background: #0F091A;
           box-shadow: 0 8px 30px rgba(138, 43, 226, 0.2);
         }
+        .timeline-badge-row {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          margin-bottom: 0.65rem;
+        }
         .timeline-badge {
           display: inline-block;
           font-family: var(--font-mono);
@@ -431,8 +443,19 @@ export default function Schedule({ onOpenRegister }) {
           background: var(--purple);
           padding: 0.25rem 0.65rem;
           border-radius: var(--radius-sm);
-          margin-bottom: 0.65rem;
           font-weight: 700;
+        }
+        .timeline-venue-chip {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.08em;
+          color: var(--purple-light);
+          background: rgba(138, 43, 226, 0.12);
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          padding: 0.25rem 0.65rem;
+          border-radius: var(--radius-sm);
+          font-weight: 600;
         }
         .timeline-event-title {
           font-size: 1.35rem;

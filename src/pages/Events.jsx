@@ -19,8 +19,8 @@ export default function Events() {
 
   const filteredEvents = eventsData.filter(evt => {
     if (activeCategory === 'all') return true;
-    if (activeCategory === 'championship') return evt.id === 'build-break-defend';
-    if (activeCategory === 'cyber') return evt.id === 'cipherx';
+    if (activeCategory === 'championship') return evt.id === 'verdictx' || evt.id === 'build-break-defend';
+    if (activeCategory === 'cyber') return evt.id === 'sherlock-syntax' || evt.id === 'cipherx';
     if (activeCategory === 'workshop') return evt.id === 'edge-ai-tinyml';
     if (activeCategory === 'venture') return evt.id === 'idea-alchemy' || evt.id === 'codenomics';
     if (activeCategory === 'mentorship') return evt.id === 'nano-mentoring' || evt.id === 'ieee-cs-benefits';
@@ -40,7 +40,7 @@ export default function Events() {
             <span className="text-purple-highlight">BREAK. DEFEND. CREATE.</span>
           </h1>
           <p className="events-hero-sub">
-            From the 24-hour adversarial software engineering championship to microcontroller TinyML and cybersecurity forensics, discover our full operational lineup.
+            From the 24-hour open-domain hackathon to on-device TinyML intelligence and cybersecurity CTF, discover our full operational lineup.
           </p>
 
           {/* Filter Chips */}

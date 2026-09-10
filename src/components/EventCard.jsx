@@ -5,8 +5,10 @@ import { ArrowRight, Users, Clock, Shield, Sparkles, Terminal, Cpu, Lightbulb, C
 export default function EventCard({ event, featured = false }) {
   const getEventIcon = (id) => {
     switch (id) {
+      case 'verdictx':
       case 'build-break-defend':
         return <Terminal size={24} color="var(--purple-light)" />;
+      case 'sherlock-syntax':
       case 'cipherx':
         return <Shield size={24} color="var(--purple-light)" />;
       case 'edge-ai-tinyml':
@@ -17,7 +19,6 @@ export default function EventCard({ event, featured = false }) {
         return <Coins size={24} color="var(--purple-light)" />;
       default:
         return <Sparkles size={24} color="var(--purple-light)" />;
-    }
   };
 
   return (

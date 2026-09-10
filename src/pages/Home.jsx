@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Sparkles, Terminal, Shield, Cpu, Lightbulb, Users, Award, Compass } from 'lucide-react';
+import { ArrowRight, ChevronRight, Sparkles, Terminal, Shield, Cpu, Lightbulb, Users, Award, Compass, Coins } from 'lucide-react';
 import Countdown from '../components/Countdown';
 import { eventsData } from '../data/events';
 import { eventMeta } from '../data/contacts';
@@ -87,16 +87,10 @@ export default function Home({ onOpenRegister }) {
           </div>
         </div>
 
-        {/* Integrated Countdown Anchor Strip */}
+        {/* Integrated Centered Countdown Section */}
         <div className="hero-countdown-dock">
-          <div className="container dock-container">
-            <div className="dock-label">
-              <span className="dock-mono">COUNTDOWN TO OPENING KEYNOTE</span>
-              <strong>OCTOBER 14, 2026 // 09:00 IST</strong>
-            </div>
-            <div className="dock-timer-wrap">
-              <Countdown />
-            </div>
+          <div className="container dock-centered-container">
+            <Countdown />
           </div>
         </div>
       </section>
@@ -123,10 +117,10 @@ export default function Home({ onOpenRegister }) {
               
               <div className="editorial-body-paragraphs">
                 <p>
-                  It brings students, researchers, industry mentors, and engineering delegates together through hands-on technical challenges, competitive championships, applied workshops, and venture creation.
+                  It brings together technical competition, hands-on learning, innovation, mentoring, and IEEE Computer Society engagement across two days.
                 </p>
                 <p>
-                  Conceived as an arena of deep technical rigor rather than routine symposium paper presentations, TechX centers on execution: 24-hour continuous software engineering, vulnerability exploitation and threat analysis, on-device TinyML intelligence, and startup ideation.
+                  Built as an arena of genuine engineering capability, TechX features the 24-hour VerdictX: Code & Conquer hackathon, Sherlock & Syntax cybersecurity CTF, hands-on Edge AI & TinyML workshop, startup pitch, and gamified competitive programming.
                 </p>
               </div>
 
@@ -158,23 +152,23 @@ export default function Home({ onOpenRegister }) {
             <div className="glance-metric-item">
               <span className="metric-large-number">14—15</span>
               <span className="metric-label-tag">OCTOBER 2026</span>
-              <p className="metric-desc">Two full days of immersive technical convergence</p>
-            </div>
-
-            <div className="glance-metric-divider"></div>
-
-            <div className="glance-metric-item">
-              <span className="metric-large-number">01</span>
-              <span className="metric-label-tag">FLAGSHIP ASSEMBLY</span>
-              <p className="metric-desc">State-level IEEE Computer Society flagship experience</p>
+              <p className="metric-desc">Two days of technology, competition, learning, and community</p>
             </div>
 
             <div className="glance-metric-divider"></div>
 
             <div className="glance-metric-item">
               <span className="metric-large-number">24H</span>
-              <span className="metric-label-tag">HACKATHON</span>
-              <p className="metric-desc">Build.Break.Defend software engineering championship</p>
+              <span className="metric-label-tag">VERDICTX</span>
+              <p className="metric-desc">24-hour open-domain hackathon</p>
+            </div>
+
+            <div className="glance-metric-divider"></div>
+
+            <div className="glance-metric-item">
+              <span className="metric-large-number">CTF</span>
+              <span className="metric-label-tag">SHERLOCK & SYNTAX</span>
+              <p className="metric-desc">Cybersecurity Capture The Flag</p>
             </div>
 
             <div className="glance-metric-divider"></div>
@@ -182,14 +176,14 @@ export default function Home({ onOpenRegister }) {
             <div className="glance-metric-item">
               <span className="metric-large-number">07</span>
               <span className="metric-label-tag">EXPERIENCES</span>
-              <p className="metric-desc">From TinyML edge AI to cybersecurity CTF & pitch</p>
+              <p className="metric-desc">Edge AI, competitive programming, innovation, mentoring & IEEE CS engagement</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          4. THE EXPERIENCE (CORE PILLARS)
+          4. THE TECHX EXPERIENCE (7 OFFICIAL EXPERIENCES)
       ============================================================ */}
       <section className="section experience-pillars-section">
         <div className="container">
@@ -197,58 +191,122 @@ export default function Home({ onOpenRegister }) {
             <span className="section-eyebrow">CURATED EXPERIENCES</span>
             <h2 className="section-title">THE TECHX EXPERIENCE</h2>
             <p className="pillars-section-sub">
-              Four cornerstone pillars designed to test real-world developer endurance, threat defense, applied intelligence, and commercial viability.
+              Seven experiences across building, cybersecurity, edge AI, competitive programming, innovation, mentoring, and IEEE Computer Society engagement.
             </p>
           </div>
 
           <div className="pillars-editorial-grid">
-            {/* Pillar 1 */}
-            <div className="pillar-column">
+            {/* Experience 01 */}
+            <Link to="/events/verdictx" className="pillar-column">
               <div className="pillar-top-meta">
                 <span className="pillar-index">01</span>
                 <Terminal size={22} color="var(--purple-light)" />
               </div>
-              <h3 className="pillar-title">BUILD.BREAK.DEFEND</h3>
+              <h3 className="pillar-title">VERDICTX: CODE & CONQUER</h3>
               <p className="pillar-text">
-                Build.Break.Defend puts teams of 4 through 24 hours of overnight system architecture, code sprint, and stress testing against real-time evaluation rubrics.
+                24-hour open-domain hackathon where teams develop innovative solutions, adapt to changing requirements, undergo technical review, and defend their project through a technical debate.
               </p>
-            </div>
+              <div className="pillar-footer-meta">
+                <span>Steve Jobs Hall</span>
+                <span>40 Teams • 4 Members</span>
+              </div>
+            </Link>
 
-            {/* Pillar 2 */}
-            <div className="pillar-column">
+            {/* Experience 02 */}
+            <Link to="/events/sherlock-syntax" className="pillar-column">
               <div className="pillar-top-meta">
                 <span className="pillar-index">02</span>
                 <Shield size={22} color="var(--purple-light)" />
               </div>
-              <h3 className="pillar-title">CIPHERX</h3>
+              <h3 className="pillar-title">SHERLOCK & SYNTAX</h3>
               <p className="pillar-text">
-                CipherX challenges security investigators with cryptographic decryption, forensic memory analysis, binary reverse engineering, and threat hunt scenarios.
+                Standard skill-based cybersecurity Capture The Flag arena tackling web exploitation, cryptography, forensics, reverse engineering, and OSINT.
               </p>
-            </div>
+              <div className="pillar-footer-meta">
+                <span>Alpha Hall</span>
+                <span>30 Teams • 3 Members</span>
+              </div>
+            </Link>
 
-            {/* Pillar 3 */}
-            <div className="pillar-column">
+            {/* Experience 03 */}
+            <Link to="/events/edge-ai-tinyml" className="pillar-column">
               <div className="pillar-top-meta">
                 <span className="pillar-index">03</span>
                 <Cpu size={22} color="var(--purple-light)" />
               </div>
               <h3 className="pillar-title">EDGE AI & TINYML</h3>
               <p className="pillar-text">
-                Hands-on microcontroller workshop deploying neural inference and sensor perception directly onto micro-hardware without cloud dependencies.
+                Hands-on workshop introducing AI processing on edge devices, low-power machine learning principles, and real-time embedded applications.
               </p>
-            </div>
+              <div className="pillar-footer-meta">
+                <span>Apple Hall</span>
+                <span>160 Participants</span>
+              </div>
+            </Link>
 
-            {/* Pillar 4 */}
-            <div className="pillar-column">
+            {/* Experience 04 */}
+            <Link to="/events/idea-alchemy" className="pillar-column">
               <div className="pillar-top-meta">
                 <span className="pillar-index">04</span>
                 <Lightbulb size={22} color="var(--purple-light)" />
               </div>
-              <h3 className="pillar-title">IDEA ALCHEMY & CODENOMICS</h3>
+              <h3 className="pillar-title">IDEA ALCHEMY</h3>
               <p className="pillar-text">
-                Idea Alchemy and CodeNomics transform prototype code into defensible business models, unit economics, and investment-ready pitches.
+                Innovation-driven startup competition combining random matrix problem cards in Round 1 and navigating dynamic business constraint cards in Round 2.
               </p>
-            </div>
+              <div className="pillar-footer-meta">
+                <span>Apple Hall</span>
+                <span>45 Teams • 3 Members</span>
+              </div>
+            </Link>
+
+            {/* Experience 05 */}
+            <Link to="/events/codenomics" className="pillar-column">
+              <div className="pillar-top-meta">
+                <span className="pillar-index">05</span>
+                <Coins size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="pillar-title">CODENOMICS</h3>
+              <p className="pillar-text">
+                Gamified competitive programming where teams strategically earn and spend TechCoins via the TechX Portal and HackerRank platforms.
+              </p>
+              <div className="pillar-footer-meta">
+                <span>Alpha Hall</span>
+                <span>40 Teams • 2 Members</span>
+              </div>
+            </Link>
+
+            {/* Experience 06 */}
+            <Link to="/events/nano-mentoring" className="pillar-column">
+              <div className="pillar-top-meta">
+                <span className="pillar-index">06</span>
+                <Users size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="pillar-title">NANO MENTORING</h3>
+              <p className="pillar-text">
+                Interaction session with experienced professionals providing practical insights, guidance, and industry perspectives for student developers.
+              </p>
+              <div className="pillar-footer-meta">
+                <span>Day 1 // 10:00 AM</span>
+                <span>Direct Interaction</span>
+              </div>
+            </Link>
+
+            {/* Experience 07 */}
+            <Link to="/events/ieee-cs-benefits" className="pillar-column">
+              <div className="pillar-top-meta">
+                <span className="pillar-index">07</span>
+                <Award size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="pillar-title">IEEE CS BENEFITS</h3>
+              <p className="pillar-text">
+                Engagement and awareness session highlighting career advancement, networking opportunities, professional development, and technological innovation.
+              </p>
+              <div className="pillar-footer-meta">
+                <span>Day 1 // 10:00 AM</span>
+                <span>Global Community</span>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -281,14 +339,14 @@ export default function Home({ onOpenRegister }) {
                 </div>
 
                 <div className="evt-row-main">
-                  <span className="evt-row-cat">{evt.category}</span>
+                  <span className="evt-row-cat">{evt.badge || evt.subtitle}</span>
                   <h3 className="evt-row-title">{evt.title}</h3>
-                  <p className="evt-row-desc">{evt.tagline}</p>
+                  <p className="evt-row-desc">{evt.shortDescription}</p>
                 </div>
 
                 <div className="evt-row-meta">
                   <span className="evt-row-team">{evt.teamSize}</span>
-                  <span className="evt-row-day">{evt.day} • {evt.timing}</span>
+                  <span className="evt-row-day">{evt.duration}</span>
                 </div>
 
                 <div className="evt-row-arrow">
@@ -301,41 +359,41 @@ export default function Home({ onOpenRegister }) {
       </section>
 
       {/* ============================================================
-          6. WHY ATTEND (HIGH-IMPACT EDITORIAL STATEMENTS)
+          6. WHY ATTEND (DARK EDITORIAL SECTION)
       ============================================================ */}
-      <section className="section section-light why-attend-editorial-section">
+      <section className="section why-attend-editorial-section">
         <div className="container">
           <div className="why-editorial-head">
-            <span className="section-eyebrow" style={{ color: 'var(--purple-deep)' }}>THE VALUE PROPOSITION</span>
-            <h2 className="section-title" style={{ color: '#0E0916' }}>WHY ATTEND TECHX'26?</h2>
-            <p style={{ color: '#524B5A', maxWidth: '640px' }}>
-              Designed from the ground up to give student technologists real operational capability, IEEE credentials, and access to industry mentors.
+            <span className="section-eyebrow">THE VALUE PROPOSITION</span>
+            <h2 className="section-title">WHY ATTEND TECHX'26?</h2>
+            <p className="why-editorial-sub">
+              Source-supported development opportunities, professional IEEE networking, and hands-on technological learning.
             </p>
           </div>
 
           <div className="why-statements-grid">
             <div className="why-statement-item">
               <span className="why-num">01</span>
-              <h4>PRODUCTION-GRADE RIGOR</h4>
-              <p>No toy problems or canned slides. Build software under real continuous integration, unit testing, and live infrastructure constraints.</p>
+              <h4>REAL-WORLD PROBLEM SOLVING</h4>
+              <p>Build, adapt, evaluate, and defend solutions through the multi-round VerdictX: Code & Conquer hackathon.</p>
             </div>
 
             <div className="why-statement-item">
               <span className="why-num">02</span>
-              <h4>GLOBAL IEEE NETWORK</h4>
-              <p>Direct exposure to the IEEE Computer Society international framework, professional chapter counselors, and regional industry liaisons.</p>
+              <h4>IEEE COMPUTER SOCIETY COMMUNITY</h4>
+              <p>Connect with the IEEE Computer Society community and explore the value of professional membership, networking, and career development.</p>
             </div>
 
             <div className="why-statement-item">
               <span className="why-num">03</span>
-              <h4>HARDWARE-GROUNDED AI</h4>
-              <p>Move beyond web prompts. Deploy lightweight edge intelligence, microcontrollers, and sensory models on resource-constrained hardware.</p>
+              <h4>HANDS-ON EDGE AI</h4>
+              <p>Explore Edge AI & TinyML through a hands-on workshop focused on AI processing on edge devices and real-time applications.</p>
             </div>
 
             <div className="why-statement-item">
               <span className="why-num">04</span>
-              <h4>DIRECT INDUSTRY MENTORING</h4>
-              <p>Work directly alongside experienced engineering leads and startup founders across 6 dedicated Nano Mentoring sessions.</p>
+              <h4>MENTORSHIP & INDUSTRY INSIGHTS</h4>
+              <p>Gain practical insights, guidance, and industry perspectives through Nano Mentoring sessions.</p>
             </div>
           </div>
         </div>
@@ -600,43 +658,17 @@ export default function Home({ onOpenRegister }) {
           position: relative;
           z-index: 2;
           border-top: 1px solid rgba(255, 255, 255, 0.08);
-          background: rgba(4, 2, 7, 0.7);
-          backdrop-filter: blur(10px);
-          padding: 1.1rem 0;
+          background: rgba(4, 2, 7, 0.85);
+          backdrop-filter: blur(14px);
+          padding: 2.5rem 1rem;
         }
 
-        .dock-container {
+        .dock-centered-container {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 1.5rem;
-        }
-
-        @media (max-width: 900px) {
-          .dock-container {
-            justify-content: center;
-            text-align: center;
-          }
-        }
-
-        .dock-label {
-          display: flex;
-          flex-direction: column;
-          gap: 0.15rem;
-        }
-
-        .dock-mono {
-          font-family: var(--font-mono);
-          font-size: 0.68rem;
-          letter-spacing: 0.15em;
-          color: var(--purple-light);
-        }
-
-        .dock-label strong {
-          font-size: 0.85rem;
-          letter-spacing: 0.05em;
-          color: #FFFFFF;
+          justify-content: center;
+          max-width: 850px;
+          margin: 0 auto;
         }
 
         /* ============================================================
@@ -800,10 +832,10 @@ export default function Home({ onOpenRegister }) {
         .pillars-editorial-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 2.5rem;
+          gap: 2rem;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
           .pillars-editorial-grid {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -820,11 +852,30 @@ export default function Home({ onOpenRegister }) {
           padding-top: 1.75rem;
           display: flex;
           flex-direction: column;
-          transition: border-color 0.2s ease;
+          text-decoration: none;
+          transition: border-color 0.25s ease, transform 0.25s ease;
         }
 
         .pillar-column:hover {
           border-color: var(--purple-light);
+          transform: translateY(-3px);
+        }
+
+        .pillar-column:hover .pillar-title {
+          color: var(--purple-light);
+        }
+
+        .pillar-footer-meta {
+          margin-top: auto;
+          padding-top: 1.25rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--purple-light);
+          letter-spacing: 0.08em;
+          border-top: 1px dashed rgba(255, 255, 255, 0.1);
         }
 
         .pillar-top-meta {
@@ -984,20 +1035,30 @@ export default function Home({ onOpenRegister }) {
         }
 
         /* ============================================================
-           6. WHY ATTEND
+           6. WHY ATTEND (DARK THEME)
         ============================================================ */
         .why-attend-editorial-section {
-          padding: 7rem 0;
+          padding: 6.5rem 0;
+          background: rgba(9, 5, 16, 0.7);
+          border-top: 1px solid var(--border-subtle);
+          border-bottom: 1px solid var(--border-subtle);
         }
 
         .why-editorial-head {
-          margin-bottom: 4rem;
+          max-width: 680px;
+          margin-bottom: 3.5rem;
+        }
+
+        .why-editorial-sub {
+          font-size: 1.05rem;
+          color: var(--muted);
+          line-height: 1.6;
         }
 
         .why-statements-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 3rem;
+          gap: 1.5rem;
         }
 
         @media (max-width: 1024px) {
@@ -1013,30 +1074,44 @@ export default function Home({ onOpenRegister }) {
         }
 
         .why-statement-item {
+          background: rgba(14, 9, 24, 0.75);
+          border: 1px solid rgba(138, 43, 226, 0.22);
+          border-radius: var(--radius-md);
+          padding: 2.2rem 1.75rem;
           display: flex;
           flex-direction: column;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+          backdrop-filter: blur(8px);
+          transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .why-statement-item:hover {
+          transform: translateY(-4px);
+          border-color: var(--purple-light);
+          box-shadow: 0 12px 32px rgba(138, 43, 226, 0.18);
         }
 
         .why-num {
           font-family: var(--font-mono);
           font-size: 0.85rem;
-          color: var(--purple-deep);
+          color: var(--purple-light);
           font-weight: 700;
-          letter-spacing: 0.1em;
-          margin-bottom: 1rem;
+          letter-spacing: 0.12em;
+          margin-bottom: 1.25rem;
         }
 
         .why-statement-item h4 {
-          font-size: 1.15rem;
-          color: #0E0916;
+          font-size: 1.08rem;
+          color: #FFFFFF;
           text-transform: uppercase;
-          margin-bottom: 0.75rem;
-          line-height: 1.3;
+          letter-spacing: 0.03em;
+          margin-bottom: 0.85rem;
+          line-height: 1.35;
         }
 
         .why-statement-item p {
           font-size: 0.92rem;
-          color: #554D5D;
+          color: #B2A7C2;
           line-height: 1.6;
         }
 

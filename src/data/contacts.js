@@ -6,8 +6,8 @@ export const eventMeta = {
   name: "TECHX MADRAS 2026",
   shortName: "TECHX'26",
   motto: "IGNITE THE CODE. OWN THE FUTURE.",
-  dates: "14th & 15th October 2026",
-  datesShort: "14 — 15 OCT 2026",
+  dates: "14–15 October 2026",
+  datesShort: "14–15 OCT 2026",
   targetDate: "2026-10-14T09:00:00+05:30",
   venueName: "Sri Sai Ram Institute of Technology",
   venueAddress: "Sairam College Rd, Sai Leo Nagar, West Tambaram, Chennai, Poonthandalam, Tamil Nadu 600132",
@@ -23,11 +23,11 @@ export const eventMeta = {
 };
 
 export const verifiedStats = [
-  { value: 250, suffix: "+", label: "Expected Participants", note: "Official Expected Attendance" },
-  { value: 160, suffix: "+", label: "24H Championship Seats", note: "Build.Break.Defend (Team of 4)" },
-  { value: 100, suffix: "+", label: "CipherX CTF Seats", note: "Sherlock & Syntax (Team of 2)" },
-  { value: 160, suffix: "+", label: "Edge AI Workshop Seats", note: "TinyML On-Device Intelligence" },
-  { value: 110, suffix: "+", label: "Idea Alchemy Capacity", note: "Business & Startup Pitch (Team of 3)" }
+  { value: 250, suffix: "+", label: "Expected Participants", note: "Official Demographics Target" },
+  { value: 160, suffix: "", label: "VerdictX Hackathon Seats", note: "Steve Jobs Hall (40 Teams of 4)" },
+  { value: 90, suffix: "", label: "Sherlock & Syntax CTF", note: "Alpha Hall (30 Teams of 3)" },
+  { value: 160, suffix: "", label: "Edge AI Workshop", note: "Apple Hall Capacity" },
+  { value: 135, suffix: "", label: "Idea Alchemy Pitch", note: "Apple Hall (45 Teams of 3)" }
 ];
 
 export const participantBreakdown = [
@@ -35,4 +35,3 @@ export const participantBreakdown = [
   { label: "IEEE Members (Other Societies)", count: 60, percent: "24%" },
   { label: "Non-IEEE Engineering Delegates", count: 100, percent: "40%" }
 ];
-

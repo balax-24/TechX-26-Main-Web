@@ -117,7 +117,7 @@ export default function Speakers({ onOpenRegister }) {
                 <span className="section-eyebrow">EVALUATION PANEL</span>
                 <h2 className="group-title">JURY & JUDGES</h2>
                 <p className="group-sub">
-                  Experienced judges overseeing Build.Break.Defend, CipherX, and Idea Alchemy evaluation rounds.
+                  Experienced judges overseeing VerdictX: Code & Conquer, Sherlock & Syntax, and Idea Alchemy evaluation rounds.
                 </p>
               </div>
 
@@ -130,7 +130,7 @@ export default function Speakers({ onOpenRegister }) {
                   <Award size={36} color="var(--purple-light)" />
                   <h3>HONOURABLE EVALUATION BENCH</h3>
                   <p>
-                    The evaluation bench comprises engineering leaders from Tier-1 tech firms, founders, and academic fellows. The jury panel for the 24H Championship and Startup Pitch will be unveiled alongside final problem tracks.
+                    The evaluation bench comprises engineering leaders, domain specialists, and academic fellows. The jury panel for the 24H Hackathon and Startup Pitch will be unveiled alongside final problem tracks.
                   </p>
                   <span className="badge-tech">EVALUATION BENCH TO BE REVEALED</span>
                 </div>

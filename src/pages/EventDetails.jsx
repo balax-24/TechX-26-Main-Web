@@ -3,21 +3,33 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { 
   ArrowLeft, ArrowRight, Clock, Users, Shield, Cpu, Terminal, 
   Lightbulb, Coins, CheckCircle2, AlertTriangle, Key, Layers, Award,
-  Sparkles, ExternalLink
+  Sparkles, ExternalLink, HelpCircle, Flame, Target, Trophy, Lock
 } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import { eventsData } from '../data/events';
 
 export default function EventDetails({ onOpenRegister }) {
   const { id } = useParams();
+
+  // Backward compatibility alias redirects
+  if (id === 'build-break-defend') {
+    return <Navigate to="/events/verdictx" replace />;
+  }
+  if (id === 'cipherx') {
+    return <Navigate to="/events/sherlock-syntax" replace />;
+  }
+
   const event = eventsData.find(e => e.id === id);
 
   if (!event) {
     return <Navigate to="/events" replace />;
   }
 
-  // Active operation step for Build.Break.Defend
-  const [activeStep, setActiveStep] = useState(0);
+  // Active round tab for VerdictX
+  const [activeRoundTab, setActiveRoundTab] = useState(0);
+
+  // Active platform tab for CodeNomics
+  const [activePlatformTab, setActivePlatformTab] = useState('portal');
 
   return (
     <div className="event-detail-root">
@@ -37,6 +49,9 @@ export default function EventDetails({ onOpenRegister }) {
                 <span className="event-detail-num">{event.number}</span>
                 <span className="badge-tech">{event.badge}</span>
                 <span className="detail-date-badge">{event.date}</span>
+                {event.venueRoom && (
+                  <span className="detail-room-badge">{event.venueRoom}</span>
+                )}
               </div>
 
               <h1 className="detail-title">{event.publicTitle || event.title}</h1>
@@ -53,7 +68,7 @@ export default function EventDetails({ onOpenRegister }) {
                 </div>
                 <div className="detail-chip">
                   <Award size={16} />
-                  <span>Official IEEE CS SBC Certificate & Trophies</span>
+                  <span>Official IEEE CS SBC Recognition</span>
                 </div>
               </div>
 
@@ -81,7 +96,7 @@ export default function EventDetails({ onOpenRegister }) {
                   <strong className="s-val">{event.duration}</strong>
                 </div>
                 <div className="spec-item">
-                  <span className="s-label">DELEGATE ALLOCATION</span>
+                  <span className="s-label">SEAT ALLOCATION</span>
                   <strong className="s-val">{event.participants} Total Attendees</strong>
                 </div>
                 <div className="spec-item">
@@ -89,8 +104,8 @@ export default function EventDetails({ onOpenRegister }) {
                   <strong className="s-val">{event.teamSize}</strong>
                 </div>
                 <div className="spec-item">
-                  <span className="s-label">VENUE ARENA</span>
-                  <strong className="s-val">Sri Sai Ram Institute of Technology</strong>
+                  <span className="s-label">VENUE HALL</span>
+                  <strong className="s-val">{event.venueRoom || "Sri Sai Ram Institute of Technology"}</strong>
                 </div>
               </div>
 
@@ -109,8 +124,8 @@ export default function EventDetails({ onOpenRegister }) {
         <div className="container">
           {/* About The Event */}
           <div className="detail-section-block">
-            <span className="section-eyebrow">OVERVIEW & ARCHITECTURE</span>
-            <h2 className="detail-block-heading">ABOUT THE COMPETITION</h2>
+            <span className="section-eyebrow">OVERVIEW & MECHANICS</span>
+            <h2 className="detail-block-heading">ABOUT THE EVENT</h2>
             <div className="detail-prose">
               {event.fullDescription.split('\n\n').map((para, i) => (
                 <p key={i}>{para}</p>
@@ -120,7 +135,7 @@ export default function EventDetails({ onOpenRegister }) {
             {/* Event Highlights */}
             {event.highlights && (
               <div className="detail-highlights-box">
-                <h4 className="highlights-title">KEY ENGINEERING HIGHLIGHTS</h4>
+                <h4 className="highlights-title">KEY EVENT HIGHLIGHTS</h4>
                 <div className="highlights-grid">
                   {event.highlights.map((item, i) => (
                     <div key={i} className="highlight-item">
@@ -134,126 +149,256 @@ export default function EventDetails({ onOpenRegister }) {
           </div>
 
           {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 01 BUILD.BREAK.DEFEND WORKFLOW
+              CUSTOM VISUAL: EVENT 01 VERDICTX: CODE & CONQUER (3 ROUNDS)
           ============================================================ */}
-          {event.id === 'build-break-defend' && event.workflow && (
-            <div className="detail-section-block workflow-block">
-              <span className="section-eyebrow">24-HOUR LIFECYCLE PIPELINE</span>
-              <h2 className="detail-block-heading">THE 8-STAGE OPERATIONS WORKFLOW</h2>
+          {event.id === 'verdictx' && event.rounds && (
+            <div className="detail-section-block verdictx-block">
+              <span className="section-eyebrow">HACKATHON LIFECYCLE</span>
+              <h2 className="detail-block-heading">THE THREE-ROUND STRUCTURE</h2>
               <p className="detail-block-sub">
-                Build.Break.Defend executes through eight phased engineering operations. Click any operation stage to inspect its operational focus.
+                VerdictX: Code & Conquer spans 24 continuous hours across ideation, prototype development with dynamic constraints, and technical debate defense.
               </p>
 
-              {/* Interactive Timeline Tabs */}
-              <div className="workflow-timeline-nav">
-                {event.workflow.map((op, idx) => (
+              {/* Round Selection Tabs */}
+              <div className="verdictx-tabs-nav">
+                {event.rounds.map((rnd, idx) => (
                   <button
-                    key={op.code}
-                    onClick={() => setActiveStep(idx)}
-                    className={`timeline-step-btn ${activeStep === idx ? 'step-active' : ''}`}
+                    key={rnd.round}
+                    onClick={() => setActiveRoundTab(idx)}
+                    className={`v-tab-btn ${activeRoundTab === idx ? 'v-tab-active' : ''}`}
                   >
-                    <span className="step-num">{op.step}</span>
-                    <span className="step-code">{op.code}</span>
+                    <span className="v-tab-pill">{rnd.round}</span>
+                    <strong className="v-tab-title">{rnd.title}</strong>
                   </button>
                 ))}
               </div>
 
-              {/* Active Step Display Card */}
-              <div className="active-operation-card">
-                <div className="op-card-top">
-                  <div className="op-badge-wrap">
-                    <span className="badge-tech">{event.workflow[activeStep].code}</span>
-                    <span className="op-phase-num">STAGE {event.workflow[activeStep].step} OF 08</span>
+              {/* Active Round Card */}
+              <div className="verdictx-round-card">
+                <div className="v-card-top">
+                  <div className="v-round-meta">
+                    <span className="badge-tech">{event.rounds[activeRoundTab].round}</span>
+                    <span className="v-timing-chip">{event.rounds[activeRoundTab].timing}</span>
                   </div>
-                  <Terminal size={24} color="var(--purple-light)" />
+                  {activeRoundTab === 0 && <span className="v-pitch-badge">3 mins per team</span>}
+                  {activeRoundTab === 2 && <span className="v-pitch-badge">5m Presentation + 7m Defense</span>}
                 </div>
 
-                <h3 className="op-title">{event.workflow[activeStep].title}</h3>
-                <p className="op-desc">{event.workflow[activeStep].desc}</p>
+                <h3 className="v-card-heading">{event.rounds[activeRoundTab].title}</h3>
+                <p className="v-card-desc">{event.rounds[activeRoundTab].desc}</p>
 
-                <div className="op-card-context">
-                  <AlertTriangle size={16} color="var(--purple-light)" />
-                  <span>Real-time constraint injections and mentor reviews govern this operation.</span>
+                {/* Round 1 Specifics */}
+                {activeRoundTab === 0 && (
+                  <div className="v-subsections-grid">
+                    <div className="v-sub-col">
+                      <h4>PRESENTATION SCOPE</h4>
+                      <ul>
+                        <li>Proposed Solution & Architecture</li>
+                        <li>Key System Features</li>
+                        <li>Technology Stack & APIs</li>
+                        <li>Implementation Plan & Milestones</li>
+                        <li>Expected Real-World Impact</li>
+                      </ul>
+                    </div>
+                    <div className="v-sub-col">
+                      <h4>EVALUATION RUBRIC</h4>
+                      <div className="rubric-pills-wrap">
+                        {event.rounds[0].evaluation.map((crit, i) => (
+                          <div key={i} className="rubric-pill">
+                            <CheckCircle2 size={14} color="var(--purple-light)" />
+                            <span>{crit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Round 2 Specifics */}
+                {activeRoundTab === 1 && (
+                  <div className="v-subsections-grid">
+                    <div className="v-sub-col">
+                      <h4>DYNAMIC CONSTRAINT INJECTIONS</h4>
+                      <p className="v-sub-note">During prototype review (9:00 PM – 11:00 PM), judges introduce two unexpected constraints:</p>
+                      <ul>
+                        <li>Add offline functionality with local persistence</li>
+                        <li>Improve accessibility for differently-abled users</li>
+                        <li>Scale the solution architecture for one million users</li>
+                      </ul>
+                    </div>
+                    <div className="v-sub-col">
+                      <h4>EVALUATION RUBRIC</h4>
+                      <div className="rubric-pills-wrap">
+                        {event.rounds[1].evaluation.map((crit, i) => (
+                          <div key={i} className="rubric-pill">
+                            <CheckCircle2 size={14} color="var(--purple-light)" />
+                            <span>{crit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Round 3 Specifics */}
+                {activeRoundTab === 2 && (
+                  <div className="v-subsections-grid">
+                    <div className="v-sub-col">
+                      <h4>SUBMISSION & PEER REVIEW</h4>
+                      <p className="v-sub-note">Submission Window (3:30 AM – 4:30 AM) & Peer Review (4:30 AM – 5:00 AM):</p>
+                      <div className="submission-items-list">
+                        {event.rounds[2].submissionRequirements.map((sub, i) => (
+                          <div key={i} className="sub-item-badge">
+                            <Layers size={13} />
+                            <span>{sub}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="peer-review-topics">
+                        <strong>Peer Review Areas:</strong>
+                        <span>Strengths, Weaknesses, Bugs, Security Issues, UI/UX, Scalability, Performance, Suggestions.</span>
+                      </div>
+                    </div>
+                    <div className="v-sub-col">
+                      <h4>DEFENSE & DEBATE EVALUATION</h4>
+                      <div className="rubric-pills-wrap">
+                        {event.rounds[2].evaluation.map((crit, i) => (
+                          <div key={i} className="rubric-pill">
+                            <CheckCircle2 size={14} color="var(--purple-light)" />
+                            <span>{crit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Cumulative Scoring & General Rules Cards */}
+              <div className="verdictx-bottom-grid">
+                <div className="v-bottom-card">
+                  <h4 className="v-card-subhead">
+                    <Trophy size={18} color="var(--purple-light)" />
+                    <span>CUMULATIVE SCORING MODEL</span>
+                  </h4>
+                  <p className="v-sub-note">Final rankings represent cumulative performance across all five evaluation gates:</p>
+                  <div className="cumulative-gates-list">
+                    {event.scoringCumulative.map((gate, idx) => (
+                      <div key={idx} className="gate-row">
+                        <span className="gate-num">0{idx + 1}</span>
+                        <span className="gate-title">{gate}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="v-bottom-card">
+                  <h4 className="v-card-subhead">
+                    <Shield size={18} color="var(--purple-light)" />
+                    <span>GENERAL RULES & FAIR PLAY</span>
+                  </h4>
+                  <ul className="v-rules-list">
+                    {event.generalRules.map((rule, idx) => (
+                      <li key={idx}>
+                        <CheckCircle2 size={15} color="var(--purple-light)" />
+                        <span>{rule}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================================
+              CUSTOM VISUAL: EVENT 02 SHERLOCK & SYNTAX (CYBERSECURITY CTF)
+          ============================================================ */}
+          {event.id === 'sherlock-syntax' && (
+            <div className="detail-section-block ctf-block">
+              <span className="section-eyebrow">COMPETITIVE ARENA</span>
+              <h2 className="detail-block-heading">CHALLENGE CATEGORIES & SCORING MATRIX</h2>
+              <p className="detail-block-sub">
+                A standard skill-based cybersecurity Capture The Flag competition. Thirty teams of three compete over 2.5 hours in Alpha Hall.
+              </p>
+
+              {/* Challenge Categories Grid */}
+              <div className="ctf-categories-grid">
+                {event.categories.map((cat, idx) => (
+                  <div key={idx} className="ctf-cat-card">
+                    <Shield size={20} color="var(--purple-light)" />
+                    <span className="ctf-cat-name">{cat}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Difficulty & Points Matrix */}
+              <div className="ctf-matrix-section">
+                <h4 className="matrix-heading">CHALLENGE DISTRIBUTION & POINTS WEIGHTAGE</h4>
+                <div className="ctf-tier-grid">
+                  {event.challengeDistribution.map((tier) => (
+                    <div key={tier.tier} className="tier-card">
+                      <span className="tier-badge">{tier.tier}</span>
+                      <strong className="tier-pts">{tier.points} PTS</strong>
+                      <span className="tier-count">{tier.count}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="tier-note">
+                  <span>Approximate scope: 15–20 Challenges. Scoring is fully automated through the dedicated CTF platform (e.g., CTFd).</span>
                 </div>
               </div>
 
-              {/* Skills Tested */}
-              <div className="skills-tested-card">
-                <h4 className="skills-heading">WHAT YOU WILL TEST</h4>
-                <div className="skills-tags-wrap">
-                  {event.skillsTested.map((s, idx) => (
-                    <div key={idx} className="skill-pill">
-                      <span className="pill-dot"></span>
-                      <span>{s}</span>
+              {/* CTF Live Schedule Flow */}
+              <div className="ctf-timeline-card">
+                <h4 className="ctf-schedule-head">EVENT TIMELINE (DAY 2 // ALPHA HALL)</h4>
+                <div className="ctf-flow-steps">
+                  {event.eventFlow.map((step, idx) => (
+                    <div key={idx} className="ctf-step-row">
+                      <span className="ctf-step-time">{step.time}</span>
+                      <div className="ctf-step-content">
+                        <strong>{step.title}</strong>
+                        <p>{step.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-          )}
 
-          {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 02 CIPHERX INVESTIGATION
-          ============================================================ */}
-          {event.id === 'cipherx' && (
-            <div className="detail-section-block cipherx-block">
-              <span className="section-eyebrow">HYBRID ARENA MECHANICS</span>
-              <h2 className="detail-block-heading">THE SHERLOCK & SYNTAX ENGINE</h2>
-              <p className="detail-block-sub">
-                CipherX forces teams to maintain dual fronts: cracking algorithmic programming challenges while concurrently performing cyber incident forensics.
-              </p>
+              {/* Tie-Break and Rules Cards */}
+              <div className="ctf-bottom-grid">
+                <div className="ctf-bottom-card">
+                  <h4>AUTOMATED SCORING & TIE-BREAK</h4>
+                  <div className="tie-break-box">
+                    <Target size={20} color="var(--purple-light)" />
+                    <p>{event.tieBreakRule}</p>
+                  </div>
+                  <p className="ctf-recog-text">{event.recognition}</p>
+                </div>
 
-              {/* Mechanism Flowchart */}
-              <div className="mechanism-flow">
-                <div className="mech-node">
-                  <Terminal size={22} color="var(--purple-light)" />
-                  <strong>PROGRAMMING</strong>
-                  <span>Algorithmic Modules</span>
-                </div>
-                <div className="mech-connector">+</div>
-                <div className="mech-node">
-                  <Shield size={22} color="var(--purple-light)" />
-                  <strong>CYBER INVESTIGATION</strong>
-                  <span>Forensic Incidents</span>
-                </div>
-                <div className="mech-connector">↓</div>
-                <div className="mech-node mech-highlight">
-                  <Key size={22} color="#FFFFFF" />
-                  <strong>INTEL TOKENS</strong>
-                  <span>Tactical Currency</span>
-                </div>
-                <div className="mech-connector">↓</div>
-                <div className="mech-node">
-                  <Sparkles size={22} color="var(--purple-light)" />
-                  <strong>CRUCIAL HINTS</strong>
-                  <span>Unblock Mission</span>
-                </div>
-              </div>
-
-              {/* Investigation Artifacts */}
-              <div className="investigation-evidence-card">
-                <h4 className="evidence-title">SIMULATED DIGITAL EVIDENCE ARTIFACTS</h4>
-                <p className="evidence-desc">{event.investigationDetails}</p>
-                <div className="evidence-grid">
-                  <div className="artifact-chip">SERVER LOGS</div>
-                  <div className="artifact-chip">EXFILTRATED EMAILS</div>
-                  <div className="artifact-chip">BROWSER HISTORY</div>
-                  <div className="artifact-chip">SCREENSHOT EXCERPTS</div>
-                  <div className="artifact-chip">PCAP NETWORK DUMPS</div>
+                <div className="ctf-bottom-card">
+                  <h4>COMPETITION RULES</h4>
+                  <ul className="ctf-rules-list">
+                    {event.rules.map((rule, idx) => (
+                      <li key={idx}>
+                        <CheckCircle2 size={14} color="var(--purple-light)" />
+                        <span>{rule}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
           )}
 
           {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 03 EDGE AI & TINYML
+              CUSTOM VISUAL: EVENT 03 EDGE AI & TINYML WORKSHOP
           ============================================================ */}
           {event.id === 'edge-ai-tinyml' && (
             <div className="detail-section-block edgeai-block">
               <span className="section-eyebrow">INTELLIGENCE AT THE BOUNDARY</span>
-              <h2 className="detail-block-heading">THE EMBEDDED AI PIPELINE</h2>
+              <h2 className="detail-block-heading">THE ON-DEVICE AI ARCHITECTURE</h2>
               <p className="detail-block-sub">
-                Discover the progression from resource-heavy cloud models to milliwatt neural inferences running on microcontrollers.
+                Explore how machine learning breaks free from cloud dependence to operate directly on edge devices with zero network latency and enhanced privacy.
               </p>
 
               {/* Node Progression Diagram */}
@@ -272,7 +417,7 @@ export default function EventDetails({ onOpenRegister }) {
 
               {/* Topics Grid */}
               <div className="topics-section-box">
-                <h4 className="topics-heading">WORKSHOP CURRICULUM & MODULES</h4>
+                <h4 className="topics-heading">WORKSHOP CURRICULUM MODULES</h4>
                 <div className="topics-list">
                   {event.topics.map((t, idx) => (
                     <div key={idx} className="topic-card">
@@ -283,32 +428,36 @@ export default function EventDetails({ onOpenRegister }) {
                 </div>
               </div>
 
-              {/* Target Audience & Expected Outcomes */}
-              <div className="audience-outcome-grid">
-                <div className="audience-card">
-                  <h4>TARGET PARTICIPANTS</h4>
-                  <p>{event.targetAudience}</p>
+              {/* Venue & Capacity Card */}
+              <div className="workshop-specs-card">
+                <div className="w-spec-item">
+                  <span className="w-label">SESSION VENUE</span>
+                  <strong>Apple Hall</strong>
                 </div>
-                <div className="audience-card">
-                  <h4>EXPECTED OUTCOME</h4>
-                  <p>{event.expectedOutcome}</p>
+                <div className="w-spec-item">
+                  <span className="w-label">WORKSHOP TIMING</span>
+                  <strong>Day 2 // 10:45 AM – 12:15 PM</strong>
+                </div>
+                <div className="w-spec-item">
+                  <span className="w-label">MAX CAPACITY</span>
+                  <strong>160 Participants</strong>
                 </div>
               </div>
             </div>
           )}
 
           {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 04 IDEA ALCHEMY
+              CUSTOM VISUAL: EVENT 04 IDEA ALCHEMY
           ============================================================ */}
           {event.id === 'idea-alchemy' && (
             <div className="detail-section-block alchemy-block">
-              <span className="section-eyebrow">DYNAMIC ENTREPRENEURIAL SPRINT</span>
-              <h2 className="detail-block-heading">ROUND ARCHITECTURE & PIVOT CHALLENGE</h2>
+              <span className="section-eyebrow">STARTUP COMPETITION</span>
+              <h2 className="detail-block-heading">INNOVATE. ADAPT. PITCH.</h2>
               <p className="detail-block-sub">
-                Teams conceptualize breakthrough startups under random matrix combinations and must withstand severe unexpected business constraints.
+                An innovation-driven startup arena where teams construct breakthrough concepts on the fly from random draws and adapt them to sudden real-world business constraints.
               </p>
 
-              {/* Rounds */}
+              {/* Rounds Display */}
               <div className="rounds-grid">
                 {event.rounds.map((rnd) => (
                   <div key={rnd.round} className="round-card">
@@ -319,36 +468,43 @@ export default function EventDetails({ onOpenRegister }) {
                 ))}
               </div>
 
-              {/* Matrix Combinations */}
+              {/* 3 Boxes Matrix */}
               <div className="alchemy-matrix-box">
-                <h4>THE GENERATIVE MATRIX (ROUND 1 SPRINT)</h4>
+                <h4>THE 3-BOX SPRINT MATRIX (ROUND 1)</h4>
+                <p className="matrix-sub">Each team of 3 randomly selects one card from each box to build their startup premise:</p>
                 <div className="matrix-columns">
-                  <div className="matrix-col">
-                    <span className="col-label">TARGET USERS</span>
-                    {event.combinations.targetUsers.map(u => (
-                      <div key={u} className="matrix-tag">{u}</div>
-                    ))}
-                  </div>
-                  <div className="matrix-col">
-                    <span className="col-label">TECH DOMAINS</span>
-                    {event.combinations.techDomains.map(d => (
-                      <div key={d} className="matrix-tag">{d}</div>
-                    ))}
-                  </div>
-                  <div className="matrix-col">
-                    <span className="col-label">PRODUCTS / SERVICES</span>
-                    {event.combinations.productsServices.map(p => (
-                      <div key={p} className="matrix-tag">{p}</div>
-                    ))}
-                  </div>
+                  {event.boxes.map((b) => (
+                    <div key={b.box} className="matrix-col">
+                      <span className="col-label">{b.name}</span>
+                      <div className="matrix-tags-wrap">
+                        {b.examples.map(ex => (
+                          <div key={ex} className="matrix-tag">{ex}</div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Constraint Cards Examples */}
+              <div className="pivot-constraints-card">
+                <h4>ROUND 2 PIVOT CHALLENGE: BUSINESS CONSTRAINT EXAMPLES</h4>
+                <p className="pivot-sub">Top 5 qualifying finalists receive a real-world business constraint card requiring strategic adaptation:</p>
+                <div className="constraint-chips-grid">
+                  {event.constraintExamples.map((c, idx) => (
+                    <div key={idx} className="constraint-chip">
+                      <AlertTriangle size={15} color="var(--purple-light)" />
+                      <span>{c}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Evaluation Criteria Weights */}
               <div className="criteria-weights-card">
-                <h4>EVALUATION CRITERIA WEIGHTS</h4>
+                <h4>OFFICIAL JUDGING CRITERIA WEIGHTS</h4>
                 <div className="criteria-bars-grid">
-                  {event.criteria.map((c) => (
+                  {event.judgingCriteria.map((c) => (
                     <div key={c.label} className="crit-item">
                       <div className="crit-top">
                         <span className="crit-name">{c.label}</span>
@@ -365,75 +521,127 @@ export default function EventDetails({ onOpenRegister }) {
           )}
 
           {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 05 CODENOMICS
+              CUSTOM VISUAL: EVENT 05 CODENOMICS
           ============================================================ */}
           {event.id === 'codenomics' && (
             <div className="detail-section-block codenomics-block">
-              <span className="section-eyebrow">GAMIFIED ALGORITHMIC ECONOMY</span>
-              <h2 className="detail-block-heading">CODE. STRATEGY. TECHCOINS.</h2>
+              <span className="section-eyebrow">GAMIFIED COMPETITIVE PROGRAMMING</span>
+              <h2 className="detail-block-heading">TECHX PORTAL & TECHX MARKET</h2>
               <p className="detail-block-sub">
-                A high-pressure competitive programming showdown where algorithmic solutions generate TechCoins that can be strategically reinvested to purchase tactical advantages.
+                Teams strategically earn TechCoins on the TechX Portal by solving technical puzzles, and spend them in the TechX Market for tactical advantages during timed HackerRank coding.
               </p>
 
-              <div className="techcoins-concept-card">
-                <div className="coins-badge-row">
-                  <Coins size={36} color="var(--purple-light)" />
-                  <div>
-                    <h3>THE TECHCOIN RESOURCE PARADIGM</h3>
-                    <p>Balance algorithmic execution velocity with capital allocation strategy.</p>
-                  </div>
-                </div>
-
-                <div className="coins-features-grid">
-                  <div className="c-feature">
-                    <strong>EARN TECHCOINS</strong>
-                    <p>Solve sub-challenges, pass initial test-cases, and crack computational puzzles to accumulate currency.</p>
-                  </div>
-                  <div className="c-feature">
-                    <strong>BID FOR ADVANTAGES</strong>
-                    <p>Strategically spend coins to purchase hint modules, priority judge reviews, and runtime tooling.</p>
-                  </div>
-                  <div className="c-feature">
-                    <strong>ECONOMIC SCORING</strong>
-                    <p>Final rankings combine raw computational precision with net TechCoin efficiency.</p>
-                  </div>
-                </div>
+              {/* Dual Platform Selector */}
+              <div className="platform-nav-tabs">
+                <button 
+                  onClick={() => setActivePlatformTab('portal')}
+                  className={`plat-tab-btn ${activePlatformTab === 'portal' ? 'plat-tab-active' : ''}`}
+                >
+                  <Sparkles size={16} />
+                  <span>TECHX PORTAL (STRATEGY & COINS)</span>
+                </button>
+                <button 
+                  onClick={() => setActivePlatformTab('market')}
+                  className={`plat-tab-btn ${activePlatformTab === 'market' ? 'plat-tab-active' : ''}`}
+                >
+                  <Coins size={16} />
+                  <span>TECHX MARKET (ADVANTAGES)</span>
+                </button>
+                <button 
+                  onClick={() => setActivePlatformTab('hackerrank')}
+                  className={`plat-tab-btn ${activePlatformTab === 'hackerrank' ? 'plat-tab-active' : ''}`}
+                >
+                  <Terminal size={16} />
+                  <span>HACKERRANK (CODING)</span>
+                </button>
               </div>
-            </div>
-          )}
 
-          {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 06 NANO MENTORING
-          ============================================================ */}
-          {event.id === 'nano-mentoring' && (
-            <div className="detail-section-block mentoring-block">
-              <span className="section-eyebrow">HIGH-IMPACT INTERACTIONS</span>
-              <h2 className="detail-block-heading">INDUSTRY MENTORS & SESSIONS</h2>
-              <p className="detail-block-sub">
-                Participants connect directly with 6 distinguished industry mentors and judges across focused technical and career tracks.
-              </p>
-
-              {/* Mentor Placeholders Grid */}
-              <div className="mentors-grid">
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <div key={num} className="mentor-placeholder-card">
-                    <div className="mentor-avatar-box">
-                      <span className="mentor-tag">MENTOR 0{num}</span>
+              {/* Tab 1: TechX Portal Levels */}
+              {activePlatformTab === 'portal' && (
+                <div className="plat-content-box">
+                  <div className="starting-balance-banner">
+                    <Coins size={28} color="var(--purple-light)" />
+                    <div>
+                      <strong>STARTING BALANCE: 100 TECHCOINS PER TEAM</strong>
+                      <p>Teams start with 100 TechCoins and accumulate additional coins by solving non-programming strategy puzzles.</p>
                     </div>
-                    <h4>Industry Mentor 0{num}</h4>
-                    <span className="mentor-status">Profile details to be announced</span>
                   </div>
-                ))}
-              </div>
 
-              {/* Topics */}
-              <div className="mentoring-topics-card">
-                <h4>CORE DISCUSSION DOMAINS</h4>
-                <div className="mentoring-topics-list">
-                  {event.topics.map((t, idx) => (
-                    <div key={idx} className="m-topic-item">
-                      <CheckCircle2 size={16} color="var(--purple-light)" />
-                      <span>{t}</span>
+                  <div className="portal-levels-grid">
+                    {event.portalLevels.map((lvl) => (
+                      <div key={lvl.level} className="portal-lvl-card">
+                        <div className="lvl-card-head">
+                          <span className="lvl-name">{lvl.level}</span>
+                          <span className="lvl-reward">{lvl.reward}</span>
+                        </div>
+                        <div className="lvl-examples-list">
+                          {lvl.examples.map((ex, i) => (
+                            <span key={i} className="lvl-tag">{ex}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Tab 2: TechX Market Catalog */}
+              {activePlatformTab === 'market' && (
+                <div className="plat-content-box">
+                  <div className="market-intro-banner">
+                    <Sparkles size={24} color="var(--purple-light)" />
+                    <div>
+                      <strong>TECHX MARKET CATALOG (PREVIEW)</strong>
+                      <p>Spend earned TechCoins to purchase real-time tactical advantages during the HackerRank coding challenge.</p>
+                    </div>
+                  </div>
+
+                  <div className="market-items-grid">
+                    {event.marketItems.map((item) => (
+                      <div key={item.item} className="market-item-card">
+                        <div className="market-item-top">
+                          <strong className="market-item-name">{item.item}</strong>
+                          <span className="market-cost-badge">{item.cost}</span>
+                        </div>
+                        <p className="market-item-desc">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Tab 3: HackerRank & Scoring */}
+              {activePlatformTab === 'hackerrank' && (
+                <div className="plat-content-box">
+                  <div className="hackerrank-desc-card">
+                    <h4>HACKERRANK PROGRAMMING CONTEST</h4>
+                    <p>
+                      Contains algorithmic programming questions across Easy, Medium, and Hard tiers, presented in randomized order. Code correctness, runtime efficiency, and hidden test-case coverage are evaluated strictly by HackerRank.
+                    </p>
+                  </div>
+
+                  <div className="scoring-weight-box">
+                    <h4>FINAL RANKING WEIGHTAGE</h4>
+                    <div className="codenomics-weights-grid">
+                      {event.winningCriteria.map((crit) => (
+                        <div key={crit.label} className="c-weight-card">
+                          <strong className="c-weight-val">{crit.weight}</strong>
+                          <span className="c-weight-label">{crit.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Fair Play & Anti-Cheating */}
+              <div className="anticheat-card">
+                <h4>FAIR PLAY & ANTI-CHEATING ARCHITECTURE</h4>
+                <div className="anticheat-grid">
+                  {event.antiCheatingRules.map((rule, idx) => (
+                    <div key={idx} className="anticheat-item">
+                      <Lock size={15} color="var(--purple-light)" />
+                      <span>{rule}</span>
                     </div>
                   ))}
                 </div>
@@ -442,24 +650,57 @@ export default function EventDetails({ onOpenRegister }) {
           )}
 
           {/* ============================================================
-              CUSTOM VISUAL INTERACTION: EVENT 07 IEEE CS BENEFITS
+              CUSTOM VISUAL: EVENT 06 NANO MENTORING
+          ============================================================ */}
+          {event.id === 'nano-mentoring' && (
+            <div className="detail-section-block mentoring-block">
+              <span className="section-eyebrow">DIRECT GUIDANCE</span>
+              <h2 className="detail-block-heading">PRACTICAL INDUSTRY PERSPECTIVES</h2>
+              <p className="detail-block-sub">
+                An interaction session connecting student technologists with experienced professionals for practical guidance, modern engineering insights, and career navigation.
+              </p>
+
+              <div className="mentoring-focus-grid">
+                {event.sessionFocus.map((focus, idx) => (
+                  <div key={idx} className="m-focus-card">
+                    <span className="m-focus-num">0{idx + 1}</span>
+                    <h4>{focus}</h4>
+                    <p>Engage in unfiltered technical and career discussions designed to align academic preparation with industry expectations.</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mentoring-schedule-note">
+                <Clock size={18} color="var(--purple-light)" />
+                <span>Scheduled on Day 1 at 10:00 AM in the Campus Auditorium, directly alongside Benefits of IEEE Computer Society Membership.</span>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================================
+              CUSTOM VISUAL: EVENT 07 IEEE CS BENEFITS
           ============================================================ */}
           {event.id === 'ieee-cs-benefits' && (
             <div className="detail-section-block ieee-benefits-block">
-              <span className="section-eyebrow">GLOBAL PROFESSIONAL NETWORK</span>
-              <h2 className="detail-block-heading">UNLOCKING IEEE CS OPPORTUNITIES</h2>
+              <span className="section-eyebrow">GLOBAL COMMUNITY</span>
+              <h2 className="detail-block-heading">VALUE OF IEEE COMPUTER SOCIETY MEMBERSHIP</h2>
               <p className="detail-block-sub">
-                Discover the immense global benefits offered through active membership in the IEEE Computer Society.
+                An awareness and engagement session highlighting how IEEE Computer Society membership unlocks global opportunities, professional networks, and career milestones.
               </p>
 
               <div className="benefits-cards-grid">
-                {event.topics.map((t, idx) => (
+                {event.coreThemes.map((theme, idx) => (
                   <div key={idx} className="benefit-card">
                     <span className="benefit-num">0{idx + 1}</span>
-                    <h4>{t}</h4>
-                    <p>Exclusive access to premier IEEE computing repositories, conferences, and student development grants.</p>
+                    <h4>{theme}</h4>
+                    <p>Explore pathways to elevate your professional trajectory through international conferences, computing repositories, and global leadership roles.</p>
                   </div>
                 ))}
+              </div>
+
+              <div className="mentoring-schedule-note">
+                <Sparkles size={18} color="var(--purple-light)" />
+                <span>Day 1 at 10:00 AM in the Campus Auditorium. Open to all registered delegates and student attendees.</span>
               </div>
             </div>
           )}
@@ -468,7 +709,7 @@ export default function EventDetails({ onOpenRegister }) {
           <div className="detail-bottom-enroll">
             <div className="enroll-content">
               <h3>READY TO COMPETE IN {event.title}?</h3>
-              <p>14th & 15th October 2026 • Sri Sai Ram Institute of Technology</p>
+              <p>14–15 October 2026 • Sri Sai Ram Institute of Technology</p>
             </div>
             <button onClick={onOpenRegister} className="btn btn-primary">
               <span>REGISTER FOR TECHX'26</span>
@@ -518,7 +759,7 @@ export default function EventDetails({ onOpenRegister }) {
         .detail-eyebrow-row {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.85rem;
           margin-bottom: 1rem;
           flex-wrap: wrap;
         }
@@ -528,7 +769,7 @@ export default function EventDetails({ onOpenRegister }) {
           line-height: 1;
           color: var(--purple-light);
         }
-        .detail-date-badge {
+        .detail-date-badge, .detail-room-badge {
           font-family: var(--font-mono);
           font-size: 0.75rem;
           color: var(--muted);
@@ -536,6 +777,11 @@ export default function EventDetails({ onOpenRegister }) {
           border: 1px solid var(--border-subtle);
           padding: 0.35rem 0.75rem;
           border-radius: var(--radius-sm);
+        }
+        .detail-room-badge {
+          color: var(--purple-light);
+          border-color: rgba(138, 43, 226, 0.3);
+          background: rgba(138, 43, 226, 0.08);
         }
         .detail-title {
           font-family: var(--font-display);
@@ -574,9 +820,6 @@ export default function EventDetails({ onOpenRegister }) {
           font-family: var(--font-mono);
           color: var(--off-white);
           max-width: 100%;
-        }
-        .detail-chip span {
-          word-break: break-word;
         }
         .detail-hero-actions {
           display: flex;
@@ -619,89 +862,92 @@ export default function EventDetails({ onOpenRegister }) {
             padding: 1.5rem 1.15rem;
           }
         }
-        .spec-card-header {
-          margin-bottom: 1.5rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          padding-bottom: 1rem;
-        }
         .spec-card-badge {
           font-family: var(--font-mono);
-          font-size: 0.72rem;
+          font-size: 0.68rem;
           letter-spacing: 0.12em;
           color: var(--purple-light);
+          display: block;
+          margin-bottom: 0.25rem;
         }
         .spec-card-header h3 {
-          font-size: 1.35rem;
-          text-transform: uppercase;
-          margin-top: 0.25rem;
+          font-size: 1.2rem;
+          margin-bottom: 1.5rem;
+          color: #FFFFFF;
         }
         .spec-item-list {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.2rem;
           margin-bottom: 2rem;
         }
         .spec-item {
           display: flex;
           flex-direction: column;
-          gap: 0.2rem;
+          gap: 0.25rem;
+          border-bottom: 1px solid var(--border-subtle);
+          padding-bottom: 0.85rem;
+        }
+        .spec-item:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
         }
         .s-label {
           font-family: var(--font-mono);
-          font-size: 0.68rem;
+          font-size: 0.7rem;
           letter-spacing: 0.1em;
-          color: var(--muted-dark);
+          color: var(--muted);
         }
         .s-val {
-          font-size: 0.95rem;
-          color: var(--white);
+          font-size: 1.05rem;
+          color: #FFFFFF;
         }
 
-        /* Detail Blocks */
+        /* Main Section Blocks */
         .detail-main-section {
-          padding: 5rem 0;
+          padding: 5rem 0 7rem;
         }
         .detail-section-block {
-          background: #0A0612;
+          background: #08040F;
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 3rem;
-          margin-bottom: 3.5rem;
-          max-width: 100%;
-          overflow: hidden;
-          box-sizing: border-box;
+          padding: 3.5rem;
+          margin-bottom: 3rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
         @media (max-width: 768px) {
           .detail-section-block {
             padding: 2rem 1.25rem;
           }
         }
-        @media (max-width: 600px) {
-          .detail-section-block {
-            padding: 1.5rem 1rem;
-          }
-        }
         .detail-block-heading {
-          font-size: clamp(2rem, 3.5vw, 2.75rem);
+          font-size: clamp(1.8rem, 3.5vw, 2.5rem);
           text-transform: uppercase;
-          margin-bottom: 1rem;
+          letter-spacing: 0.02em;
+          margin-bottom: 1.25rem;
+          color: #FFFFFF;
         }
         .detail-block-sub {
           font-size: 1.05rem;
           color: var(--muted);
-          max-width: 760px;
+          line-height: 1.6;
+          max-width: 800px;
           margin-bottom: 2.5rem;
         }
         .detail-prose p {
           font-size: 1.05rem;
-          line-height: 1.75;
-          margin-bottom: 1.5rem;
-          color: #D4CFD8;
+          line-height: 1.7;
+          color: #D6CCE6;
+          margin-bottom: 1.25rem;
+          max-width: 860px;
         }
+
         .detail-highlights-box {
           margin-top: 2.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          padding-top: 2rem;
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid rgba(138, 43, 226, 0.2);
+          border-radius: var(--radius-sm);
+          padding: 2rem;
         }
         .highlights-title {
           font-family: var(--font-mono);
@@ -709,12 +955,11 @@ export default function EventDetails({ onOpenRegister }) {
           letter-spacing: 0.12em;
           color: var(--purple-light);
           margin-bottom: 1.25rem;
-          text-transform: uppercase;
         }
         .highlights-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
+          gap: 1rem 2rem;
         }
         @media (max-width: 768px) {
           .highlights-grid {
@@ -726,278 +971,518 @@ export default function EventDetails({ onOpenRegister }) {
           align-items: flex-start;
           gap: 0.75rem;
           font-size: 0.95rem;
-          color: var(--off-white);
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border-subtle);
-          padding: 0.85rem 1rem;
-          border-radius: var(--radius-sm);
+          color: #DDD6E5;
+          line-height: 1.5;
         }
 
-        /* Workflow Timeline */
-        .workflow-timeline-nav {
-          display: flex;
-          gap: 0.5rem;
-          overflow-x: auto;
-          padding-bottom: 1rem;
+        /* VerdictX Tabs & Rounds */
+        .verdictx-tabs-nav {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
           margin-bottom: 2rem;
-          scrollbar-width: thin;
         }
-        .timeline-step-btn {
+        @media (max-width: 768px) {
+          .verdictx-tabs-nav {
+            grid-template-columns: 1fr;
+          }
+        }
+        .v-tab-btn {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 1.25rem;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          padding: 0.85rem 1.25rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-sm);
-          min-width: 170px;
+          cursor: pointer;
+          transition: all 0.25s ease;
           text-align: left;
-          transition: var(--transition-fast);
         }
-        .timeline-step-btn:hover {
+        .v-tab-btn:hover {
           border-color: var(--purple-light);
-          background: rgba(138, 43, 226, 0.1);
+          background: rgba(138, 43, 226, 0.08);
         }
-        .step-active {
-          background: var(--purple);
+        .v-tab-active {
           border-color: var(--purple-light);
-          box-shadow: 0 0 15px var(--purple-glow);
+          background: rgba(138, 43, 226, 0.18);
+          box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
         }
-        .step-num {
+        .v-tab-pill {
           font-family: var(--font-mono);
-          font-size: 0.75rem;
-          opacity: 0.7;
+          font-size: 0.72rem;
+          letter-spacing: 0.14em;
+          color: var(--purple-light);
+          margin-bottom: 0.35rem;
         }
-        .step-code {
-          font-family: var(--font-heading);
-          font-weight: 700;
-          font-size: 0.85rem;
-          color: var(--white);
-          margin-top: 0.25rem;
+        .v-tab-title {
+          font-size: 1rem;
+          color: #FFFFFF;
+          text-transform: uppercase;
         }
-        .active-operation-card {
-          background: #0E0918;
-          border: 1px solid var(--border-strong);
+
+        .verdictx-round-card {
+          background: rgba(12, 7, 20, 0.8);
+          border: 1px solid rgba(138, 43, 226, 0.3);
           border-radius: var(--radius-md);
-          padding: 2.25rem;
-          margin-bottom: 2.5rem;
+          padding: 2.5rem;
+          margin-bottom: 2rem;
         }
-        .op-card-top {
+        @media (max-width: 600px) {
+          .verdictx-round-card {
+            padding: 1.5rem;
+          }
+        }
+        .v-card-top {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          margin-bottom: 1rem;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin-bottom: 1.25rem;
         }
-        .op-badge-wrap {
+        .v-round-meta {
           display: flex;
           align-items: center;
           gap: 0.75rem;
         }
-        .op-phase-num {
+        .v-timing-chip {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          color: #DDD6E5;
+          background: rgba(255, 255, 255, 0.05);
+          padding: 0.3rem 0.65rem;
+          border-radius: 4px;
+        }
+        .v-pitch-badge {
           font-family: var(--font-mono);
           font-size: 0.75rem;
-          color: var(--muted);
-        }
-        .op-title {
-          font-size: 1.8rem;
-          margin-bottom: 0.5rem;
-          color: var(--white);
-        }
-        .op-desc {
-          font-size: 1.05rem;
-          color: var(--muted);
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-        }
-        .op-card-context {
-          display: flex;
-          align-items: center;
-          gap: 0.65rem;
-          font-size: 0.85rem;
           color: var(--purple-light);
-          background: rgba(138, 43, 226, 0.1);
-          padding: 0.75rem 1rem;
-          border-radius: var(--radius-sm);
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          padding: 0.3rem 0.75rem;
+          border-radius: 20px;
         }
-        .skills-tested-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border-subtle);
-          border-radius: var(--radius-sm);
-          padding: 1.75rem;
+        .v-card-heading {
+          font-size: 1.6rem;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          margin-bottom: 0.85rem;
         }
-        .skills-heading {
+        .v-card-desc {
+          font-size: 1.05rem;
+          color: #BDB2CE;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+        .v-subsections-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          padding-top: 2rem;
+        }
+        @media (max-width: 768px) {
+          .v-subsections-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .v-sub-col h4 {
           font-family: var(--font-mono);
-          font-size: 0.8rem;
+          font-size: 0.82rem;
           letter-spacing: 0.12em;
           color: var(--purple-light);
           margin-bottom: 1rem;
         }
-        .skills-tags-wrap {
+        .v-sub-col ul {
+          list-style: disc;
+          padding-left: 1.25rem;
+          color: #D6CCE6;
+          line-height: 1.8;
+          font-size: 0.95rem;
+        }
+        .v-sub-note {
+          font-size: 0.92rem;
+          color: var(--muted);
+          margin-bottom: 0.85rem;
+        }
+        .rubric-pills-wrap {
           display: flex;
-          flex-wrap: wrap;
+          flex-direction: column;
           gap: 0.65rem;
         }
-        .skill-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          padding: 0.4rem 0.85rem;
-          background: rgba(138, 43, 226, 0.1);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-sm);
-          font-size: 0.82rem;
-          color: var(--white);
-        }
-        .pill-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--purple-light);
-        }
-
-        /* CipherX Mechanism */
-        .mechanism-flow {
+        .rubric-pill {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap: 0.65rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
+          padding: 0.6rem 1rem;
+          border-radius: var(--radius-sm);
+          font-size: 0.9rem;
+          color: #FFFFFF;
+        }
+        .submission-items-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+        }
+        .sub-item-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: rgba(138, 43, 226, 0.15);
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          padding: 0.4rem 0.75rem;
+          border-radius: 4px;
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          color: #FFFFFF;
+        }
+        .peer-review-topics {
+          font-size: 0.88rem;
+          color: #BDB2CE;
+          line-height: 1.5;
+        }
+        .peer-review-topics strong {
+          color: #FFFFFF;
+          display: block;
+          margin-bottom: 0.25rem;
+        }
+
+        .verdictx-bottom-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+        @media (max-width: 768px) {
+          .verdictx-bottom-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .v-bottom-card {
           background: rgba(14, 9, 24, 0.6);
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
           padding: 2rem;
-          margin-bottom: 2.5rem;
-          flex-wrap: wrap;
-          gap: 1rem;
         }
-        .mech-node {
+        .v-card-subhead {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          margin-bottom: 0.5rem;
+        }
+        .cumulative-gates-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+          margin-top: 1.25rem;
+        }
+        .gate-row {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
+          padding: 0.65rem 1rem;
+          border-radius: var(--radius-sm);
+        }
+        .gate-num {
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          color: var(--purple-light);
+          font-weight: 700;
+        }
+        .gate-title {
+          font-size: 0.95rem;
+          color: #FFFFFF;
+        }
+        .v-rules-list {
+          list-style: none;
+          padding: 0;
+          margin: 1.25rem 0 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .v-rules-list li {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.65rem;
+          font-size: 0.92rem;
+          color: #DDD6E5;
+          line-height: 1.5;
+        }
+
+        /* CTF Sherlock & Syntax Styles */
+        .ctf-categories-grid {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 1rem;
+          margin-bottom: 2.5rem;
+        }
+        @media (max-width: 1024px) {
+          .ctf-categories-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        @media (max-width: 540px) {
+          .ctf-categories-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        .ctf-cat-card {
+          background: rgba(14, 9, 24, 0.75);
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+          text-align: center;
+        }
+        .ctf-cat-name {
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          color: #FFFFFF;
+          letter-spacing: 0.05em;
+        }
+        .ctf-matrix-section {
+          background: rgba(12, 7, 20, 0.8);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem;
+          margin-bottom: 2rem;
+        }
+        .matrix-heading {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 1.5rem;
+        }
+        .ctf-tier-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+          margin-bottom: 1.25rem;
+        }
+        @media (max-width: 600px) {
+          .ctf-tier-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .tier-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 0.35rem;
-          padding: 1.25rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid var(--border-subtle);
-          border-radius: var(--radius-sm);
-          min-width: 140px;
-          flex: 1;
+          gap: 0.4rem;
         }
-        .mech-node strong {
-          font-size: 0.95rem;
-          color: var(--white);
-        }
-        .mech-node span {
-          font-size: 0.78rem;
-          color: var(--muted);
+        .tier-badge {
           font-family: var(--font-mono);
-        }
-        .mech-highlight {
-          background: var(--purple);
-          border-color: var(--purple-light);
-          box-shadow: 0 0 20px var(--purple-glow);
-        }
-        .mech-highlight span {
-          color: rgba(255, 255, 255, 0.8);
-        }
-        .mech-connector {
-          font-family: var(--font-display);
-          font-size: 1.8rem;
+          font-size: 0.72rem;
           color: var(--purple-light);
-        }
-        .investigation-evidence-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border-subtle);
-          border-radius: var(--radius-sm);
-          padding: 2rem;
-        }
-        .evidence-title {
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
           letter-spacing: 0.12em;
-          color: var(--purple-light);
-          margin-bottom: 0.5rem;
+          text-transform: uppercase;
         }
-        .evidence-desc {
-          font-size: 0.95rem;
-          margin-bottom: 1.5rem;
+        .tier-pts {
+          font-family: var(--font-display);
+          font-size: 2rem;
+          color: #FFFFFF;
         }
-        .evidence-grid {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
+        .tier-count {
+          font-size: 0.85rem;
+          color: var(--muted);
         }
-        .artifact-chip {
-          padding: 0.5rem 1rem;
-          background: rgba(0, 0, 0, 0.4);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-sm);
-          font-family: var(--font-mono);
-          font-size: 0.78rem;
-          color: var(--white);
+        .tier-note {
+          font-size: 0.88rem;
+          color: var(--muted);
+          border-top: 1px dashed rgba(255, 255, 255, 0.08);
+          padding-top: 1rem;
         }
 
-        /* Edge AI TinyML */
-        .tinyml-nodes-flow {
-          display: flex;
-          align-items: stretch;
-          gap: 1rem;
-          margin-bottom: 3rem;
-          flex-wrap: wrap;
+        .ctf-timeline-card {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem;
+          margin-bottom: 2rem;
         }
-        .tiny-node-item {
+        .ctf-schedule-head {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 1.5rem;
+        }
+        .ctf-flow-steps {
           display: flex;
           flex-direction: column;
+          gap: 1.25rem;
+        }
+        .ctf-step-row {
+          display: grid;
+          grid-template-columns: 180px 1fr;
+          gap: 1.5rem;
+          align-items: baseline;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          padding-bottom: 1rem;
+        }
+        @media (max-width: 600px) {
+          .ctf-step-row {
+            grid-template-columns: 1fr;
+            gap: 0.35rem;
+          }
+        }
+        .ctf-step-time {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          color: var(--purple-light);
+        }
+        .ctf-step-content strong {
+          color: #FFFFFF;
+          display: block;
+          margin-bottom: 0.25rem;
+        }
+        .ctf-step-content p {
+          font-size: 0.92rem;
+          color: #BDB2CE;
+          line-height: 1.5;
+        }
+
+        .ctf-bottom-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+        @media (max-width: 768px) {
+          .ctf-bottom-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .ctf-bottom-card {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem;
+        }
+        .ctf-bottom-card h4 {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 1.25rem;
+        }
+        .tie-break-box {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.85rem;
+          background: rgba(138, 43, 226, 0.1);
+          border: 1px solid rgba(138, 43, 226, 0.3);
           padding: 1.25rem;
-          background: rgba(255, 255, 255, 0.03);
+          border-radius: var(--radius-sm);
+          margin-bottom: 1.25rem;
+        }
+        .tie-break-box p {
+          font-size: 0.95rem;
+          color: #FFFFFF;
+          line-height: 1.5;
+        }
+        .ctf-recog-text {
+          font-size: 0.9rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+        .ctf-rules-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+        }
+        .ctf-rules-list li {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.65rem;
+          font-size: 0.92rem;
+          color: #DDD6E5;
+          line-height: 1.5;
+        }
+
+        /* Edge AI Workflow & Curriculum */
+        .tinyml-nodes-flow {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.25rem;
+          margin-bottom: 2.5rem;
+        }
+        @media (max-width: 900px) {
+          .tinyml-nodes-flow {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 480px) {
+          .tinyml-nodes-flow {
+            grid-template-columns: 1fr;
+          }
+        }
+        .tiny-node-item {
+          background: rgba(14, 9, 24, 0.7);
           border: 1px solid var(--border);
           border-radius: var(--radius-sm);
-          flex: 1;
-          min-width: 170px;
+          padding: 1.5rem 1.25rem;
+          display: flex;
+          flex-direction: column;
           position: relative;
         }
         .tiny-step {
           font-family: var(--font-mono);
           font-size: 0.75rem;
           color: var(--purple-light);
+          margin-bottom: 0.5rem;
         }
         .tiny-label {
           font-size: 1.1rem;
-          margin: 0.35rem 0;
-          color: var(--white);
+          color: #FFFFFF;
+          margin-bottom: 0.25rem;
         }
         .tiny-sub {
-          font-size: 0.75rem;
+          font-size: 0.85rem;
           color: var(--muted);
-          line-height: 1.4;
         }
         .tiny-arrow {
           position: absolute;
-          right: -12px;
+          right: -0.75rem;
           top: 40%;
           color: var(--purple-light);
           font-size: 1.2rem;
           z-index: 2;
         }
-        @media (max-width: 700px) {
-          .tinyml-nodes-flow {
-            flex-direction: column;
-          }
-          .tiny-node-item {
-            width: 100%;
-            min-width: 0;
-          }
+        @media (max-width: 900px) {
           .tiny-arrow {
             display: none;
           }
         }
+
         .topics-section-box {
-          margin-bottom: 3rem;
+          margin-bottom: 2.5rem;
         }
         .topics-heading {
           font-family: var(--font-mono);
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           letter-spacing: 0.12em;
           color: var(--purple-light);
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.5rem;
         }
         .topics-list {
           display: grid;
@@ -1010,55 +1495,59 @@ export default function EventDetails({ onOpenRegister }) {
           }
         }
         .topic-card {
-          padding: 1.25rem;
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid var(--border-subtle);
           border-radius: var(--radius-sm);
+          padding: 1.25rem;
         }
         .topic-index {
-          display: block;
           font-family: var(--font-mono);
-          font-size: 0.72rem;
+          font-size: 0.7rem;
           color: var(--purple-light);
+          display: block;
           margin-bottom: 0.35rem;
         }
         .topic-card p {
+          color: #FFFFFF;
           font-size: 0.95rem;
-          color: var(--off-white);
+          line-height: 1.5;
         }
-        .audience-outcome-grid {
+
+        .workshop-specs-card {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 1.75rem;
         }
         @media (max-width: 768px) {
-          .audience-outcome-grid {
+          .workshop-specs-card {
             grid-template-columns: 1fr;
           }
         }
-        .audience-card {
-          padding: 1.75rem;
-          background: rgba(138, 43, 226, 0.06);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-sm);
+        .w-spec-item {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
         }
-        .audience-card h4 {
+        .w-label {
           font-family: var(--font-mono);
-          font-size: 0.82rem;
-          letter-spacing: 0.12em;
-          color: var(--purple-light);
-          margin-bottom: 0.75rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+          color: var(--muted);
         }
-        .audience-card p {
-          font-size: 0.92rem;
-          line-height: 1.6;
+        .w-spec-item strong {
+          font-size: 1.15rem;
+          color: #FFFFFF;
         }
 
-        /* Idea Alchemy */
+        /* Idea Alchemy Styles */
         .rounds-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
+          gap: 2rem;
           margin-bottom: 2.5rem;
         }
         @media (max-width: 768px) {
@@ -1067,31 +1556,34 @@ export default function EventDetails({ onOpenRegister }) {
           }
         }
         .round-card {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(14, 9, 24, 0.7);
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
           padding: 2rem;
         }
         .round-pill {
-          display: inline-block;
           font-family: var(--font-mono);
           font-size: 0.75rem;
           color: var(--purple-light);
+          display: inline-block;
           margin-bottom: 0.75rem;
         }
         .round-title {
-          font-size: 1.4rem;
+          font-size: 1.35rem;
+          color: #FFFFFF;
           margin-bottom: 0.75rem;
         }
         .round-desc {
-          font-size: 0.92rem;
+          font-size: 0.95rem;
+          color: #BDB2CE;
           line-height: 1.6;
         }
+
         .alchemy-matrix-box {
-          background: #0D0816;
+          background: rgba(12, 7, 20, 0.8);
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 2rem;
+          padding: 2.5rem;
           margin-bottom: 2.5rem;
         }
         .alchemy-matrix-box h4 {
@@ -1099,14 +1591,19 @@ export default function EventDetails({ onOpenRegister }) {
           font-size: 0.85rem;
           letter-spacing: 0.12em;
           color: var(--purple-light);
-          margin-bottom: 1.5rem;
+          margin-bottom: 0.35rem;
+        }
+        .matrix-sub {
+          font-size: 0.95rem;
+          color: var(--muted);
+          margin-bottom: 2rem;
         }
         .matrix-columns {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
+          gap: 2rem;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
           .matrix-columns {
             grid-template-columns: 1fr;
           }
@@ -1114,58 +1611,115 @@ export default function EventDetails({ onOpenRegister }) {
         .matrix-col {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.65rem;
         }
         .col-label {
           font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: var(--muted-dark);
-          margin-bottom: 0.25rem;
+          font-size: 0.78rem;
+          color: #FFFFFF;
+          letter-spacing: 0.1em;
+          margin-bottom: 0.5rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid var(--border-subtle);
+        }
+        .matrix-tags-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
         }
         .matrix-tag {
-          padding: 0.6rem 0.85rem;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid var(--border-subtle);
+          padding: 0.55rem 0.85rem;
           border-radius: var(--radius-sm);
           font-size: 0.88rem;
+          color: #DDD6E5;
         }
-        .criteria-weights-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border-subtle);
+
+        .pivot-constraints-card {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
           border-radius: var(--radius-md);
           padding: 2rem;
+          margin-bottom: 2.5rem;
+        }
+        .pivot-constraints-card h4 {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 0.35rem;
+        }
+        .pivot-sub {
+          font-size: 0.92rem;
+          color: var(--muted);
+          margin-bottom: 1.5rem;
+        }
+        .constraint-chips-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.85rem;
+        }
+        @media (max-width: 768px) {
+          .constraint-chips-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .constraint-chip {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
+          padding: 0.75rem 1rem;
+          border-radius: var(--radius-sm);
+          font-size: 0.9rem;
+          color: #FFFFFF;
+        }
+
+        .criteria-weights-card {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2.5rem;
         }
         .criteria-weights-card h4 {
           font-family: var(--font-mono);
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           letter-spacing: 0.12em;
           color: var(--purple-light);
-          margin-bottom: 1.5rem;
+          margin-bottom: 2rem;
         }
         .criteria-bars-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
+          gap: 1.5rem 3rem;
         }
         @media (max-width: 768px) {
           .criteria-bars-grid {
             grid-template-columns: 1fr;
           }
         }
+        .crit-item {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
         .crit-top {
           display: flex;
           justify-content: space-between;
-          font-size: 0.85rem;
-          margin-bottom: 0.4rem;
+          font-size: 0.95rem;
         }
         .crit-name {
-          color: var(--white);
+          color: #FFFFFF;
         }
         .crit-pct {
           font-family: var(--font-mono);
           color: var(--purple-light);
+          font-weight: 700;
         }
         .crit-track {
+          width: 100%;
           height: 6px;
           background: rgba(255, 255, 255, 0.08);
           border-radius: 3px;
@@ -1173,217 +1727,345 @@ export default function EventDetails({ onOpenRegister }) {
         }
         .crit-fill {
           height: 100%;
-          background: linear-gradient(90deg, #8A2BE2, #B86CFF);
+          background: linear-gradient(90deg, #8A2BE2, #C084FC);
+          border-radius: 3px;
         }
 
-        /* CodeNomics */
-        .techcoins-concept-card {
-          background: rgba(14, 9, 24, 0.7);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-md);
-          padding: 2.5rem;
-        }
-        .coins-badge-row {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
+        /* CodeNomics Styles */
+        .platform-nav-tabs {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
           margin-bottom: 2rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          padding-bottom: 1.5rem;
         }
-        .coins-badge-row h3 {
-          font-size: 1.4rem;
-        }
-        .coins-features-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-        }
-        @media (max-width: 768px) {
-          .coins-features-grid {
+        @media (max-width: 800px) {
+          .platform-nav-tabs {
             grid-template-columns: 1fr;
           }
         }
-        .c-feature strong {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
-          color: var(--purple-light);
-          margin-bottom: 0.5rem;
-        }
-        .c-feature p {
-          font-size: 0.9rem;
-          line-height: 1.5;
-        }
-
-        /* Mentors Grid */
-        .mentors-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          margin-bottom: 2.5rem;
-        }
-        @media (max-width: 768px) {
-          .mentors-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 480px) {
-          .mentors-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-        .mentor-placeholder-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border-subtle);
+        .plat-tab-btn {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
           border-radius: var(--radius-sm);
-          padding: 1.75rem;
-          text-align: center;
-        }
-        .mentor-avatar-box {
-          width: 72px;
-          height: 72px;
-          border-radius: 50%;
-          background: rgba(138, 43, 226, 0.15);
-          border: 1px dashed var(--border);
+          padding: 1.15rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 1.25rem;
-        }
-        .mentor-tag {
+          gap: 0.65rem;
+          cursor: pointer;
           font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: var(--purple-light);
+          font-size: 0.8rem;
+          letter-spacing: 0.08em;
+          color: #DDD6E5;
+          transition: all 0.25s ease;
         }
-        .mentor-placeholder-card h4 {
+        .plat-tab-btn:hover {
+          border-color: var(--purple-light);
+          background: rgba(138, 43, 226, 0.08);
+        }
+        .plat-tab-active {
+          border-color: var(--purple-light);
+          background: rgba(138, 43, 226, 0.2);
+          color: #FFFFFF;
+          box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+        }
+        .plat-content-box {
+          margin-bottom: 2.5rem;
+        }
+        .starting-balance-banner, .market-intro-banner {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          background: rgba(138, 43, 226, 0.12);
+          border: 1px solid rgba(138, 43, 226, 0.3);
+          border-radius: var(--radius-md);
+          padding: 1.5rem 2rem;
+          margin-bottom: 2rem;
+        }
+        .starting-balance-banner strong, .market-intro-banner strong {
+          color: #FFFFFF;
+          display: block;
           font-size: 1.05rem;
           margin-bottom: 0.25rem;
         }
-        .mentor-status {
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: var(--muted-dark);
+        .starting-balance-banner p, .market-intro-banner p {
+          font-size: 0.92rem;
+          color: #BDB2CE;
+          line-height: 1.5;
         }
-        .mentoring-topics-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border-subtle);
-          border-radius: var(--radius-sm);
-          padding: 2rem;
+
+        .portal-levels-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
         }
-        .mentoring-topics-card h4 {
+        @media (max-width: 768px) {
+          .portal-levels-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .portal-lvl-card {
+          background: rgba(14, 9, 24, 0.7);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 1.75rem;
+        }
+        .lvl-card-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding-bottom: 0.75rem;
+        }
+        .lvl-name {
           font-family: var(--font-mono);
           font-size: 0.85rem;
+          color: #FFFFFF;
+          font-weight: 700;
+        }
+        .lvl-reward {
+          font-family: var(--font-mono);
+          font-size: 0.85rem;
+          color: #22C55E;
+          background: rgba(34, 197, 94, 0.1);
+          border: 1px solid rgba(34, 197, 94, 0.25);
+          padding: 0.25rem 0.65rem;
+          border-radius: 4px;
+        }
+        .lvl-examples-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .lvl-tag {
+          font-size: 0.82rem;
+          color: #BDB2CE;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
+          padding: 0.35rem 0.65rem;
+          border-radius: 4px;
+        }
+
+        .market-items-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.25rem;
+        }
+        @media (max-width: 768px) {
+          .market-items-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .market-item-card {
+          background: rgba(14, 9, 24, 0.7);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .market-item-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+        .market-item-name {
+          color: #FFFFFF;
+          font-size: 1rem;
+        }
+        .market-cost-badge {
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          color: var(--purple-light);
+          background: rgba(138, 43, 226, 0.18);
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          padding: 0.25rem 0.65rem;
+          border-radius: 20px;
+          white-space: nowrap;
+        }
+        .market-item-desc {
+          font-size: 0.88rem;
+          color: var(--muted);
+          line-height: 1.5;
+        }
+
+        .hackerrank-desc-card {
+          background: rgba(14, 9, 24, 0.7);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem;
+          margin-bottom: 2rem;
+        }
+        .hackerrank-desc-card h4 {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 0.85rem;
+        }
+        .hackerrank-desc-card p {
+          font-size: 1rem;
+          color: #DDD6E5;
+          line-height: 1.6;
+        }
+
+        .scoring-weight-box h4 {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
           letter-spacing: 0.12em;
           color: var(--purple-light);
           margin-bottom: 1.25rem;
         }
-        .mentoring-topics-list {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-        }
-        @media (max-width: 768px) {
-          .mentoring-topics-list {
-            grid-template-columns: 1fr;
-          }
-        }
-        .m-topic-item {
-          display: flex;
-          align-items: center;
-          gap: 0.65rem;
-          font-size: 0.92rem;
-          color: var(--off-white);
-        }
-
-        /* IEEE Benefits */
-        .benefits-cards-grid {
+        .codenomics-weights-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
         }
-        @media (max-width: 1024px) {
-          .benefits-cards-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 640px) {
-          .benefits-cards-grid {
+        @media (max-width: 600px) {
+          .codenomics-weights-grid {
             grid-template-columns: 1fr;
           }
         }
-        .benefit-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid var(--border);
+        .c-weight-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-subtle);
           border-radius: var(--radius-sm);
-          padding: 1.75rem;
-          transition: var(--transition-fast);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.5rem;
         }
-        .benefit-card:hover {
-          border-color: var(--purple-light);
-          transform: translateY(-3px);
+        .c-weight-val {
+          font-family: var(--font-display);
+          font-size: 2.2rem;
+          color: #FFFFFF;
         }
-        .benefit-num {
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--purple-light);
-          display: block;
-          margin-bottom: 0.75rem;
-        }
-        .benefit-card h4 {
-          font-size: 1.1rem;
-          margin-bottom: 0.5rem;
-          color: var(--white);
-        }
-        .benefit-card p {
+        .c-weight-label {
           font-size: 0.85rem;
+          color: var(--muted);
+        }
+
+        .anticheat-card {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem;
+        }
+        .anticheat-card h4 {
+          font-family: var(--font-mono);
+          font-size: 0.82rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          margin-bottom: 1.5rem;
+        }
+        .anticheat-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem 2rem;
+        }
+        @media (max-width: 768px) {
+          .anticheat-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .anticheat-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.65rem;
+          font-size: 0.92rem;
+          color: #DDD6E5;
           line-height: 1.5;
         }
 
-        /* Bottom Enrollment */
-        .detail-bottom-enroll {
-          background: #0E0918;
+        /* Nano Mentoring & IEEE CS Benefits */
+        .mentoring-focus-grid, .benefits-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+          margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+          .mentoring-focus-grid, .benefits-cards-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .m-focus-card, .benefit-card {
+          background: rgba(14, 9, 24, 0.7);
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 2.5rem 3rem;
+          padding: 2rem;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 2rem;
-          flex-wrap: wrap;
-          max-width: 100%;
-          box-sizing: border-box;
+          flex-direction: column;
         }
-        @media (max-width: 600px) {
+        .m-focus-num, .benefit-num {
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          color: var(--purple-light);
+          margin-bottom: 0.75rem;
+        }
+        .m-focus-card h4, .benefit-card h4 {
+          font-size: 1.15rem;
+          color: #FFFFFF;
+          margin-bottom: 0.5rem;
+        }
+        .m-focus-card p, .benefit-card p {
+          font-size: 0.92rem;
+          color: #BDB2CE;
+          line-height: 1.6;
+        }
+        .mentoring-schedule-note {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          background: rgba(138, 43, 226, 0.1);
+          border: 1px solid rgba(138, 43, 226, 0.3);
+          padding: 1.25rem 1.75rem;
+          border-radius: var(--radius-sm);
+          font-size: 0.92rem;
+          color: #FFFFFF;
+        }
+
+        /* Bottom Enrollment Section */
+        .detail-bottom-enroll {
+          margin-top: 5rem;
+          background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(14, 9, 24, 0.9));
+          border: 1px solid var(--purple-light);
+          border-radius: var(--radius-md);
+          padding: 3.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 2rem;
+          box-shadow: 0 0 50px rgba(138, 43, 226, 0.25);
+        }
+        @media (max-width: 768px) {
           .detail-bottom-enroll {
-            padding: 1.75rem 1.15rem;
+            padding: 2rem 1.5rem;
             flex-direction: column;
             align-items: stretch;
-            text-align: left;
-            gap: 1.25rem;
+            text-align: center;
           }
           .detail-bottom-enroll .btn {
             width: 100%;
             justify-content: center;
           }
         }
-        .enroll-content {
-          max-width: 100%;
-          min-width: 0;
-        }
         .enroll-content h3 {
-          font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+          font-size: 1.8rem;
           text-transform: uppercase;
+          color: #FFFFFF;
           margin-bottom: 0.35rem;
-          word-break: break-word;
-          overflow-wrap: break-word;
         }
         .enroll-content p {
-          font-size: clamp(0.75rem, 2vw, 0.95rem);
-          color: var(--purple-light);
+          color: #E2D9F3;
           font-family: var(--font-mono);
-          word-break: break-word;
-          overflow-wrap: break-word;
+          font-size: 0.88rem;
         }
       `}</style>
     </div>

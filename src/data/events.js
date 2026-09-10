@@ -1,161 +1,265 @@
 // TechX Madras 2026 - Official Events Data
+// Source: Official TechX Proposal & Event Documentation
+
 export const eventsData = [
   {
-    id: "build-break-defend",
+    id: "verdictx",
     number: "01",
-    title: "Build.Break.Defend",
-    publicTitle: "BUILD.BREAK.DEFEND",
-    subtitle: "24-Hour Software Engineering Championship",
-    badge: "24H CHAMPIONSHIP",
+    title: "VerdictX: Code & Conquer",
+    publicTitle: "VERDICTX: CODE & CONQUER",
+    subtitle: "24-Hour Open-Domain Hackathon",
+    badge: "24H HACKATHON",
     accent: "#8A2BE2",
     teamSize: "Team of 4",
+    maxTeams: 40,
     participants: 160,
     duration: "24 Hours (Overnight)",
-    date: "14th - 15th October 2026",
-    shortDescription: "A 24-hour flagship software engineering championship simulating real-world lifecycle constraints: designing, architecture review, attack injections, bug auctions, and production releases.",
-    fullDescription: "Build.Break.Defend is a 24-hour Software Engineering Championship that goes beyond the traditional hackathon experience. Participants experience the complete software engineering lifecycle by designing, developing, testing, reviewing, defending, and refining solutions under real-world constraints.\n\nThroughout the competition, teams encounter engineering challenges, architectural reviews, peer evaluations, simulated production incidents, and client requirement changes. The event emphasizes resilience, collaboration, software quality, engineering excellence, adaptability, and decision-making under intense real-world scenarios.",
+    date: "14th – 15th October 2026",
+    venueRoom: "Steve Jobs Hall",
+    shortDescription: "A 24-hour open-domain hackathon where teams develop innovative solutions, adapt to changing requirements, undergo technical review, and defend their project through a technical debate.",
+    fullDescription: "VerdictX: Code & Conquer is a 24-hour open-domain hackathon where teams develop innovative solutions, adapt to changing requirements, undergo technical review, and defend their project through a technical debate.\n\nOver 24 continuous hours, teams receive unique problem statements, build working prototypes with modern tools and APIs, handle judge-injected dynamic constraints, conduct technical peer evaluations, and defend their architecture before the evaluation bench.",
     highlights: [
-      "Simulated production outages & client requirements injection",
-      "Dynamic bug auction & live attack injection phases",
-      "Rigorous architectural review & technical debate defense",
-      "Overnight engineering sprint spanning Day 1 to Day 2"
+      "24-Hour continuous open-domain software hackathon (Steve Jobs Hall)",
+      "Multi-round lifecycle: Ideation, Prototype Development, and Defense",
+      "Dynamic constraint injections by judges during development",
+      "Peer project technical review and live technical debate"
     ],
-    workflow: [
-      { step: "01", code: "OPERATION ALPHA", title: "Foundation Build", desc: "Core architecture setup and initial system scaffolding." },
-      { step: "02", code: "OPERATION BRAVO", title: "AI Enhancement", desc: "Infusing machine intelligence and algorithmic capability." },
-      { step: "03", code: "OPERATION CHARLIE", title: "Client Feature Injection", desc: "Sudden scope evolution and dynamic requirement adaptation." },
-      { step: "04", code: "OPERATION DELTA", title: "Architecture Review", desc: "Rigorous technical inspection by engineering mentors." },
-      { step: "05", code: "OPERATION ECHO", title: "Bug Auction", desc: "Strategic bidding and flaw management under constraints." },
-      { step: "06", code: "OPERATION FOXTROT", title: "Attack Phase", desc: "Adversarial stress-testing of competitor codebases." },
-      { step: "07", code: "OPERATION GAMMA", title: "Patch Sprint", desc: "Rapid remediation, hardening, and resilience testing." },
-      { step: "08", code: "OPERATION OMEGA", title: "Production Release", desc: "Submission, peer project review, and technical defense." }
+    rounds: [
+      {
+        round: "ROUND 1",
+        title: "IDEATION & PRESENTATION",
+        timing: "Preparation: 1:00 PM – 3:30 PM | Evaluation: 3:45 PM – 5:00 PM",
+        pitchTime: "3 minutes per team",
+        desc: "Each team receives one unique problem statement and prepares a presentation covering: Proposed Solution, Features, Architecture, Technology Stack, Implementation Plan, and Expected Impact.",
+        evaluation: [
+          "Problem Understanding",
+          "Innovation",
+          "Feasibility",
+          "Technical Approach",
+          "Presentation & Clarity"
+        ]
+      },
+      {
+        round: "ROUND 2",
+        title: "PROTOTYPE DEVELOPMENT",
+        timing: "Development: 5:30 PM – 8:00 PM | Evaluation: 9:00 PM – 11:00 PM",
+        desc: "Teams develop a working prototype. AI tools, open-source libraries, APIs, and other development resources are permitted. During evaluation, judges introduce two additional dynamic constraints that teams must address (e.g. offline functionality, accessibility for differently-abled users, or scaling for one million users).",
+        evaluation: [
+          "Functionality",
+          "Innovation",
+          "UI/UX",
+          "Technical Implementation",
+          "Constraint Handling",
+          "Demonstration"
+        ]
+      },
+      {
+        round: "ROUND 3",
+        title: "TECHNICAL REVIEW & DEFENSE",
+        timing: "Submission: 3:30 AM – 4:30 AM | Peer Review: 4:30 AM – 5:00 AM | Final Defense: 8:30 AM – 11:00 AM",
+        submissionRequirements: [
+          "GitHub Repository",
+          "README Documentation",
+          "Demo Video",
+          "Final PPT"
+        ],
+        peerReviewAreas: [
+          "Strengths",
+          "Weaknesses",
+          "Bugs",
+          "Security Issues",
+          "UI/UX Improvements",
+          "Scalability",
+          "Performance",
+          "Suggestions"
+        ],
+        defenseTiming: "5 minutes Project Presentation + 7 minutes Technical Defense & Debate per team",
+        desc: "Teams submit deliverables and are randomly assigned another team's project to conduct a comprehensive peer review. During morning evaluation, teams present their work and defend their technical choices in an interactive debate.",
+        evaluation: [
+          "Technical Knowledge",
+          "Quality of Review",
+          "Problem Solving",
+          "Communication",
+          "Defense",
+          "Overall Project Quality"
+        ]
+      }
     ],
-    skillsTested: [
-      "Resilient Software Architecture",
-      "Full-Lifecycle Engineering",
-      "Adversarial Defense & Patching",
-      "Dynamic Adaptability",
-      "Peer Code Analysis",
-      "High-Pressure Decision Making"
+    scoringCumulative: [
+      "Round 1 Presentation",
+      "Prototype Development",
+      "Constraint Implementation",
+      "Technical Review",
+      "Technical Defense"
+    ],
+    generalRules: [
+      "Exactly 4 members per team (Maximum 40 teams)",
+      "AI tools, open-source libraries, and development APIs are permitted",
+      "Plagiarism or copying from other teams results in immediate disqualification",
+      "All submissions must strictly meet specified deadlines",
+      "Decisions of the evaluation bench and judges are final"
     ]
   },
   {
-    id: "cipherx",
+    id: "sherlock-syntax",
     number: "02",
-    title: "CipherX",
-    publicTitle: "CIPHERX — SHERLOCK & SYNTAX",
-    subtitle: "Cybersecurity CTF & Coding Challenge",
-    badge: "CTF & SYNTAX",
+    title: "Sherlock & Syntax",
+    publicTitle: "SHERLOCK & SYNTAX",
+    subtitle: "Cybersecurity Capture The Flag (CTF)",
+    badge: "CYBERSECURITY CTF",
     accent: "#9D4EDD",
-    teamSize: "Team of 2",
-    participants: 100,
-    duration: "Day 2 Morning",
+    teamSize: "Team of 3",
+    maxTeams: 30,
+    participants: 90,
+    duration: "Day 2 // 9:00 AM – 12:15 PM",
     date: "15th October 2026",
-    shortDescription: "A hybrid arena fusing programming with cyber forensic investigation. Teams balance dual fronts to earn Intel Tokens for strategic programming hints.",
-    fullDescription: "CipherX combines programming and cybersecurity investigation into a single strategic challenge. Participants solve algorithmic programming modules while simultaneously investigating simulated cyber incidents through dedicated web platforms.\n\nTeams strategically allocate members between Programming and Cyber Investigation. As they uncover forensic evidence, they earn Intel Tokens which can be redeemed for valuable hints during the programming challenges. This tests both coding velocity and defensive threat intelligence.",
+    venueRoom: "Alpha Hall",
+    shortDescription: "A standard skill-based cybersecurity Capture The Flag competition testing technical exploitation, cryptography, digital forensics, and reverse engineering.",
+    fullDescription: "Sherlock & Syntax is a standard skill-based cybersecurity Capture The Flag (CTF) competition. Thirty teams of three compete in Alpha Hall over a 2.5-hour live window to solve approximately 15–20 technical challenges across multiple disciplines.\n\nScoring is fully automated via the CTF platform. In the event of a tie, the team that reaches its final score earliest is ranked higher.",
     highlights: [
-      "Simulated cyber incident response web environment",
-      "Strategic resource allocation between coding and digital forensics",
-      "Intel Token economy for unlocking high-value algorithmic hints",
-      "Real-world forensic artifacts: logs, emails, browser histories, memory dumps"
+      "Standard skill-based cybersecurity Capture The Flag competition (Alpha Hall)",
+      "30 Teams × 3 Members = 90 Total Participants",
+      "15–20 Challenges distributed across Easy, Medium, and Hard tiers",
+      "Fully automated platform scoring with earliest-time tie-break rule"
     ],
-    mechanism: [
-      { label: "PROGRAMMING & FORENSICS", desc: "Teams split force between syntax challenges and cyber incident investigation." },
-      { label: "INTEL TOKENS", desc: "Forensic discoveries yield Intel Tokens used as tactical currency." },
-      { label: "STRATEGIC HINTS", desc: "Redeem tokens to unlock algorithmic clues and bypass computational roadblocks." },
-      { label: "MISSION SOLVE", desc: "Execute flawless mission completion before the countdown concludes." }
+    categories: [
+      "Web Exploitation",
+      "Cryptography",
+      "Forensics",
+      "Reverse Engineering",
+      "OSINT",
+      "Miscellaneous"
     ],
-    investigationDetails: "Forensic modules simulate incidents containing emails, server logs, screenshots, browser histories, and network digital evidence. Participants pinpoint attack vectors and formulate mitigation strategies.",
-    skillsTested: [
-      "Algorithmic Problem Solving",
-      "Cyber Threat Investigation",
-      "Log & Digital Evidence Analysis",
-      "Resource & Token Strategy",
-      "Rapid Team Coordination"
-    ]
+    challengeDistribution: [
+      { tier: "Easy", count: "6–8 Challenges", points: 100 },
+      { tier: "Medium", count: "6–8 Challenges", points: 250 },
+      { tier: "Hard", count: "3–4 Challenges", points: 500 }
+    ],
+    eventFlow: [
+      { time: "9:00 AM – 9:15 AM", title: "Reporting & Verification", desc: "Team arrival, identity verification, and system setup in Alpha Hall." },
+      { time: "9:15 AM – 9:30 AM", title: "Official Briefing", desc: "Rules overview, platform access distribution, and scope explanation." },
+      { time: "9:30 AM – 12:00 PM", title: "Live CTF Competition", desc: "2.5-hour active challenge solving across all categories." },
+      { time: "12:00 PM – 12:15 PM", title: "Leaderboard Freeze & Wrap-Up", desc: "Platform freeze, final tie-break verification, and closing remarks." }
+    ],
+    tieBreakRule: "The team that reaches its final score earliest is ranked higher.",
+    rules: [
+      "Exactly 3 members per team (30 teams total, 90 participants)",
+      "No substitutions allowed during the event",
+      "One laptop/system required per team",
+      "Flag sharing between teams is strictly prohibited",
+      "Unauthorized external help results in immediate disqualification",
+      "Any technical issues must be reported immediately to organizers"
+    ],
+    resources: [
+      "Dedicated CTF hosting platform (e.g., CTFd)",
+      "High-speed campus Wi-Fi / LAN connection",
+      "Dedicated power outlets and extension stations",
+      "Live projected leaderboard screen",
+      "IEEE CS student volunteers"
+    ],
+    recognition: "Top 3 teams announced based on final leaderboard. Official certificates for participating teams."
   },
   {
     id: "edge-ai-tinyml",
     number: "03",
-    title: "Edge AI & TinyML",
+    title: "Edge AI & TinyML: AI Beyond the Cloud",
     publicTitle: "EDGE AI & TINYML: AI BEYOND THE CLOUD",
-    subtitle: "Hands-on Workshop on Embedded Machine Intelligence",
-    badge: "TECHNICAL WORKSHOP",
+    subtitle: "Hands-on Workshop on Edge AI & Real-Time Applications",
+    badge: "HANDS-ON WORKSHOP",
     accent: "#C77DFF",
-    teamSize: "Individual / Open",
+    teamSize: "Workshop (Up to 160 Seats)",
     participants: 160,
-    duration: "Day 2 Morning",
+    duration: "Day 2 // 10:45 AM – 12:15 PM",
     date: "15th October 2026",
-    shortDescription: "A deep-dive technical workshop introducing on-device artificial intelligence, low-power machine learning, and model optimization on microcontrollers.",
-    fullDescription: "Edge AI & TinyML: AI Beyond the Cloud is a technical workshop introducing Artificial Intelligence at the Edge and Tiny Machine Learning (TinyML). The workshop focuses on how artificial intelligence can break free from heavy cloud dependency to operate directly on low-power, resource-constrained hardware.\n\nParticipants discover quantization, pruning, and deployment pipelines to run responsive neural models on microcontrollers, edge sensors, and IoT hardware with zero network latency and maximum privacy.",
+    venueRoom: "Apple Hall",
+    shortDescription: "A hands-on workshop introducing AI processing on edge devices and real-time applications.",
+    fullDescription: "Edge AI & TinyML: AI Beyond the Cloud is a hands-on workshop introducing AI processing on edge devices and real-time applications.\n\nHeld in Apple Hall with a capacity of 160 participants, the session explores how machine intelligence operates beyond cloud boundaries, highlighting on-device computing, reduced latency, data privacy, and embedded real-time applications.",
     highlights: [
-      "Understanding TinyML paradigms and embedded neural networks",
-      "Benchmarking Edge AI vs Cloud AI architectures",
-      "Model quantization, pruning, and on-chip optimization",
-      "Real-world industrial, medical, and autonomous IoT applications"
+      "Hands-on workshop in Apple Hall (Capacity: 160 participants)",
+      "Introducing AI processing on edge devices and real-time applications",
+      "Understanding the transition from heavy cloud models to edge intelligence",
+      "Exploring low-latency, private, and energy-efficient AI architectures"
     ],
     topics: [
-      "Introduction to Edge AI Paradigms",
-      "Basics of TinyML and Low-Power Inference",
+      "Introduction to Edge AI Concepts and Paradigms",
+      "Principles of TinyML and Low-Power Embedded Inference",
       "Edge AI vs Cloud AI: Latency, Bandwidth, and Privacy",
-      "AI on Microcontrollers & Resource-Constrained IoT",
-      "Model Optimization, Quantization, and Deployment Pipelines",
-      "Real-world Industrial and Embedded Applications",
-      "The Future Horizon of On-Device Intelligence"
+      "Model Optimization, Quantization, and Real-Time Deployment",
+      "Real-World Industrial, Healthcare, and Embedded Use Cases"
     ],
     workflowNodes: [
-      { step: "01", label: "CLOUD AI", desc: "High compute, high latency" },
-      { step: "02", label: "EDGE AI", desc: "Distributed boundary processing" },
+      { step: "01", label: "CLOUD AI", desc: "Centralized server compute" },
+      { step: "02", label: "EDGE AI", desc: "Localized boundary processing" },
       { step: "03", label: "TINYML", desc: "Milliwatt neural execution" },
-      { step: "04", label: "MICROCONTROLLER", desc: "Resource-constrained silicon" },
-      { step: "05", label: "ON-DEVICE INTELLIGENCE", desc: "Autonomous local inference" }
-    ],
-    targetAudience: "Students and builders passionate about Artificial Intelligence, Machine Learning, IoT, Embedded Systems, Electronics, and Computer Science.",
-    expectedOutcome: "Participants gain a practical understanding of how neural inference operates directly on microcontrollers, equipping them to build edge-native intelligent systems."
+      { step: "04", label: "ON-DEVICE", desc: "Autonomous real-time inference" }
+    ]
   },
   {
     id: "idea-alchemy",
     number: "04",
     title: "Idea Alchemy",
     publicTitle: "IDEA ALCHEMY",
-    subtitle: "Business & Idea Pitch with Dynamic Pivot Challenge",
-    badge: "STARTUP PITCH",
+    subtitle: "Business & Idea Pitch",
+    tagline: "INNOVATE. ADAPT. PITCH.",
+    badge: "BUSINESS & PITCH",
     accent: "#B86CFF",
     teamSize: "Team of 3",
-    participants: 110,
-    duration: "Day 2 Afternoon",
+    maxTeams: 45,
+    participants: 135,
+    duration: "Day 2 // 1:15 PM – 3:00 PM",
     date: "15th October 2026",
-    shortDescription: "An innovation-driven startup arena where teams construct breakthrough concepts on the fly and defend them against unexpected market pivots and regulatory shocks.",
-    fullDescription: "Idea Alchemy is an innovation-driven pitch competition designed to rigorously evaluate creativity, problem-solving, entrepreneurial mindset, technical feasibility, adaptability, business model viability, and executive communication.\n\nTeams generate startup concepts instantly based on assigned user, domain, and product combinations. In the second round, finalists face sudden business constraints—such as sudden regulatory shifts or resource drops—demanding agile strategic pivots.",
+    venueRoom: "Apple Hall",
+    shortDescription: "An innovation-driven competition where teams generate a startup concept on the spot by combining randomly assigned problem statements, technology domains, and products/services.",
+    fullDescription: "Idea Alchemy (Business & Idea Pitch) is an innovation-driven competition where teams generate a startup concept on the spot by combining randomly assigned problem statements, technology domains, and products/services.\n\nEvaluating creativity, problem-solving, entrepreneurial mindset, feasibility, business thinking, and communication, the competition challenges teams across two high-intensity rounds—culminating in an unexpected Pivot Challenge for the top 5 finalists.",
     highlights: [
-      "Rapid on-the-spot startup conceptualization",
-      "Unexpected dynamic business and technology constraints in Round 2",
-      "Evaluation across technical feasibility, commercial potential, and agility",
-      "High-caliber pitch presentation before seasoned entrepreneurial judges"
+      "Rapid on-the-spot startup conceptualization from random card combinations",
+      "Round 1 Innovation Sprint pitching complete business architecture",
+      "Round 2 Pivot Challenge featuring dynamic real-world business constraints",
+      "Objective percentage-weighted judging criteria by experienced jury"
     ],
     rounds: [
       {
         round: "ROUND 1",
         title: "INNOVATION SPRINT",
-        desc: "Teams combine one randomly selected Target User, one Technology Domain, and one Product/Service format. The pitch must concisely deliver: Problem Definition, Solution Architecture, Target Audience, Core Tech, Business Model, USP, and Market Potential. Top 5 teams qualify."
+        desc: "Teams of 3 randomly select one card from each of three boxes: Target Users, Technology Domain, and Product/Service. Teams develop a startup idea from the combination and deliver a pitch covering: Problem Statement, Proposed Solution, Target Audience, Technology Used, Business Model, Unique Selling Proposition (USP), and Market Potential. The top 5 teams qualify for Round 2."
       },
       {
         round: "ROUND 2",
-        title: "THE PIVOT CHALLENGE",
-        desc: "Finalists are hit with unexpected real-world business constraints—e.g. 70% budget reduction, cloud infrastructure shutdown, severe regulatory compliance changes, or mandatory offline operation. Teams must pivot their strategy and present a viable adapted value proposition."
+        title: "PIVOT CHALLENGE",
+        desc: "Each finalist team receives an unexpected Business Constraint Card. Teams must adapt their idea and explain: Changes made, How the new challenge was addressed, Revised business strategy, and Updated value proposition."
       }
     ],
-    combinations: {
-      targetUsers: ["Farmers", "Students", "Drivers", "Elderly People"],
-      techDomains: ["AI", "IoT", "Cybersecurity", "Blockchain", "Cloud Computing"],
-      productsServices: ["Mobile App", "Smart Watch", "Drone", "Digital Wallet"]
-    },
-    criteria: [
+    boxes: [
+      {
+        box: "BOX 1",
+        name: "TARGET USERS",
+        examples: ["Farmers", "Drivers", "Elderly People", "Students", "Women", "Healthcare Workers", "Small Business Owners"]
+      },
+      {
+        box: "BOX 2",
+        name: "TECHNOLOGY DOMAIN",
+        examples: ["Artificial Intelligence", "IoT", "Cybersecurity", "Blockchain", "Cloud Computing", "Robotics", "Data Analytics"]
+      },
+      {
+        box: "BOX 3",
+        name: "PRODUCT / SERVICE",
+        examples: ["Smart Watch", "ATM", "Mobile Application", "Drone", "Vending Machine", "Smart Mirror", "Digital Wallet"]
+      }
+    ],
+    constraintExamples: [
+      "Major technology is no longer available",
+      "Project budget is significantly reduced",
+      "Government regulations changed",
+      "Target users have different requirements",
+      "Competitor launched a similar product",
+      "Solution must function without internet"
+    ],
+    judgingCriteria: [
       { label: "Innovation & Creativity", percentage: 25 },
-      { label: "Feasibility & Architecture", percentage: 20 },
+      { label: "Feasibility", percentage: 20 },
       { label: "Problem-Solution Fit", percentage: 20 },
-      { label: "Adaptability & Pivot Agility", percentage: 15 },
-      { label: "Business Model & Monetization", percentage: 10 },
+      { label: "Adaptability", percentage: 15 },
+      { label: "Business Model", percentage: 10 },
       { label: "Presentation & Communication", percentage: 10 }
     ]
   },
@@ -164,27 +268,89 @@ export const eventsData = [
     number: "05",
     title: "CodeNomics",
     publicTitle: "CODENOMICS",
-    subtitle: "Code. Strategy. TechCoins.",
+    subtitle: "Gamified Competitive Programming",
     badge: "GAMIFIED CODING",
     accent: "#7B2CBF",
-    teamSize: "Team / Individual",
-    participants: "Open Challenge",
-    duration: "Day 2 Afternoon",
+    teamSize: "Team of 2",
+    maxTeams: 40,
+    participants: 120,
+    duration: "Day 2 // 1:15 PM – 3:30 PM",
     date: "15th October 2026",
-    shortDescription: "A gamified competitive programming challenge where teams strategically earn, invest, and risk TechCoins to gain algorithmic advantages.",
-    fullDescription: "CodeNomics merges rapid algorithmic problem solving with economic strategy. Participants tackle technical coding rounds where solving sub-problems awards TechCoins.\n\nTeams must calculate when to hoard coins, when to bid for priority test cases, and when to unlock critical algorithmic tools. The competition rewards not just raw coding speed, but tactical resource management under time pressure.",
+    venueRoom: "Alpha Hall",
+    shortDescription: "Gamified competitive programming where teams strategically earn and spend TechCoins while solving coding challenges.",
+    fullDescription: "CodeNomics is a gamified competitive programming arena where teams strategically earn and spend TechCoins while solving coding challenges across two integrated platforms: the TechX Portal and HackerRank.\n\nTeams begin with 100 TechCoins and solve strategic non-programming challenges on the TechX Portal to earn additional currency. They then strategically spend coins in the TechX Market to purchase tactical advantages during the timed HackerRank programming challenges.",
     highlights: [
-      "Dynamic TechCoin economic mechanics intertwined with code execution",
-      "Strategic tool purchases to accelerate problem resolution",
-      "Real-time leaderboard shifting with economic and computational scores",
-      "High-energy coding format testing mental clarity under economic constraints"
+      "Dual-platform architecture: TechX Portal (Strategy) + HackerRank (Programming)",
+      "Starting balance of 100 TechCoins per team",
+      "TechX Portal levels awarding from +20 to +120 TechCoins",
+      "Interactive TechX Market to purchase tactical hints, AI prompts, and timer freezes",
+      "Holistic scoring: 70% HackerRank Score, 20% Completion Time, 10% TechCoins"
     ],
-    skillsTested: [
-      "Algorithmic Precision",
-      "Strategic Resource Allocation",
-      "Risk vs Reward Calculus",
-      "Computational Speed",
-      "Tactical Decision Making"
+    platforms: [
+      {
+        name: "TECHX PORTAL",
+        desc: "Non-programming challenges, TechCoin management, TechX Market, live leaderboard, and progress tracking."
+      },
+      {
+        name: "HACKERRANK",
+        desc: "Programming questions, automated code evaluation, hidden testcase judging, and coding score calculation."
+      }
+    ],
+    flow: [
+      "Team Login",
+      "Solve Strategy Challenges",
+      "Earn TechCoins",
+      "Use Coins in TechX Market",
+      "Solve Coding Problems on HackerRank",
+      "Finish & Submit",
+      "Final Ranking"
+    ],
+    portalLevels: [
+      {
+        level: "LEVEL 1 — EASY",
+        reward: "+20 TechCoins",
+        examples: ["Debug the output", "Find the error", "Tech trivia", "Logic puzzle", "SQL MCQs", "OS puzzles"]
+      },
+      {
+        level: "LEVEL 2 — MEDIUM",
+        reward: "+40 TechCoins",
+        examples: ["Predict program output", "API flow questions", "Git workflow", "Database design", "Networking"]
+      },
+      {
+        level: "LEVEL 3 — HARD",
+        reward: "+70 TechCoins",
+        examples: ["Architecture decisions", "System Design MCQs", "Algorithm analysis", "Security puzzles", "Scenario-based debugging"]
+      },
+      {
+        level: "BOSS CHALLENGE",
+        reward: "+120 TechCoins",
+        examples: ["Final comprehensive strategic puzzle testing technical synthesis"]
+      }
+    ],
+    marketItems: [
+      { item: "Reveal Hint", cost: "20 Coins", desc: "Unlock a foundational algorithmic hint." },
+      { item: "Second Hint", cost: "40 Coins", desc: "Unlock an advanced hint with architectural direction." },
+      { item: "Judge Clarification", cost: "15 Coins", desc: "Official problem statement clarification from judges." },
+      { item: "AI Assistant (Limited Prompt)", cost: "60 Coins", desc: "Execute one targeted inquiry via the TechX assistant." },
+      { item: "Hidden Testcase Preview", cost: "40 Coins", desc: "Inspect one hidden edge-case testcase input." },
+      { item: "Skip One Wrong Submission", cost: "30 Coins", desc: "Remove the penalty for one incorrect submission." },
+      { item: "Reveal Live Leaderboard", cost: "10 Coins", desc: "Temporarily reveal live standings during freeze period." },
+      { item: "Freeze Timer for 2 Minutes", cost: "100 Coins", desc: "Pause contest timer for 120 seconds of deliberation." }
+    ],
+    winningCriteria: [
+      { label: "HackerRank Score / Levels Completed", weight: "70%" },
+      { label: "Completion Time", weight: "20%" },
+      { label: "Remaining TechCoins", weight: "10%" }
+    ],
+    antiCheatingRules: [
+      "Mobile phones collected before event start",
+      "Exactly one laptop permitted per team",
+      "Unique team login credentials with randomized question order",
+      "Tab switching strictly prohibited and monitored",
+      "AI tools permitted exclusively through the TechX Market item",
+      "Organizer monitoring throughout the session",
+      "HackerRank automated plagiarism detection",
+      "Server-side validation for all TechCoin transactions; coins earned once per challenge"
     ]
   },
   {
@@ -192,66 +358,55 @@ export const eventsData = [
     number: "06",
     title: "Nano Mentoring",
     publicTitle: "NANO MENTORING",
-    subtitle: "High-Impact Industry Interactions",
-    badge: "EXPERT MENTORSHIP",
+    subtitle: "Industry Insights & Guidance",
+    badge: "INDUSTRY INSIGHTS",
     accent: "#8A2BE2",
     teamSize: "Open to Attendees",
     participants: 80,
-    duration: "Day 1 Morning",
+    duration: "Day 1 // 10:00 AM",
     date: "14th October 2026",
-    shortDescription: "Intimate, high-density mentoring sessions connecting ambitious student technologists with veteran industry experts, tech leads, and researchers.",
-    fullDescription: "An interactive mentoring session designed to connect participants with industry experts and experienced professionals. Nano Mentoring delivers direct, actionable guidance tailored to modern engineering realities.\n\nStudents interact with 6 distinguished judges and mentors across career acceleration, research trajectories, internship preparation, and breaking into top-tier tech organizations.",
+    venueRoom: "Campus Auditorium",
+    shortDescription: "An interaction session with experienced professionals providing practical insights, guidance, and industry perspectives.",
+    fullDescription: "Nano Mentoring is a dedicated interaction session with experienced professionals designed to provide practical insights, guidance, and industry perspectives.\n\nScheduled on Day 1 at 10:00 AM alongside the Benefits of IEEE Computer Society Membership session, it gives student technologists direct exposure to industry expectations, career navigation, and modern technology practices.",
     highlights: [
-      "6 Industry Mentors & Judges providing direct feedback",
-      "Targeted focus on career development and higher education",
-      "Actionable expectations from modern hiring managers and engineering leads",
-      "Unfiltered Q&A on emerging technologies and real-world engineering careers"
+      "Direct interaction session with experienced professionals",
+      "Practical insights, guidance, and industry perspectives",
+      "Career development and modern technology guidance",
+      "Presented alongside Benefits of IEEE Computer Society Membership"
     ],
-    topics: [
-      "Engineering Career Trajectories & Specialization",
-      "Higher Education & Research Opportunities Abroad",
-      "Emerging Tech Stacks Shaping the Next Decade",
-      "High-Value Internships & Industry Readiness",
-      "What Tier-1 Tech Companies Really Look For"
-    ],
-    objectives: [
-      "Actionable Career Guidance",
-      "Direct Industry Exposure",
-      "Lasting Professional Networks"
+    sessionFocus: [
+      "Practical Insights into Modern Tech Workflows",
+      "Career Guidance and Skill Trajectories",
+      "Industry Expectations for Student Developers",
+      "Interactive Q&A with Experienced Professionals"
     ]
   },
   {
     id: "ieee-cs-benefits",
     number: "07",
-    title: "Benefits of IEEE Computer Society",
-    publicTitle: "BENEFITS OF IEEE COMPUTER SOCIETY",
-    subtitle: "Unlocking Global Computing Opportunities",
-    badge: "KEYNOTE & ORIENTATION",
+    title: "Benefits of IEEE Computer Society Membership",
+    publicTitle: "BENEFITS OF IEEE COMPUTER SOCIETY MEMBERSHIP",
+    subtitle: "Career Advancement & Professional Opportunities",
+    badge: "IEEE CS ENGAGEMENT",
     accent: "#9D4EDD",
     teamSize: "Open to Attendees",
     participants: 80,
-    duration: "Day 1 Morning",
+    duration: "Day 1 // 10:00 AM",
     date: "14th October 2026",
-    shortDescription: "Explore how IEEE Computer Society membership unlocks international competitions, IEEE Xplore digital access, global scholarships, and leadership roles.",
-    fullDescription: "The session introduces the immense opportunities available through the IEEE Computer Society—the world's leading community for computer science and engineering professionals.\n\nParticipants will discover how active membership connects them to global technical councils, exclusive conferences, international hackathons, peer-reviewed research publications, scholarships, and worldwide leadership appointments.",
+    venueRoom: "Campus Auditorium",
+    shortDescription: "An engagement and awareness session highlighting career advancement, networking opportunities, career development, and innovation in the technology sector.",
+    fullDescription: "Benefits of IEEE Computer Society Membership is an engagement and awareness session designed to highlight the profound advantages of belonging to the world's leading community for computer science professionals.\n\nHeld on Day 1 at 10:00 AM, the session covers career advancement, international networking opportunities, continuous professional development, and technological innovation.",
     highlights: [
-      "Introduction to global IEEE Computer Society technical chapters",
-      "Navigating international student design & research competitions",
-      "Leveraging IEEE Xplore digital library for cutting-edge projects",
-      "Pathways to international leadership and student ambassador roles"
+      "Official IEEE Computer Society engagement and awareness session",
+      "Highlighting career advancement and professional development",
+      "Global networking opportunities with engineers and researchers",
+      "Fostering innovation across the technology sector"
     ],
-    topics: [
-      "Global Technical Communities & Special Interest Groups",
-      "International Design Competitions & Hackathons",
-      "Research Publications, Digital Libraries & IEEE Xplore",
-      "Prestigious International Scholarships & Travel Grants",
-      "Student Leadership & Chapter Governance Opportunities",
-      "Cross-Border Professional Networking with Industry Fellows"
-    ],
-    objectives: [
-      "Promote IEEE CS Membership Value",
-      "Increase Global Student Engagement",
-      "Catalyze Long-Term Professional Development"
+    coreThemes: [
+      "Career Advancement & Industry Recognition",
+      "Global Networking Opportunities",
+      "Professional Development & Lifelong Learning",
+      "Innovation in the Technology Sector"
     ]
   }
 ];

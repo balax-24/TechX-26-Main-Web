@@ -182,10 +182,13 @@ export default function Contact() {
                         className="tech-input tech-select"
                       >
                         <option value="General Event Inquiry">General Event Inquiry</option>
-                        <option value="Build.Break.Defend Championship">Build.Break.Defend Championship</option>
-                        <option value="CipherX CTF & Syntax">CipherX CTF & Syntax</option>
+                        <option value="VerdictX: Code & Conquer">VerdictX: Code & Conquer</option>
+                        <option value="Sherlock & Syntax">Sherlock & Syntax</option>
                         <option value="Edge AI & TinyML">Edge AI & TinyML</option>
-                        <option value="Idea Alchemy Pitch">Idea Alchemy Pitch</option>
+                        <option value="Idea Alchemy">Idea Alchemy</option>
+                        <option value="CodeNomics">CodeNomics</option>
+                        <option value="Nano Mentoring">Nano Mentoring</option>
+                        <option value="IEEE Computer Society Membership">IEEE Computer Society Membership</option>
                         <option value="Partnership & Collaboration">Partnership & Collaboration</option>
                       </select>
                     </div>
