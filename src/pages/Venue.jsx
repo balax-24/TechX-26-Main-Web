@@ -13,7 +13,7 @@ export default function Venue({ onOpenRegister }) {
       {/* Hero */}
       <section className="venue-hero-section">
         <div className="container">
-          <span className="section-eyebrow">HOST CAMPUS & ARENA</span>
+          <span className="section-eyebrow">HOST CAMPUS & VENUE</span>
           <h1 className="venue-hero-title">
             THE VENUE<br />
             <span className="text-purple-highlight">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
@@ -83,7 +83,7 @@ export default function Venue({ onOpenRegister }) {
           <div className="venue-info-grid">
             {/* Address Specification */}
             <div className="venue-card-primary">
-              <div className="venue-badge">EVENT DESTINATION</div>
+              <div className="venue-badge">CAMPUS VENUE</div>
               <h2 className="venue-h2">LOCATION</h2>
 
               <div className="venue-spec-list">
@@ -135,7 +135,7 @@ export default function Venue({ onOpenRegister }) {
             {/* Interactive Google Map */}
             <div className="map-standin-card">
               <div className="map-standin-head">
-                <span className="section-eyebrow">GEOGRAPHIC ANCHOR</span>
+                <span className="section-eyebrow">INTERACTIVE MAP</span>
                 <h3 className="map-standin-title">LOCATION MAP</h3>
               </div>
 

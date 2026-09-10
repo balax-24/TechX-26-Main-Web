@@ -1,20 +1,105 @@
 // TechX Madras 2026 - Official Events Data
 // Source: Official TechX Proposal & Event Documentation
+// Chronological Order: Day 1 (01–03) then Day 2 (04–07)
 
 export const eventsData = [
+  // ----------------------------------------------------
+  // DAY 1 — 14 OCTOBER 2026
+  // ----------------------------------------------------
+  {
+    id: "nano-mentoring",
+    number: "01",
+    day: 1,
+    dayLabel: "DAY 1",
+    eventDate: "14 October 2026",
+    time: "10:00 AM",
+    title: "Nano Mentoring",
+    publicTitle: "NANO MENTORING",
+    subtitle: "Industry Insights & Guidance",
+    badge: "MENTORING",
+    accent: "#8A2BE2",
+    teamSize: "Open to Attendees",
+    participants: 80,
+    participantsLabel: "Open to Registered Delegates",
+    duration: "Day 1 // 10:00 AM",
+    date: "14th October 2026",
+    venueRoom: "Campus Auditorium",
+    shortDescription: "An interaction session with experienced professionals providing practical insights, guidance, and industry perspectives.",
+    fullDescription: "Nano Mentoring is a dedicated interaction session with experienced professionals designed to provide practical insights, guidance, and industry perspectives.\n\nScheduled on Day 1 at 10:00 AM alongside the Benefits of IEEE Computer Society Membership session, it gives student technologists direct exposure to industry expectations, career navigation, and modern technology practices.",
+    highlights: [
+      "Direct interaction session with experienced professionals",
+      "Practical insights, guidance, and industry perspectives",
+      "Career development and modern technology guidance",
+      "Presented alongside Benefits of IEEE Computer Society Membership"
+    ],
+    sessionFocus: [
+      "Practical Insights into Modern Tech Workflows",
+      "Career Guidance and Skill Trajectories",
+      "Industry Expectations for Student Developers",
+      "Interactive Q&A with Experienced Professionals"
+    ],
+    prizes: {
+      recognition: "Interactive professional development and industry perspective session.",
+      certificates: "Participation certificates for all registered attendees.",
+      details: "Details to be announced."
+    }
+  },
+  {
+    id: "ieee-cs-benefits",
+    number: "02",
+    day: 1,
+    dayLabel: "DAY 1",
+    eventDate: "14 October 2026",
+    time: "10:00 AM",
+    title: "Benefits of IEEE Computer Society Membership",
+    publicTitle: "BENEFITS OF IEEE COMPUTER SOCIETY MEMBERSHIP",
+    subtitle: "Career Advancement & Professional Opportunities",
+    badge: "IEEE CS ENGAGEMENT",
+    accent: "#9D4EDD",
+    teamSize: "Open to Attendees",
+    participants: 80,
+    participantsLabel: "Open to Registered Delegates",
+    duration: "Day 1 // 10:00 AM",
+    date: "14th October 2026",
+    venueRoom: "Campus Auditorium",
+    shortDescription: "An engagement and awareness session highlighting career advancement, networking opportunities, career development, and innovation in the technology sector.",
+    fullDescription: "Benefits of IEEE Computer Society Membership is an engagement and awareness session designed to highlight the advantages of belonging to the world's leading community for computer science professionals.\n\nHeld on Day 1 at 10:00 AM, the session covers career advancement, international networking opportunities, continuous professional development, and technological innovation.",
+    highlights: [
+      "Official IEEE Computer Society engagement and awareness session",
+      "Highlighting career advancement and professional development",
+      "Global networking opportunities with engineers and researchers",
+      "Fostering innovation across the technology sector"
+    ],
+    coreThemes: [
+      "Career Advancement & Industry Recognition",
+      "Global Networking Opportunities",
+      "Professional Development & Lifelong Learning",
+      "Innovation in the Technology Sector"
+    ],
+    prizes: {
+      recognition: "Official IEEE Computer Society student chapter awareness.",
+      certificates: "Participation certificates for all registered attendees.",
+      details: "Details to be announced."
+    }
+  },
   {
     id: "verdictx",
-    number: "01",
+    number: "03",
+    day: 1,
+    dayLabel: "DAY 1 (OVERNIGHT)",
+    eventDate: "14–15 October 2026",
+    time: "01:30 PM (24 Hours)",
     title: "VerdictX: Code & Conquer",
     publicTitle: "VERDICTX: CODE & CONQUER",
     subtitle: "24-Hour Open-Domain Hackathon",
-    badge: "24H HACKATHON",
+    badge: "24-HOUR HACKATHON",
     accent: "#8A2BE2",
-    teamSize: "Team of 4",
+    teamSize: "4 members",
     maxTeams: 40,
     participants: 160,
+    participantsLabel: "Up to 160 Participants (40 Teams × 4)",
     duration: "24 Hours (Overnight)",
-    date: "14th – 15th October 2026",
+    date: "14–15 October 2026",
     venueRoom: "Steve Jobs Hall",
     shortDescription: "A 24-hour open-domain hackathon where teams develop innovative solutions, adapt to changing requirements, undergo technical review, and defend their project through a technical debate.",
     fullDescription: "VerdictX: Code & Conquer is a 24-hour open-domain hackathon where teams develop innovative solutions, adapt to changing requirements, undergo technical review, and defend their project through a technical debate.\n\nOver 24 continuous hours, teams receive unique problem statements, build working prototypes with modern tools and APIs, handle judge-injected dynamic constraints, conduct technical peer evaluations, and defend their architecture before the evaluation bench.",
@@ -98,23 +183,37 @@ export const eventsData = [
       "Plagiarism or copying from other teams results in immediate disqualification",
       "All submissions must strictly meet specified deadlines",
       "Decisions of the evaluation bench and judges are final"
-    ]
+    ],
+    prizes: {
+      recognition: "Top teams recognized across the cumulative multi-round evaluation bench.",
+      certificates: "Official certificates for all participating teams.",
+      details: "Awards and winner recognition to be announced by organizers."
+    }
   },
+
+  // ----------------------------------------------------
+  // DAY 2 — 15 OCTOBER 2026
+  // ----------------------------------------------------
   {
     id: "sherlock-syntax",
-    number: "02",
+    number: "04",
+    day: 2,
+    dayLabel: "DAY 2",
+    eventDate: "15 October 2026",
+    time: "09:00 AM – 12:15 PM",
     title: "Sherlock & Syntax",
     publicTitle: "SHERLOCK & SYNTAX",
     subtitle: "Cybersecurity Capture The Flag (CTF)",
     badge: "CYBERSECURITY CTF",
     accent: "#9D4EDD",
-    teamSize: "Team of 3",
+    teamSize: "3 members",
     maxTeams: 30,
     participants: 90,
+    participantsLabel: "90 Participants (30 Teams × 3)",
     duration: "Day 2 // 9:00 AM – 12:15 PM",
     date: "15th October 2026",
     venueRoom: "Alpha Hall",
-    shortDescription: "A standard skill-based cybersecurity Capture The Flag competition testing technical exploitation, cryptography, digital forensics, and reverse engineering.",
+    shortDescription: "A standard skill-based cybersecurity Capture The Flag competition testing web exploitation, cryptography, digital forensics, reverse engineering, and OSINT.",
     fullDescription: "Sherlock & Syntax is a standard skill-based cybersecurity Capture The Flag (CTF) competition. Thirty teams of three compete in Alpha Hall over a 2.5-hour live window to solve approximately 15–20 technical challenges across multiple disciplines.\n\nScoring is fully automated via the CTF platform. In the event of a tie, the team that reaches its final score earliest is ranked higher.",
     highlights: [
       "Standard skill-based cybersecurity Capture The Flag competition (Alpha Hall)",
@@ -157,18 +256,27 @@ export const eventsData = [
       "Live projected leaderboard screen",
       "IEEE CS student volunteers"
     ],
-    recognition: "Top 3 teams announced based on final leaderboard. Official certificates for participating teams."
+    prizes: {
+      recognition: "Top 3 teams announced based on final leaderboard standings.",
+      certificates: "Official certificates for all participating teams.",
+      details: "Winner recognition and awards subject to overall event budget."
+    }
   },
   {
     id: "edge-ai-tinyml",
-    number: "03",
+    number: "05",
+    day: 2,
+    dayLabel: "DAY 2",
+    eventDate: "15 October 2026",
+    time: "10:45 AM – 12:15 PM",
     title: "Edge AI & TinyML: AI Beyond the Cloud",
     publicTitle: "EDGE AI & TINYML: AI BEYOND THE CLOUD",
     subtitle: "Hands-on Workshop on Edge AI & Real-Time Applications",
     badge: "HANDS-ON WORKSHOP",
     accent: "#C77DFF",
-    teamSize: "Workshop (Up to 160 Seats)",
+    teamSize: "Individual Workshop Entry",
     participants: 160,
+    participantsLabel: "160 Participants Capacity",
     duration: "Day 2 // 10:45 AM – 12:15 PM",
     date: "15th October 2026",
     venueRoom: "Apple Hall",
@@ -192,23 +300,35 @@ export const eventsData = [
       { step: "02", label: "EDGE AI", desc: "Localized boundary processing" },
       { step: "03", label: "TINYML", desc: "Milliwatt neural execution" },
       { step: "04", label: "ON-DEVICE", desc: "Autonomous real-time inference" }
-    ]
+    ],
+    prizes: {
+      recognition: "Hands-on edge intelligence and microcontroller AI deployment.",
+      certificates: "Participation certificates for all registered attendees.",
+      details: "Details to be announced."
+    }
   },
   {
     id: "idea-alchemy",
-    number: "04",
+    number: "06",
+    day: 2,
+    dayLabel: "DAY 2 (PARALLEL TRACK)",
+    eventDate: "15 October 2026",
+    time: "01:15 PM – 03:00 PM",
     title: "Idea Alchemy",
     publicTitle: "IDEA ALCHEMY",
     subtitle: "Business & Idea Pitch",
     tagline: "INNOVATE. ADAPT. PITCH.",
-    badge: "BUSINESS & PITCH",
+    badge: "BUSINESS & IDEA PITCH",
     accent: "#B86CFF",
-    teamSize: "Team of 3",
+    teamSize: "3 members",
     maxTeams: 45,
     participants: 135,
+    participantsLabel: "Up to 135 Participants (45 Teams × 3)",
     duration: "Day 2 // 1:15 PM – 3:00 PM",
     date: "15th October 2026",
     venueRoom: "Apple Hall",
+    parallelTrack: true,
+    parallelWith: "CodeNomics (Alpha Hall)",
     shortDescription: "An innovation-driven competition where teams generate a startup concept on the spot by combining randomly assigned problem statements, technology domains, and products/services.",
     fullDescription: "Idea Alchemy (Business & Idea Pitch) is an innovation-driven competition where teams generate a startup concept on the spot by combining randomly assigned problem statements, technology domains, and products/services.\n\nEvaluating creativity, problem-solving, entrepreneurial mindset, feasibility, business thinking, and communication, the competition challenges teams across two high-intensity rounds—culminating in an unexpected Pivot Challenge for the top 5 finalists.",
     highlights: [
@@ -261,22 +381,34 @@ export const eventsData = [
       { label: "Adaptability", percentage: 15 },
       { label: "Business Model", percentage: 10 },
       { label: "Presentation & Communication", percentage: 10 }
-    ]
+    ],
+    prizes: {
+      recognition: "Top finalist teams recognized based on jury evaluation criteria.",
+      certificates: "Certificates for all participating teams.",
+      details: "Details to be announced."
+    }
   },
   {
     id: "codenomics",
-    number: "05",
+    number: "07",
+    day: 2,
+    dayLabel: "DAY 2 (PARALLEL TRACK)",
+    eventDate: "15 October 2026",
+    time: "01:15 PM – 03:30 PM",
     title: "CodeNomics",
     publicTitle: "CODENOMICS",
     subtitle: "Gamified Competitive Programming",
-    badge: "GAMIFIED CODING",
+    badge: "COMPETITIVE PROGRAMMING",
     accent: "#7B2CBF",
-    teamSize: "Team of 2",
+    teamSize: "2 members",
     maxTeams: 40,
-    participants: 120,
+    participants: 80,
+    participantsLabel: "Up to 80 Participants (40 Teams × 2)",
     duration: "Day 2 // 1:15 PM – 3:30 PM",
     date: "15th October 2026",
     venueRoom: "Alpha Hall",
+    parallelTrack: true,
+    parallelWith: "Idea Alchemy (Apple Hall)",
     shortDescription: "Gamified competitive programming where teams strategically earn and spend TechCoins while solving coding challenges.",
     fullDescription: "CodeNomics is a gamified competitive programming arena where teams strategically earn and spend TechCoins while solving coding challenges across two integrated platforms: the TechX Portal and HackerRank.\n\nTeams begin with 100 TechCoins and solve strategic non-programming challenges on the TechX Portal to earn additional currency. They then strategically spend coins in the TechX Market to purchase tactical advantages during the timed HackerRank programming challenges.",
     highlights: [
@@ -351,62 +483,82 @@ export const eventsData = [
       "Organizer monitoring throughout the session",
       "HackerRank automated plagiarism detection",
       "Server-side validation for all TechCoin transactions; coins earned once per challenge"
-    ]
-  },
-  {
-    id: "nano-mentoring",
-    number: "06",
-    title: "Nano Mentoring",
-    publicTitle: "NANO MENTORING",
-    subtitle: "Industry Insights & Guidance",
-    badge: "INDUSTRY INSIGHTS",
-    accent: "#8A2BE2",
-    teamSize: "Open to Attendees",
-    participants: 80,
-    duration: "Day 1 // 10:00 AM",
-    date: "14th October 2026",
-    venueRoom: "Campus Auditorium",
-    shortDescription: "An interaction session with experienced professionals providing practical insights, guidance, and industry perspectives.",
-    fullDescription: "Nano Mentoring is a dedicated interaction session with experienced professionals designed to provide practical insights, guidance, and industry perspectives.\n\nScheduled on Day 1 at 10:00 AM alongside the Benefits of IEEE Computer Society Membership session, it gives student technologists direct exposure to industry expectations, career navigation, and modern technology practices.",
-    highlights: [
-      "Direct interaction session with experienced professionals",
-      "Practical insights, guidance, and industry perspectives",
-      "Career development and modern technology guidance",
-      "Presented alongside Benefits of IEEE Computer Society Membership"
     ],
-    sessionFocus: [
-      "Practical Insights into Modern Tech Workflows",
-      "Career Guidance and Skill Trajectories",
-      "Industry Expectations for Student Developers",
-      "Interactive Q&A with Experienced Professionals"
-    ]
-  },
-  {
-    id: "ieee-cs-benefits",
-    number: "07",
-    title: "Benefits of IEEE Computer Society Membership",
-    publicTitle: "BENEFITS OF IEEE COMPUTER SOCIETY MEMBERSHIP",
-    subtitle: "Career Advancement & Professional Opportunities",
-    badge: "IEEE CS ENGAGEMENT",
-    accent: "#9D4EDD",
-    teamSize: "Open to Attendees",
-    participants: 80,
-    duration: "Day 1 // 10:00 AM",
-    date: "14th October 2026",
-    venueRoom: "Campus Auditorium",
-    shortDescription: "An engagement and awareness session highlighting career advancement, networking opportunities, career development, and innovation in the technology sector.",
-    fullDescription: "Benefits of IEEE Computer Society Membership is an engagement and awareness session designed to highlight the profound advantages of belonging to the world's leading community for computer science professionals.\n\nHeld on Day 1 at 10:00 AM, the session covers career advancement, international networking opportunities, continuous professional development, and technological innovation.",
-    highlights: [
-      "Official IEEE Computer Society engagement and awareness session",
-      "Highlighting career advancement and professional development",
-      "Global networking opportunities with engineers and researchers",
-      "Fostering innovation across the technology sector"
-    ],
-    coreThemes: [
-      "Career Advancement & Industry Recognition",
-      "Global Networking Opportunities",
-      "Professional Development & Lifelong Learning",
-      "Innovation in the Technology Sector"
-    ]
+    prizes: {
+      recognition: "Top ranked teams announced on final leaderboard combining HackerRank, completion time, and TechCoins.",
+      certificates: "Certificates for all participating teams.",
+      details: "Details to be announced."
+    }
   }
 ];
+
+// ----------------------------------------------------
+// REGISTRATION & INDICATIVE TICKET PRICING
+// ----------------------------------------------------
+export const ticketPricing = {
+  sectionTitle: "REGISTRATION / TICKET PRICING",
+  subtitle: "Indicative fee structure for conference and event delegate passes across Day 1 and Day 2.",
+  day1: {
+    dayNumber: "DAY 1",
+    date: "14 OCTOBER 2026",
+    title: "DAY 1 PASS",
+    eventsIncluded: [
+      "Inauguration & Event Briefing (09:00 AM)",
+      "Nano Mentoring Session (10:00 AM)",
+      "IEEE Computer Society Membership Session (10:00 AM)",
+      "VerdictX 24-Hour Hackathon Entry (01:30 PM, Continues Overnight)"
+    ],
+    tiers: [
+      {
+        category: "IEEE CS MEMBER",
+        price: "₹399*",
+        originalUsd: "$4.18",
+        desc: "Active IEEE Computer Society student members with valid membership ID."
+      },
+      {
+        category: "IEEE NON-CS MEMBER",
+        price: "₹499*",
+        originalUsd: "$5.23",
+        desc: "Active IEEE student members from other society chapters."
+      },
+      {
+        category: "NON-IEEE MEMBER",
+        price: "₹599*",
+        originalUsd: "$6.28",
+        desc: "Open to student technologists and delegates from all engineering institutions."
+      }
+    ]
+  },
+  day2: {
+    dayNumber: "DAY 2",
+    date: "15 OCTOBER 2026",
+    title: "DAY 2 PASS",
+    eventsIncluded: [
+      "Sherlock & Syntax Cybersecurity CTF (09:00 AM – 12:15 PM)",
+      "Edge AI & TinyML Hands-on Workshop (10:45 AM – 12:15 PM)",
+      "Idea Alchemy Startup Pitch OR CodeNomics Programming (01:15 PM)",
+      "Grand Valedictory Ceremony & Awards Distribution (03:30 PM)"
+    ],
+    tiers: [
+      {
+        category: "IEEE CS MEMBER",
+        price: "₹299*",
+        originalUsd: "$3.13",
+        desc: "Active IEEE Computer Society student members with valid membership ID."
+      },
+      {
+        category: "IEEE NON-CS MEMBER",
+        price: "₹399*",
+        originalUsd: "$4.18",
+        desc: "Active IEEE student members from other society chapters."
+      },
+      {
+        category: "NON-IEEE MEMBER",
+        price: "₹499*",
+        originalUsd: "$5.23",
+        desc: "Open to student technologists and delegates from all engineering institutions."
+      }
+    ]
+  },
+  footnote: "*Indicative INR conversion of proposal pricing; final registration fee will be confirmed by the organizers."
+};

@@ -107,7 +107,7 @@ export default function Contact() {
             {/* Right Column: Inquiry Form */}
             <div className="contact-form-col">
               <div className="inquiry-dispatch-card">
-                <span className="section-eyebrow">ELECTRONIC DISPATCH</span>
+                <span className="section-eyebrow">CONTACT TECHX'26</span>
                 <h3 className="dispatch-title">SEND AN INQUIRY</h3>
                 <p className="dispatch-sub">
                   Send your question directly to the TechX'26 organizing desk.

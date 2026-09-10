@@ -64,21 +64,21 @@ export default function EventDetails({ onOpenRegister }) {
                 </div>
                 <div className="detail-chip">
                   <Clock size={16} />
-                  <span>{event.participants} Verified Seats</span>
+                  <span>{event.participantsLabel || `Up to ${event.participants} Participants`}</span>
                 </div>
                 <div className="detail-chip">
                   <Award size={16} />
-                  <span>Official IEEE CS SBC Recognition</span>
+                  <span>{event.maxTeams ? `${event.maxTeams} Max Teams` : 'Registered Delegates'}</span>
                 </div>
               </div>
 
               <div className="detail-hero-actions">
                 <button onClick={onOpenRegister} className="btn btn-primary">
-                  <span>REGISTER FOR THIS TRACK</span>
+                  <span>REGISTER FOR EVENT</span>
                   <ArrowRight size={18} />
                 </button>
                 <Link to="/schedule" className="btn btn-secondary">
-                  <span>VIEW TIMELINE</span>
+                  <span>VIEW SCHEDULE</span>
                 </Link>
               </div>
             </div>
@@ -86,32 +86,42 @@ export default function EventDetails({ onOpenRegister }) {
             {/* Quick Spec Card */}
             <div className="detail-spec-card">
               <div className="spec-card-header">
-                <span className="spec-card-badge">TRACK SPECIFICATIONS</span>
-                <h3>OPERATIONAL SUMMARY</h3>
+                <span className="spec-card-badge">EVENT DETAILS</span>
+                <h3>EVENT SPECIFICATIONS</h3>
               </div>
 
               <div className="spec-item-list">
                 <div className="spec-item">
-                  <span className="s-label">DURATION & SCHEDULE</span>
+                  <span className="s-label">DURATION</span>
                   <strong className="s-val">{event.duration}</strong>
                 </div>
                 <div className="spec-item">
-                  <span className="s-label">SEAT ALLOCATION</span>
-                  <strong className="s-val">{event.participants} Total Attendees</strong>
-                </div>
-                <div className="spec-item">
-                  <span className="s-label">TEAM COMPOSITION</span>
+                  <span className="s-label">TEAM SIZE</span>
                   <strong className="s-val">{event.teamSize}</strong>
                 </div>
                 <div className="spec-item">
-                  <span className="s-label">VENUE HALL</span>
+                  <span className="s-label">CAPACITY</span>
+                  <strong className="s-val">{event.participantsLabel || `${event.participants} Participants`}</strong>
+                </div>
+                {event.maxTeams && (
+                  <div className="spec-item">
+                    <span className="s-label">MAX TEAMS</span>
+                    <strong className="s-val">{event.maxTeams} Teams</strong>
+                  </div>
+                )}
+                <div className="spec-item">
+                  <span className="s-label">VENUE</span>
                   <strong className="s-val">{event.venueRoom || "Sri Sai Ram Institute of Technology"}</strong>
+                </div>
+                <div className="spec-item">
+                  <span className="s-label">DATE</span>
+                  <strong className="s-val">{event.date}</strong>
                 </div>
               </div>
 
               <div className="spec-card-footer">
-                <button onClick={onOpenRegister} className="btn btn-purple" style={{ width: '100%' }}>
-                  ENROLL IN ARENA
+                <button onClick={onOpenRegister} className="btn btn-primary" style={{ width: '100%' }}>
+                  REGISTER FOR {event.publicTitle || event.title}
                 </button>
               </div>
             </div>
@@ -315,7 +325,7 @@ export default function EventDetails({ onOpenRegister }) {
           ============================================================ */}
           {event.id === 'sherlock-syntax' && (
             <div className="detail-section-block ctf-block">
-              <span className="section-eyebrow">COMPETITIVE ARENA</span>
+              <span className="section-eyebrow">CTF FORMAT & CATEGORIES</span>
               <h2 className="detail-block-heading">CHALLENGE CATEGORIES & SCORING MATRIX</h2>
               <p className="detail-block-sub">
                 A standard skill-based cybersecurity Capture The Flag competition. Thirty teams of three compete over 2.5 hours in Alpha Hall.
@@ -705,6 +715,70 @@ export default function EventDetails({ onOpenRegister }) {
             </div>
           )}
 
+          {/* ============================================================
+              PRIZES & RECOGNITION (OFFICIAL / GROUNDED)
+          ============================================================ */}
+          <div className="detail-section-block prizes-recognition-block">
+            <span className="section-eyebrow">AWARDS & ACKNOWLEDGEMENT</span>
+            <h2 className="detail-block-heading">PRIZES & RECOGNITION</h2>
+            
+            {event.id === 'sherlock-syntax' ? (
+              <div className="prizes-grid">
+                <div className="prize-box">
+                  <span className="prize-label">TOP 3 TEAMS</span>
+                  <h4>Final Leaderboard Standings</h4>
+                  <p>Top 3 teams will be officially recognized based on the final automated platform leaderboard standings.</p>
+                </div>
+                <div className="prize-box">
+                  <span className="prize-label">CERTIFICATES</span>
+                  <h4>Official Credentials</h4>
+                  <p>Official participation certificates issued to all verified participating teams.</p>
+                </div>
+                <div className="prize-box">
+                  <span className="prize-label">PRIZE DETAILS</span>
+                  <h4>Awards Allocation</h4>
+                  <p>Special recognition and winner prizes subject to overall event budget. Details to be announced.</p>
+                </div>
+              </div>
+            ) : event.id === 'verdictx' ? (
+              <div className="prizes-grid">
+                <div className="prize-box">
+                  <span className="prize-label">TOP TEAMS</span>
+                  <h4>Cumulative Bench Evaluation</h4>
+                  <p>Top evaluated projects recognized across Round 1 Ideation, Round 2 Prototype & Dynamic Constraints, and Round 3 Technical Defense.</p>
+                </div>
+                <div className="prize-box">
+                  <span className="prize-label">CERTIFICATES</span>
+                  <h4>Official Credentials</h4>
+                  <p>Official certificates of participation and achievement awarded to all 4 members of registered teams.</p>
+                </div>
+                <div className="prize-box">
+                  <span className="prize-label">PRIZE DETAILS</span>
+                  <h4>Awards Allocation</h4>
+                  <p>Prize details, mementos, and track recognition to be announced by the organizing committee.</p>
+                </div>
+              </div>
+            ) : (
+              <div className="prizes-grid">
+                <div className="prize-box">
+                  <span className="prize-label">RECOGNITION</span>
+                  <h4>Official Acknowledgement</h4>
+                  <p>{event.prizes?.recognition || "Delegates recognized for active participation and project evaluation."}</p>
+                </div>
+                <div className="prize-box">
+                  <span className="prize-label">CERTIFICATES</span>
+                  <h4>Official Credentials</h4>
+                  <p>{event.prizes?.certificates || "Official certificates issued to all registered participants."}</p>
+                </div>
+                <div className="prize-box">
+                  <span className="prize-label">PRIZE DETAILS</span>
+                  <h4>Awards Allocation</h4>
+                  <p>{event.prizes?.details || "Details to be announced."}</p>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Bottom Enrolment CTA */}
           <div className="detail-bottom-enroll">
             <div className="enroll-content">
@@ -965,6 +1039,46 @@ export default function EventDetails({ onOpenRegister }) {
           .highlights-grid {
             grid-template-columns: 1fr;
           }
+        }
+
+        /* Prizes & Recognition Grid */
+        .prizes-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+        }
+        .prize-box {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          transition: var(--transition-fast);
+        }
+        .prize-box:hover {
+          border-color: var(--purple-light);
+          transform: translateY(-2px);
+        }
+        .prize-label {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: var(--purple-light);
+          letter-spacing: 0.08em;
+        }
+        .prize-box h4 {
+          font-size: 1.15rem;
+          margin: 0;
+          color: var(--white);
+        }
+        .prize-box p {
+          font-size: 0.9rem;
+          color: var(--muted);
+          line-height: 1.5;
+          margin: 0;
         }
         .highlight-item {
           display: flex;

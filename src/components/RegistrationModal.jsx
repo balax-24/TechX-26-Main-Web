@@ -61,11 +61,33 @@ export default function RegistrationModal({ isOpen, onClose }) {
             <div className="modal-alert-box">
               <span className="live-dot"></span>
               <div>
-                <strong>REGISTRATION OPENS SOON</strong>
+                <strong>REGISTRATION DETAILS COMING SOON</strong>
                 <p style={{ fontSize: '0.88rem', margin: '4px 0 0 0', color: 'var(--muted)' }}>
-                  The official registration portal will be announced soon. Sign up below for priority notification.
+                  The official registration gateway will open soon. Review the indicative delegate pricing below and sign up for priority notification.
                 </p>
               </div>
+            </div>
+
+            {/* Indicative Pricing Breakdown */}
+            <div className="modal-pricing-summary">
+              <span className="modal-pricing-kicker">INDICATIVE TICKET PRICING</span>
+              <div className="modal-pricing-grid">
+                <div className="modal-price-col">
+                  <span className="m-day-tag">DAY 1 PASS (14 OCT)</span>
+                  <div className="m-price-line"><span>IEEE CS:</span> <strong>₹399*</strong></div>
+                  <div className="m-price-line"><span>IEEE Non-CS:</span> <strong>₹499*</strong></div>
+                  <div className="m-price-line"><span>Non-IEEE:</span> <strong>₹599*</strong></div>
+                </div>
+                <div className="modal-price-col">
+                  <span className="m-day-tag">DAY 2 PASS (15 OCT)</span>
+                  <div className="m-price-line"><span>IEEE CS:</span> <strong>₹299*</strong></div>
+                  <div className="m-price-line"><span>IEEE Non-CS:</span> <strong>₹399*</strong></div>
+                  <div className="m-price-line"><span>Non-IEEE:</span> <strong>₹499*</strong></div>
+                </div>
+              </div>
+              <p className="modal-pricing-footnote">
+                *Indicative INR conversion of proposal pricing; final registration fees will be confirmed by organizers.
+              </p>
             </div>
 
             {submitted ? (
@@ -202,6 +224,61 @@ export default function RegistrationModal({ isOpen, onClose }) {
         .signup-success p {
           font-size: 0.88rem;
           color: var(--muted);
+        }
+        .modal-pricing-summary {
+          margin-bottom: 1.5rem;
+          padding: 1rem 1.15rem;
+          background: rgba(0, 0, 0, 0.4);
+          border: 1px solid var(--border-subtle);
+          border-radius: var(--radius-sm);
+        }
+        .modal-pricing-kicker {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: var(--purple-light);
+          letter-spacing: 0.08em;
+          display: block;
+          margin-bottom: 0.65rem;
+        }
+        .modal-pricing-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        @media (max-width: 480px) {
+          .modal-pricing-grid {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+          }
+        }
+        .modal-price-col {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+        }
+        .m-day-tag {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: var(--white);
+          margin-bottom: 0.2rem;
+        }
+        .m-price-line {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.8rem;
+          color: var(--light-gray);
+        }
+        .m-price-line strong {
+          color: var(--purple-light);
+          font-family: var(--font-mono);
+        }
+        .modal-pricing-footnote {
+          font-size: 0.74rem;
+          color: var(--muted);
+          margin: 0.75rem 0 0;
+          line-height: 1.35;
         }
         .modal-footer-contact {
           border-top: 1px solid rgba(255, 255, 255, 0.08);

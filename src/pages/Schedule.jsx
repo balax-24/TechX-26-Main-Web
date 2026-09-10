@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, Moon, Sun, ArrowRight, Zap, CheckCircle2 } from 'lucide-react';
+import { Calendar, Clock, Moon, Sun, ArrowRight, Zap, CheckCircle2, GitFork } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import TechAtmosphere from '../components/TechAtmosphere';
 import { scheduleData } from '../data/schedule';
@@ -101,16 +101,45 @@ export default function Schedule({ onOpenRegister }) {
                   {/* Event Details Card */}
                   <div className="timeline-content-box">
                     <div className="content-card-inner">
-                      <div className="timeline-badge-row">
-                        {item.badge && (
-                          <span className="timeline-badge">{item.badge}</span>
-                        )}
-                        {item.venue && (
-                          <span className="timeline-venue-chip">{item.venue}</span>
-                        )}
-                      </div>
-                      <h3 className="timeline-event-title">{item.title}</h3>
-                      <p className="timeline-event-desc">{item.desc}</p>
+                      {item.isParallel ? (
+                        <div className="parallel-schedule-node">
+                          <div className="timeline-badge-row">
+                            <span className="timeline-badge">{item.badge}</span>
+                            <span className="timeline-venue-chip">{item.venue}</span>
+                          </div>
+                          <h3 className="timeline-event-title">{item.title}</h3>
+                          <p className="timeline-event-desc">{item.desc}</p>
+
+                          <div className="parallel-tree-box">
+                            {item.tracks.map((trk, tIdx) => (
+                              <div key={tIdx} className="parallel-tree-branch">
+                                <span className="branch-symbol">{tIdx === 0 ? '┌' : '└'}</span>
+                                <div className="branch-details">
+                                  <div className="branch-meta-row">
+                                    <strong className="branch-title">{trk.title}</strong>
+                                    <span className="timeline-venue-chip">{trk.venue}</span>
+                                  </div>
+                                  <span className="branch-time">{trk.time}</span>
+                                  <p className="branch-desc">{trk.desc}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="timeline-badge-row">
+                            {item.badge && (
+                              <span className="timeline-badge">{item.badge}</span>
+                            )}
+                            {item.venue && (
+                              <span className="timeline-venue-chip">{item.venue}</span>
+                            )}
+                          </div>
+                          <h3 className="timeline-event-title">{item.title}</h3>
+                          <p className="timeline-event-desc">{item.desc}</p>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -466,6 +495,65 @@ export default function Schedule({ onOpenRegister }) {
           font-size: 0.92rem;
           line-height: 1.55;
           color: var(--muted);
+        }
+
+        /* Parallel Schedule Node & Branch Tree */
+        .parallel-schedule-node {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .parallel-tree-box {
+          margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.15rem;
+          background: rgba(0, 0, 0, 0.45);
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          border-radius: var(--radius-sm);
+        }
+        .parallel-tree-branch {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.85rem;
+        }
+        .branch-symbol {
+          font-family: var(--font-mono);
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--purple-light);
+          line-height: 1.1;
+          user-select: none;
+        }
+        .branch-details {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+        .branch-meta-row {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          flex-wrap: wrap;
+        }
+        .branch-title {
+          font-size: 1.05rem;
+          color: var(--white);
+          margin: 0;
+        }
+        .branch-time {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--purple-light);
+          font-weight: 600;
+        }
+        .branch-desc {
+          font-size: 0.85rem;
+          color: var(--muted);
+          line-height: 1.45;
+          margin: 0;
         }
 
         /* Schedule Footer */

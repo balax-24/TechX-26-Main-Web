@@ -188,18 +188,50 @@ export default function Home({ onOpenRegister }) {
       <section className="section experience-pillars-section">
         <div className="container">
           <div className="pillars-section-head">
-            <span className="section-eyebrow">CURATED EXPERIENCES</span>
+            <span className="section-eyebrow">CONFERENCE PROGRAM</span>
             <h2 className="section-title">THE TECHX EXPERIENCE</h2>
             <p className="pillars-section-sub">
-              Seven experiences across building, cybersecurity, edge AI, competitive programming, innovation, mentoring, and IEEE Computer Society engagement.
+              Seven technical and professional experiences organized across Day 1 and Day 2.
             </p>
           </div>
 
           <div className="pillars-editorial-grid">
             {/* Experience 01 */}
-            <Link to="/events/verdictx" className="pillar-column">
+            <Link to="/events/nano-mentoring" className="pillar-column">
               <div className="pillar-top-meta">
                 <span className="pillar-index">01</span>
+                <Users size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="pillar-title">NANO MENTORING</h3>
+              <p className="pillar-text">
+                Interaction session with experienced professionals providing practical insights, guidance, and industry perspectives for student developers.
+              </p>
+              <div className="pillar-footer-meta">
+                <span>Campus Auditorium</span>
+                <span>Day 1 // 10:00 AM</span>
+              </div>
+            </Link>
+
+            {/* Experience 02 */}
+            <Link to="/events/ieee-cs-benefits" className="pillar-column">
+              <div className="pillar-top-meta">
+                <span className="pillar-index">02</span>
+                <Award size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="pillar-title">IEEE CS BENEFITS</h3>
+              <p className="pillar-text">
+                Engagement and awareness session highlighting career advancement, networking opportunities, professional development, and technological innovation.
+              </p>
+              <div className="pillar-footer-meta">
+                <span>Campus Auditorium</span>
+                <span>Day 1 // 10:00 AM</span>
+              </div>
+            </Link>
+
+            {/* Experience 03 */}
+            <Link to="/events/verdictx" className="pillar-column">
+              <div className="pillar-top-meta">
+                <span className="pillar-index">03</span>
                 <Terminal size={22} color="var(--purple-light)" />
               </div>
               <h3 className="pillar-title">VERDICTX: CODE & CONQUER</h3>
@@ -208,14 +240,14 @@ export default function Home({ onOpenRegister }) {
               </p>
               <div className="pillar-footer-meta">
                 <span>Steve Jobs Hall</span>
-                <span>40 Teams • 4 Members</span>
+                <span>Day 1 // 1:30 PM (24H Overnight)</span>
               </div>
             </Link>
 
-            {/* Experience 02 */}
+            {/* Experience 04 */}
             <Link to="/events/sherlock-syntax" className="pillar-column">
               <div className="pillar-top-meta">
-                <span className="pillar-index">02</span>
+                <span className="pillar-index">04</span>
                 <Shield size={22} color="var(--purple-light)" />
               </div>
               <h3 className="pillar-title">SHERLOCK & SYNTAX</h3>
@@ -224,14 +256,14 @@ export default function Home({ onOpenRegister }) {
               </p>
               <div className="pillar-footer-meta">
                 <span>Alpha Hall</span>
-                <span>30 Teams • 3 Members</span>
+                <span>Day 2 // 9:00 AM – 12:15 PM</span>
               </div>
             </Link>
 
-            {/* Experience 03 */}
+            {/* Experience 05 */}
             <Link to="/events/edge-ai-tinyml" className="pillar-column">
               <div className="pillar-top-meta">
-                <span className="pillar-index">03</span>
+                <span className="pillar-index">05</span>
                 <Cpu size={22} color="var(--purple-light)" />
               </div>
               <h3 className="pillar-title">EDGE AI & TINYML</h3>
@@ -240,14 +272,14 @@ export default function Home({ onOpenRegister }) {
               </p>
               <div className="pillar-footer-meta">
                 <span>Apple Hall</span>
-                <span>160 Participants</span>
+                <span>Day 2 // 10:45 AM – 12:15 PM</span>
               </div>
             </Link>
 
-            {/* Experience 04 */}
+            {/* Experience 06 */}
             <Link to="/events/idea-alchemy" className="pillar-column">
               <div className="pillar-top-meta">
-                <span className="pillar-index">04</span>
+                <span className="pillar-index">06</span>
                 <Lightbulb size={22} color="var(--purple-light)" />
               </div>
               <h3 className="pillar-title">IDEA ALCHEMY</h3>
@@ -256,14 +288,14 @@ export default function Home({ onOpenRegister }) {
               </p>
               <div className="pillar-footer-meta">
                 <span>Apple Hall</span>
-                <span>45 Teams • 3 Members</span>
+                <span>Day 2 // 1:15 PM (Parallel Track)</span>
               </div>
             </Link>
 
-            {/* Experience 05 */}
+            {/* Experience 07 */}
             <Link to="/events/codenomics" className="pillar-column">
               <div className="pillar-top-meta">
-                <span className="pillar-index">05</span>
+                <span className="pillar-index">07</span>
                 <Coins size={22} color="var(--purple-light)" />
               </div>
               <h3 className="pillar-title">CODENOMICS</h3>
@@ -272,39 +304,7 @@ export default function Home({ onOpenRegister }) {
               </p>
               <div className="pillar-footer-meta">
                 <span>Alpha Hall</span>
-                <span>40 Teams • 2 Members</span>
-              </div>
-            </Link>
-
-            {/* Experience 06 */}
-            <Link to="/events/nano-mentoring" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">06</span>
-                <Users size={22} color="var(--purple-light)" />
-              </div>
-              <h3 className="pillar-title">NANO MENTORING</h3>
-              <p className="pillar-text">
-                Interaction session with experienced professionals providing practical insights, guidance, and industry perspectives for student developers.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Day 1 // 10:00 AM</span>
-                <span>Direct Interaction</span>
-              </div>
-            </Link>
-
-            {/* Experience 07 */}
-            <Link to="/events/ieee-cs-benefits" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">07</span>
-                <Award size={22} color="var(--purple-light)" />
-              </div>
-              <h3 className="pillar-title">IEEE CS BENEFITS</h3>
-              <p className="pillar-text">
-                Engagement and awareness session highlighting career advancement, networking opportunities, professional development, and technological innovation.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Day 1 // 10:00 AM</span>
-                <span>Global Community</span>
+                <span>Day 2 // 1:15 PM (Parallel Track)</span>
               </div>
             </Link>
           </div>

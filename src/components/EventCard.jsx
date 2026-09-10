@@ -51,7 +51,7 @@ export default function EventCard({ event, featured = false }) {
           </div>
           <div className="metric-chip">
             <Clock size={14} />
-            <span>{event.participants} Seats</span>
+            <span>{event.participantsLabel || `${event.participants} Participants`}</span>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function EventCard({ event, featured = false }) {
       {/* Footer / CTA */}
       <div className="event-card-footer">
         <Link to={`/events/${event.id}`} className="event-explore-btn">
-          <span>EXPLORE EVENT ARCHITECTURE</span>
+          <span>VIEW EVENT DETAILS</span>
           <ArrowRight size={16} className="arrow-icon" />
         </Link>
       </div>

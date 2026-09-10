@@ -144,7 +144,7 @@ export const scheduleData = {
         venue: "Alpha Hall",
         category: "Cybersecurity CTF",
         highlight: true,
-        badge: "CTF ARENA",
+        badge: "CYBERSECURITY CTF",
         desc: "Standard skill-based CTF across Web Exploitation, Cryptography, Forensics, Reverse Engineering, OSINT, and Misc (30 teams of 3; live automated scoring)."
       },
       {
@@ -173,22 +173,30 @@ export const scheduleData = {
         desc: "Lunch and networking for delegates, speakers, and mentors."
       },
       {
-        time: "01:15 PM – 03:00 PM",
-        title: "Idea Alchemy — Business & Idea Pitch",
-        venue: "Apple Hall",
-        category: "Startup Pitch",
+        time: "01:15 PM",
+        title: "Parallel Afternoon Sessions",
+        venue: "Apple Hall & Alpha Hall",
+        category: "Parallel Tracks",
         highlight: true,
-        badge: "INNOVATION SPRINT",
-        desc: "Innovation-driven startup competition: Round 1 Innovation Sprint from random matrix card combinations, followed by Round 2 Pivot Challenge for top 5 finalists."
-      },
-      {
-        time: "01:15 PM – 03:30 PM",
-        title: "CodeNomics — Gamified Competitive Programming",
-        venue: "Alpha Hall",
-        category: "Competitive Programming",
-        highlight: true,
-        badge: "GAMIFIED CODING",
-        desc: "Gamified coding arena where teams strategically earn TechCoins via TechX Portal non-programming puzzles and spend them in the TechX Market while solving HackerRank challenges."
+        isParallel: true,
+        badge: "CONCURRENT SESSIONS",
+        tracks: [
+          {
+            title: "Idea Alchemy — Business & Idea Pitch",
+            time: "01:15 PM – 03:00 PM",
+            venue: "Apple Hall",
+            badge: "BUSINESS & IDEA PITCH",
+            desc: "Innovation-driven startup competition: Round 1 Innovation Sprint from random matrix card combinations, followed by Round 2 Pivot Challenge for top 5 finalists."
+          },
+          {
+            title: "CodeNomics — Gamified Competitive Programming",
+            time: "01:15 PM – 03:30 PM",
+            venue: "Alpha Hall",
+            badge: "COMPETITIVE PROGRAMMING",
+            desc: "Gamified coding arena where teams strategically earn TechCoins via TechX Portal non-programming puzzles and spend them in the TechX Market while solving HackerRank challenges."
+          }
+        ],
+        desc: "Idea Alchemy and CodeNomics run concurrently in separate halls. Delegates participate in their registered event."
       },
       {
         time: "03:30 PM",
