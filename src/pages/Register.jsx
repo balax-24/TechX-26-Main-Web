@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { registrationOptions, registrationMeta } from '../data/registration';
 import { eventsData } from '../data/events';
+import Reveal from '../components/Reveal';
 
 export default function Register() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -92,7 +93,7 @@ export default function Register() {
         {/* ============================================================
             1. PAGE HEADER
         ============================================================ */}
-        <header className="register-header">
+        <Reveal variant="header" as="header" className="register-header">
           <div className="register-eyebrow-strip">
             <span className="eyebrow-badge">OFFICIAL REGISTRATION PORTAL</span>
             <span className="eyebrow-sep">//</span>
@@ -141,7 +142,7 @@ export default function Register() {
               </button>
             </div>
           )}
-        </header>
+        </Reveal>
 
         {/* ============================================================
             2. PASS LISTING VIEW (DAY 1 & DAY 2)
@@ -155,7 +156,7 @@ export default function Register() {
               className={`day-section day-1-section ${matchedEvent && matchedEvent.day === 1 ? 'day-section-highlighted' : ''}`}
               aria-labelledby="day-1-heading"
             >
-              <div className="day-section-header">
+              <Reveal variant="header" className="day-section-header">
                 <div className="day-header-left">
                   <span className="day-badge">PHASE 01</span>
                   <h2 id="day-1-heading" className="day-heading">DAY 1 — 14 OCTOBER 2026</h2>
@@ -163,11 +164,11 @@ export default function Register() {
                 <div className="day-header-right">
                   <span className="day-meta-pill">INAUGURATION • NANO MENTORING • VERDICTX HACKATHON</span>
                 </div>
-              </div>
+              </Reveal>
 
-              <div className="passes-grid">
+              <Reveal variant="stagger" className="passes-grid">
                 {day1Passes.map((pass) => (
-                  <article key={pass.id} className="pass-card">
+                  <article key={pass.id} className="pass-card reveal-card">
                     <div className="pass-card-top">
                       <div className="pass-label-strip">
                         <span className="pass-label-tag">{pass.label}</span>
@@ -209,7 +210,7 @@ export default function Register() {
                     </div>
                   </article>
                 ))}
-              </div>
+              </Reveal>
             </section>
 
             {/* Visual Section Separator */}
@@ -226,7 +227,7 @@ export default function Register() {
               className={`day-section day-2-section ${matchedEvent && matchedEvent.day === 2 ? 'day-section-highlighted' : ''}`}
               aria-labelledby="day-2-heading"
             >
-              <div className="day-section-header">
+              <Reveal variant="header" className="day-section-header">
                 <div className="day-header-left">
                   <span className="day-badge day-badge-alt">PHASE 02</span>
                   <h2 id="day-2-heading" className="day-heading">DAY 2 — 15 OCTOBER 2026</h2>
@@ -234,11 +235,11 @@ export default function Register() {
                 <div className="day-header-right">
                   <span className="day-meta-pill">CYBERSECURITY CTF • TINYML • STARTUP PITCH • VALEDICTORY</span>
                 </div>
-              </div>
+              </Reveal>
 
-              <div className="passes-grid">
+              <Reveal variant="stagger" className="passes-grid">
                 {day2Passes.map((pass) => (
-                  <article key={pass.id} className="pass-card">
+                  <article key={pass.id} className="pass-card reveal-card">
                     <div className="pass-card-top">
                       <div className="pass-label-strip">
                         <span className="pass-label-tag pass-label-alt">{pass.label}</span>
@@ -280,11 +281,11 @@ export default function Register() {
                     </div>
                   </article>
                 ))}
-              </div>
+              </Reveal>
             </section>
 
             {/* Official Pricing Footnote */}
-            <div className="register-footnote-box" role="note">
+            <Reveal variant="pop" className="register-footnote-box" role="note">
               <AlertCircle size={18} className="footnote-alert-icon" />
               <div className="footnote-content">
                 <p className="footnote-main-text">
@@ -294,7 +295,7 @@ export default function Register() {
                   Payment portals will be opened following formal institutional sanction. Razorpay Payment Links will be published directly on this portal.
                 </p>
               </div>
-            </div>
+            </Reveal>
           </div>
         )}
 
@@ -302,7 +303,7 @@ export default function Register() {
             3. OPTIONAL PARTICIPANT DETAILS FORM STEP
         ============================================================ */}
         {step === 'details' && selectedPass && (
-          <div className="details-flow-wrapper" role="region" aria-labelledby="details-heading">
+          <Reveal variant="card" className="details-flow-wrapper" role="region" aria-labelledby="details-heading">
             <div className="details-header-bar">
               <button 
                 onClick={handleResetToPasses} 
@@ -488,14 +489,14 @@ export default function Register() {
                 </div>
               </aside>
             </div>
-          </div>
+          </Reveal>
         )}
 
         {/* ============================================================
             4. CLEAN COMING SOON FALLBACK VIEW (When paymentUrl is empty)
         ============================================================ */}
         {step === 'coming-soon' && (
-          <div className="coming-soon-wrapper" role="status" aria-live="assertive">
+          <Reveal variant="card" className="coming-soon-wrapper" role="status" aria-live="assertive">
             <div className="coming-soon-card">
               <div className="coming-soon-badge-strip">
                 <span className="cs-badge">PAYMENT GATEWAY STATUS</span>
@@ -531,7 +532,7 @@ export default function Register() {
                 <span>Official Razorpay payment links will be activated once organizer approvals are completed.</span>
               </div>
             </div>
-          </div>
+          </Reveal>
         )}
       </div>
 

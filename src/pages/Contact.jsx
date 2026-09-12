@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, Calendar, Send, CheckCircle2, MessageSquare, Clock } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { eventMeta } from '../data/contacts';
 
 export default function Contact() {
@@ -34,14 +35,16 @@ export default function Contact() {
       {/* Hero */}
       <section className="contact-hero-section">
         <div className="container">
-          <span className="section-eyebrow">COMMUNICATIONS</span>
-          <h1 className="contact-hero-title">
-            CONTACT TECHX'26
-          </h1>
-          <p className="contact-hero-sub">
-            IEEE Computer Society Student Branch Chapter<br />
-            Sri Sai Ram Institute of Technology
-          </p>
+          <Reveal variant="header">
+            <span className="section-eyebrow">COMMUNICATIONS</span>
+            <h1 className="contact-hero-title">
+              CONTACT TECHX'26
+            </h1>
+            <p className="contact-hero-sub">
+              IEEE Computer Society Student Branch Chapter<br />
+              Sri Sai Ram Institute of Technology
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -51,15 +54,17 @@ export default function Contact() {
           <div className="contact-main-grid">
             {/* Left Column: Official Event Contact Details */}
             <div className="contact-details-col">
-              <span className="section-eyebrow">DIRECT COMMUNICATIONS</span>
-              <h2 className="details-heading">OFFICIAL EVENT CHANNELS</h2>
-              <p className="details-lead">
-                The organizing secretariat is available to assist participants, faculty advisors, industry partners, and student teams.
-              </p>
+              <Reveal variant="header">
+                <span className="section-eyebrow">DIRECT COMMUNICATIONS</span>
+                <h2 className="details-heading">OFFICIAL EVENT CHANNELS</h2>
+                <p className="details-lead">
+                  The organizing secretariat is available to assist participants, faculty advisors, industry partners, and student teams.
+                </p>
+              </Reveal>
 
-              <div className="official-channel-cards">
+              <Reveal variant="stagger" className="official-channel-cards">
                 {/* Official Email */}
-                <div className="channel-card highlight-channel">
+                <div className="channel-card highlight-channel reveal-card">
                   <div className="channel-icon-wrap">
                     <Mail size={24} color="var(--purple-light)" />
                   </div>
@@ -75,7 +80,7 @@ export default function Contact() {
                 </div>
 
                 {/* Registration Status */}
-                <div className="channel-card">
+                <div className="channel-card reveal-card">
                   <div className="channel-icon-wrap">
                     <Clock size={24} color="var(--purple-light)" />
                   </div>
@@ -89,7 +94,7 @@ export default function Contact() {
                 </div>
 
                 {/* Venue Location */}
-                <div className="channel-card">
+                <div className="channel-card reveal-card">
                   <div className="channel-icon-wrap">
                     <MapPin size={24} color="var(--purple-light)" />
                   </div>
@@ -101,12 +106,12 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             </div>
 
             {/* Right Column: Inquiry Form */}
             <div className="contact-form-col">
-              <div className="inquiry-dispatch-card">
+              <Reveal variant="card" className="inquiry-dispatch-card">
                 <span className="section-eyebrow">CONTACT TECHX'26</span>
                 <h3 className="dispatch-title">SEND AN INQUIRY</h3>
                 <p className="dispatch-sub">
@@ -212,7 +217,7 @@ export default function Contact() {
                     </button>
                   </form>
                 )}
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>

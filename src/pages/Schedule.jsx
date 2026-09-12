@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, Moon, Sun, ArrowRight, Zap, CheckCircle2, GitFork } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { scheduleData } from '../data/schedule';
 
 export default function Schedule() {
@@ -17,14 +18,16 @@ export default function Schedule() {
       {/* Page Header */}
       <section className="schedule-hero-section">
         <div className="container">
-          <span className="section-eyebrow">OFFICIAL ITINERARY</span>
-          <h1 className="schedule-hero-title">
-            TWO-DAY<br />
-            <span className="text-purple-highlight">OPERATIONAL TIMELINE</span>
-          </h1>
-          <p className="schedule-hero-sub">
-            From the inauguration to the 24-hour open-domain hackathon and Day 2 technical tracks, explore the full chronological roadmap of TechX Madras 2026.
-          </p>
+          <Reveal variant="header">
+            <span className="section-eyebrow">OFFICIAL ITINERARY</span>
+            <h1 className="schedule-hero-title">
+              TWO-DAY<br />
+              <span className="text-purple-highlight">OPERATIONAL TIMELINE</span>
+            </h1>
+            <p className="schedule-hero-sub">
+              From the inauguration to the 24-hour open-domain hackathon and Day 2 technical tracks, explore the full chronological roadmap of TechX Madras 2026.
+            </p>
+          </Reveal>
 
           {/* Day Switcher Tabs */}
           <div className="day-switcher-bar">
@@ -58,19 +61,19 @@ export default function Schedule() {
       {/* Timeline Section */}
       <section className="timeline-section">
         <div className="container">
-          <div className="schedule-subhead">
+          <Reveal variant="header" className="schedule-subhead">
             <h2 className="curr-day-title">{currentSchedule.title}</h2>
             <p className="curr-day-sub">{currentSchedule.subtitle}</p>
-          </div>
+          </Reveal>
 
           {activeDay === 'day1' && (
-            <div className="overnight-banner">
+            <Reveal variant="card" className="overnight-banner">
               <span className="overnight-pulse"></span>
               <div className="overnight-content">
                 <strong>24-HOUR OVERNIGHT MARATHON NOTICE</strong>
                 <p>The VerdictX: Code & Conquer hackathon spans continuously overnight in Steve Jobs Hall from 01:30 PM on Day 1 through Round 3 Defense on Day 2 morning.</p>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* The Timeline Track */}
@@ -82,8 +85,9 @@ export default function Schedule() {
               const isEven = index % 2 === 0;
 
               return (
-                <div 
-                  key={index} 
+                <Reveal 
+                  key={`${activeDay}-${index}`} 
+                  variant="card"
                   className={`timeline-row ${isEven ? 'row-left' : 'row-right'} ${item.highlight ? 'row-highlight' : ''}`}
                 >
                   {/* Time Box */}
@@ -118,9 +122,9 @@ export default function Schedule() {
                                 <div className="branch-details">
                                   <div className="branch-meta-row">
                                     <strong className="branch-title">{trk.title}</strong>
-                                    <span className="timeline-venue-chip">{trk.venue}</span>
+                                    <span className="branch-time">{trk.time}</span>
+                                    <span className="branch-venue">{trk.venue}</span>
                                   </div>
-                                  <span className="branch-time">{trk.time}</span>
                                   <p className="branch-desc">{trk.desc}</p>
                                 </div>
                               </div>
@@ -143,13 +147,13 @@ export default function Schedule() {
                       )}
                     </div>
                   </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
 
           {/* Schedule Footer Action */}
-          <div className="schedule-footer-box">
+          <Reveal variant="card" className="schedule-footer-box">
             <div>
               <h3>READY TO PARTICIPATE IN THESE SESSIONS?</h3>
               <p>Reserve your track entry early before seat limits are reached.</p>
@@ -158,7 +162,7 @@ export default function Schedule() {
               <span>REGISTER FOR SESSIONS</span>
               <ArrowRight size={18} />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 

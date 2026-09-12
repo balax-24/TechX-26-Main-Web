@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Calendar, ArrowRight, Compass } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
 import sairamFountainImg from '../assets/architecture/sairam-fountain.png';
 import { eventMeta } from '../data/contacts';
@@ -13,25 +14,27 @@ export default function Venue() {
       {/* Hero */}
       <section className="venue-hero-section">
         <div className="container">
-          <span className="section-eyebrow">HOST CAMPUS & VENUE</span>
-          <h1 className="venue-hero-title">
-            THE VENUE<br />
-            <span className="text-purple-highlight">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
-          </h1>
-          <div className="venue-hero-meta-bar">
-            <div className="meta-pill">
-              <Calendar size={15} color="var(--purple-light)" />
-              <span>14 — 15 OCTOBER 2026</span>
+          <Reveal variant="header">
+            <span className="section-eyebrow">HOST CAMPUS & VENUE</span>
+            <h1 className="venue-hero-title">
+              THE VENUE<br />
+              <span className="text-purple-highlight">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
+            </h1>
+            <div className="venue-hero-meta-bar">
+              <div className="meta-pill">
+                <Calendar size={15} color="var(--purple-light)" />
+                <span>14 — 15 OCTOBER 2026</span>
+              </div>
+              <div className="meta-pill">
+                <MapPin size={15} color="var(--purple-light)" />
+                <span>CHENNAI, TAMIL NADU</span>
+              </div>
+              <div className="meta-pill">
+                <Compass size={15} color="var(--purple-light)" />
+                <span>IEEE COMPUTER SOCIETY SBC</span>
+              </div>
             </div>
-            <div className="meta-pill">
-              <MapPin size={15} color="var(--purple-light)" />
-              <span>CHENNAI, TAMIL NADU</span>
-            </div>
-            <div className="meta-pill">
-              <Compass size={15} color="var(--purple-light)" />
-              <span>IEEE COMPUTER SOCIETY SBC</span>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -40,7 +43,7 @@ export default function Venue() {
         <div className="container">
           <div className="venue-monument-grid">
             {/* Main Heritage Building Artwork */}
-            <div className="monument-main-frame">
+            <Reveal variant="image" className="monument-main-frame">
               <div className="monument-image-wrapper">
                 <img 
                   src={sairamHeritageBuildingImg} 
@@ -53,10 +56,10 @@ export default function Venue() {
                   <strong>SRI SAI RAM INSTITUTE OF TECHNOLOGY</strong>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Fountain Motif & Campus Identity */}
-            <div className="monument-motif-frame">
+            <Reveal variant="image" className="monument-motif-frame">
               <div className="fountain-wrapper">
                 <img 
                   src={sairamFountainImg} 
@@ -72,7 +75,7 @@ export default function Venue() {
                   A timeless center point connecting innovation labs, auditoriums, and open collaborative squares across the campus grounds.
                 </p>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -82,7 +85,7 @@ export default function Venue() {
         <div className="container">
           <div className="venue-info-grid">
             {/* Address Specification */}
-            <div className="venue-card-primary">
+            <Reveal variant="card" className="venue-card-primary">
               <div className="venue-badge">CAMPUS VENUE</div>
               <h2 className="venue-h2">LOCATION</h2>
 
@@ -130,10 +133,10 @@ export default function Venue() {
                   <ArrowRight size={16} />
                 </a>
               </div>
-            </div>
+            </Reveal>
 
-            {/* Interactive Google Map */}
-            <div className="map-standin-card">
+            {/* Interactive Google Map - reveals slightly after venue information */}
+            <Reveal variant="card" delay={120} className="map-standin-card">
               <div className="map-standin-head">
                 <span className="section-eyebrow">INTERACTIVE MAP</span>
                 <h3 className="map-standin-title">LOCATION MAP</h3>
@@ -165,7 +168,7 @@ export default function Venue() {
                   <ArrowRight size={14} />
                 </a>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>

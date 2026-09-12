@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, Sparkles, Award, Compass, MessageSquare, ArrowRight, CheckCircle2 } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { speakerCategories, keynoteSpeakers, industryMentors, juryPanels } from '../data/speakers';
 
 export default function Speakers() {
@@ -14,13 +15,15 @@ export default function Speakers() {
       {/* Page Header */}
       <section className="speakers-hero-section">
         <div className="container">
-          <span className="section-eyebrow">THE MINDS BEHIND THE EXPERIENCE</span>
-          <h1 className="speakers-hero-title">
-            SPEAKERS
-          </h1>
-          <p className="speakers-hero-sub">
-            Speaker and mentor announcements coming soon. Leading engineering leaders, researchers, and systems pioneers will be announced prior to the symposium.
-          </p>
+          <Reveal variant="header">
+            <span className="section-eyebrow">THE MINDS BEHIND THE EXPERIENCE</span>
+            <h1 className="speakers-hero-title">
+              SPEAKERS
+            </h1>
+            <p className="speakers-hero-sub">
+              Speaker and mentor announcements coming soon. Leading engineering leaders, researchers, and systems pioneers will be announced prior to the symposium.
+            </p>
+          </Reveal>
 
           {/* Tab Filter */}
           <div className="speakers-tabs-row">
@@ -43,22 +46,22 @@ export default function Speakers() {
           {/* 1. KEYNOTE SPEAKERS SECTION */}
           {(activeTab === 'all' || activeTab === 'speakers') && (
             <div className="speakers-group-block">
-              <div className="group-header">
+              <Reveal variant="header" className="group-header">
                 <span className="section-eyebrow">FEATURED KEYNOTES</span>
                 <h2 className="group-title">KEYNOTE SPEAKERS</h2>
                 <p className="group-sub">
                   Thought leaders delivering perspective on Edge AI, resilient architectures, and global computing careers.
                 </p>
-              </div>
+              </Reveal>
 
               {keynoteSpeakers.length > 0 ? (
                 <div className="speakers-grid">
                   {/* Populated when real speakers are added */}
                 </div>
               ) : (
-                <div className="speaker-placeholder-grid">
+                <Reveal variant="stagger" className="speaker-placeholder-grid">
                   {[1, 2].map((n) => (
-                    <div key={n} className="speaker-unannounced-card">
+                    <div key={n} className="speaker-unannounced-card reveal-card">
                       <div className="avatar-placeholder-box">
                         <User size={36} color="var(--purple-light)" />
                         <span className="placeholder-tag">KEYNOTE 0{n}</span>
@@ -72,7 +75,7 @@ export default function Speakers() {
                       </div>
                     </div>
                   ))}
-                </div>
+                </Reveal>
               )}
             </div>
           )}
@@ -80,32 +83,32 @@ export default function Speakers() {
           {/* 2. INDUSTRY MENTORS SECTION (6 MENTORS) */}
           {(activeTab === 'all' || activeTab === 'mentors') && (
             <div className="speakers-group-block">
-              <div className="group-header">
+              <Reveal variant="header" className="group-header">
                 <span className="section-eyebrow">NANO MENTORING CORPS</span>
                 <h2 className="group-title">6 INDUSTRY MENTORS</h2>
                 <p className="group-sub">
                   Hands-on engineering leads and veteran professionals guiding students across high-stakes career and technical sessions.
                 </p>
-              </div>
+              </Reveal>
 
               {industryMentors.length > 0 ? (
                 <div className="speakers-grid">
                   {/* Real mentors */}
                 </div>
               ) : (
-                <div className="mentors-roster-grid">
+                <Reveal variant="stagger" className="mentors-roster-grid">
                   {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <div key={num} className="mentor-roster-card">
+                    <div key={num} className="mentor-roster-card reveal-card">
                       <div className="mentor-avatar-frame">
                         <User size={28} color="var(--purple-light)" />
-                        <span className="mentor-slot">SLOT 0{num}</span>
+                        <span className="mentor-num-pill">MENTOR 0{num}</span>
                       </div>
-                      <h4>INDUSTRY MENTOR 0{num}</h4>
-                      <p className="mentor-domain">Announcement Coming Soon</p>
-                      <span className="announcement-tag">Mentor details to be announced</span>
+                      <h4 className="mentor-name">MENTOR 0{num}</h4>
+                      <p className="mentor-org">Industry Mentor</p>
+                      <span className="mentor-status">Profile details to be announced</span>
                     </div>
                   ))}
-                </div>
+                </Reveal>
               )}
             </div>
           )}
@@ -113,33 +116,33 @@ export default function Speakers() {
           {/* 3. JURY & JUDGES SECTION */}
           {(activeTab === 'all' || activeTab === 'jury') && (
             <div className="speakers-group-block">
-              <div className="group-header">
+              <Reveal variant="header" className="group-header">
                 <span className="section-eyebrow">EVALUATION PANEL</span>
                 <h2 className="group-title">JURY & JUDGES</h2>
                 <p className="group-sub">
                   Experienced judges overseeing VerdictX: Code & Conquer, Sherlock & Syntax, and Idea Alchemy evaluation rounds.
                 </p>
-              </div>
+              </Reveal>
 
               {juryPanels.length > 0 ? (
                 <div className="speakers-grid">
                   {/* Real jury */}
                 </div>
               ) : (
-                <div className="jury-placeholder-card">
+                <Reveal variant="card" className="jury-placeholder-card">
                   <Award size={36} color="var(--purple-light)" />
                   <h3>HONOURABLE EVALUATION BENCH</h3>
                   <p>
                     The evaluation bench comprises engineering leaders, domain specialists, and academic fellows. The jury panel for the 24H Hackathon and Startup Pitch will be unveiled alongside final problem tracks.
                   </p>
                   <span className="badge-tech">EVALUATION BENCH TO BE REVEALED</span>
-                </div>
+                </Reveal>
               )}
             </div>
           )}
 
           {/* Bottom Nomination / Inquire CTA */}
-          <div className="speakers-nominate-banner">
+          <Reveal variant="card" className="speakers-nominate-banner">
             <div>
               <h3>ARE YOU AN INDUSTRY EXPERT OR SPEAKER?</h3>
               <p>Connect with the organizing committee to deliver masterclasses or participate in nano-mentoring.</p>
@@ -148,7 +151,7 @@ export default function Speakers() {
               <span>CONTACT ORGANIZING COMMITTEE</span>
               <ArrowRight size={18} />
             </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 

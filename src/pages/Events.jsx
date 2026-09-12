@@ -5,7 +5,9 @@ import {
   Calendar, Award, Sparkles, AlertCircle, GitFork
 } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { eventsData, ticketPricing } from '../data/events';
+import sairamCampusFacade from '../assets/architecture/sairam-campus-facade.png';
 
 export default function Events() {
   const [selectedDayTab, setSelectedDayTab] = useState('all');
@@ -17,41 +19,66 @@ export default function Events() {
     <div className="events-page-root">
       <TechAtmosphere />
 
-      {/* Page Header */}
+      {/* Page Header with Asymmetric Visual Hero */}
       <section className="events-hero-section">
         <div className="container">
-          <span className="section-eyebrow">OFFICIAL CONFERENCE PROGRAM</span>
-          <h1 className="events-hero-title">
-            TECHX'26<br />
-            <span className="text-purple-highlight">CONFERENCE EVENTS</span>
-          </h1>
-          <p className="events-hero-sub">
-            Seven technical and professional experiences organized chronologically across Day 1 (14 October) and Day 2 (15 October 2026).
-          </p>
+          <div className="events-hero-layout">
+            {/* Left Column: Information (~58%) */}
+            <Reveal variant="header" className="events-hero-left">
+              <span className="section-eyebrow">OFFICIAL CONFERENCE PROGRAM</span>
+              <h1 className="events-hero-title">
+                TECHX'26<br />
+                <span className="text-purple-highlight">CONFERENCE EVENTS</span>
+              </h1>
+              <p className="events-hero-sub">
+                Seven technical and professional experiences organized chronologically across Day 1 (14 October) and Day 2 (15 October 2026).
+              </p>
 
-          {/* Quick Day Navigation / Jump Anchors */}
-          <div className="events-day-nav">
-            <button
-              onClick={() => setSelectedDayTab('all')}
-              className={`day-nav-btn ${selectedDayTab === 'all' ? 'day-nav-active' : ''}`}
-            >
-              ALL EXPERIENCES (01–07)
-            </button>
-            <button
-              onClick={() => setSelectedDayTab('day1')}
-              className={`day-nav-btn ${selectedDayTab === 'day1' ? 'day-nav-active' : ''}`}
-            >
-              DAY 01 // 14 OCTOBER
-            </button>
-            <button
-              onClick={() => setSelectedDayTab('day2')}
-              className={`day-nav-btn ${selectedDayTab === 'day2' ? 'day-nav-active' : ''}`}
-            >
-              DAY 02 // 15 OCTOBER
-            </button>
-            <a href="#pricing-section" className="day-nav-btn day-nav-pricing">
-              TICKET PRICING ↓
-            </a>
+              {/* Quick Day Navigation / Jump Anchors */}
+              <div className="events-day-nav">
+                <button
+                  onClick={() => setSelectedDayTab('all')}
+                  className={`day-nav-btn ${selectedDayTab === 'all' ? 'day-nav-active' : ''}`}
+                >
+                  ALL EXPERIENCES (01–07)
+                </button>
+                <button
+                  onClick={() => setSelectedDayTab('day1')}
+                  className={`day-nav-btn ${selectedDayTab === 'day1' ? 'day-nav-active' : ''}`}
+                >
+                  DAY 01 // 14 OCTOBER
+                </button>
+                <button
+                  onClick={() => setSelectedDayTab('day2')}
+                  className={`day-nav-btn ${selectedDayTab === 'day2' ? 'day-nav-active' : ''}`}
+                >
+                  DAY 02 // 15 OCTOBER
+                </button>
+                <a href="#pricing-section" className="day-nav-btn day-nav-pricing">
+                  TICKET PRICING ↓
+                </a>
+              </div>
+            </Reveal>
+
+            {/* Right Column: Architectural Visual Panel (~42%) */}
+            <div className="events-hero-right">
+              <Reveal variant="image" className="events-hero-visual-panel">
+                <img 
+                  src={sairamCampusFacade} 
+                  alt="Sri Sai Ram Institute of Technology Campus Architectural Facade" 
+                  className="events-hero-panel-img"
+                />
+                <div className="events-hero-panel-overlay"></div>
+                <div className="events-hero-panel-grid"></div>
+                <div className="events-hero-panel-tag">
+                  <span className="panel-tag-brand">TECHX'26</span>
+                  <span className="panel-tag-loc">SSIT • CHENNAI</span>
+                </div>
+                <div className="events-hero-panel-coords">
+                  <span>12.9606° N, 80.0532° E</span>
+                </div>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
@@ -63,7 +90,7 @@ export default function Events() {
         ============================================================ */}
         {(selectedDayTab === 'all' || selectedDayTab === 'day1') && (
           <section className="day-program-section" id="day1-section">
-            <div className="day-program-header">
+            <Reveal variant="header" className="day-program-header">
               <div className="day-header-meta">
                 <span className="day-badge-large">DAY 01</span>
                 <span className="day-date-text">WEDNESDAY, 14 OCTOBER 2026</span>
@@ -87,11 +114,11 @@ export default function Events() {
                   <span className="flow-title">VerdictX Hackathon Begins (Overnight)</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="day-events-grid">
+            <Reveal variant="stagger" className="day-events-grid">
               {day1Events.map((evt) => (
-                <article key={evt.id} className={`event-program-card ${evt.id === 'verdictx' ? 'card-overnight-highlight' : ''}`}>
+                <article key={evt.id} className={`event-program-card ${evt.id === 'verdictx' ? 'card-overnight-highlight' : ''} reveal-card`}>
                   <div className="card-top-row">
                     <div className="card-number-badge">
                       <span className="evt-num">{evt.number}</span>
@@ -159,7 +186,7 @@ export default function Events() {
                   </div>
                 </article>
               ))}
-            </div>
+            </Reveal>
           </section>
         )}
 
@@ -168,7 +195,7 @@ export default function Events() {
         ============================================================ */}
         {(selectedDayTab === 'all' || selectedDayTab === 'day2') && (
           <section className="day-program-section" id="day2-section">
-            <div className="day-program-header">
+            <Reveal variant="header" className="day-program-header">
               <div className="day-header-meta">
                 <span className="day-badge-large">DAY 02</span>
                 <span className="day-date-text">THURSDAY, 15 OCTOBER 2026</span>
@@ -197,12 +224,12 @@ export default function Events() {
                   <span className="flow-title">Valedictory & Awards</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Morning Events: CTF & Workshop */}
-            <div className="day-events-grid">
+            <Reveal variant="stagger" className="day-events-grid">
               {day2Events.slice(0, 2).map((evt) => (
-                <article key={evt.id} className="event-program-card">
+                <article key={evt.id} className="event-program-card reveal-card">
                   <div className="card-top-row">
                     <div className="card-number-badge">
                       <span className="evt-num">{evt.number}</span>
@@ -264,11 +291,11 @@ export default function Events() {
                   </div>
                 </article>
               ))}
-            </div>
+            </Reveal>
 
             {/* Parallel Tracks Notice & Parallel Card Layout at 13:15 */}
             <div className="parallel-session-container">
-              <div className="parallel-session-banner">
+              <Reveal variant="pop" className="parallel-session-banner">
                 <div className="parallel-tag">
                   <GitFork size={15} />
                   <span>PARALLEL TRACKS // 01:15 PM – 03:00/03:30 PM</span>
@@ -276,11 +303,11 @@ export default function Events() {
                 <p className="parallel-desc">
                   Idea Alchemy and CodeNomics run concurrently in separate halls. Attendees select their track based on their specialization.
                 </p>
-              </div>
+              </Reveal>
 
-              <div className="parallel-cards-grid">
+              <Reveal variant="stagger" className="parallel-cards-grid">
                 {day2Events.slice(2, 4).map((evt) => (
-                  <article key={evt.id} className="event-program-card parallel-child-card">
+                  <article key={evt.id} className="event-program-card parallel-child-card reveal-card">
                     <div className="card-top-row">
                       <div className="card-number-badge">
                         <span className="evt-num">{evt.number}</span>
@@ -343,11 +370,11 @@ export default function Events() {
                     </div>
                   </article>
                 ))}
-              </div>
+              </Reveal>
             </div>
 
-            {/* Valedictory Closing Note */}
-            <div className="valedictory-banner">
+            {/* Day 2 Valedictory Banner */}
+            <Reveal variant="card" className="valedictory-banner">
               <div className="valedictory-content">
                 <span className="valedictory-badge">03:30 PM // GRAND VALEDICTORY</span>
                 <h4>Valedictory Ceremony, Prize Distribution & Closing Remarks</h4>
@@ -356,7 +383,7 @@ export default function Events() {
               <Link to="/schedule" className="btn btn-secondary">
                 <span>VIEW FULL TIMELINE</span>
               </Link>
-            </div>
+            </Reveal>
           </section>
         )}
 
@@ -364,15 +391,15 @@ export default function Events() {
             REGISTRATION / TICKET PRICING SECTION
         ============================================================ */}
         <section className="pricing-section" id="pricing-section">
-          <div className="pricing-section-header">
+          <Reveal variant="header" className="pricing-section-header">
             <span className="section-eyebrow">DELEGATE ACCESS PASSES</span>
             <h2 className="pricing-main-title">{ticketPricing.sectionTitle}</h2>
             <p className="pricing-main-sub">{ticketPricing.subtitle}</p>
-          </div>
+          </Reveal>
 
-          <div className="pricing-grid">
+          <Reveal variant="stagger" className="pricing-grid">
             {/* Day 1 Pass Card */}
-            <div className="pricing-card">
+            <div className="pricing-card reveal-card">
               <div className="pricing-card-top">
                 <span className="pricing-day-tag">{ticketPricing.day1.dayNumber} PASS</span>
                 <h3 className="pricing-card-title">{ticketPricing.day1.title}</h3>
@@ -415,7 +442,7 @@ export default function Events() {
             </div>
 
             {/* Day 2 Pass Card */}
-            <div className="pricing-card">
+            <div className="pricing-card reveal-card">
               <div className="pricing-card-top">
                 <span className="pricing-day-tag">{ticketPricing.day2.dayNumber} PASS</span>
                 <h3 className="pricing-card-title">{ticketPricing.day2.title}</h3>
@@ -456,13 +483,13 @@ export default function Events() {
                 </Link>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Pricing Footnote & Notice */}
-          <div className="pricing-footnote-box">
+          <Reveal variant="pop" className="pricing-footnote-box">
             <AlertCircle size={15} color="var(--purple-light)" style={{ flexShrink: 0, marginTop: '2px' }} />
             <p>{ticketPricing.footnote} Final registration details and payment gateway access will be announced soon.</p>
-          </div>
+          </Reveal>
         </section>
       </div>
 
@@ -473,9 +500,99 @@ export default function Events() {
           min-height: 100vh;
         }
         .events-hero-section {
-          padding: clamp(3rem, 6vw, 5rem) 0 2rem;
+          padding: clamp(3rem, 6vw, 5rem) 0 3rem;
           border-bottom: 1px solid var(--border-subtle);
           background: radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.12) 0%, transparent 70%);
+        }
+        .events-hero-layout {
+          display: grid;
+          grid-template-columns: 1.35fr 1fr;
+          gap: clamp(2rem, 4vw, 3.5rem);
+          align-items: center;
+        }
+        .events-hero-left {
+          display: flex;
+          flex-direction: column;
+        }
+        .events-hero-right {
+          display: flex;
+          justify-content: center;
+        }
+        .events-hero-visual-panel {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 11;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          background: #0A0612;
+          box-shadow: 0 15px 35px -10px rgba(138, 43, 226, 0.25), 0 0 20px rgba(138, 43, 226, 0.1);
+        }
+        .events-hero-panel-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(100%) contrast(1.15) brightness(0.85);
+          display: block;
+        }
+        .events-hero-panel-overlay {
+          position: absolute;
+          inset: 0;
+          background: 
+            linear-gradient(135deg, rgba(138, 43, 226, 0.22) 0%, rgba(10, 5, 20, 0.85) 100%),
+            linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, transparent 60%),
+            linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+          pointer-events: none;
+        }
+        .events-hero-panel-grid {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(184, 108, 255, 0.18) 1px, transparent 1px);
+          background-size: 16px 16px;
+          pointer-events: none;
+        }
+        .events-hero-panel-tag {
+          position: absolute;
+          bottom: 1.25rem;
+          left: 1.25rem;
+          background: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          border-radius: var(--radius-xs);
+          padding: 0.5rem 0.85rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+          z-index: 2;
+        }
+        .panel-tag-brand {
+          font-family: var(--font-display);
+          font-size: 1.15rem;
+          color: var(--white);
+          letter-spacing: 0.05em;
+          line-height: 1;
+        }
+        .panel-tag-loc {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          color: var(--purple-light);
+          letter-spacing: 0.08em;
+          font-weight: 600;
+        }
+        .events-hero-panel-coords {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: rgba(0, 0, 0, 0.75);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: var(--radius-xs);
+          padding: 0.3rem 0.6rem;
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          color: rgba(255, 255, 255, 0.7);
+          letter-spacing: 0.05em;
+          z-index: 2;
         }
         .events-hero-title {
           font-size: clamp(2.4rem, 6vw, 4.2rem);
@@ -613,16 +730,18 @@ export default function Events() {
           border: 1px solid var(--border-subtle);
           border-radius: var(--radius-md);
           padding: clamp(1.5rem, 3vw, 2.25rem);
-          transition: var(--transition-fast);
+          transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                      border-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                      box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1);
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
           position: relative;
         }
         .event-program-card:hover {
-          border-color: var(--border);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-          transform: translateY(-2px);
+          border-color: rgba(184, 108, 255, 0.45);
+          box-shadow: 0 12px 30px -8px rgba(138, 43, 226, 0.35);
+          transform: translateY(-3px);
         }
         .card-overnight-highlight {
           border-color: rgba(138, 43, 226, 0.35);
@@ -975,6 +1094,17 @@ export default function Events() {
         }
         .pricing-footnote-box p {
           margin: 0;
+        }
+
+        @media (max-width: 960px) {
+          .events-hero-layout {
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
+          }
+          .events-hero-visual-panel {
+            aspect-ratio: 16 / 9;
+            max-height: 320px;
+          }
         }
 
         @media (max-width: 768px) {

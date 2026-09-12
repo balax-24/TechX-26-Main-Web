@@ -363,12 +363,206 @@ select.tech-input option:checked,
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Reduced Motion */
+/* ============================================================
+   GLOBAL SCROLL REVEAL / POP-IN ANIMATION SYSTEM
+   Language: POP / RISE / SETTLE
+   Easing: cubic-bezier(0.22, 1, 0.36, 1)
+   ============================================================ */
+
+/* 1. Default Global Pop-in (Rising into focus) */
+.reveal-pop,
+.reveal:not(.reveal-header):not(.reveal-image-container):not(.reveal-stagger),
+.reveal-choreography {
+  opacity: 0;
+  transform: translateY(35px) scale(0.96);
+  transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-pop.is-revealed,
+.reveal:not(.reveal-header):not(.reveal-image-container):not(.reveal-stagger).is-revealed,
+.reveal-choreography.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 2. Card Specific Pop-in */
+.reveal-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 680ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-card.is-revealed,
+.is-revealed .reveal-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 3. Section Header Group Hierarchy */
+.reveal-header .section-eyebrow,
+.reveal-header .eyebrow-reveal,
+.reveal-header .page-eyebrow,
+.reveal-header .events-eyebrow,
+.reveal-header .badge-tag {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-header .section-title,
+.reveal-header .title-reveal,
+.reveal-header .page-title,
+.reveal-header .events-hero-title,
+.reveal-header .day-header-title,
+.reveal-header h1,
+.reveal-header h2 {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1) 80ms,
+              transform 720ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
+  will-change: opacity, transform;
+}
+
+.reveal-header .section-sub,
+.reveal-header .hero-sub,
+.reveal-header .desc-reveal,
+.reveal-header .page-description,
+.reveal-header .events-hero-sub,
+.reveal-header .section-desc {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 680ms cubic-bezier(0.22, 1, 0.36, 1) 160ms,
+              transform 680ms cubic-bezier(0.22, 1, 0.36, 1) 160ms;
+  will-change: opacity, transform;
+}
+
+.reveal-header.is-revealed .section-eyebrow,
+.reveal-header.is-revealed .eyebrow-reveal,
+.reveal-header.is-revealed .page-eyebrow,
+.reveal-header.is-revealed .events-eyebrow,
+.reveal-header.is-revealed .badge-tag,
+.reveal-header.is-revealed .section-title,
+.reveal-header.is-revealed .title-reveal,
+.reveal-header.is-revealed .page-title,
+.reveal-header.is-revealed .events-hero-title,
+.reveal-header.is-revealed .day-header-title,
+.reveal-header.is-revealed h1,
+.reveal-header.is-revealed h2,
+.reveal-header.is-revealed .section-sub,
+.reveal-header.is-revealed .hero-sub,
+.reveal-header.is-revealed .desc-reveal,
+.reveal-header.is-revealed .page-description,
+.reveal-header.is-revealed .events-hero-sub,
+.reveal-header.is-revealed .section-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4. Cinematic Architectural Image Reveal */
+.reveal-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.reveal-image-container img,
+.reveal-image {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 850ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-image-container.is-revealed img,
+.reveal-image.is-revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 5. Staggered Grid Utilities (100ms intervals) */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 680ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-stagger.is-revealed > * {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 100ms; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 200ms; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 300ms; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 400ms; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 500ms; }
+.reveal-stagger > *:nth-child(7) { transition-delay: 600ms; }
+.reveal-stagger > *:nth-child(8) { transition-delay: 700ms; }
+
+.reveal-delay-1 { transition-delay: 100ms !important; }
+.reveal-delay-2 { transition-delay: 200ms !important; }
+.reveal-delay-3 { transition-delay: 300ms !important; }
+.reveal-delay-4 { transition-delay: 400ms !important; }
+
+/* 6. Button Hover Micro-Interaction */
+.btn {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 220ms ease,
+              border-color 220ms ease,
+              box-shadow 220ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
+  .reveal,
+  .reveal-pop,
+  .reveal-choreography,
+  .reveal-card,
+  .reveal-image,
+  .reveal-stagger > *,
+  .reveal-image-container img,
+  .reveal-header .section-eyebrow,
+  .reveal-header .eyebrow-reveal,
+  .reveal-header .page-eyebrow,
+  .reveal-header .events-eyebrow,
+  .reveal-header .badge-tag,
+  .reveal-header .section-title,
+  .reveal-header .title-reveal,
+  .reveal-header .page-title,
+  .reveal-header .events-hero-title,
+  .reveal-header .day-header-title,
+  .reveal-header h1,
+  .reveal-header h2,
+  .reveal-header .section-sub,
+  .reveal-header .hero-sub,
+  .reveal-header .desc-reveal,
+  .reveal-header .page-description,
+  .reveal-header .events-hero-sub,
+  .reveal-header .section-desc {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
+
+

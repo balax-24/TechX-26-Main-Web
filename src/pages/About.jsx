@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Award } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { leadershipData, techxJourney, techxAward } from '../data/leadership';
 import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
 
@@ -13,13 +14,15 @@ export default function About() {
       {/* Hero */}
       <section className="about-hero-section">
         <div className="container">
-          <span className="section-eyebrow">TECHX MADRAS 2026</span>
-          <h1 className="about-hero-title">
-            ABOUT TECHX
-          </h1>
-          <p className="about-hero-sub">
-            TECHX MADRAS is a technology-focused initiative by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
-          </p>
+          <Reveal variant="header">
+            <span className="section-eyebrow">TECHX MADRAS 2026</span>
+            <h1 className="about-hero-title">
+              ABOUT TECHX
+            </h1>
+            <p className="about-hero-sub">
+              TECHX MADRAS is a technology-focused initiative by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -27,7 +30,7 @@ export default function About() {
       <section className="about-overview-section">
         <div className="container">
           <div className="overview-editorial-grid">
-            <div className="editorial-copy">
+            <Reveal variant="pop" className="editorial-copy">
               <span className="section-eyebrow">THE FOUNDATION</span>
               <h2 className="overview-heading">WHAT IS TECHX?</h2>
               
@@ -61,11 +64,11 @@ export default function About() {
                   <span>Direct Industry Mentorship Roster</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Architectural Heritage Visual Detail */}
             <div className="editorial-visual-col">
-              <div className="arch-blueprint-card">
+              <Reveal variant="image" className="arch-blueprint-card">
                 <div className="arch-card-frame">
                   <img 
                     src={sairamHeritageBuildingImg} 
@@ -82,7 +85,7 @@ export default function About() {
                   </div>
                   <span className="meta-tag">CHENNAI, TAMIL NADU</span>
                 </div>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -91,17 +94,17 @@ export default function About() {
       {/* The Journey: TechX 2025 -> Outstanding Host Award -> TechX 2026 */}
       <section className="section journey-transition-section">
         <div className="container">
-          <div className="journey-head">
+          <Reveal variant="header" className="journey-head">
             <span className="section-eyebrow">THE TECHX JOURNEY</span>
             <h2 className="journey-title">THE TECHX JOURNEY</h2>
             <p className="journey-sub">
               From the inaugural foundation to recognized excellence and our premier 2026 edition.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="journey-timeline-flow">
+          <Reveal variant="stagger" className="journey-timeline-flow">
             {/* TechX'25: The Foundation */}
-            <div className="journey-milestone-card milestone-foundation">
+            <div className="journey-milestone-card milestone-foundation reveal-card">
               <div className="milestone-top">
                 <span className="milestone-year">2025</span>
                 <span className="milestone-tag">THE FOUNDATION</span>
@@ -118,7 +121,7 @@ export default function About() {
             </div>
 
             {/* Verified Historical Achievement: Outstanding Host Award */}
-            <div className="journey-award-card">
+            <div className="journey-award-card reveal-card">
               <div className="award-card-inner">
                 <div className="award-icon-box">
                   <Award size={34} color="var(--purple-light)" />
@@ -140,7 +143,7 @@ export default function About() {
             </div>
 
             {/* TechX'26: The Next Chapter */}
-            <div className="journey-milestone-card milestone-current">
+            <div className="journey-milestone-card milestone-current reveal-card">
               <div className="milestone-top">
                 <span className="milestone-year">2026</span>
                 <span className="milestone-tag">THE NEXT CHAPTER</span>
@@ -154,14 +157,14 @@ export default function About() {
                 <span>THE NEXT CHAPTER BEGINS • 14 — 15 OCT 2026</span>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* IEEE CS Student Branch Chapter Charter */}
       <section className="about-chapter-section">
         <div className="container">
-          <div className="chapter-banner-card">
+          <Reveal variant="card" className="chapter-banner-card">
             <div className="chapter-text-content">
               <span className="section-eyebrow">ORGANIZING BODY</span>
               <h2 className="chapter-title">IEEE COMPUTER SOCIETY STUDENT BRANCH CHAPTER</h2>
@@ -179,24 +182,24 @@ export default function About() {
                 <span className="seal-sub">SIT CHENNAI</span>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Institutional Leadership */}
       <section className="section leadership-section">
         <div className="container">
-          <div className="leadership-head">
+          <Reveal variant="header" className="leadership-head">
             <span className="section-eyebrow">EXECUTIVE PATRONS</span>
             <h2 className="leadership-title">INSTITUTIONAL LEADERSHIP</h2>
             <p className="leadership-sub">
               Visionary guidance providing the bedrock for engineering excellence and student innovation at Sri Sai Ram Institute of Technology.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="leadership-grid">
-            {leadershipData.map((leader) => (
-              <div key={leader.name} className="leader-card">
+          <Reveal variant="stagger" className="leadership-grid">
+            {leadershipData.map((leader, idx) => (
+              <div key={leader.name || idx} className="leader-card reveal-card">
                 <div className="leader-avatar-frame">
                   <div className="leader-placeholder-box">
                     <span className="leader-seal">SSIT</span>
@@ -211,10 +214,10 @@ export default function About() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
 
           {/* Bottom CTA */}
-          <div className="about-footer-banner">
+          <Reveal variant="card" className="about-footer-banner">
             <div>
               <h3>BE PART OF OUR 2026 MILESTONE</h3>
               <p>Experience the culmination of rigorous student-driven technology leadership.</p>
@@ -223,7 +226,7 @@ export default function About() {
               <span>JOIN TECHX'26</span>
               <ArrowRight size={18} />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 

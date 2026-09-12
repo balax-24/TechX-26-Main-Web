@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, Sparkles, Terminal, Shield, Cpu, Lightbulb, Users, Award, Compass, Coins } from 'lucide-react';
 import Countdown from '../components/Countdown';
+import GlanceSection from '../components/GlanceSection';
+import Reveal from '../components/Reveal';
 import { eventsData } from '../data/events';
 import { eventMeta } from '../data/contacts';
 
@@ -101,16 +103,16 @@ export default function Home() {
       <section className="section what-is-techx-section">
         <div className="container">
           <div className="what-is-editorial-layout">
-            <div className="editorial-left-col">
+            <Reveal variant="header" className="editorial-left-col">
               <span className="section-eyebrow">THE INITIATIVE</span>
               <h2 className="editorial-huge-heading">
                 WHAT<br />
                 IS<br />
                 <span className="text-purple-highlight">TECHX?</span>
               </h2>
-            </div>
+            </Reveal>
 
-            <div className="editorial-right-col">
+            <Reveal variant="pop" delay={120} className="editorial-right-col">
               <p className="editorial-lead-statement">
                 TECHX MADRAS is a technology-focused initiative organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
               </p>
@@ -130,81 +132,39 @@ export default function Home() {
                   <ArrowRight size={16} />
                 </Link>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          3. TECHX'26 AT A GLANCE (VERIFIED NUMERICAL TYPOGRAPHY)
+          3. TECHX'26 AT A GLANCE (STAGGERED SCROLL REVEAL MOTION)
       ============================================================ */}
-      <section className="section glance-metrics-section">
-        <div className="container">
-          <div className="glance-head">
-            <span className="section-eyebrow">THE HORIZON</span>
-            <h2 className="glance-title">TECHX'26 AT A GLANCE</h2>
-            <p className="glance-subtitle">
-              Verified schedule parameters, experiences, and delegate scale under the IEEE Computer Society SBC charter.
-            </p>
-          </div>
-
-          <div className="glance-metrics-row">
-            <div className="glance-metric-item">
-              <span className="metric-large-number">14—15</span>
-              <span className="metric-label-tag">OCTOBER 2026</span>
-              <p className="metric-desc">Two days of technology, competition, learning, and community</p>
-            </div>
-
-            <div className="glance-metric-divider"></div>
-
-            <div className="glance-metric-item">
-              <span className="metric-large-number">24H</span>
-              <span className="metric-label-tag">VERDICTX</span>
-              <p className="metric-desc">24-hour open-domain hackathon</p>
-            </div>
-
-            <div className="glance-metric-divider"></div>
-
-            <div className="glance-metric-item">
-              <span className="metric-large-number">CTF</span>
-              <span className="metric-label-tag">SHERLOCK & SYNTAX</span>
-              <p className="metric-desc">Cybersecurity Capture The Flag</p>
-            </div>
-
-            <div className="glance-metric-divider"></div>
-
-            <div className="glance-metric-item">
-              <span className="metric-large-number">07</span>
-              <span className="metric-label-tag">EXPERIENCES</span>
-              <p className="metric-desc">Edge AI, competitive programming, innovation, mentoring & IEEE CS engagement</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GlanceSection />
 
       {/* ============================================================
           4. THE TECHX EXPERIENCE (7 OFFICIAL EXPERIENCES)
       ============================================================ */}
       <section className="section experience-pillars-section">
         <div className="container">
-          <div className="pillars-section-head">
+          <Reveal variant="header" className="pillars-section-head">
             <span className="section-eyebrow">CONFERENCE PROGRAM</span>
             <h2 className="section-title">THE TECHX EXPERIENCE</h2>
             <p className="pillars-section-sub">
               Seven technical and professional experiences organized across Day 1 and Day 2.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="pillars-editorial-grid">
+          <Reveal variant="stagger" className="pillars-editorial-grid">
             {/* Experience 01 */}
-            <Link to="/events/nano-mentoring" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">01</span>
-                <Users size={22} color="var(--purple-light)" />
+            <Link to="/events/nano-mentoring" className="pillar-column reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">01</span>
+                <span className="p-tag">MENTORING</span>
               </div>
               <h3 className="pillar-title">NANO MENTORING</h3>
               <p className="pillar-text">
-                Interaction session with experienced professionals providing practical insights, guidance, and industry perspectives for student developers.
+                An interaction session with experienced professionals providing practical insights, guidance, and industry perspectives.
               </p>
               <div className="pillar-footer-meta">
                 <span>Campus Auditorium</span>
@@ -213,14 +173,14 @@ export default function Home() {
             </Link>
 
             {/* Experience 02 */}
-            <Link to="/events/ieee-cs-benefits" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">02</span>
-                <Award size={22} color="var(--purple-light)" />
+            <Link to="/events/ieee-cs-benefits" className="pillar-column reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">02</span>
+                <span className="p-tag">IEEE CS</span>
               </div>
-              <h3 className="pillar-title">IEEE CS BENEFITS</h3>
+              <h3 className="pillar-title">BENEFITS OF IEEE CS</h3>
               <p className="pillar-text">
-                Engagement and awareness session highlighting career advancement, networking opportunities, professional development, and technological innovation.
+                Explore IEEE Computer Society student and professional memberships, technical activities, leadership opportunities, and global resources.
               </p>
               <div className="pillar-footer-meta">
                 <span>Campus Auditorium</span>
@@ -229,85 +189,85 @@ export default function Home() {
             </Link>
 
             {/* Experience 03 */}
-            <Link to="/events/verdictx" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">03</span>
-                <Terminal size={22} color="var(--purple-light)" />
+            <Link to="/events/verdictx" className="pillar-column pillar-column-highlight reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">03</span>
+                <span className="p-tag p-tag-highlight">24H HACKATHON</span>
               </div>
-              <h3 className="pillar-title">VERDICTX: CODE & CONQUER</h3>
+              <h3 className="pillar-title">VERDICTX</h3>
               <p className="pillar-text">
-                24-hour open-domain hackathon where teams develop innovative solutions, adapt to changing requirements, undergo technical review, and defend their project through a technical debate.
+                The flagship 24-hour open-domain hackathon where teams develop and evaluate real-world solutions under real-time challenges and peer reviews.
               </p>
               <div className="pillar-footer-meta">
-                <span>Steve Jobs Hall</span>
-                <span>Day 1 // 1:30 PM (24H Overnight)</span>
+                <span>Main Computing Center</span>
+                <span>Day 1 // 1:30 PM (Overnight)</span>
               </div>
             </Link>
 
             {/* Experience 04 */}
-            <Link to="/events/sherlock-syntax" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">04</span>
-                <Shield size={22} color="var(--purple-light)" />
+            <Link to="/events/sherlock-syntax" className="pillar-column reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">04</span>
+                <span className="p-tag">CYBERSECURITY</span>
               </div>
               <h3 className="pillar-title">SHERLOCK & SYNTAX</h3>
               <p className="pillar-text">
-                Standard skill-based cybersecurity Capture The Flag arena tackling web exploitation, cryptography, forensics, reverse engineering, and OSINT.
+                A multi-round cybersecurity challenge and CTF competition testing technical investigation, vulnerability analysis, and defensive problem-solving.
               </p>
               <div className="pillar-footer-meta">
-                <span>Alpha Hall</span>
-                <span>Day 2 // 9:00 AM – 12:15 PM</span>
+                <span>Cybersecurity Lab</span>
+                <span>Day 2 // 9:00 AM</span>
               </div>
             </Link>
 
             {/* Experience 05 */}
-            <Link to="/events/edge-ai-tinyml" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">05</span>
-                <Cpu size={22} color="var(--purple-light)" />
+            <Link to="/events/edge-ai-tinyml" className="pillar-column reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">05</span>
+                <span className="p-tag">WORKSHOP</span>
               </div>
               <h3 className="pillar-title">EDGE AI & TINYML</h3>
               <p className="pillar-text">
-                Hands-on workshop introducing AI processing on edge devices, low-power machine learning principles, and real-time embedded applications.
+                Hands-on workshop exploring artificial intelligence on edge hardware and resource-constrained microcontrollers with real-time deployment.
               </p>
               <div className="pillar-footer-meta">
-                <span>Apple Hall</span>
-                <span>Day 2 // 10:45 AM – 12:15 PM</span>
+                <span>AI / IoT Laboratory</span>
+                <span>Day 2 // 10:45 AM</span>
               </div>
             </Link>
 
             {/* Experience 06 */}
-            <Link to="/events/idea-alchemy" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">06</span>
-                <Lightbulb size={22} color="var(--purple-light)" />
+            <Link to="/events/idea-alchemy" className="pillar-column reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">06</span>
+                <span className="p-tag">INNOVATION PITCH</span>
               </div>
               <h3 className="pillar-title">IDEA ALCHEMY</h3>
               <p className="pillar-text">
-                Innovation-driven startup competition combining random matrix problem cards in Round 1 and navigating dynamic business constraint cards in Round 2.
+                Startup and innovation pitch presentation where student entrepreneurs present viable technical projects and business frameworks to an expert jury.
               </p>
               <div className="pillar-footer-meta">
-                <span>Apple Hall</span>
+                <span>Seminar Hall</span>
                 <span>Day 2 // 1:15 PM (Parallel Track)</span>
               </div>
             </Link>
 
             {/* Experience 07 */}
-            <Link to="/events/codenomics" className="pillar-column">
-              <div className="pillar-top-meta">
-                <span className="pillar-index">07</span>
-                <Coins size={22} color="var(--purple-light)" />
+            <Link to="/events/codenomics" className="pillar-column reveal-card">
+              <div className="pillar-index-tag">
+                <span className="p-num">07</span>
+                <span className="p-tag">PROGRAMMING</span>
               </div>
               <h3 className="pillar-title">CODENOMICS</h3>
               <p className="pillar-text">
-                Gamified competitive programming where teams strategically earn and spend TechCoins via the TechX Portal and HackerRank platforms.
+                Dynamic competitive programming arena combining algorithmic problem solving with virtual coin bids and market strategy.
               </p>
               <div className="pillar-footer-meta">
-                <span>Alpha Hall</span>
+                <span>Computing Laboratory 02</span>
                 <span>Day 2 // 1:15 PM (Parallel Track)</span>
               </div>
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -316,7 +276,7 @@ export default function Home() {
       ============================================================ */}
       <section className="section events-roster-section">
         <div className="container">
-          <div className="roster-header-row">
+          <Reveal variant="header" className="roster-header-row">
             <div>
               <span className="section-eyebrow">OFFICIAL PROGRAM</span>
               <h2 className="section-title">FEATURED EVENTS</h2>
@@ -325,14 +285,14 @@ export default function Home() {
               <span>VIEW ALL 07 EVENTS</span>
               <ArrowRight size={15} />
             </Link>
-          </div>
+          </Reveal>
 
-          <div className="events-editorial-list">
+          <Reveal variant="stagger" className="events-editorial-list">
             {officialEvents.map((evt, idx) => (
               <Link 
                 key={evt.id} 
                 to={`/events/${evt.id}`} 
-                className="event-editorial-row"
+                className="event-editorial-row reveal-card"
               >
                 <div className="evt-row-index">
                   <span>0{idx + 1}</span>
@@ -354,7 +314,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -363,73 +323,77 @@ export default function Home() {
       ============================================================ */}
       <section className="section why-attend-editorial-section">
         <div className="container">
-          <div className="why-editorial-head">
+          <Reveal variant="header" className="why-editorial-head">
             <span className="section-eyebrow">THE VALUE PROPOSITION</span>
             <h2 className="section-title">WHY ATTEND TECHX'26?</h2>
             <p className="why-editorial-sub">
               Source-supported development opportunities, professional IEEE networking, and hands-on technological learning.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="why-statements-grid">
-            <div className="why-statement-item">
+          <Reveal variant="stagger" className="why-statements-grid">
+            <div className="why-statement-item reveal-card">
               <span className="why-num">01</span>
               <h4>REAL-WORLD PROBLEM SOLVING</h4>
               <p>Build, adapt, evaluate, and defend solutions through the multi-round VerdictX: Code & Conquer hackathon.</p>
             </div>
 
-            <div className="why-statement-item">
+            <div className="why-statement-item reveal-card">
               <span className="why-num">02</span>
               <h4>IEEE COMPUTER SOCIETY COMMUNITY</h4>
               <p>Connect with the IEEE Computer Society community and explore the value of professional membership, networking, and career development.</p>
             </div>
 
-            <div className="why-statement-item">
+            <div className="why-statement-item reveal-card">
               <span className="why-num">03</span>
               <h4>HANDS-ON EDGE AI</h4>
               <p>Explore Edge AI & TinyML through a hands-on workshop focused on AI processing on edge devices and real-time applications.</p>
             </div>
 
-            <div className="why-statement-item">
+            <div className="why-statement-item reveal-card">
               <span className="why-num">04</span>
               <h4>MENTORSHIP & INDUSTRY INSIGHTS</h4>
               <p>Gain practical insights, guidance, and industry perspectives through Nano Mentoring sessions.</p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ============================================================
-          7. PARTNERS (CLEAN TASTEFUL PLACEHOLDER)
+          7. PARTNERS (INTENTIONAL ASYMMETRIC 2-COLUMN LAYOUT)
       ============================================================ */}
       <section className="section partners-preview-section">
         <div className="container">
-          <div className="partners-preview-head">
-            <span className="section-eyebrow">POWERING TECHX'26</span>
-            <h2 className="section-title">PARTNERS</h2>
-            <p className="partners-preview-sub">
-              Technology grows stronger when great organizations build together. Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be revealed soon.
-            </p>
-          </div>
+          <div className="partners-editorial-split">
+            <Reveal variant="pop" className="partners-preview-head">
+              <span className="section-eyebrow">POWERING TECHX'26</span>
+              <h2 className="section-title">PARTNERS</h2>
+              <p className="partners-preview-sub">
+                Technology grows stronger when great organizations build together. Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be revealed soon.
+              </p>
+              <div className="partners-head-link">
+                <Link to="/partners" className="editorial-text-link">
+                  <span>EXPLORE ECOSYSTEM DIRECTORY</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </Reveal>
 
-          <div className="partners-announcement-card">
-            <div className="announcement-pill">
-              <Sparkles size={15} color="var(--purple-light)" />
-              <span>PARTNERSHIP DESK</span>
-            </div>
-            <h3>PARTNER ANNOUNCEMENTS COMING SOON</h3>
-            <p>
-              Official partnership agreements are currently being finalized with leading enterprise organizations, hardware vendors, and tech communities.
-            </p>
-
-            <div className="empty-slots-row" aria-hidden="true">
-              {[1, 2, 3, 4].map((slot) => (
-                <div key={slot} className="empty-slot-pill">
-                  <span className="slot-code">PARTNER 0{slot}</span>
-                  <span className="slot-sub">Announcement Pending</span>
-                </div>
-              ))}
-            </div>
+            <Reveal variant="card" delay={120} className="partners-announcement-card">
+              <div className="announcement-pill">
+                <Sparkles size={15} color="var(--purple-light)" />
+                <span>PARTNERSHIP DESK</span>
+              </div>
+              <h3 className="announcement-card-heading">PARTNERSHIP ANNOUNCEMENTS</h3>
+              <div className="announcement-status-tag">Coming soon</div>
+              <p className="announcement-card-copy">
+                Official TechX'26 partners will be listed here once confirmed. Partnership agreements are currently being finalized with leading enterprise organizations, hardware vendors, and technology communities.
+              </p>
+              <div className="partners-status-strip">
+                <span className="status-label">OFFICIAL LIAISON //</span>
+                <span className="status-text">{eventMeta.email}</span>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -437,7 +401,7 @@ export default function Home() {
       {/* ============================================================
           8. FINAL MONUMENTAL CTA
       ============================================================ */}
-      <section className="section final-cta-section">
+      <Reveal as="section" variant="pop" className="section final-cta-section">
         <div className="container">
           <div className="final-cta-monument">
             <span className="section-eyebrow">CONVERGENCE AWAITS</span>
@@ -456,7 +420,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       <style>{`
         .home-page-root {
@@ -1116,102 +1080,99 @@ export default function Home() {
         }
 
         /* ============================================================
-           7. PARTNERS PREVIEW
+           7. PARTNERS PREVIEW (ASYMMETRIC EDITORIAL 2-COL)
         ============================================================ */
         .partners-preview-section {
           padding: 7rem 0;
+          background: #040206;
+        }
+
+        .partners-editorial-split {
+          display: grid;
+          grid-template-columns: 1.15fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+
+        @media (max-width: 960px) {
+          .partners-editorial-split {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
         }
 
         .partners-preview-head {
-          max-width: 680px;
-          margin-bottom: 3.5rem;
+          max-width: 600px;
         }
 
         .partners-preview-sub {
           font-size: 1.05rem;
           color: var(--muted);
           line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+
+        .partners-head-link {
+          margin-top: 1.5rem;
         }
 
         .partners-announcement-card {
-          border: 1px solid var(--border);
+          border: 1px solid rgba(138, 43, 226, 0.35);
           border-radius: var(--radius-md);
-          background: #08050C;
-          padding: 3.5rem;
-          text-align: center;
-          max-width: 900px;
+          background: #090510;
+          padding: 2.75rem 2.25rem;
+          position: relative;
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(138, 43, 226, 0.12);
         }
 
         @media (max-width: 600px) {
           .partners-announcement-card {
-            padding: 2.25rem 1.5rem;
+            padding: 2rem 1.5rem;
           }
         }
 
-        .announcement-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
+        .announcement-card-heading {
+          font-family: var(--font-display);
+          font-size: clamp(1.6rem, 3vw, 2.2rem);
+          text-transform: uppercase;
+          letter-spacing: 0.03em;
+          margin-bottom: 0.5rem;
+          color: #FFFFFF;
+        }
+
+        .announcement-status-tag {
           font-family: var(--font-mono);
-          font-size: 0.72rem;
+          font-size: 0.82rem;
           color: var(--purple-light);
-          border: 1px solid var(--border-purple);
-          background: rgba(138, 43, 226, 0.1);
-          padding: 0.35rem 0.85rem;
-          border-radius: var(--radius-sm);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
           margin-bottom: 1.25rem;
         }
 
-        .partners-announcement-card h3 {
-          font-size: clamp(1.5rem, 3vw, 2.2rem);
-          text-transform: uppercase;
-          letter-spacing: 0.03em;
-          margin-bottom: 0.75rem;
-        }
-
-        .partners-announcement-card p {
-          max-width: 600px;
-          margin: 0 auto 2.5rem;
-          font-size: 0.95rem;
+        .announcement-card-copy {
+          font-size: 0.92rem;
           color: var(--muted);
+          line-height: 1.6;
+          margin-bottom: 2rem;
         }
 
-        .empty-slots-row {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1rem;
-          margin-bottom: 2.5rem;
-        }
-
-        @media (max-width: 768px) {
-          .empty-slots-row {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-
-        .empty-slot-pill {
-          border: 1px dashed var(--border);
-          padding: 1.25rem 0.75rem;
-          border-radius: var(--radius-sm);
+        .partners-status-strip {
           display: flex;
-          flex-direction: column;
-          gap: 0.35rem;
-        }
-
-        .slot-code {
+          align-items: center;
+          gap: 0.75rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
           font-family: var(--font-mono);
-          font-size: 0.72rem;
+          font-size: 0.75rem;
+        }
+
+        .status-label {
           color: var(--purple-light);
+          letter-spacing: 0.12em;
         }
 
-        .slot-sub {
-          font-size: 0.78rem;
-          color: var(--muted-dark);
-        }
-
-        .partner-inquire-row {
-          display: flex;
-          justify-content: center;
+        .status-text {
+          color: #DDD6E5;
         }
 
         /* ============================================================

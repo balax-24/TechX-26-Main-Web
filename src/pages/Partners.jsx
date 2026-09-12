@@ -1,6 +1,7 @@
 import React from 'react';
-import { Building2, Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, ArrowRight, ShieldCheck, Mail } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { partners } from '../data/partners';
 import { eventMeta } from '../data/contacts';
 
@@ -9,34 +10,62 @@ export default function Partners() {
     <div className="partners-page-root">
       <TechAtmosphere showArch={false} />
 
-      {/* Hero */}
+      {/* Hero with Intentional Asymmetric 2-Column Composition */}
       <section className="partners-hero-section">
         <div className="container">
-          <span className="section-eyebrow">POWERING TECHX'26</span>
-          <h1 className="partners-hero-title">
-            PARTNERS
-          </h1>
-          <p className="partners-hero-sub">
-            Partner announcements coming soon.
-          </p>
+          <div className="partners-hero-layout">
+            {/* Left Column: Headline & Statement */}
+            <Reveal variant="header" className="partners-hero-left">
+              <span className="section-eyebrow">POWERING TECHX'26</span>
+              <h1 className="partners-hero-title">
+                PARTNERS
+              </h1>
+              <p className="partners-hero-sub">
+                TechX Madras collaborates with innovative technology enterprises, forward-looking engineering organisations, and developer platforms.
+              </p>
+            </Reveal>
+
+            {/* Right Column: Compact Partnership Status Panel */}
+            <Reveal variant="card" className="partners-hero-right">
+              <div className="partnership-status-panel">
+                <div className="status-panel-top">
+                  <span className="status-badge-mono">PARTNERSHIP STATUS</span>
+                  <div className="status-live-dot" aria-hidden="true"></div>
+                </div>
+                <h2 className="status-panel-heading">
+                  ANNOUNCEMENTS<br />
+                  <span className="text-purple-highlight">COMING SOON</span>
+                </h2>
+                <p className="status-panel-desc">
+                  Official partnership agreements are currently being finalized with industry leaders, developer platforms, and hardware vendors.
+                </p>
+                <div className="status-panel-footer">
+                  <span className="status-liaison-label">OFFICIAL LIAISON //</span>
+                  <a href={`mailto:${eventMeta.email}`} className="status-liaison-email">
+                    {eventMeta.email}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Main Partners Section */}
       <section className="partners-display-section">
         <div className="container">
-          <div className="partners-block-head">
+          <Reveal variant="header" className="partners-block-head">
             <span className="section-eyebrow">ECOSYSTEM NETWORK</span>
             <h2 className="partners-block-title">OUR PARTNERS</h2>
             <p className="partners-block-desc">
-              TechX Madras collaborates with innovative technology enterprises, forward-looking engineering organisations, and developer platforms.
+              Technology grows stronger when great organizations build together.
             </p>
-          </div>
+          </Reveal>
 
           {partners && partners.length > 0 ? (
-            <div className="confirmed-partners-grid">
+            <Reveal variant="stagger" className="confirmed-partners-grid">
               {partners.map((partner, idx) => (
-                <div key={idx} className="partner-brand-card">
+                <div key={idx} className="partner-brand-card reveal-card">
                   {partner.logo ? (
                     <img src={partner.logo} alt={partner.name} className="partner-logo-img" />
                   ) : (
@@ -47,36 +76,47 @@ export default function Partners() {
                   )}
                 </div>
               ))}
-            </div>
+            </Reveal>
           ) : (
             <div className="partners-empty-container">
-              <div className="announcement-prompt-box">
-                <div className="prompt-badge">
+              {/* Single Clean Status Treatment Replacing Fake Placeholder Slots */}
+              <Reveal variant="card" className="clean-status-card">
+                <div className="clean-status-badge">
                   <Sparkles size={16} color="var(--purple-light)" />
-                  <span>OFFICIAL ANNOUNCEMENTS</span>
+                  <span>CONFIRMED NETWORK DIRECTORY</span>
                 </div>
-                <h3 className="announcement-title">PARTNER ANNOUNCEMENTS COMING SOON</h3>
-                <p className="announcement-sub">
-                  Official industry sponsors, technology partners, and developer tooling organizations supporting TechX'26 will be unveiled here as partnerships are finalized.
+                <h3 className="clean-status-title">PARTNERSHIP ANNOUNCEMENTS</h3>
+                <div className="clean-status-tag">Coming soon</div>
+                <p className="clean-status-desc">
+                  Official TechX'26 partners will be listed here once confirmed. We are actively finalizing partnerships across cloud computing, cybersecurity tooling, embedded systems hardware, and developer ecosystems.
                 </p>
-              </div>
-
-              {/* Tasteful Empty Logo-Grid Treatment */}
-              <div className="tasteful-logo-grid" aria-hidden="true">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((slot) => (
-                  <div key={slot} className="empty-logo-cell">
-                    <div className="cell-inner">
-                      <div className="cell-icon-wrap">
-                        <Building2 size={24} className="cell-icon" />
-                      </div>
-                      <span className="cell-slot-num">PARTNER SLOT {String(slot).padStart(2, '0')}</span>
-                      <span className="cell-status">Announcement Pending</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                <div className="clean-status-actions">
+                  <a 
+                    href={`mailto:${eventMeta.email}?subject=TechX'26%20Partnership%20Inquiry`} 
+                    className="btn btn-primary"
+                  >
+                    <span>INQUIRE ABOUT PARTNERSHIP</span>
+                    <ArrowRight size={16} />
+                  </a>
+                </div>
+              </Reveal>
             </div>
           )}
+
+          {/* Partnership Inquiry Strip */}
+          <Reveal variant="card" className="partner-inquiry-strip">
+            <div className="inquiry-copy">
+              <h3>INTERESTED IN PARTNERING WITH TECHX'26?</h3>
+              <p>Connect with 1,000+ passionate engineers, developers, and tech pioneers across South India.</p>
+            </div>
+            <a 
+              href={`mailto:${eventMeta.email}?subject=TechX'26%20Partnership%20Proposal`}
+              className="btn btn-secondary"
+            >
+              <span>CONTACT PARTNERSHIP TEAM</span>
+              <ArrowRight size={16} />
+            </a>
+          </Reveal>
         </div>
       </section>
 
@@ -87,34 +127,118 @@ export default function Partners() {
           min-height: 100vh;
         }
         .partners-hero-section {
-          padding: 5rem 0 3.5rem;
+          padding: clamp(3.5rem, 7vw, 5.5rem) 0 3.5rem;
           border-bottom: 1px solid var(--border-subtle);
+          background: radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
           position: relative;
+        }
+        .partners-hero-layout {
+          display: grid;
+          grid-template-columns: 1.35fr 1fr;
+          gap: clamp(2rem, 4vw, 4rem);
+          align-items: center;
+        }
+        .partners-hero-left {
+          display: flex;
+          flex-direction: column;
         }
         .partners-hero-title {
           font-family: var(--font-display);
-          font-size: clamp(3.2rem, 8vw, 6.5rem);
+          font-size: clamp(3.2rem, 8vw, 6.2rem);
           line-height: 0.95;
           letter-spacing: 0.03em;
           text-transform: uppercase;
-          margin: 1rem 0 1.5rem;
+          margin: 0.75rem 0 1.25rem;
           color: var(--white);
         }
         .partners-hero-sub {
-          font-size: 1.25rem;
-          max-width: 740px;
+          font-size: clamp(1rem, 2vw, 1.2rem);
+          max-width: 640px;
           color: var(--off-white);
-          line-height: 1.5;
+          line-height: 1.6;
+        }
+
+        /* Right Column: Status Panel */
+        .partners-hero-right {
+          display: flex;
+          justify-content: center;
+        }
+        .partnership-status-panel {
+          background: #0C0816;
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          border-radius: var(--radius-md);
+          padding: 2.25rem 2rem;
+          width: 100%;
+          box-shadow: 0 15px 35px -10px rgba(138, 43, 226, 0.2), 0 0 20px rgba(138, 43, 226, 0.08);
+          position: relative;
+        }
+        .status-panel-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.25rem;
+        }
+        .status-badge-mono {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--purple-light);
+          letter-spacing: 0.08em;
+          font-weight: 700;
+        }
+        .status-live-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--purple-bright);
+          box-shadow: 0 0 10px var(--purple-light);
+        }
+        .status-panel-heading {
+          font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+          text-transform: uppercase;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+          margin-bottom: 0.85rem;
+          color: var(--white);
+        }
+        .status-panel-desc {
+          font-size: 0.92rem;
+          color: var(--muted);
+          line-height: 1.55;
+          margin-bottom: 1.5rem;
+        }
+        .status-panel-footer {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border-subtle);
+        }
+        .status-liaison-label {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          color: var(--muted-dark);
+          letter-spacing: 0.06em;
+        }
+        .status-liaison-email {
+          font-family: var(--font-mono);
+          font-size: 0.85rem;
+          color: var(--purple-light);
+          text-decoration: none;
+          transition: color var(--transition-fast);
+        }
+        .status-liaison-email:hover {
+          color: var(--white);
+          text-decoration: underline;
         }
 
         /* Partners Display Section */
         .partners-display-section {
-          padding: 5.5rem 0 6rem;
+          padding: 5rem 0 6rem;
         }
         .partners-block-head {
           text-align: center;
           max-width: 680px;
-          margin: 0 auto 4rem;
+          margin: 0 auto 3.5rem;
         }
         .partners-block-title {
           font-size: clamp(2.2rem, 4.5vw, 3.4rem);
@@ -127,21 +251,21 @@ export default function Partners() {
           line-height: 1.6;
         }
 
-        /* Empty State & Tasteful Logo Grid */
+        /* Clean Status Card (No Fake Placeholders) */
         .partners-empty-container {
-          max-width: 1060px;
-          margin: 0 auto 4.5rem;
+          max-width: 860px;
+          margin: 0 auto 4rem;
         }
-        .announcement-prompt-box {
+        .clean-status-card {
           background: #0B0714;
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 3.5rem 2.5rem;
+          padding: clamp(2.5rem, 5vw, 4rem) clamp(1.75rem, 4vw, 3rem);
           text-align: center;
-          margin-bottom: 3rem;
           position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        .prompt-badge {
+        .clean-status-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
@@ -149,86 +273,36 @@ export default function Partners() {
           font-size: 0.72rem;
           color: var(--purple-light);
           background: rgba(138, 43, 226, 0.12);
-          border: 1px solid var(--border);
+          border: 1px solid var(--border-purple);
           padding: 0.35rem 0.85rem;
           border-radius: var(--radius-sm);
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.5rem;
         }
-        .announcement-title {
-          font-size: clamp(1.6rem, 3vw, 2.2rem);
+        .clean-status-title {
+          font-size: clamp(1.6rem, 3.5vw, 2.4rem);
           text-transform: uppercase;
-          letter-spacing: 0.03em;
-          margin-bottom: 0.75rem;
+          letter-spacing: 0.02em;
+          margin-bottom: 0.5rem;
           color: var(--white);
         }
-        .announcement-sub {
-          font-size: 1rem;
-          max-width: 600px;
-          margin: 0 auto;
-          color: var(--muted);
-          line-height: 1.6;
-        }
-
-        /* Tasteful Grid */
-        .tasteful-logo-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.25rem;
-        }
-        @media (max-width: 1024px) {
-          .tasteful-logo-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 550px) {
-          .tasteful-logo-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-        .empty-logo-cell {
-          background: rgba(14, 9, 24, 0.5);
-          border: 1px dashed var(--border-subtle);
-          border-radius: var(--radius-sm);
-          padding: 2.25rem 1.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          transition: var(--transition-fast);
-        }
-        .empty-logo-cell:hover {
-          border-color: var(--border);
-          background: rgba(138, 43, 226, 0.05);
-        }
-        .cell-inner {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.5rem;
-        }
-        .cell-icon-wrap {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 0.25rem;
-        }
-        .cell-icon {
-          color: var(--muted-dark);
-        }
-        .cell-slot-num {
+        .clean-status-tag {
           font-family: var(--font-mono);
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           color: var(--purple-light);
           letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 1.25rem;
         }
-        .cell-status {
-          font-size: 0.8rem;
-          color: var(--muted-dark);
+        .clean-status-desc {
+          font-size: 1.02rem;
+          max-width: 620px;
+          margin: 0 auto 2.25rem;
+          color: var(--muted);
+          line-height: 1.65;
+        }
+        .clean-status-actions {
+          display: flex;
+          justify-content: center;
         }
 
         /* Inquiry Strip */
@@ -254,6 +328,14 @@ export default function Partners() {
         .partner-inquiry-strip p {
           font-size: 0.92rem;
           color: var(--muted);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+          .partners-hero-layout {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
         }
         @media (max-width: 600px) {
           .partner-inquiry-strip {

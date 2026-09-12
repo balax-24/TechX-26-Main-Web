@@ -6,6 +6,7 @@ import {
   Sparkles, ExternalLink, HelpCircle, Flame, Target, Trophy, Lock
 } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
+import Reveal from '../components/Reveal';
 import { eventsData } from '../data/events';
 
 export default function EventDetails() {
@@ -44,7 +45,7 @@ export default function EventDetails() {
           </Link>
 
           <div className="detail-hero-grid">
-            <div className="detail-hero-text">
+            <Reveal variant="header" className="detail-hero-text">
               <div className="detail-eyebrow-row">
                 <span className="event-detail-num">{event.number}</span>
                 <span className="badge-tech">{event.badge}</span>
@@ -81,10 +82,10 @@ export default function EventDetails() {
                   <span>VIEW SCHEDULE</span>
                 </Link>
               </div>
-            </div>
+            </Reveal>
 
             {/* Quick Spec Card */}
-            <div className="detail-spec-card">
+            <Reveal variant="card" className="detail-spec-card">
               <div className="spec-card-header">
                 <span className="spec-card-badge">EVENT DETAILS</span>
                 <h3>EVENT SPECIFICATIONS</h3>
@@ -124,7 +125,7 @@ export default function EventDetails() {
                   REGISTER FOR {event.publicTitle || event.title}
                 </Link>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -133,7 +134,7 @@ export default function EventDetails() {
       <section className="detail-main-section">
         <div className="container">
           {/* About The Event */}
-          <div className="detail-section-block">
+          <Reveal variant="pop" className="detail-section-block">
             <span className="section-eyebrow">OVERVIEW & MECHANICS</span>
             <h2 className="detail-block-heading">ABOUT THE EVENT</h2>
             <div className="detail-prose">
@@ -156,13 +157,13 @@ export default function EventDetails() {
                 </div>
               </div>
             )}
-          </div>
+          </Reveal>
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 01 VERDICTX: CODE & CONQUER (3 ROUNDS)
           ============================================================ */}
           {event.id === 'verdictx' && event.rounds && (
-            <div className="detail-section-block verdictx-block">
+            <Reveal variant="pop" className="detail-section-block verdictx-block">
               <span className="section-eyebrow">HACKATHON LIFECYCLE</span>
               <h2 className="detail-block-heading">THE THREE-ROUND STRUCTURE</h2>
               <p className="detail-block-sub">
@@ -317,14 +318,14 @@ export default function EventDetails() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 02 SHERLOCK & SYNTAX (CYBERSECURITY CTF)
           ============================================================ */}
           {event.id === 'sherlock-syntax' && (
-            <div className="detail-section-block ctf-block">
+            <Reveal variant="pop" className="detail-section-block ctf-block">
               <span className="section-eyebrow">CTF FORMAT & CATEGORIES</span>
               <h2 className="detail-block-heading">CHALLENGE CATEGORIES & SCORING MATRIX</h2>
               <p className="detail-block-sub">
@@ -397,14 +398,14 @@ export default function EventDetails() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 03 EDGE AI & TINYML WORKSHOP
           ============================================================ */}
           {event.id === 'edge-ai-tinyml' && (
-            <div className="detail-section-block edgeai-block">
+            <Reveal variant="pop" className="detail-section-block edgeai-block">
               <span className="section-eyebrow">INTELLIGENCE AT THE BOUNDARY</span>
               <h2 className="detail-block-heading">THE ON-DEVICE AI ARCHITECTURE</h2>
               <p className="detail-block-sub">
@@ -453,14 +454,14 @@ export default function EventDetails() {
                   <strong>160 Participants</strong>
                 </div>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 04 IDEA ALCHEMY
           ============================================================ */}
           {event.id === 'idea-alchemy' && (
-            <div className="detail-section-block alchemy-block">
+            <Reveal variant="pop" className="detail-section-block alchemy-block">
               <span className="section-eyebrow">STARTUP COMPETITION</span>
               <h2 className="detail-block-heading">INNOVATE. ADAPT. PITCH.</h2>
               <p className="detail-block-sub">
@@ -527,14 +528,14 @@ export default function EventDetails() {
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 05 CODENOMICS
           ============================================================ */}
           {event.id === 'codenomics' && (
-            <div className="detail-section-block codenomics-block">
+            <Reveal variant="pop" className="detail-section-block codenomics-block">
               <span className="section-eyebrow">GAMIFIED COMPETITIVE PROGRAMMING</span>
               <h2 className="detail-block-heading">TECHX PORTAL & TECHX MARKET</h2>
               <p className="detail-block-sub">
@@ -656,14 +657,14 @@ export default function EventDetails() {
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 06 NANO MENTORING
           ============================================================ */}
           {event.id === 'nano-mentoring' && (
-            <div className="detail-section-block mentoring-block">
+            <Reveal variant="pop" className="detail-section-block mentoring-block">
               <span className="section-eyebrow">DIRECT GUIDANCE</span>
               <h2 className="detail-block-heading">PRACTICAL INDUSTRY PERSPECTIVES</h2>
               <p className="detail-block-sub">
@@ -684,14 +685,14 @@ export default function EventDetails() {
                 <Clock size={18} color="var(--purple-light)" />
                 <span>Scheduled on Day 1 at 10:00 AM in the Campus Auditorium, directly alongside Benefits of IEEE Computer Society Membership.</span>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               CUSTOM VISUAL: EVENT 07 IEEE CS BENEFITS
           ============================================================ */}
           {event.id === 'ieee-cs-benefits' && (
-            <div className="detail-section-block ieee-benefits-block">
+            <Reveal variant="pop" className="detail-section-block ieee-benefits-block">
               <span className="section-eyebrow">GLOBAL COMMUNITY</span>
               <h2 className="detail-block-heading">VALUE OF IEEE COMPUTER SOCIETY MEMBERSHIP</h2>
               <p className="detail-block-sub">
@@ -712,13 +713,13 @@ export default function EventDetails() {
                 <Sparkles size={18} color="var(--purple-light)" />
                 <span>Day 1 at 10:00 AM in the Campus Auditorium. Open to all registered delegates and student attendees.</span>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {/* ============================================================
               PRIZES & RECOGNITION (OFFICIAL / GROUNDED)
           ============================================================ */}
-          <div className="detail-section-block prizes-recognition-block">
+          <Reveal variant="pop" className="detail-section-block prizes-recognition-block">
             <span className="section-eyebrow">AWARDS & ACKNOWLEDGEMENT</span>
             <h2 className="detail-block-heading">PRIZES & RECOGNITION</h2>
             
@@ -777,10 +778,10 @@ export default function EventDetails() {
                 </div>
               </div>
             )}
-          </div>
+          </Reveal>
 
           {/* Bottom Enrolment CTA */}
-          <div className="detail-bottom-enroll">
+          <Reveal variant="card" className="detail-bottom-enroll">
             <div className="enroll-content">
               <h3>READY TO COMPETE IN {event.title}?</h3>
               <p>14–15 October 2026 • Sri Sai Ram Institute of Technology</p>
@@ -789,7 +790,7 @@ export default function EventDetails() {
               <span>REGISTER FOR TECHX'26</span>
               <ArrowRight size={18} />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
