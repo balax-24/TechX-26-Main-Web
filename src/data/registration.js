@@ -137,3 +137,15 @@ export const registrationMeta = {
   intro: "Choose your registration category below. Registration fees shown are indicative and subject to final confirmation by the organizers.",
   footnote: "*Indicative INR conversion of proposal pricing. Final registration fees will be confirmed by the organizers."
 };
+
+// Isolated configurable offer object
+export const registrationOffer = {
+  active: false, // Set to true when organizers supply official offer terms
+  title: "TECHX'26 REGISTRATION OFFER",
+  statusBadge: "OFFICIAL OFFER STATUS",
+  statusHeading: "REGISTRATION OFFER",
+  statusSub: "Coming soon",
+  placeholderText: "[OFFER CONTENT WILL BE UPDATED]",
+  description: "Official registration incentives, institutional group concessions, or early delegate packages will be published here upon organizer confirmation.",
+  note: "No unverified discounts or promotional codes are applied in advance."
+};

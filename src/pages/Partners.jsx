@@ -85,10 +85,10 @@ export default function Partners() {
                   <Sparkles size={16} color="var(--purple-light)" />
                   <span>CONFIRMED NETWORK DIRECTORY</span>
                 </div>
-                <h3 className="clean-status-title">PARTNERSHIP ANNOUNCEMENTS</h3>
-                <div className="clean-status-tag">Coming soon</div>
+                <h2 className="clean-status-title">PARTNERS</h2>
+                <div className="clean-status-tag">Partnership announcements coming soon.</div>
                 <p className="clean-status-desc">
-                  Official TechX'26 partners will be listed here once confirmed. We are actively finalizing partnerships across cloud computing, cybersecurity tooling, embedded systems hardware, and developer ecosystems.
+                  Official TechX'26 partners will be listed here once confirmed.
                 </p>
                 <div className="clean-status-actions">
                   <a 

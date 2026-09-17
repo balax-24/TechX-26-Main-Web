@@ -29,11 +29,13 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const desktopNavLinks = [
+    { to: '/', label: 'HOME' },
     { to: '/events', label: 'EVENTS' },
     { to: '/schedule', label: 'SCHEDULE' },
     { to: '/speakers', label: 'SPEAKERS' },
     { to: '/partners', label: 'PARTNERS' },
     { to: '/about', label: 'ABOUT' },
+    { to: '/contact', label: 'CONTACT' },
   ];
 
   const mobileNavLinks = [
@@ -43,7 +45,6 @@ export default function Navbar() {
     { to: '/speakers', label: 'SPEAKERS' },
     { to: '/partners', label: 'PARTNERS' },
     { to: '/about', label: 'ABOUT' },
-    { to: '/venue', label: 'VENUE' },
     { to: '/contact', label: 'CONTACT' },
     { to: '/register', label: 'REGISTER' },
   ];
@@ -208,7 +209,7 @@ export default function Navbar() {
         .navbar-desktop-nav {
           display: flex;
           align-items: center;
-          gap: 2.25rem;
+          gap: clamp(0.9rem, 1.6vw, 1.75rem);
         }
         @media (max-width: 1024px) {
           .navbar-desktop-nav {

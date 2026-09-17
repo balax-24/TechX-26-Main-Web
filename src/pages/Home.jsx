@@ -1,18 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Sparkles, Terminal, Shield, Cpu, Lightbulb, Users, Award, Compass, Coins } from 'lucide-react';
+import {
+  ArrowRight, ChevronRight, Sparkles, Terminal, Shield, Cpu,
+  Lightbulb, Users, Award, Compass, Coins, Code, Zap, CheckCircle2
+} from 'lucide-react';
 import Countdown from '../components/Countdown';
 import GlanceSection from '../components/GlanceSection';
 import Reveal from '../components/Reveal';
 import { eventsData } from '../data/events';
 import { eventMeta } from '../data/contacts';
 
-import logoImg from '../assets/logo/techx-logo-cropped.png';
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 
 export default function Home() {
-  // 7 Official TechX'26 Events
   const officialEvents = eventsData;
+
+  // Group events for Featured Events section
+  const hackathonEvents = officialEvents.filter(e => e.id === 'verdictx' || e.id === 'idea-alchemy');
+  const technicalLabEvents = officialEvents.filter(e => e.id === 'sherlock-syntax' || e.id === 'edge-ai-tinyml');
+  const competitiveDevEvents = officialEvents.filter(e => e.id === 'codenomics' || e.id === 'nano-mentoring' || e.id === 'ieee-cs-benefits');
 
   return (
     <div className="home-page-root">
@@ -23,9 +29,9 @@ export default function Home() {
       <section className="hero-cover-viewport" aria-label="TechX'26 Opening Cover">
         {/* Full-Screen Architectural Facade Canvas */}
         <div className="hero-arch-canvas" aria-hidden="true">
-          <img 
-            src={campusFacadeImg} 
-            alt="Sri Sai Ram Institute of Technology Architectural Facade" 
+          <img
+            src={campusFacadeImg}
+            alt="Sri Sai Ram Institute of Technology Architectural Facade"
             className="hero-arch-bg-img"
           />
           {/* Layered Lighting & Vignette Treatments */}
@@ -39,7 +45,7 @@ export default function Home() {
         {/* Campaign Cover Hierarchy */}
         <div className="container hero-content-container">
           <div className="hero-campaign-block">
-            {/* 1. Small Brand Identifier */}
+            {/* 1. Brand Identifier Kicker */}
             <div className="hero-brand-kicker">
               <span className="kicker-pulse-dot"></span>
               <span className="kicker-text">
@@ -47,26 +53,17 @@ export default function Home() {
               </span>
             </div>
 
-            {/* 2. Official TechX Logo */}
-            <div className="hero-emblem-wrap">
-              <img 
-                src={logoImg} 
-                alt="TechX Official Logo" 
-                className="hero-emblem-img"
-              />
-            </div>
-
-            {/* 3. TECHX'26 Monumental Typography */}
+            {/* 2. TECHX'26 Monumental Typography (Single Clean Brand Mark, No Stacked Duplicate Logos) */}
             <h1 className="hero-monument-title">
               TECHX'26
             </h1>
 
-            {/* 4. Primary Tagline */}
+            {/* 3. Primary Tagline */}
             <p className="hero-tagline-statement">
               IGNITE THE CODE. OWN THE FUTURE.
             </p>
 
-            {/* 5. Editorial Information Strip */}
+            {/* 4. Editorial Information Strip */}
             <div className="hero-editorial-strip">
               <span className="strip-item">14 — 15 OCTOBER 2026</span>
               <span className="strip-sep">•</span>
@@ -75,7 +72,7 @@ export default function Home() {
               <span className="strip-item">CHENNAI, TAMIL NADU</span>
             </div>
 
-            {/* 6. Primary and Secondary CTAs */}
+            {/* 5. Primary and Secondary CTAs */}
             <div className="hero-actions-group">
               <Link to="/register" className="btn btn-primary hero-cta-btn">
                 <span>REGISTER NOW</span>
@@ -98,14 +95,14 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          2. WHAT IS TECHX? (EDITORIAL SPLIT SECTION)
+          2. WHAT IS TECHX? + THE TECHX JOURNEY (NATURAL PROGRESSION)
       ============================================================ */}
       <section className="section what-is-techx-section">
         <div className="container">
           <div className="what-is-editorial-layout">
             <Reveal variant="header" className="editorial-left-col">
-              <span className="section-eyebrow">THE INITIATIVE</span>
-              <h2 className="editorial-huge-heading">
+              <span className="section-eyebrow">THE INITIATIVE & EVOLUTION</span>
+              <h2 className="editorial-huge-heading" aria-label="WHAT IS TECHX?">
                 WHAT<br />
                 IS<br />
                 <span className="text-purple-highlight">TECHX?</span>
@@ -114,21 +111,52 @@ export default function Home() {
 
             <Reveal variant="pop" delay={120} className="editorial-right-col">
               <p className="editorial-lead-statement">
-                TECHX MADRAS is a technology-focused initiative organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+                TECHX MADRAS is a technology conference and technical symposium organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
               </p>
-              
+
               <div className="editorial-body-paragraphs">
                 <p>
-                  It brings together technical competition, hands-on learning, innovation, mentoring, and IEEE Computer Society engagement across two days.
+                  Conceived as an arena of genuine engineering capability, TechX brings together technical competition, hands-on learning, innovation, mentoring, and IEEE Computer Society engagement across two high-impact days in Chennai.
                 </p>
-                <p>
-                  Built as an arena of genuine engineering capability, TechX features the 24-hour VerdictX: Code & Conquer hackathon, Sherlock & Syntax cybersecurity CTF, hands-on Edge AI & TinyML workshop, startup pitch, and gamified competitive programming.
-                </p>
+              </div>
+
+              {/* The TechX Journey Sub-section */}
+              <div className="journey-summary-block">
+                <div className="journey-block-header">
+                  <span className="section-eyebrow" style={{ marginBottom: 0 }}>THE TECHX JOURNEY</span>
+                  <h3 className="journey-block-title">FROM FOUNDATION TO FLAGSHIP</h3>
+                </div>
+
+                <div className="journey-progression-cards">
+                  {/* TechX'25 */}
+                  <div className="journey-edition-card">
+                    <div className="edition-header-row">
+                      <span className="edition-badge">TECHX'25</span>
+                      <span className="edition-award-tag">1ST PLACE OUTSTANDING HOST</span>
+                    </div>
+                    <h4 className="edition-title">THE FOUNDATION & GLOBAL RECOGNITION</h4>
+                    <p className="edition-desc">
+                      TechX Madras 2025 united technologists, engineers, and mentors across the region, earning the prestigious <strong>Outstanding Host Award — 1st Place</strong> from the IEEE Computer Society Students & Young Professionals (SYP) Committee under the TechX 2025 global series.
+                    </p>
+                  </div>
+
+                  {/* TechX'26 */}
+                  <div className="journey-edition-card edition-card-highlight">
+                    <div className="edition-header-row">
+                      <span className="edition-badge edition-badge-active">TECHX'26</span>
+                      <span className="edition-date-tag">14 — 15 OCTOBER 2026</span>
+                    </div>
+                    <h4 className="edition-title">THE NEXT CHAPTER</h4>
+                    <p className="edition-desc">
+                      The 2026 edition expands the technical frontier with the 24-hour VerdictX software engineering championship, Sherlock & Syntax cybersecurity CTF, on-device Edge AI & TinyML masterclass, and IEEE Computer Society networking.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="editorial-link-action">
                 <Link to="/about" className="editorial-text-link">
-                  <span>DISCOVER OUR CHARTER & IEEE CS SBC HERITAGE</span>
+                  <span>DISCOVER FULL CHAPTER CHARTER & LEADERSHIP</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>
@@ -143,183 +171,176 @@ export default function Home() {
       <GlanceSection />
 
       {/* ============================================================
-          4. THE TECHX EXPERIENCE (7 OFFICIAL EXPERIENCES)
+          4. THE TECHX EXPERIENCE (EXPERIENCE PILLARS + FEATURED EVENTS)
       ============================================================ */}
       <section className="section experience-pillars-section">
         <div className="container">
+          {/* Main Section Heading */}
           <Reveal variant="header" className="pillars-section-head">
-            <span className="section-eyebrow">CONFERENCE PROGRAM</span>
+            <span className="section-eyebrow">THE EXPERIENCE ARCHITECTURE</span>
             <h2 className="section-title">THE TECHX EXPERIENCE</h2>
             <p className="pillars-section-sub">
-              Seven technical and professional experiences organized across Day 1 and Day 2.
+              What does a participant actually experience at TechX'26? A multi-dimensional journey grounded in genuine technical rigor.
             </p>
           </Reveal>
 
-          <Reveal variant="stagger" className="pillars-editorial-grid">
-            {/* Experience 01 */}
-            <Link to="/events/nano-mentoring" className="pillar-column reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">01</span>
-                <span className="p-tag">MENTORING</span>
+          {/* Experiential Pillars (Answering what participants experience) */}
+          <Reveal variant="stagger" className="experience-dimensions-grid">
+            <div className="experience-dimension-card reveal-card">
+              <div className="dim-icon-wrap">
+                <Terminal size={22} color="var(--purple-light)" />
               </div>
-              <h3 className="pillar-title">NANO MENTORING</h3>
-              <p className="pillar-text">
-                An interaction session with experienced professionals providing practical insights, guidance, and industry perspectives.
+              <span className="dim-tag">DIMENSION 01</span>
+              <h3 className="dim-title">COMPETE & BUILD</h3>
+              <p className="dim-text">
+                Push endurance and engineering capabilities in the 24-hour VerdictX open-domain hackathon and real-time algorithmic showdowns under dynamic judge constraints.
               </p>
-              <div className="pillar-footer-meta">
-                <span>Campus Auditorium</span>
-                <span>Day 1 // 10:00 AM</span>
-              </div>
-            </Link>
-
-            {/* Experience 02 */}
-            <Link to="/events/ieee-cs-benefits" className="pillar-column reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">02</span>
-                <span className="p-tag">IEEE CS</span>
-              </div>
-              <h3 className="pillar-title">BENEFITS OF IEEE CS</h3>
-              <p className="pillar-text">
-                Explore IEEE Computer Society student and professional memberships, technical activities, leadership opportunities, and global resources.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Campus Auditorium</span>
-                <span>Day 1 // 10:00 AM</span>
-              </div>
-            </Link>
-
-            {/* Experience 03 */}
-            <Link to="/events/verdictx" className="pillar-column pillar-column-highlight reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">03</span>
-                <span className="p-tag p-tag-highlight">24H HACKATHON</span>
-              </div>
-              <h3 className="pillar-title">VERDICTX</h3>
-              <p className="pillar-text">
-                The flagship 24-hour open-domain hackathon where teams develop and evaluate real-world solutions under real-time challenges and peer reviews.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Main Computing Center</span>
-                <span>Day 1 // 1:30 PM (Overnight)</span>
-              </div>
-            </Link>
-
-            {/* Experience 04 */}
-            <Link to="/events/sherlock-syntax" className="pillar-column reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">04</span>
-                <span className="p-tag">CYBERSECURITY</span>
-              </div>
-              <h3 className="pillar-title">SHERLOCK & SYNTAX</h3>
-              <p className="pillar-text">
-                A multi-round cybersecurity challenge and CTF competition testing technical investigation, vulnerability analysis, and defensive problem-solving.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Cybersecurity Lab</span>
-                <span>Day 2 // 9:00 AM</span>
-              </div>
-            </Link>
-
-            {/* Experience 05 */}
-            <Link to="/events/edge-ai-tinyml" className="pillar-column reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">05</span>
-                <span className="p-tag">WORKSHOP</span>
-              </div>
-              <h3 className="pillar-title">EDGE AI & TINYML</h3>
-              <p className="pillar-text">
-                Hands-on workshop exploring artificial intelligence on edge hardware and resource-constrained microcontrollers with real-time deployment.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>AI / IoT Laboratory</span>
-                <span>Day 2 // 10:45 AM</span>
-              </div>
-            </Link>
-
-            {/* Experience 06 */}
-            <Link to="/events/idea-alchemy" className="pillar-column reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">06</span>
-                <span className="p-tag">INNOVATION PITCH</span>
-              </div>
-              <h3 className="pillar-title">IDEA ALCHEMY</h3>
-              <p className="pillar-text">
-                Startup and innovation pitch presentation where student entrepreneurs present viable technical projects and business frameworks to an expert jury.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Seminar Hall</span>
-                <span>Day 2 // 1:15 PM (Parallel Track)</span>
-              </div>
-            </Link>
-
-            {/* Experience 07 */}
-            <Link to="/events/codenomics" className="pillar-column reveal-card">
-              <div className="pillar-index-tag">
-                <span className="p-num">07</span>
-                <span className="p-tag">PROGRAMMING</span>
-              </div>
-              <h3 className="pillar-title">CODENOMICS</h3>
-              <p className="pillar-text">
-                Dynamic competitive programming arena combining algorithmic problem solving with virtual coin bids and market strategy.
-              </p>
-              <div className="pillar-footer-meta">
-                <span>Computing Laboratory 02</span>
-                <span>Day 2 // 1:15 PM (Parallel Track)</span>
-              </div>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ============================================================
-          5. FEATURED EVENTS (EDITORIAL EVENT ROSTER)
-      ============================================================ */}
-      <section className="section events-roster-section">
-        <div className="container">
-          <Reveal variant="header" className="roster-header-row">
-            <div>
-              <span className="section-eyebrow">OFFICIAL PROGRAM</span>
-              <h2 className="section-title">FEATURED EVENTS</h2>
             </div>
-            <Link to="/events" className="btn btn-secondary">
-              <span>VIEW ALL 07 EVENTS</span>
-              <ArrowRight size={15} />
-            </Link>
+
+            <div className="experience-dimension-card reveal-card">
+              <div className="dim-icon-wrap">
+                <Shield size={22} color="var(--purple-light)" />
+              </div>
+              <span className="dim-tag">DIMENSION 02</span>
+              <h3 className="dim-title">INVESTIGATE & SOLVE</h3>
+              <p className="dim-text">
+                Deconstruct vulnerability vectors, decipher cryptographic clues, and execute tactical forensics during the multi-round Sherlock & Syntax cybersecurity CTF.
+              </p>
+            </div>
+
+            <div className="experience-dimension-card reveal-card">
+              <div className="dim-icon-wrap">
+                <Cpu size={22} color="var(--purple-light)" />
+              </div>
+              <span className="dim-tag">DIMENSION 03</span>
+              <h3 className="dim-title">LEARN & DEPLOY</h3>
+              <p className="dim-text">
+                Step into on-device intelligence during the Edge AI & TinyML masterclass, flashing neural network models onto silicon hardware with zero cloud latency.
+              </p>
+            </div>
+
+            <div className="experience-dimension-card reveal-card">
+              <div className="dim-icon-wrap">
+                <Lightbulb size={22} color="var(--purple-light)" />
+              </div>
+              <span className="dim-tag">DIMENSION 04</span>
+              <h3 className="dim-title">PITCH & VALIDATE</h3>
+              <p className="dim-text">
+                Pitch commercially viable software architectures, venture ideas, and technical roadmaps to venture analysts and academic leaders in Idea Alchemy.
+              </p>
+            </div>
+
+            <div className="experience-dimension-card reveal-card">
+              <div className="dim-icon-wrap">
+                <Users size={22} color="var(--purple-light)" />
+              </div>
+              <span className="dim-tag">DIMENSION 05</span>
+              <h3 className="dim-title">MENTOR & CONNECT</h3>
+              <p className="dim-text">
+                Engage in direct dialogue with senior engineers in Nano Mentoring and connect with the global IEEE Computer Society professional network.
+              </p>
+            </div>
           </Reveal>
 
-          <Reveal variant="stagger" className="events-editorial-list">
-            {officialEvents.map((evt, idx) => (
-              <Link 
-                key={evt.id} 
-                to={`/events/${evt.id}`} 
-                className="event-editorial-row reveal-card"
-              >
-                <div className="evt-row-index">
-                  <span>0{idx + 1}</span>
-                </div>
-
-                <div className="evt-row-main">
-                  <span className="evt-row-cat">{evt.badge || evt.subtitle}</span>
-                  <h3 className="evt-row-title">{evt.title}</h3>
-                  <p className="evt-row-desc">{evt.shortDescription}</p>
-                </div>
-
-                <div className="evt-row-meta">
-                  <span className="evt-row-team">{evt.teamSize}</span>
-                  <span className="evt-row-day">{evt.duration}</span>
-                </div>
-
-                <div className="evt-row-arrow">
-                  <ArrowRight size={20} />
-                </div>
+          {/* FEATURED EVENTS SUB-SECTION (INSIDE TECHX EXPERIENCE) */}
+          <div className="featured-events-block">
+            <Reveal variant="header" className="featured-events-header-row">
+              <div>
+                <span className="section-eyebrow">CONFERENCE TRACKS</span>
+                <h3 className="featured-events-heading">FEATURED EVENTS</h3>
+                <p className="featured-events-sub">
+                  Seven carefully orchestrated events designed to challenge every facet of modern engineering.
+                </p>
+              </div>
+              <Link to="/events" className="btn btn-secondary">
+                <span>VIEW ALL 07 EVENTS</span>
+                <ArrowRight size={15} />
               </Link>
-            ))}
-          </Reveal>
+            </Reveal>
+
+            {/* Grouped Featured Events */}
+            <div className="featured-groups-container">
+              {/* Group 1: Hackathon & Innovation */}
+              <div className="featured-group">
+                <div className="featured-group-tag">
+                  <span>TRACK 01 // HACKATHON & INNOVATION</span>
+                </div>
+                <div className="featured-group-grid">
+                  {hackathonEvents.map((evt) => (
+                    <Link key={evt.id} to={`/events/${evt.id}`} className="featured-event-card">
+                      <div className="f-card-top">
+                        <span className="f-num">{evt.number}</span>
+                        <span className="f-badge">{evt.badge}</span>
+                        <span className="f-day">{evt.dateShort}</span>
+                      </div>
+                      <h4 className="f-title">{evt.title}</h4>
+                      <p className="f-sub">{evt.subtitle}</p>
+                      <p className="f-desc">{evt.shortDescription}</p>
+                      <div className="f-footer">
+                        <span>{evt.venueRoom}</span>
+                        <span className="f-arrow">EXPLORE →</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Group 2: Cybersecurity & Applied Labs */}
+              <div className="featured-group">
+                <div className="featured-group-tag">
+                  <span>TRACK 02 // CYBERSECURITY & APPLIED LABS</span>
+                </div>
+                <div className="featured-group-grid">
+                  {technicalLabEvents.map((evt) => (
+                    <Link key={evt.id} to={`/events/${evt.id}`} className="featured-event-card">
+                      <div className="f-card-top">
+                        <span className="f-num">{evt.number}</span>
+                        <span className="f-badge">{evt.badge}</span>
+                        <span className="f-day">{evt.dateShort}</span>
+                      </div>
+                      <h4 className="f-title">{evt.title}</h4>
+                      <p className="f-sub">{evt.subtitle}</p>
+                      <p className="f-desc">{evt.shortDescription}</p>
+                      <div className="f-footer">
+                        <span>{evt.venueRoom}</span>
+                        <span className="f-arrow">EXPLORE →</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Group 3: Competitive Programming & Mentorship */}
+              <div className="featured-group">
+                <div className="featured-group-tag">
+                  <span>TRACK 03 // ALGORITHMS, MENTORING & COMMUNITY</span>
+                </div>
+                <div className="featured-group-grid">
+                  {competitiveDevEvents.map((evt) => (
+                    <Link key={evt.id} to={`/events/${evt.id}`} className="featured-event-card">
+                      <div className="f-card-top">
+                        <span className="f-num">{evt.number}</span>
+                        <span className="f-badge">{evt.badge}</span>
+                        <span className="f-day">{evt.dateShort}</span>
+                      </div>
+                      <h4 className="f-title">{evt.title}</h4>
+                      <p className="f-sub">{evt.subtitle}</p>
+                      <p className="f-desc">{evt.shortDescription}</p>
+                      <div className="f-footer">
+                        <span>{evt.venueRoom}</span>
+                        <span className="f-arrow">EXPLORE →</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ============================================================
-          6. WHY ATTEND (DARK EDITORIAL SECTION)
+          5. WHY ATTEND TECHX'26? (THE VALUE PROPOSITION)
       ============================================================ */}
       <section className="section why-attend-editorial-section">
         <div className="container">
@@ -335,32 +356,32 @@ export default function Home() {
             <div className="why-statement-item reveal-card">
               <span className="why-num">01</span>
               <h4>REAL-WORLD PROBLEM SOLVING</h4>
-              <p>Build, adapt, evaluate, and defend solutions through the multi-round VerdictX: Code & Conquer hackathon.</p>
+              <p>Build, adapt, evaluate, and defend solutions through the multi-round VerdictX: Code & Conquer hackathon under dynamic constraints.</p>
             </div>
 
             <div className="why-statement-item reveal-card">
               <span className="why-num">02</span>
               <h4>IEEE COMPUTER SOCIETY COMMUNITY</h4>
-              <p>Connect with the IEEE Computer Society community and explore the value of professional membership, networking, and career development.</p>
+              <p>Connect with the IEEE Computer Society community and explore the value of professional membership, networking, and career opportunities.</p>
             </div>
 
             <div className="why-statement-item reveal-card">
               <span className="why-num">03</span>
               <h4>HANDS-ON EDGE AI</h4>
-              <p>Explore Edge AI & TinyML through a hands-on workshop focused on AI processing on edge devices and real-time applications.</p>
+              <p>Explore Edge AI & TinyML through a laboratory masterclass focused on model deployment to microcontrollers and sensor hardware.</p>
             </div>
 
             <div className="why-statement-item reveal-card">
               <span className="why-num">04</span>
               <h4>MENTORSHIP & INDUSTRY INSIGHTS</h4>
-              <p>Gain practical insights, guidance, and industry perspectives through Nano Mentoring sessions.</p>
+              <p>Gain practical insights, guidance, and industry perspectives through Nano Mentoring sessions with practicing engineers.</p>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* ============================================================
-          7. PARTNERS (INTENTIONAL ASYMMETRIC 2-COLUMN LAYOUT)
+          6. PARTNERS (CLEAN STATUS CARD, NO FAKE PARTNERS)
       ============================================================ */}
       <section className="section partners-preview-section">
         <div className="container">
@@ -369,11 +390,11 @@ export default function Home() {
               <span className="section-eyebrow">POWERING TECHX'26</span>
               <h2 className="section-title">PARTNERS</h2>
               <p className="partners-preview-sub">
-                Technology grows stronger when great organizations build together. Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be revealed soon.
+                Technology grows stronger when great organizations build together. Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be announced soon.
               </p>
               <div className="partners-head-link">
                 <Link to="/partners" className="editorial-text-link">
-                  <span>EXPLORE ECOSYSTEM DIRECTORY</span>
+                  <span>EXPLORE PARTNERSHIP DIRECTORY</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>
@@ -399,7 +420,7 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          8. FINAL MONUMENTAL CTA
+          7. FINAL MONUMENTAL CTA
       ============================================================ */}
       <Reveal as="section" variant="pop" className="section final-cta-section">
         <div className="container">
@@ -428,9 +449,7 @@ export default function Home() {
           position: relative;
         }
 
-        /* ============================================================
-           1. FULL-SCREEN HERO COVER VIEWPORT
-        ============================================================ */
+        /* 1. Hero Cover Viewport */
         .hero-cover-viewport {
           position: relative;
           width: 100%;
@@ -451,33 +470,33 @@ export default function Home() {
           }
         }
 
-        /* Full-Screen Architectural Facade Canvas */
         .hero-arch-canvas {
           position: absolute;
           inset: 0;
-          width: 100%;
-          height: 100%;
+          z-index: 1;
           overflow: hidden;
-          z-index: 0;
+          pointer-events: none;
         }
 
         .hero-arch-bg-img {
-          position: absolute;
-          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center 55%;
-          filter: grayscale(100%) contrast(115%) brightness(0.62);
-          opacity: 0.85;
-          transform: scale(1.01);
+          object-position: center 35%;
+          filter: grayscale(100%) contrast(120%) brightness(55%);
+          transform: scale(1.02);
+          will-change: transform;
         }
 
-        /* Layered lighting & fades */
         .hero-layer-center-darkening {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse at 50% 46%, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.82) 75%, #000000 100%);
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 0, 0, 0.45) 0%,
+            rgba(0, 0, 0, 0.75) 60%,
+            rgba(0, 0, 0, 0.95) 100%
+          );
         }
 
         .hero-layer-bottom-fade {
@@ -485,8 +504,8 @@ export default function Home() {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 250px;
-          background: linear-gradient(to bottom, transparent 0%, #000000 100%);
+          height: 45%;
+          background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 60%, #000000 100%);
         }
 
         .hero-layer-top-fade {
@@ -494,73 +513,80 @@ export default function Home() {
           top: 0;
           left: 0;
           right: 0;
-          height: 180px;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+          height: 25%;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
         }
 
         .hero-layer-purple-atmosphere {
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 50% 38%, rgba(138, 43, 226, 0.16) 0%, transparent 62%);
-          pointer-events: none;
+          background: radial-gradient(
+            ellipse 80% 50% at 50% 45%,
+            rgba(138, 43, 226, 0.18) 0%,
+            rgba(78, 20, 140, 0.08) 50%,
+            transparent 80%
+          );
+          mix-blend-mode: screen;
         }
 
-        /* Hero Content */
+        .subtle-blueprint-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+          background-size: 50px 50px;
+          opacity: 0.85;
+        }
+
         .hero-content-container {
           position: relative;
           z-index: 2;
+          flex: 1;
           display: flex;
-          flex-direction: column;
           align-items: center;
           justify-content: center;
-          flex: 1;
-          text-align: center;
-          padding-top: 1rem;
-          padding-bottom: 2rem;
+          padding: 2rem 1.5rem 1rem;
         }
 
         .hero-campaign-block {
-          max-width: 1100px;
           display: flex;
           flex-direction: column;
           align-items: center;
+          text-align: center;
+          max-width: 1000px;
+          margin: 0 auto;
         }
 
         .hero-brand-kicker {
           display: inline-flex;
           align-items: center;
-          gap: 0.55rem;
+          gap: 0.65rem;
+          background: rgba(138, 43, 226, 0.15);
+          border: 1px solid rgba(184, 108, 255, 0.35);
+          border-radius: 9999px;
+          padding: 0.35rem 1rem;
           margin-bottom: 1.25rem;
+          backdrop-filter: blur(10px);
         }
 
         .kicker-pulse-dot {
-          width: 6px;
-          height: 6px;
+          width: 7px;
+          height: 7px;
           border-radius: 50%;
           background: var(--purple-light);
           box-shadow: 0 0 10px var(--purple-light);
+          animation: pulseGlow 1.8s infinite;
         }
 
         .kicker-text {
           font-family: var(--font-mono);
-          font-size: clamp(0.68rem, 1.2vw, 0.8rem);
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: #D9D2E0;
+          font-size: clamp(0.65rem, 1.2vw, 0.76rem);
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          color: var(--off-white);
         }
 
-        /* Official TechX Emblem */
-        .hero-emblem-wrap {
-          margin-bottom: 0.5rem;
-        }
-
-        .hero-emblem-img {
-          height: clamp(40px, 5.5vw, 62px);
-          width: auto;
-          filter: drop-shadow(0 0 20px rgba(184, 108, 255, 0.45));
-        }
-
-        /* Monumental TECHX'26 Title */
         .hero-monument-title {
           font-family: var(--font-display);
           font-size: clamp(5.5rem, 15vw, 13rem);
@@ -572,52 +598,47 @@ export default function Home() {
           text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tagline */
         .hero-tagline-statement {
-          font-family: var(--font-heading);
-          font-size: clamp(1rem, 2.3vw, 1.75rem);
+          font-family: var(--font-mono);
+          font-size: clamp(0.9rem, 1.8vw, 1.35rem);
           font-weight: 700;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
+          letter-spacing: 0.2em;
           color: var(--purple-light);
-          margin-bottom: 1.5rem;
-          text-shadow: 0 0 20px rgba(184, 108, 255, 0.3);
+          text-transform: uppercase;
+          margin-bottom: 1.75rem;
+          text-shadow: 0 2px 15px rgba(184, 108, 255, 0.3);
         }
 
-        /* Editorial Info Strip */
         .hero-editorial-strip {
           display: flex;
           align-items: center;
           justify-content: center;
+          gap: 1.25rem;
           flex-wrap: wrap;
-          gap: 0.85rem;
           font-family: var(--font-mono);
-          font-size: clamp(0.72rem, 1.2vw, 0.85rem);
-          letter-spacing: 0.12em;
-          color: #DDD6E5;
-          margin-bottom: 2rem;
-          padding: 0.5rem 1rem;
+          font-size: clamp(0.72rem, 1.2vw, 0.84rem);
+          letter-spacing: 0.08em;
+          color: var(--off-white);
+          margin-bottom: 2.25rem;
+          opacity: 0.9;
         }
 
         .strip-sep {
           color: var(--purple-light);
         }
 
-        /* CTAs */
         .hero-actions-group {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          flex-wrap: wrap;
+          gap: 1.25rem;
           justify-content: center;
+          flex-wrap: wrap;
         }
 
         .hero-cta-btn {
-          min-width: 180px;
-          padding: 0.95rem 1.85rem;
+          min-width: 190px;
         }
 
-        /* Countdown Dock at bottom of hero */
         .hero-countdown-dock {
           position: relative;
           z-index: 2;
@@ -635,9 +656,7 @@ export default function Home() {
           margin: 0 auto;
         }
 
-        /* ============================================================
-           2. WHAT IS TECHX? (EDITORIAL SECTION)
-        ============================================================ */
+        /* 2. What is TechX & The Journey */
         .what-is-techx-section {
           padding: 7.5rem 0;
         }
@@ -679,7 +698,108 @@ export default function Home() {
           font-size: 1.05rem;
           color: var(--muted);
           line-height: 1.75;
-          margin-bottom: 2.25rem;
+          margin-bottom: 2.5rem;
+        }
+
+        /* The Journey Box */
+        .journey-summary-block {
+          background: #0A0612;
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          border-radius: var(--radius-md);
+          padding: 2.25rem 2rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .journey-block-header {
+          margin-bottom: 1.5rem;
+        }
+
+        .journey-block-title {
+          font-size: 1.3rem;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          color: var(--white);
+          margin-top: 0.25rem;
+        }
+
+        .journey-progression-cards {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+        }
+
+        @media (max-width: 700px) {
+          .journey-progression-cards {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .journey-edition-card {
+          background: rgba(14, 9, 24, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .edition-card-highlight {
+          border-color: rgba(184, 108, 255, 0.5);
+          background: rgba(138, 43, 226, 0.1);
+          box-shadow: 0 4px 20px rgba(138, 43, 226, 0.15);
+        }
+
+        .edition-header-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .edition-badge {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: var(--white);
+          background: #190E2C;
+          border: 1px solid var(--border-purple);
+          padding: 0.2rem 0.65rem;
+          border-radius: var(--radius-sm);
+        }
+
+        .edition-badge-active {
+          background: var(--purple);
+          border-color: var(--purple-light);
+        }
+
+        .edition-award-tag {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          color: var(--purple-light);
+          letter-spacing: 0.06em;
+          font-weight: 600;
+        }
+
+        .edition-date-tag {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          color: var(--off-white);
+          letter-spacing: 0.06em;
+        }
+
+        .edition-title {
+          font-size: 1.05rem;
+          text-transform: uppercase;
+          color: var(--white);
+          margin-bottom: 0.6rem;
+        }
+
+        .edition-desc {
+          font-size: 0.88rem;
+          color: var(--muted);
+          line-height: 1.55;
         }
 
         .editorial-text-link {
@@ -700,307 +820,245 @@ export default function Home() {
           border-color: #FFFFFF;
         }
 
-        /* ============================================================
-           3. TECHX'26 AT A GLANCE
-        ============================================================ */
-        .glance-metrics-section {
-          padding: 6.5rem 0;
-          background: #050308;
-        }
-
-        .glance-head {
-          max-width: 650px;
-          margin-bottom: 4rem;
-        }
-
-        .glance-title {
-          font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-          text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-
-        .glance-subtitle {
-          font-size: 1rem;
-          color: var(--muted);
-        }
-
-        .glance-metrics-row {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 2rem;
-          flex-wrap: wrap;
-        }
-
-        .glance-metric-item {
-          flex: 1;
-          min-width: 200px;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .metric-large-number {
-          font-family: var(--font-display);
-          font-size: clamp(3.8rem, 7vw, 6.5rem);
-          line-height: 0.9;
-          letter-spacing: 0.02em;
-          color: #FFFFFF;
-          margin-bottom: 0.5rem;
-        }
-
-        .metric-label-tag {
-          font-family: var(--font-mono);
-          font-size: 0.78rem;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--purple-light);
-          margin-bottom: 0.5rem;
-        }
-
-        .metric-desc {
-          font-size: 0.88rem;
-          color: var(--muted);
-          line-height: 1.5;
-        }
-
-        .glance-metric-divider {
-          width: 1px;
-          height: 100px;
-          background: var(--border-subtle);
-          align-self: center;
-        }
-
-        @media (max-width: 900px) {
-          .glance-metric-divider {
-            display: none;
-          }
-        }
-
-        /* ============================================================
-           4. THE EXPERIENCE (PILLARS)
-        ============================================================ */
+        /* 4. The TechX Experience Section */
         .experience-pillars-section {
           padding: 7rem 0;
+          border-top: 1px solid var(--border-subtle);
         }
 
         .pillars-section-head {
-          max-width: 680px;
-          margin-bottom: 4rem;
+          max-width: 740px;
+          margin-bottom: 3.5rem;
         }
 
         .pillars-section-sub {
-          font-size: 1.1rem;
+          font-size: 1.15rem;
           color: var(--muted);
         }
 
-        .pillars-editorial-grid {
+        /* Experiential Dimensions Grid */
+        .experience-dimensions-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 2rem;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 1.5rem;
+          margin-bottom: 5.5rem;
         }
 
-        @media (max-width: 1200px) {
-          .pillars-editorial-grid {
-            grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 1100px) {
+          .experience-dimensions-grid {
+            grid-template-columns: repeat(3, 1fr);
           }
         }
 
-        @media (max-width: 640px) {
-          .pillars-editorial-grid {
+        @media (max-width: 768px) {
+          .experience-dimensions-grid {
             grid-template-columns: 1fr;
           }
         }
 
-        .pillar-column {
-          border-top: 1px solid var(--border);
-          padding-top: 1.75rem;
+        .experience-dimension-card {
+          background: #0B0714;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem 1.65rem;
           display: flex;
           flex-direction: column;
-          text-decoration: none;
-          transition: border-color 0.25s ease, transform 0.25s ease;
+          transition: var(--transition-normal);
         }
 
-        .pillar-column:hover {
+        .experience-dimension-card:hover {
           border-color: var(--purple-light);
-          transform: translateY(-3px);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 30px rgba(138, 43, 226, 0.2);
         }
 
-        .pillar-column:hover .pillar-title {
-          color: var(--purple-light);
-        }
-
-        .pillar-footer-meta {
-          margin-top: auto;
-          padding-top: 1.25rem;
+        .dim-icon-wrap {
+          width: 44px;
+          height: 44px;
+          border-radius: var(--radius-sm);
+          background: rgba(138, 43, 226, 0.12);
+          border: 1px solid rgba(138, 43, 226, 0.35);
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: var(--purple-light);
-          letter-spacing: 0.08em;
-          border-top: 1px dashed rgba(255, 255, 255, 0.1);
-        }
-
-        .pillar-top-meta {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           margin-bottom: 1.25rem;
         }
 
-        .pillar-index {
+        .dim-tag {
           font-family: var(--font-mono);
-          font-size: 0.85rem;
+          font-size: 0.68rem;
           color: var(--purple-light);
-          letter-spacing: 0.1em;
+          letter-spacing: 0.14em;
+          margin-bottom: 0.5rem;
         }
 
-        .pillar-title {
+        .dim-title {
           font-size: 1.2rem;
+          color: var(--white);
           text-transform: uppercase;
-          letter-spacing: 0.02em;
           margin-bottom: 0.75rem;
-          color: #FFFFFF;
-          line-height: 1.3;
+          line-height: 1.25;
         }
 
-        .pillar-text {
-          font-size: 0.92rem;
+        .dim-text {
+          font-size: 0.88rem;
           color: var(--muted);
-          line-height: 1.6;
+          line-height: 1.55;
         }
 
-        /* ============================================================
-           5. FEATURED EVENTS ROSTER
-        ============================================================ */
-        .events-roster-section {
-          padding: 7rem 0;
-          background: #060408;
+        /* FEATURED EVENTS BLOCK INSIDE TECHX EXPERIENCE */
+        .featured-events-block {
+          padding-top: 3rem;
+          border-top: 1px solid var(--border-subtle);
         }
 
-        .roster-header-row {
+        .featured-events-header-row {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
-          margin-bottom: 3.5rem;
+          margin-bottom: 3rem;
           flex-wrap: wrap;
           gap: 1.5rem;
         }
 
-        .events-editorial-list {
-          display: flex;
-          flex-direction: column;
-          border-top: 1px solid var(--border);
-        }
-
-        .event-editorial-row {
-          display: grid;
-          grid-template-columns: 50px 1fr auto 40px;
-          gap: 2rem;
-          align-items: center;
-          padding: 2rem 0;
-          border-bottom: 1px solid var(--border-subtle);
-          transition: all 0.2s ease;
-        }
-
-        .event-editorial-row:hover {
-          padding-left: 0.75rem;
-          border-bottom-color: var(--border-purple);
-        }
-
-        .evt-row-index {
-          font-family: var(--font-mono);
-          font-size: 0.9rem;
-          color: var(--purple-light);
-        }
-
-        .evt-row-cat {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          letter-spacing: 0.15em;
-          color: var(--purple-light);
-          margin-bottom: 0.25rem;
+        .featured-events-heading {
+          font-size: clamp(2rem, 4vw, 3rem);
           text-transform: uppercase;
+          color: var(--white);
+          margin-top: 0.25rem;
         }
 
-        .evt-row-title {
-          font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          color: #FFFFFF;
-          transition: color 0.2s ease;
-          word-break: break-word;
-        }
-
-        .event-editorial-row:hover .evt-row-title {
-          color: var(--purple-light);
-        }
-
-        .evt-row-desc {
-          font-size: 0.9rem;
+        .featured-events-sub {
+          font-size: 1.05rem;
           color: var(--muted);
-          margin-top: 0.2rem;
+          margin-top: 0.5rem;
         }
 
-        .evt-row-meta {
+        .featured-groups-container {
           display: flex;
           flex-direction: column;
-          align-items: flex-end;
-          gap: 0.2rem;
+          gap: 2.5rem;
+        }
+
+        .featured-group {
+          background: rgba(8, 4, 15, 0.6);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 2rem 2.25rem;
+        }
+
+        .featured-group-tag {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          font-weight: 700;
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .featured-group-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.75rem;
+        }
+
+        .featured-event-card {
+          background: #0D0818;
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          border-radius: var(--radius-sm);
+          padding: 1.75rem;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        }
+
+        .featured-event-card:hover {
+          border-color: var(--purple-light);
+          transform: translateY(-3px);
+          background: #120B22;
+          box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .f-card-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+        }
+
+        .f-num {
+          font-family: var(--font-display);
+          font-size: 1.3rem;
+          color: var(--purple-light);
+        }
+
+        .f-badge {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.1em;
+          color: var(--white);
+          background: var(--purple);
+          padding: 0.2rem 0.6rem;
+          border-radius: var(--radius-sm);
+          font-weight: 700;
+        }
+
+        .f-day {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--muted);
+        }
+
+        .f-title {
+          font-size: 1.35rem;
+          text-transform: uppercase;
+          color: var(--white);
+          margin-bottom: 0.35rem;
+          line-height: 1.2;
+        }
+
+        .f-sub {
           font-family: var(--font-mono);
           font-size: 0.78rem;
+          color: var(--purple-light);
+          margin-bottom: 0.75rem;
+        }
+
+        .f-desc {
+          font-size: 0.9rem;
           color: var(--muted);
+          line-height: 1.5;
+          margin-bottom: 1.5rem;
+          flex: 1;
         }
 
-        .evt-row-team {
-          color: #FFFFFF;
-        }
-
-        .evt-row-arrow {
+        .f-footer {
+          margin-top: auto;
           display: flex;
-          justify-content: flex-end;
-          color: var(--muted-dark);
-          transition: transform 0.2s ease, color 0.2s ease;
+          align-items: center;
+          justify-content: space-between;
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--muted);
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .event-editorial-row:hover .evt-row-arrow {
+        .f-arrow {
+          color: var(--purple-light);
+          font-weight: 700;
+          transition: transform 0.2s;
+        }
+
+        .featured-event-card:hover .f-arrow {
           transform: translateX(4px);
           color: #FFFFFF;
         }
 
-        @media (max-width: 900px) {
-          .event-editorial-row {
-            grid-template-columns: 40px 1fr 30px;
-            gap: 1rem;
-          }
-          .evt-row-meta {
-            display: none !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .event-editorial-row {
-            grid-template-columns: 28px 1fr 24px;
-            gap: 0.75rem;
-            padding: 1.25rem 0;
-          }
-          .hero-actions-group {
-            flex-direction: column;
-            width: 100%;
-          }
-          .hero-cta-btn {
-            width: 100%;
-            min-width: 0;
-            max-width: 320px;
-            text-align: center;
-          }
-        }
-
-        /* ============================================================
-           6. WHY ATTEND (DARK THEME)
-        ============================================================ */
+        /* 5. Why Attend */
         .why-attend-editorial-section {
           padding: 6.5rem 0;
           background: rgba(9, 5, 16, 0.7);
@@ -1079,9 +1137,7 @@ export default function Home() {
           line-height: 1.6;
         }
 
-        /* ============================================================
-           7. PARTNERS PREVIEW (ASYMMETRIC EDITORIAL 2-COL)
-        ============================================================ */
+        /* 6. Partners Preview */
         .partners-preview-section {
           padding: 7rem 0;
           background: #040206;
@@ -1101,114 +1157,110 @@ export default function Home() {
           }
         }
 
-        .partners-preview-head {
-          max-width: 600px;
-        }
-
         .partners-preview-sub {
           font-size: 1.05rem;
           color: var(--muted);
-          line-height: 1.6;
-          margin-bottom: 2rem;
-        }
-
-        .partners-head-link {
-          margin-top: 1.5rem;
+          line-height: 1.65;
+          margin-bottom: 1.75rem;
         }
 
         .partners-announcement-card {
+          background: #0A0612;
           border: 1px solid rgba(138, 43, 226, 0.35);
           border-radius: var(--radius-md);
-          background: #090510;
           padding: 2.75rem 2.25rem;
-          position: relative;
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(138, 43, 226, 0.12);
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
         }
 
-        @media (max-width: 600px) {
-          .partners-announcement-card {
-            padding: 2rem 1.5rem;
-          }
+        .announcement-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          align-self: flex-start;
         }
 
         .announcement-card-heading {
-          font-family: var(--font-display);
-          font-size: clamp(1.6rem, 3vw, 2.2rem);
+          font-size: 1.5rem;
           text-transform: uppercase;
-          letter-spacing: 0.03em;
-          margin-bottom: 0.5rem;
           color: #FFFFFF;
         }
 
         .announcement-status-tag {
+          display: inline-block;
           font-family: var(--font-mono);
-          font-size: 0.82rem;
+          font-size: 0.8rem;
+          font-weight: 700;
           color: var(--purple-light);
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          margin-bottom: 1.25rem;
+          background: rgba(138, 43, 226, 0.15);
+          border: 1px solid rgba(184, 108, 255, 0.4);
+          padding: 0.35rem 0.85rem;
+          border-radius: var(--radius-sm);
+          align-self: flex-start;
         }
 
         .announcement-card-copy {
           font-size: 0.92rem;
           color: var(--muted);
           line-height: 1.6;
-          margin-bottom: 2rem;
         }
 
         .partners-status-strip {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
-          padding-top: 1.25rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          gap: 0.65rem;
           font-family: var(--font-mono);
           font-size: 0.75rem;
+          margin-top: 0.75rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .status-label {
           color: var(--purple-light);
-          letter-spacing: 0.12em;
         }
 
         .status-text {
-          color: #DDD6E5;
+          color: var(--off-white);
         }
 
-        /* ============================================================
-           8. FINAL CTA
-        ============================================================ */
+        /* 7. Final Monumental CTA */
         .final-cta-section {
-          padding: 8rem 0;
-          background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.12) 0%, transparent 60%), #000000;
-          text-align: center;
+          padding: 9rem 0 10rem;
+          background: radial-gradient(circle at 50% 60%, rgba(138, 43, 226, 0.14) 0%, #000000 70%);
+          border-top: 1px solid var(--border-subtle);
         }
 
         .final-cta-monument {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
           max-width: 900px;
           margin: 0 auto;
         }
 
         .final-cta-title {
           font-family: var(--font-display);
-          font-size: clamp(3.5rem, 9vw, 7.5rem);
-          line-height: 0.92;
+          font-size: clamp(3.5rem, 8.5vw, 7.5rem);
+          line-height: 0.9;
           letter-spacing: 0.03em;
           text-transform: uppercase;
-          margin: 1rem 0 1.25rem;
+          margin: 1.25rem 0 1.5rem;
         }
 
         .final-cta-dates {
           font-family: var(--font-mono);
-          font-size: clamp(0.85rem, 1.6vw, 1.1rem);
-          letter-spacing: 0.16em;
-          color: #DDD6E5;
-          margin-bottom: 2.5rem;
-        }
-
-        .final-cta-actions {
-          display: flex;
-          justify-content: center;
+          font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+          letter-spacing: 0.12em;
+          color: var(--muted);
+          margin-bottom: 2.75rem;
         }
       `}</style>
     </div>

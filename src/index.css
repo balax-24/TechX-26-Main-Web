@@ -25,6 +25,7 @@
   --border-subtle: rgba(255, 255, 255, 0.05);
   --border-purple: rgba(138, 43, 226, 0.45);
   --border-purple-light: rgba(184, 108, 255, 0.6);
+  --border-strong: rgba(138, 43, 226, 0.45);
   
   --purple-glow-subtle: rgba(138, 43, 226, 0.15);
   --purple-glow-accent: rgba(184, 108, 255, 0.35);

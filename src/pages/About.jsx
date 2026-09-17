@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Award } from 'lucide-r
 import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
 import { leadershipData, techxJourney, techxAward } from '../data/leadership';
-import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
+import sairamCampusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 
 export default function About() {
   return (
@@ -33,11 +33,11 @@ export default function About() {
             <Reveal variant="pop" className="editorial-copy">
               <span className="section-eyebrow">THE FOUNDATION</span>
               <h2 className="overview-heading">WHAT IS TECHX?</h2>
-              
+
               <p className="overview-lead">
                 TECHX MADRAS is a technology-focused initiative organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
               </p>
-              
+
               <p className="overview-body">
                 It brings together students, technology enthusiasts, mentors and industry professionals through hands-on technical experiences, competitions, workshops and innovation-driven challenges.
               </p>
@@ -70,9 +70,9 @@ export default function About() {
             <div className="editorial-visual-col">
               <Reveal variant="image" className="arch-blueprint-card">
                 <div className="arch-card-frame">
-                  <img 
-                    src={sairamHeritageBuildingImg} 
-                    alt="Sri Sai Ram Institute of Technology Architectural Heritage" 
+                  <img
+                    src={sairamCampusFacadeImg}
+                    alt="Sri Sai Ram Institute of Technology Campus Architectural Facade"
                     className="heritage-arch-img"
                     loading="lazy"
                   />

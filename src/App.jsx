@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 // Global Components
 import Navbar from './components/Navbar';
@@ -14,7 +14,6 @@ import Schedule from './pages/Schedule';
 import Speakers from './pages/Speakers';
 import Partners from './pages/Partners';
 import About from './pages/About';
-import Venue from './pages/Venue';
 import Contact from './pages/Contact';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
@@ -48,12 +47,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/events/build-break-defend" element={<Navigate to="/events/verdictx" replace />} />
+          <Route path="/events/cipherx" element={<Navigate to="/events/sherlock-syntax" replace />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
-          <Route path="/venue" element={<Venue />} />
+          <Route path="/venue" element={<Navigate to="/contact" replace />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />

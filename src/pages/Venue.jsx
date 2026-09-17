@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Calendar, ArrowRight, Compass } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
-import sairamHeritageBuildingImg from '../assets/architecture/sairam-heritage-building.png';
+import sairamCampusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 import sairamFountainImg from '../assets/architecture/sairam-fountain.png';
 import { eventMeta } from '../data/contacts';
 
@@ -45,9 +45,9 @@ export default function Venue() {
             {/* Main Heritage Building Artwork */}
             <Reveal variant="image" className="monument-main-frame">
               <div className="monument-image-wrapper">
-                <img 
-                  src={sairamHeritageBuildingImg} 
-                  alt="Sri Sai Ram Institute of Technology Heritage Architecture" 
+                <img
+                  src={sairamCampusFacadeImg}
+                  alt="Sri Sai Ram Institute of Technology Campus Architectural Facade"
                   className="monument-image"
                 />
                 <div className="monument-gradient-overlay"></div>
@@ -61,9 +61,9 @@ export default function Venue() {
             {/* Fountain Motif & Campus Identity */}
             <Reveal variant="image" className="monument-motif-frame">
               <div className="fountain-wrapper">
-                <img 
-                  src={sairamFountainImg} 
-                  alt="Sri Sai Ram Institute of Technology Campus Fountain" 
+                <img
+                  src={sairamFountainImg}
+                  alt="Sri Sai Ram Institute of Technology Campus Fountain"
                   className="fountain-image"
                 />
                 <div className="fountain-glow-radial"></div>
@@ -122,7 +122,7 @@ export default function Venue() {
               </div>
 
               <div className="venue-directions-cta">
-                <a 
+                <a
                   href={eventMeta.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -158,10 +158,10 @@ export default function Venue() {
                   <span className="coords-label">COORDINATES</span>
                   <span className="coords-val">{eventMeta.coordinates.lat}° N, {eventMeta.coordinates.lng}° E</span>
                 </div>
-                <a 
+                <a
                   href={eventMeta.mapsUrl}
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-directions-link"
                 >
                   <span>GET DIRECTIONS</span>

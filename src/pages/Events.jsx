@@ -312,6 +312,11 @@ export default function Events() {
                       <div className="card-number-badge">
                         <span className="evt-num">{evt.number}</span>
                         <span className="badge-tech">{evt.badge}</span>
+                        {evt.id === 'idea-alchemy' && (
+                          <span className="badge-tech" style={{ background: 'rgba(138, 43, 226, 0.25)', borderColor: 'var(--purple-light)' }}>
+                            HACKATHON & INNOVATION
+                          </span>
+                        )}
                         <span className="badge-parallel-pill">CONCURRENT TRACK</span>
                       </div>
                       <div className="card-timing-pill">

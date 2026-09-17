@@ -21,6 +21,7 @@ import {
 import { registrationOptions, registrationMeta } from '../data/registration';
 import { eventsData } from '../data/events';
 import Reveal from '../components/Reveal';
+import RegistrationOffer from '../components/RegistrationOffer';
 
 export default function Register() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -149,6 +150,9 @@ export default function Register() {
         ============================================================ */}
         {step === 'list' && (
           <div className="passes-view-wrapper">
+            {/* Registration Offer Section */}
+            <RegistrationOffer />
+
             {/* --------------------------------------------------
                 DAY 1 — 14 OCTOBER 2026
             -------------------------------------------------- */}
@@ -159,7 +163,10 @@ export default function Register() {
               <Reveal variant="header" className="day-section-header">
                 <div className="day-header-left">
                   <span className="day-badge">PHASE 01</span>
-                  <h2 id="day-1-heading" className="day-heading">DAY 1 — 14 OCTOBER 2026</h2>
+                  <h2 id="day-1-heading" className="day-heading">
+                    DAY 1 REGISTRATION<br />
+                    <span className="day-sub-date">14 OCTOBER 2026</span>
+                  </h2>
                 </div>
                 <div className="day-header-right">
                   <span className="day-meta-pill">INAUGURATION • NANO MENTORING • VERDICTX HACKATHON</span>
@@ -230,7 +237,10 @@ export default function Register() {
               <Reveal variant="header" className="day-section-header">
                 <div className="day-header-left">
                   <span className="day-badge day-badge-alt">PHASE 02</span>
-                  <h2 id="day-2-heading" className="day-heading">DAY 2 — 15 OCTOBER 2026</h2>
+                  <h2 id="day-2-heading" className="day-heading">
+                    DAY 2 REGISTRATION<br />
+                    <span className="day-sub-date">15 OCTOBER 2026</span>
+                  </h2>
                 </div>
                 <div className="day-header-right">
                   <span className="day-meta-pill">CYBERSECURITY CTF • TINYML • STARTUP PITCH • VALEDICTORY</span>
@@ -767,9 +777,9 @@ export default function Register() {
         }
 
         .day-badge-alt {
-          color: #38bdf8;
-          background: rgba(56, 189, 248, 0.1);
-          border-color: rgba(56, 189, 248, 0.25);
+          color: var(--purple-light, #c084fc);
+          background: rgba(138, 43, 226, 0.15);
+          border-color: rgba(138, 43, 226, 0.35);
         }
 
         .day-heading {
@@ -777,9 +787,20 @@ export default function Register() {
           font-size: clamp(1.8rem, 3.5vw, 2.5rem);
           font-weight: 700;
           letter-spacing: 0.03em;
+          line-height: 1.1;
           color: #ffffff;
           margin: 0;
           text-transform: uppercase;
+        }
+
+        .day-sub-date {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.95rem;
+          color: var(--purple-light, #c084fc);
+          letter-spacing: 0.1em;
+          font-weight: 600;
+          display: inline-block;
+          margin-top: 0.25rem;
         }
 
         .day-header-right {
@@ -885,9 +906,9 @@ export default function Register() {
         }
 
         .pass-label-alt {
-          color: #38bdf8;
-          background: rgba(56, 189, 248, 0.1);
-          border-color: rgba(56, 189, 248, 0.25);
+          color: var(--purple-light, #c084fc);
+          background: rgba(138, 43, 226, 0.15);
+          border-color: rgba(138, 43, 226, 0.35);
         }
 
         .pass-day-indicator {

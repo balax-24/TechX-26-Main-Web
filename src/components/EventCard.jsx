@@ -28,6 +28,11 @@ export default function EventCard({ event, featured = false }) {
         <div className="event-badge-wrap">
           <span className="event-number">{event.number}</span>
           <span className="badge-tech">{event.badge}</span>
+          {event.id === 'idea-alchemy' && (
+            <span className="badge-tech" style={{ background: 'rgba(138, 43, 226, 0.25)', borderColor: 'var(--purple-light)' }}>
+              HACKATHON & INNOVATION
+            </span>
+          )}
         </div>
         <div className="event-icon-circle">
           {getEventIcon(event.id)}

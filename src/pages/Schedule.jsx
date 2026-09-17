@@ -203,7 +203,7 @@ export default function Schedule() {
         }
         .day-tab-btn {
           background: rgba(14, 9, 24, 0.6);
-          border: 1px solid var(--border);
+          border: 1px solid rgba(138, 43, 226, 0.25);
           border-radius: var(--radius-md);
           padding: 1.5rem 1.75rem;
           text-align: left;
@@ -212,6 +212,7 @@ export default function Schedule() {
           display: flex;
           flex-direction: column;
           gap: 0.35rem;
+          outline: none;
         }
         .day-tab-btn:hover {
           border-color: var(--purple-light);
@@ -451,15 +452,21 @@ export default function Schedule() {
         }
         .content-card-inner {
           background: #0B0713;
-          border: 1px solid var(--border);
+          border: 1px solid rgba(138, 43, 226, 0.25);
           border-radius: var(--radius-md);
           padding: 1.75rem 2rem;
           transition: var(--transition-normal);
+          outline: none;
+        }
+        .content-card-inner:hover {
+          border-color: var(--purple-light);
+          background: #110A1E;
+          box-shadow: 0 8px 30px rgba(138, 43, 226, 0.25);
         }
         .row-highlight .content-card-inner {
-          border-color: var(--border-strong);
+          border-color: var(--purple-light);
           background: #0F091A;
-          box-shadow: 0 8px 30px rgba(138, 43, 226, 0.2);
+          box-shadow: 0 8px 30px rgba(138, 43, 226, 0.25);
         }
         .timeline-badge-row {
           display: flex;
@@ -563,8 +570,8 @@ export default function Schedule() {
 
         /* Schedule Footer */
         .schedule-footer-box {
-          background: rgba(14, 9, 24, 0.7);
-          border: 1px solid var(--border);
+          background: #0B0616;
+          border: 1px solid rgba(138, 43, 226, 0.3);
           border-radius: var(--radius-md);
           padding: 2.5rem 3rem;
           display: flex;
@@ -572,6 +579,7 @@ export default function Schedule() {
           align-items: center;
           gap: 2rem;
           flex-wrap: wrap;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
         }
         .schedule-footer-box h3 {
           font-size: 1.5rem;

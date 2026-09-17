@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
+import EventArtwork from '../components/EventArtwork';
 import { eventsData } from '../data/events';
 
 export default function EventDetails() {
@@ -49,6 +50,11 @@ export default function EventDetails() {
               <div className="detail-eyebrow-row">
                 <span className="event-detail-num">{event.number}</span>
                 <span className="badge-tech">{event.badge}</span>
+                {event.id === 'idea-alchemy' && (
+                  <span className="badge-tech" style={{ background: 'rgba(138, 43, 226, 0.25)', borderColor: 'var(--purple-light)' }}>
+                    HACKATHON & INNOVATION TRACK
+                  </span>
+                )}
                 <span className="detail-date-badge">{event.date}</span>
                 {event.venueRoom && (
                   <span className="detail-room-badge">{event.venueRoom}</span>
@@ -133,6 +139,11 @@ export default function EventDetails() {
       {/* Main Content Sections */}
       <section className="detail-main-section">
         <div className="container">
+          {/* Designed Event Visual Artwork */}
+          <Reveal variant="pop" className="detail-artwork-block" style={{ marginBottom: '2.5rem' }}>
+            <EventArtwork eventId={event.id} eventTitle={event.publicTitle || event.title} />
+          </Reveal>
+
           {/* About The Event */}
           <Reveal variant="pop" className="detail-section-block">
             <span className="section-eyebrow">OVERVIEW & MECHANICS</span>

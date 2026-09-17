@@ -16,10 +16,10 @@ export default function Footer() {
 
       <div className="container footer-editorial-container">
         {/* Top Brand Statement */}
+        {/* Top Brand Statement - Clean Single Brand Mark */}
         <div className="footer-statement-block">
           <div className="footer-brand-header">
             <img src={logoImg} alt="TechX'26 Official Logo" className="footer-logo-emblem" />
-            <h2 className="footer-monument-title">TECHX'26</h2>
           </div>
           <p className="footer-tagline-statement">IGNITE THE CODE. OWN THE FUTURE.</p>
         </div>
@@ -33,6 +33,8 @@ export default function Footer() {
 
         {/* Minimal Navigation Row */}
         <nav className="footer-minimal-nav" aria-label="Footer Navigation">
+          <Link to="/">HOME</Link>
+          <span className="nav-dot">•</span>
           <Link to="/events">EVENTS</Link>
           <span className="nav-dot">•</span>
           <Link to="/schedule">SCHEDULE</Link>
@@ -42,8 +44,6 @@ export default function Footer() {
           <Link to="/partners">PARTNERS</Link>
           <span className="nav-dot">•</span>
           <Link to="/about">ABOUT</Link>
-          <span className="nav-dot">•</span>
-          <Link to="/venue">VENUE</Link>
           <span className="nav-dot">•</span>
           <Link to="/contact">CONTACT</Link>
           <span className="nav-dot">•</span>
