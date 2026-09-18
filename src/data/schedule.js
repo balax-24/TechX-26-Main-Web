@@ -14,7 +14,7 @@ export const scheduleData = {
         venue: "Campus Auditorium",
         category: "General",
         highlight: false,
-        desc: "Official opening ceremonies, ceremonial address by dignitaries, and comprehensive event briefing."
+        desc: "Opening ceremonies, ceremonial address by dignitaries, and event briefing."
       },
       {
         time: "10:00 AM",
@@ -22,7 +22,7 @@ export const scheduleData = {
         venue: "Campus Auditorium",
         category: "Mentorship & Community",
         highlight: true,
-        desc: "Interactive session with experienced professionals offering practical insights and career perspectives, alongside an orientation on global IEEE Computer Society membership advantages."
+        desc: "Industry mentoring interactions and orientation on global IEEE Computer Society membership advantages."
       },
       {
         time: "12:15 PM – 01:15 PM",
@@ -30,7 +30,7 @@ export const scheduleData = {
         venue: "Campus Dining Arena",
         category: "Break",
         highlight: false,
-        desc: "Lunch and informal networking for all participants, faculty, and guests."
+        desc: "Lunch and informal networking for participants and guests."
       },
       {
         time: "01:30 PM",
@@ -39,7 +39,7 @@ export const scheduleData = {
         category: "Hackathon",
         highlight: true,
         badge: "FLAGSHIP KICKOFF",
-        desc: "Official kickoff of the 24-hour open-domain hackathon. Teams receive unique problem statements and begin ideation."
+        desc: "Kickoff of the 24-hour open-domain hackathon; teams receive problem statements and start ideation."
       },
       {
         time: "03:30 PM",
@@ -47,7 +47,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall Foyer",
         category: "Break",
         highlight: false,
-        desc: "Brief afternoon break before Round 1 presentations begin."
+        desc: "Afternoon break before Round 1 presentations begin."
       },
       {
         time: "03:45 PM",
@@ -55,7 +55,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall",
         category: "Evaluation",
         highlight: false,
-        desc: "Teams present their proposed solution, features, architecture, technology stack, and expected impact (3 minutes per team)."
+        desc: "Teams present proposed solution architectures and technology stacks (3 mins per team)."
       },
       {
         time: "04:30 PM",
@@ -63,7 +63,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall",
         category: "Engineering",
         highlight: false,
-        desc: "Teams develop a working prototype. AI tools, open-source libraries, APIs, and development resources are permitted."
+        desc: "Teams build working prototypes with modern tools, APIs, and libraries."
       },
       {
         time: "07:30 PM",
@@ -71,7 +71,7 @@ export const scheduleData = {
         venue: "Campus Dining Arena",
         category: "Break",
         highlight: false,
-        desc: "Dinner fueling teams for the evening prototype evaluation and overnight development sprint."
+        desc: "Dinner break fueling teams for the evening sprint."
       },
       {
         time: "09:00 PM",
@@ -79,7 +79,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall",
         category: "Evaluation",
         highlight: true,
-        desc: "Judges review prototypes and introduce two dynamic constraints (e.g. offline functionality, accessibility, or 1M-user scalability) that teams must address."
+        desc: "Judges evaluate prototypes and inject two dynamic technical constraints."
       },
       {
         time: "11:00 PM – 03:30 AM",
@@ -88,7 +88,7 @@ export const scheduleData = {
         category: "Overnight Sprint",
         highlight: true,
         badge: "OVERNIGHT SPRINT",
-        desc: "Continuous overnight engineering sprint: implementing dynamic constraints, code hardening, testing, and deliverable preparation."
+        desc: "Continuous overnight sprint implementing dynamic constraints, testing, and hardening code."
       },
       {
         time: "12:00 AM",
@@ -96,7 +96,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall",
         category: "Break",
         highlight: false,
-        desc: "Midnight refreshments, coffee, and energy stations across hackathon bays."
+        desc: "Midnight refreshments and coffee across hackathon bays."
       },
       {
         time: "03:30 AM – 04:30 AM",
@@ -104,7 +104,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall",
         category: "Submission",
         highlight: true,
-        desc: "Teams submit deliverables: GitHub Repository, README documentation, Demo Video, and Final PPT."
+        desc: "Teams submit code repository, README, demo video, and slides."
       },
       {
         time: "04:30 AM – 05:30 AM",
@@ -112,7 +112,7 @@ export const scheduleData = {
         venue: "Steve Jobs Hall",
         category: "Review",
         highlight: false,
-        desc: "Teams are randomly assigned another team's repository to evaluate strengths, weaknesses, bugs, security issues, UI/UX, and scalability."
+        desc: "Cross-team peer evaluation and architectural review on assigned repositories."
       },
       {
         time: "08:30 AM – 10:30 AM",
@@ -121,7 +121,7 @@ export const scheduleData = {
         category: "Final Defense",
         highlight: true,
         badge: "FINAL BENCH",
-        desc: "Teams deliver a 5-minute project presentation followed by a 7-minute technical defense and debate responding to peer critiques and judge inquiries."
+        desc: "Five-minute presentation followed by a seven-minute technical defense and debate."
       }
     ]
   },
@@ -136,7 +136,7 @@ export const scheduleData = {
         venue: "Main Concourse",
         category: "General",
         highlight: false,
-        desc: "Badging and participant check-in for Day 2 competitive tracks and workshop attendees."
+        desc: "Check-in and badge collection for Day 2 competitive tracks and workshops."
       },
       {
         time: "09:00 AM – 12:15 PM",
@@ -145,7 +145,7 @@ export const scheduleData = {
         category: "Cybersecurity CTF",
         highlight: true,
         badge: "CYBERSECURITY CTF",
-        desc: "Standard skill-based CTF across Web Exploitation, Cryptography, Forensics, Reverse Engineering, OSINT, and Misc (30 teams of 3; live automated scoring)."
+        desc: "Live 2.5-hour skill-based CTF across web exploitation, cryptography, forensics, and reverse engineering."
       },
       {
         time: "10:30 AM",
@@ -153,7 +153,7 @@ export const scheduleData = {
         venue: "Central Foyer",
         category: "Break",
         highlight: false,
-        desc: "Morning tea and refreshments."
+        desc: "Morning refreshments and tea."
       },
       {
         time: "10:45 AM – 12:15 PM",
@@ -162,7 +162,7 @@ export const scheduleData = {
         category: "Workshop",
         highlight: true,
         badge: "HANDS-ON WORKSHOP",
-        desc: "Hands-on workshop introducing AI processing on edge devices, low-power machine intelligence, and real-time embedded applications (160 participants)."
+        desc: "Hands-on masterclass on low-latency machine learning deployment to edge microcontrollers."
       },
       {
         time: "12:15 PM – 01:15 PM",
@@ -170,7 +170,7 @@ export const scheduleData = {
         venue: "Campus Dining Arena",
         category: "Break",
         highlight: false,
-        desc: "Lunch and networking for delegates, speakers, and mentors."
+        desc: "Lunch and networking for delegates, mentors, and speakers."
       },
       {
         time: "01:15 PM",
@@ -186,17 +186,17 @@ export const scheduleData = {
             time: "01:15 PM – 03:00 PM",
             venue: "Apple Hall",
             badge: "BUSINESS & IDEA PITCH",
-            desc: "Innovation-driven startup competition: Round 1 Innovation Sprint from random matrix card combinations, followed by Round 2 Pivot Challenge for top 5 finalists."
+            desc: "Startup innovation pitches followed by the Round 2 finalist pivot challenge."
           },
           {
             title: "CodeNomics — Gamified Competitive Programming",
             time: "01:15 PM – 03:30 PM",
             venue: "Alpha Hall",
             badge: "COMPETITIVE PROGRAMMING",
-            desc: "Gamified coding arena where teams strategically earn TechCoins via TechX Portal non-programming puzzles and spend them in the TechX Market while solving HackerRank challenges."
+            desc: "Gamified HackerRank problem solving powered by tactical TechCoin portal gameplay."
           }
         ],
-        desc: "Idea Alchemy and CodeNomics run concurrently in separate halls. Delegates participate in their registered event."
+        desc: "Idea Alchemy and CodeNomics run concurrently in separate halls."
       },
       {
         time: "03:30 PM",
@@ -205,7 +205,7 @@ export const scheduleData = {
         category: "Grand Finale",
         highlight: true,
         badge: "VALEDICTORY",
-        desc: "Grand valedictory ceremony, announcement of winners across all tracks, certificate distributions, and official closing address."
+        desc: "Announcement of winners across all tracks, certificate distribution, and closing address."
       }
     ]
   }

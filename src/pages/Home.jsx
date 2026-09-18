@@ -111,14 +111,8 @@ export default function Home() {
 
             <Reveal variant="pop" delay={120} className="editorial-right-col">
               <p className="editorial-lead-statement">
-                TECHX MADRAS is a technology conference and technical symposium organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+                TECHX MADRAS is a premier technical symposium by the IEEE Computer Society SBC at Sri Sai Ram Institute of Technology, uniting competitive engineering, hands-on workshops, and IEEE mentorship across two days in Chennai.
               </p>
-
-              <div className="editorial-body-paragraphs">
-                <p>
-                  Conceived as an arena of genuine engineering capability, TechX brings together technical competition, hands-on learning, innovation, mentoring, and IEEE Computer Society engagement across two high-impact days in Chennai.
-                </p>
-              </div>
 
               {/* The TechX Journey Sub-section */}
               <div className="journey-summary-block">
@@ -136,7 +130,7 @@ export default function Home() {
                     </div>
                     <h4 className="edition-title">THE FOUNDATION & GLOBAL RECOGNITION</h4>
                     <p className="edition-desc">
-                      TechX Madras 2025 united technologists, engineers, and mentors across the region, earning the prestigious <strong>Outstanding Host Award — 1st Place</strong> from the IEEE Computer Society Students & Young Professionals (SYP) Committee under the TechX 2025 global series.
+                      TechX Madras 2025 earned the prestigious global <strong>Outstanding Host Award — 1st Place</strong> from the IEEE Computer Society SYP Committee.
                     </p>
                   </div>
 
@@ -148,7 +142,7 @@ export default function Home() {
                     </div>
                     <h4 className="edition-title">THE NEXT CHAPTER</h4>
                     <p className="edition-desc">
-                      The 2026 edition expands the technical frontier with the 24-hour VerdictX software engineering championship, Sherlock & Syntax cybersecurity CTF, on-device Edge AI & TinyML masterclass, and IEEE Computer Society networking.
+                      Expanding technical frontiers with the 24-hour VerdictX hackathon, Sherlock & Syntax CTF, Edge AI & TinyML masterclass, and competitive programming.
                     </p>
                   </div>
                 </div>
@@ -390,7 +384,7 @@ export default function Home() {
               <span className="section-eyebrow">POWERING TECHX'26</span>
               <h2 className="section-title">PARTNERS</h2>
               <p className="partners-preview-sub">
-                Technology grows stronger when great organizations build together. Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be announced soon.
+                Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be announced soon.
               </p>
               <div className="partners-head-link">
                 <Link to="/partners" className="editorial-text-link">
@@ -408,7 +402,7 @@ export default function Home() {
               <h3 className="announcement-card-heading">PARTNERSHIP ANNOUNCEMENTS</h3>
               <div className="announcement-status-tag">Coming soon</div>
               <p className="announcement-card-copy">
-                Official TechX'26 partners will be listed here once confirmed. Partnership agreements are currently being finalized with leading enterprise organizations, hardware vendors, and technology communities.
+                Official TechX'26 partners will be listed here upon confirmation as enterprise agreements and community sponsorships are finalized.
               </p>
               <div className="partners-status-strip">
                 <span className="status-label">OFFICIAL LIAISON //</span>

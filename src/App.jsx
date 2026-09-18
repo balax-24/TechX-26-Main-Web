@@ -16,6 +16,7 @@ import Partners from './pages/Partners';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Register from './pages/Register';
+import SingleScroll from './pages/SingleScroll';
 import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="/venue" element={<Navigate to="/contact" replace />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/singlescroll" element={<SingleScroll />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

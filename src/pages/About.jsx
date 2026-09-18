@@ -35,15 +35,11 @@ export default function About() {
               <h2 className="overview-heading">WHAT IS TECHX?</h2>
 
               <p className="overview-lead">
-                TECHX MADRAS is a technology-focused initiative organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+                TECHX MADRAS is a flagship technology symposium organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
               </p>
 
               <p className="overview-body">
-                It brings together students, technology enthusiasts, mentors and industry professionals through hands-on technical experiences, competitions, workshops and innovation-driven challenges.
-              </p>
-
-              <p className="overview-body">
-                Conceived as an arena for deep technical rigor rather than routine symposium presentations, TechX centers on real execution: 24-hour endurance software engineering, vulnerability exploitation and threat analysis, on-device TinyML deployment, and viable business ideation.
+                Designed as an arena of genuine engineering capability, TechX brings together technical competition, hands-on learning, innovation, and professional IEEE mentorship across two high-impact days in Chennai.
               </p>
 
               <div className="overview-pillars">
