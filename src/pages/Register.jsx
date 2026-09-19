@@ -19,11 +19,13 @@ import {
   Info
 } from 'lucide-react';
 import { registrationOptions, registrationMeta } from '../data/registration';
+import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 import { eventsData } from '../data/events';
 import Reveal from '../components/Reveal';
 import RegistrationOffer from '../components/RegistrationOffer';
 
 export default function Register() {
+  const { isOfferActive, hasEnded, getPassInfo, offerConfig } = useRegistrationPricing();
   const [searchParams, setSearchParams] = useSearchParams();
   const eventParam = searchParams.get('event');
 
@@ -174,49 +176,63 @@ export default function Register() {
               </Reveal>
 
               <Reveal variant="stagger" className="passes-grid">
-                {day1Passes.map((pass) => (
-                  <article key={pass.id} className="pass-card reveal-card">
-                    <div className="pass-card-top">
-                      <div className="pass-label-strip">
-                        <span className="pass-label-tag">{pass.label}</span>
-                        <span className="pass-day-indicator">14 OCT</span>
+                {day1Passes.map((pass) => {
+                  const pInfo = getPassInfo(pass);
+                  return (
+                    <article key={pass.id} className="pass-card reveal-card">
+                      <div className="pass-card-top">
+                        <div className="pass-label-strip">
+                          <span className="pass-label-tag">{pass.label}</span>
+                          <span className="pass-day-indicator">14 OCT</span>
+                        </div>
+                        <h3 className="pass-category-title">{pass.category}</h3>
+                        <p className="pass-category-desc">{pass.description}</p>
                       </div>
-                      <h3 className="pass-category-title">{pass.category}</h3>
-                      <p className="pass-category-desc">{pass.description}</p>
-                    </div>
 
-                    <div className="pass-pricing-block">
-                      <div className="pass-price-display">
-                        <span className="pass-price-num">{pass.displayPrice}</span>
-                        <span className="pass-price-sub">per delegate</span>
+                      <div className="pass-pricing-block">
+                        <div className="pass-price-display">
+                          <span className="pass-price-num">{pInfo.displayPrice}</span>
+                          {isOfferActive && (
+                            <del className="pass-price-struck" aria-label={`Standard price ${pInfo.normalDisplayPrice}`}>
+                              {pInfo.normalDisplayPrice}
+                            </del>
+                          )}
+                          <span className="pass-price-sub">per delegate</span>
+                        </div>
+                        {isOfferActive ? (
+                          <div className="pass-save-strip">
+                            <span className="pass-save-pill">SAVE ₹100 • EARLY OFFER</span>
+                          </div>
+                        ) : (
+                          <span className="pass-tax-note">Indicative proposal tier</span>
+                        )}
                       </div>
-                      <span className="pass-tax-note">Indicative proposal tier</span>
-                    </div>
 
-                    <div className="pass-features-block">
-                      <span className="features-label">PASS INCLUDES:</span>
-                      <ul className="features-list">
-                        {pass.features.map((feat, idx) => (
-                          <li key={idx}>
-                            <CheckCircle2 size={14} className="feature-check-icon" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      <div className="pass-features-block">
+                        <span className="features-label">PASS INCLUDES:</span>
+                        <ul className="features-list">
+                          {pass.features.map((feat, idx) => (
+                            <li key={idx}>
+                              <CheckCircle2 size={14} className="feature-check-icon" />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <div className="pass-card-footer">
-                      <button 
-                        onClick={() => handleSelectPass(pass)} 
-                        className="btn btn-primary pass-action-btn"
-                        aria-label={`Register & Pay for Day 1 ${pass.category} at ${pass.displayPrice}`}
-                      >
-                        <span>REGISTER & PAY</span>
-                        <ArrowRight size={16} />
-                      </button>
-                    </div>
-                  </article>
-                ))}
+                      <div className="pass-card-footer">
+                        <button 
+                          onClick={() => handleSelectPass(pass)} 
+                          className="btn btn-primary pass-action-btn"
+                          aria-label={`Register & Pay for Day 1 ${pass.category} at ${pInfo.displayPrice}`}
+                        >
+                          <span>REGISTER & PAY</span>
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    </article>
+                  );
+                })}
               </Reveal>
             </section>
 
@@ -248,49 +264,63 @@ export default function Register() {
               </Reveal>
 
               <Reveal variant="stagger" className="passes-grid">
-                {day2Passes.map((pass) => (
-                  <article key={pass.id} className="pass-card reveal-card">
-                    <div className="pass-card-top">
-                      <div className="pass-label-strip">
-                        <span className="pass-label-tag pass-label-alt">{pass.label}</span>
-                        <span className="pass-day-indicator">15 OCT</span>
+                {day2Passes.map((pass) => {
+                  const pInfo = getPassInfo(pass);
+                  return (
+                    <article key={pass.id} className="pass-card reveal-card">
+                      <div className="pass-card-top">
+                        <div className="pass-label-strip">
+                          <span className="pass-label-tag pass-label-alt">{pass.label}</span>
+                          <span className="pass-day-indicator">15 OCT</span>
+                        </div>
+                        <h3 className="pass-category-title">{pass.category}</h3>
+                        <p className="pass-category-desc">{pass.description}</p>
                       </div>
-                      <h3 className="pass-category-title">{pass.category}</h3>
-                      <p className="pass-category-desc">{pass.description}</p>
-                    </div>
 
-                    <div className="pass-pricing-block">
-                      <div className="pass-price-display">
-                        <span className="pass-price-num">{pass.displayPrice}</span>
-                        <span className="pass-price-sub">per delegate</span>
+                      <div className="pass-pricing-block">
+                        <div className="pass-price-display">
+                          <span className="pass-price-num">{pInfo.displayPrice}</span>
+                          {isOfferActive && (
+                            <del className="pass-price-struck" aria-label={`Standard price ${pInfo.normalDisplayPrice}`}>
+                              {pInfo.normalDisplayPrice}
+                            </del>
+                          )}
+                          <span className="pass-price-sub">per delegate</span>
+                        </div>
+                        {isOfferActive ? (
+                          <div className="pass-save-strip">
+                            <span className="pass-save-pill">SAVE ₹100 • EARLY OFFER</span>
+                          </div>
+                        ) : (
+                          <span className="pass-tax-note">Indicative proposal tier</span>
+                        )}
                       </div>
-                      <span className="pass-tax-note">Indicative proposal tier</span>
-                    </div>
 
-                    <div className="pass-features-block">
-                      <span className="features-label">PASS INCLUDES:</span>
-                      <ul className="features-list">
-                        {pass.features.map((feat, idx) => (
-                          <li key={idx}>
-                            <CheckCircle2 size={14} className="feature-check-icon" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      <div className="pass-features-block">
+                        <span className="features-label">PASS INCLUDES:</span>
+                        <ul className="features-list">
+                          {pass.features.map((feat, idx) => (
+                            <li key={idx}>
+                              <CheckCircle2 size={14} className="feature-check-icon" />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <div className="pass-card-footer">
-                      <button 
-                        onClick={() => handleSelectPass(pass)} 
-                        className="btn btn-primary pass-action-btn"
-                        aria-label={`Register & Pay for Day 2 ${pass.category} at ${pass.displayPrice}`}
-                      >
-                        <span>REGISTER & PAY</span>
-                        <ArrowRight size={16} />
-                      </button>
-                    </div>
-                  </article>
-                ))}
+                      <div className="pass-card-footer">
+                        <button 
+                          onClick={() => handleSelectPass(pass)} 
+                          className="btn btn-primary pass-action-btn"
+                          aria-label={`Register & Pay for Day 2 ${pass.category} at ${pInfo.displayPrice}`}
+                        >
+                          <span>REGISTER & PAY</span>
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    </article>
+                  );
+                })}
               </Reveal>
             </section>
 
@@ -469,35 +499,53 @@ export default function Register() {
               </div>
 
               {/* Right Column: Order Summary */}
-              <aside className="details-summary-card" aria-labelledby="summary-heading">
-                <span className="summary-eyebrow">ORDER SUMMARY</span>
-                <h3 id="summary-heading" className="summary-pass-name">{selectedPass.label}</h3>
-                <span className="summary-category">{selectedPass.category}</span>
-                <span className="summary-date-line">{selectedPass.date}</span>
+              {(() => {
+                const selectedInfo = selectedPass ? getPassInfo(selectedPass) : null;
+                return (
+                  <aside className="details-summary-card" aria-labelledby="summary-heading">
+                    <span className="summary-eyebrow">ORDER SUMMARY</span>
+                    <h3 id="summary-heading" className="summary-pass-name">{selectedPass.label}</h3>
+                    <span className="summary-category">{selectedPass.category}</span>
+                    <span className="summary-date-line">{selectedPass.date}</span>
 
-                <div className="summary-price-box">
-                  <span className="price-label">INDICATIVE FEE</span>
-                  <div className="price-number">{selectedPass.displayPrice}</div>
-                  <span className="price-sub">Subject to final confirmation</span>
-                </div>
+                    <div className="summary-price-box">
+                      <span className="price-label">{isOfferActive ? 'EARLY OFFER REGISTRATION FEE' : 'INDICATIVE FEE'}</span>
+                      <div className="summary-price-display-row">
+                        <div className="price-number">{selectedInfo ? selectedInfo.displayPrice : selectedPass.displayPrice}</div>
+                        {isOfferActive && selectedInfo && (
+                          <del className="summary-struck-price" aria-label={`Standard fee ${selectedInfo.normalDisplayPrice}`}>
+                            {selectedInfo.normalDisplayPrice}
+                          </del>
+                        )}
+                      </div>
+                      {isOfferActive ? (
+                        <div className="summary-save-note">
+                          <span>₹100 DISCOUNT APPLIED AUTOMATICALLY</span>
+                        </div>
+                      ) : (
+                        <span className="price-sub">Subject to final confirmation</span>
+                      )}
+                    </div>
 
-                <div className="summary-inclusions">
-                  <span className="inclusions-title">INCLUSIONS:</span>
-                  <ul>
-                    {selectedPass.features.map((f, i) => (
-                      <li key={i}>
-                        <CheckCircle2 size={13} color="var(--purple-light)" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    <div className="summary-inclusions">
+                      <span className="inclusions-title">INCLUSIONS:</span>
+                      <ul>
+                        {selectedPass.features.map((f, i) => (
+                          <li key={i}>
+                            <CheckCircle2 size={13} color="var(--purple-light)" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                <div className="summary-guarantee-note">
-                  <Shield size={14} color="var(--purple-light)" />
-                  <span>Verified IEEE Student Branch Chapter Portal</span>
-                </div>
-              </aside>
+                    <div className="summary-guarantee-note">
+                      <Shield size={14} color="var(--purple-light)" />
+                      <span>Verified IEEE Student Branch Chapter Portal</span>
+                    </div>
+                  </aside>
+                );
+              })()}
             </div>
           </Reveal>
         )}
@@ -519,12 +567,18 @@ export default function Register() {
                 Please check back soon.
               </p>
 
-              {selectedPass && (
-                <div className="coming-soon-details-pill">
-                  <span className="cs-pill-label">SELECTED CATEGORY:</span>
-                  <strong className="cs-pill-val">{selectedPass.label} — {selectedPass.category} ({selectedPass.displayPrice})</strong>
-                </div>
-              )}
+              {selectedPass && (() => {
+                const selectedInfo = getPassInfo(selectedPass);
+                return (
+                  <div className="coming-soon-details-pill">
+                    <span className="cs-pill-label">SELECTED CATEGORY:</span>
+                    <strong className="cs-pill-val">
+                      {selectedPass.label} — {selectedPass.category} ({selectedInfo.displayPrice})
+                      {isOfferActive ? ' [Early Offer: ₹100 Off Applied]' : ''}
+                    </strong>
+                  </div>
+                );
+              })()}
 
               <div className="coming-soon-actions">
                 <button 
@@ -948,7 +1002,8 @@ export default function Register() {
         .pass-price-display {
           display: flex;
           align-items: baseline;
-          gap: 0.5rem;
+          gap: 0.65rem;
+          flex-wrap: wrap;
         }
 
         .pass-price-num {
@@ -959,11 +1014,39 @@ export default function Register() {
           color: #ffffff;
         }
 
+        .pass-price-struck {
+          font-family: var(--font-mono, monospace);
+          font-size: 1.15rem;
+          color: var(--text-tertiary, #888888);
+          text-decoration: line-through;
+          text-decoration-color: rgba(138, 43, 226, 0.7);
+          opacity: 0.85;
+          user-select: none;
+        }
+
         .pass-price-sub {
           font-family: var(--font-mono, monospace);
           font-size: 0.78rem;
           color: var(--text-tertiary, #888888);
           letter-spacing: 0.06em;
+        }
+
+        .pass-save-strip {
+          margin-top: 0.35rem;
+        }
+
+        .pass-save-pill {
+          display: inline-block;
+          font-family: var(--font-mono, monospace);
+          font-size: 0.68rem;
+          letter-spacing: 0.1em;
+          font-weight: 700;
+          color: #22C55E;
+          background: rgba(34, 197, 94, 0.1);
+          border: 1px solid rgba(34, 197, 94, 0.28);
+          padding: 0.15rem 0.5rem;
+          border-radius: 4px;
+          text-transform: uppercase;
         }
 
         .pass-tax-note {
@@ -1325,11 +1408,30 @@ export default function Register() {
           margin-bottom: 0.25rem;
         }
 
-        .price-number {
-          font-family: var(--font-display, sans-serif);
-          font-size: 2.25rem;
-          font-weight: 800;
-          color: #ffffff;
+        .summary-price-display-row {
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 0.65rem;
+        }
+
+        .summary-struck-price {
+          font-family: var(--font-mono, monospace);
+          font-size: 1.15rem;
+          color: var(--text-tertiary, #888888);
+          text-decoration: line-through;
+          text-decoration-color: rgba(138, 43, 226, 0.7);
+          opacity: 0.8;
+          user-select: none;
+        }
+
+        .summary-save-note {
+          margin-top: 0.35rem;
+          font-family: var(--font-mono, monospace);
+          font-size: 0.68rem;
+          letter-spacing: 0.08em;
+          font-weight: 700;
+          color: #22C55E;
         }
 
         .price-sub {

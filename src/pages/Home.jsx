@@ -2,17 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, ChevronRight, Sparkles, Terminal, Shield, Cpu,
-  Lightbulb, Users, Award, Compass, Coins, Code, Zap, CheckCircle2
+  Lightbulb, Users, Award, Compass, Coins, Code, Zap, CheckCircle2,
+  Tag
 } from 'lucide-react';
 import Countdown from '../components/Countdown';
 import GlanceSection from '../components/GlanceSection';
 import Reveal from '../components/Reveal';
 import { eventsData } from '../data/events';
 import { eventMeta } from '../data/contacts';
+import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 
 export default function Home() {
+  const { isOfferActive, hasEnded, isUpcoming, offerConfig } = useRegistrationPricing();
   const officialEvents = eventsData;
 
   // Group events for Featured Events section
@@ -73,6 +76,15 @@ export default function Home() {
             </div>
 
             {/* 5. Primary and Secondary CTAs */}
+            {isOfferActive && (
+              <div className="hero-offer-kicker">
+                <span className="hero-offer-tag">
+                  <Tag size={13} className="hero-offer-icon" />
+                  <span>EARLY REGISTRATION OFFER • SAVE ₹100 ON EVERY REGISTRATION</span>
+                </span>
+              </div>
+            )}
+
             <div className="hero-actions-group">
               <Link to="/register" className="btn btn-primary hero-cta-btn">
                 <span>REGISTER NOW</span>
@@ -419,17 +431,24 @@ export default function Home() {
       <Reveal as="section" variant="pop" className="section final-cta-section">
         <div className="container">
           <div className="final-cta-monument">
-            <span className="section-eyebrow">CONVERGENCE AWAITS</span>
+            <span className="section-eyebrow">
+              {isOfferActive ? 'EARLY REGISTRATION OFFER' : 'CONVERGENCE AWAITS'}
+            </span>
             <h2 className="final-cta-title">
-              IGNITE THE CODE.<br />
-              <span className="text-purple-highlight">OWN THE FUTURE.</span>
+              {isOfferActive ? 'SAVE ₹100 ON EVERY REGISTRATION' : "REGISTER FOR TECHX'26"}
             </h2>
-            <p className="final-cta-dates">
-              14 — 15 OCTOBER 2026 • SRI SAI RAM INSTITUTE OF TECHNOLOGY
-            </p>
+            {isOfferActive ? (
+              <p className="final-cta-offer-sub">
+                Register now and save ₹100 on every registration.
+              </p>
+            ) : (
+              <p className="final-cta-dates">
+                14 — 15 OCTOBER 2026 • SRI SAI RAM INSTITUTE OF TECHNOLOGY
+              </p>
+            )}
             <div className="final-cta-actions">
               <Link to="/register" className="btn btn-primary" style={{ padding: '1.1rem 2.5rem', fontSize: '0.95rem' }}>
-                <span>REGISTER FOR TECHX'26</span>
+                <span>REGISTER NOW</span>
                 <ArrowRight size={18} />
               </Link>
             </div>
@@ -619,6 +638,31 @@ export default function Home() {
 
         .strip-sep {
           color: var(--purple-light);
+        }
+
+        .hero-offer-kicker {
+          margin-bottom: 0.85rem;
+          display: flex;
+          justify-content: center;
+        }
+
+        .hero-offer-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          letter-spacing: 0.12em;
+          color: #22C55E;
+          background: rgba(34, 197, 94, 0.1);
+          border: 1px solid rgba(34, 197, 94, 0.3);
+          padding: 0.35rem 0.85rem;
+          border-radius: 999px;
+          font-weight: 700;
+        }
+
+        .hero-offer-icon {
+          color: #22C55E;
         }
 
         .hero-actions-group {
@@ -1255,6 +1299,14 @@ export default function Home() {
           letter-spacing: 0.12em;
           color: var(--muted);
           margin-bottom: 2.75rem;
+        }
+
+        .final-cta-offer-sub {
+          font-family: var(--font-body);
+          font-size: clamp(1rem, 1.8vw, 1.25rem);
+          color: #C2B8D2;
+          margin-bottom: 2.5rem;
+          line-height: 1.5;
         }
       `}</style>
     </div>

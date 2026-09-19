@@ -1,53 +1,49 @@
 import React from 'react';
-import { Tag, Sparkles, Clock, AlertCircle } from 'lucide-react';
-import { registrationOffer } from '../data/registration';
+import { Tag, AlertCircle } from 'lucide-react';
 import Reveal from './Reveal';
+import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 
 export default function RegistrationOffer() {
-  const offer = registrationOffer;
+  const { isOfferActive, hasEnded, offerConfig } = useRegistrationPricing();
 
   return (
     <div className="registration-offer-wrapper">
-      <Reveal variant="card" className="registration-offer-card">
-        <div className="offer-header-row">
-          <div className="offer-badge-group">
-            <span className="offer-pill-badge">
-              <Tag size={13} color="var(--purple-light)" />
-              <span>{offer.statusBadge}</span>
-            </span>
-          </div>
-          <span className="offer-mono-tag">CONF_TIER // 2026</span>
-        </div>
-
-        <h3 className="offer-main-title">{offer.title}</h3>
-
-        {offer.active ? (
-          <div className="offer-active-content">
-            {/* When real offer is supplied by organizers */}
-            <div className="offer-details-box">
-              <h4>{offer.heading}</h4>
-              <p>{offer.description}</p>
+      <Reveal variant="card" className={`registration-offer-card ${hasEnded ? 'offer-ended-card' : ''}`}>
+        {hasEnded ? (
+          /* ============================================================
+             STATE: STANDARD REGISTRATION (Active from 5 Oct 00:00:00 IST)
+          ============================================================ */
+          <div className="offer-ended-content">
+            <div className="offer-header-row">
+              <span className="offer-pill-badge offer-pill-ended">
+                <AlertCircle size={13} />
+                <span>REGISTRATION STATUS</span>
+              </span>
             </div>
+
+            <h3 className="offer-main-title">{offerConfig.endedHeading}</h3>
+            <p className="offer-ended-desc">{offerConfig.endedMessage}</p>
           </div>
         ) : (
-          <div className="offer-placeholder-content">
-            <div className="offer-state-row">
-              <div className="offer-state-title">
-                <span className="offer-label-sub">{offer.statusHeading}</span>
-                <strong className="offer-status-text">{offer.statusSub}</strong>
-              </div>
-              <div className="offer-bracket-tag">
-                {offer.placeholderText}
-              </div>
+          /* ============================================================
+             STATE: EARLY REGISTRATION OFFER (ACTIVE FROM NOW)
+          ============================================================ */
+          <div className="offer-active-layout">
+            <div className="offer-header-row">
+              <span className="offer-pill-badge">
+                <Tag size={13} color="var(--purple-light)" />
+                <span>OFFICIAL REGISTRATION OFFER</span>
+              </span>
             </div>
 
-            <p className="offer-explanation-text">
-              {offer.description}
-            </p>
-
-            <div className="offer-footer-note">
-              <span className="offer-dot"></span>
-              <span>{offer.note}</span>
+            <div className="offer-info-col">
+              <h3 className="offer-main-title">{offerConfig.title}</h3>
+              <div className="offer-savings-callout">
+                <span className="savings-highlight">{offerConfig.savingsHeading}</span>
+              </div>
+              <p className="offer-body-text">
+                {offerConfig.bodyText}
+              </p>
             </div>
           </div>
         )}
@@ -55,29 +51,29 @@ export default function RegistrationOffer() {
 
       <style>{`
         .registration-offer-wrapper {
-          margin: 2.5rem 0 3.5rem;
+          margin: 2rem 0 3rem;
           width: 100%;
         }
         .registration-offer-card {
           background: #0B0616;
-          border: 1px solid rgba(138, 43, 226, 0.35);
+          border: 1px solid rgba(138, 43, 226, 0.45);
           border-radius: var(--radius-md, 8px);
-          padding: clamp(1.75rem, 3.5vw, 2.5rem);
+          padding: clamp(1.5rem, 3vw, 2.25rem);
           position: relative;
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.1);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 35px rgba(138, 43, 226, 0.15);
+        }
+        .offer-ended-card {
+          border-color: rgba(255, 255, 255, 0.15);
+          background: #080510;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
         .offer-header-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 1rem;
+          margin-bottom: 1.25rem;
           flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-        .offer-badge-group {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
         .offer-pill-badge {
           display: inline-flex;
@@ -88,90 +84,65 @@ export default function RegistrationOffer() {
           letter-spacing: 0.12em;
           color: var(--purple-light);
           background: rgba(138, 43, 226, 0.12);
-          border: 1px solid rgba(138, 43, 226, 0.3);
-          padding: 0.25rem 0.65rem;
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          padding: 0.3rem 0.75rem;
           border-radius: 999px;
           font-weight: 700;
         }
-        .offer-mono-tag {
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
+        .offer-pill-ended {
           color: var(--muted);
-          letter-spacing: 0.08em;
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.12);
+        }
+        .offer-active-layout {
+          display: flex;
+          flex-direction: column;
+        }
+        .offer-info-col {
+          display: flex;
+          flex-direction: column;
         }
         .offer-main-title {
           font-family: var(--font-display);
-          font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-          line-height: 1;
+          font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+          line-height: 1.1;
           letter-spacing: 0.02em;
           color: var(--white);
-          margin-bottom: 1.25rem;
+          margin-bottom: 0.5rem;
           text-transform: uppercase;
         }
-        .offer-state-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1rem;
-          flex-wrap: wrap;
-          background: rgba(0, 0, 0, 0.45);
-          border: 1px dashed rgba(138, 43, 226, 0.4);
-          border-radius: var(--radius-sm, 4px);
-          padding: 1rem 1.25rem;
-          margin-bottom: 1rem;
+        .offer-savings-callout {
+          margin-bottom: 0.75rem;
         }
-        .offer-state-title {
-          display: flex;
-          flex-direction: column;
-          gap: 0.15rem;
-        }
-        .offer-label-sub {
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          letter-spacing: 0.1em;
-          color: var(--purple-light);
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-        .offer-status-text {
+        .savings-highlight {
+          display: inline-block;
           font-family: var(--font-heading);
-          font-size: 1.2rem;
-          color: var(--white);
-          letter-spacing: 0.02em;
+          font-weight: 800;
+          font-size: clamp(1.05rem, 2vw, 1.35rem);
+          letter-spacing: 0.04em;
+          color: #22C55E;
+          text-transform: uppercase;
         }
-        .offer-bracket-tag {
-          font-family: var(--font-mono);
-          font-size: 0.82rem;
-          letter-spacing: 0.08em;
-          color: var(--purple-light);
-          background: rgba(138, 43, 226, 0.15);
-          padding: 0.35rem 0.85rem;
-          border-radius: 4px;
-          border: 1px solid rgba(138, 43, 226, 0.3);
-        }
-        .offer-explanation-text {
+        .offer-body-text {
           font-size: 0.95rem;
           line-height: 1.6;
-          color: var(--muted);
-          margin-bottom: 1.25rem;
-          max-width: 780px;
+          color: #C2B8D2;
+          margin-bottom: 0;
+          max-width: 680px;
         }
-        .offer-footer-note {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
+
+        /* Ended View Styling */
+        .offer-ended-content .offer-main-title {
+          font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+          color: #E2D9F3;
+          margin-bottom: 0.35rem;
+        }
+        .offer-ended-desc {
           font-family: var(--font-mono);
-          font-size: 0.75rem;
+          font-size: 0.88rem;
           color: var(--muted);
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
-          padding-top: 0.75rem;
-        }
-        .offer-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--purple-light);
-          flex-shrink: 0;
+          margin-bottom: 0;
+          line-height: 1.5;
         }
       `}</style>
     </div>

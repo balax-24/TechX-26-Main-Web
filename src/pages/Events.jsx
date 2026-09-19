@@ -7,13 +7,18 @@ import {
 import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
 import { eventsData, ticketPricing } from '../data/events';
+import { registrationOptions } from '../data/registration';
+import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 import sairamCampusFacade from '../assets/architecture/sairam-campus-facade.png';
 
 export default function Events() {
+  const { isOfferActive, hasEnded, getPassInfo, offerConfig } = useRegistrationPricing();
   const [selectedDayTab, setSelectedDayTab] = useState('all');
 
   const day1Events = eventsData.filter(evt => evt.day === 1);
   const day2Events = eventsData.filter(evt => evt.day === 2);
+  const day1Passes = registrationOptions.filter(p => p.dayNumber === 1);
+  const day2Passes = registrationOptions.filter(p => p.dayNumber === 2);
 
   return (
     <div className="events-page-root">
@@ -397,9 +402,17 @@ export default function Events() {
         ============================================================ */}
         <section className="pricing-section" id="pricing-section">
           <Reveal variant="header" className="pricing-section-header">
-            <span className="section-eyebrow">DELEGATE ACCESS PASSES</span>
+            <span className="section-eyebrow">
+              {isOfferActive ? 'EARLY REGISTRATION OFFER' : 'DELEGATE ACCESS PASSES'}
+            </span>
             <h2 className="pricing-main-title">{ticketPricing.sectionTitle}</h2>
-            <p className="pricing-main-sub">{ticketPricing.subtitle}</p>
+            <p className="pricing-main-sub">
+              {isOfferActive 
+                ? 'Register now and save ₹100 on every registration.'
+                : hasEnded
+                ? 'Standard registration fees apply for all conference tracks.'
+                : ticketPricing.subtitle}
+            </p>
           </Reveal>
 
           <Reveal variant="stagger" className="pricing-grid">
@@ -413,17 +426,23 @@ export default function Events() {
 
               {/* Tiers Breakdown */}
               <div className="pricing-tiers-list">
-                {ticketPricing.day1.tiers.map((tier, idx) => (
-                  <div key={idx} className="tier-row">
-                    <div className="tier-info">
-                      <span className="tier-cat-name">{tier.category}</span>
-                      <p className="tier-cat-desc">{tier.desc}</p>
+                {day1Passes.map((pass) => {
+                  const pInfo = getPassInfo(pass);
+                  return (
+                    <div key={pass.id} className="tier-row">
+                      <div className="tier-info">
+                        <span className="tier-cat-name">{pass.category}</span>
+                        <p className="tier-cat-desc">{pass.description}</p>
+                      </div>
+                      <div className="tier-price-box">
+                        <span className="tier-price">{pInfo.displayPrice}</span>
+                        {isOfferActive && (
+                          <del className="tier-struck-price">{pInfo.normalDisplayPrice}</del>
+                        )}
+                      </div>
                     </div>
-                    <div className="tier-price-box">
-                      <span className="tier-price">{tier.price}</span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="pricing-included-box">
@@ -456,17 +475,23 @@ export default function Events() {
 
               {/* Tiers Breakdown */}
               <div className="pricing-tiers-list">
-                {ticketPricing.day2.tiers.map((tier, idx) => (
-                  <div key={idx} className="tier-row">
-                    <div className="tier-info">
-                      <span className="tier-cat-name">{tier.category}</span>
-                      <p className="tier-cat-desc">{tier.desc}</p>
+                {day2Passes.map((pass) => {
+                  const pInfo = getPassInfo(pass);
+                  return (
+                    <div key={pass.id} className="tier-row">
+                      <div className="tier-info">
+                        <span className="tier-cat-name">{pass.category}</span>
+                        <p className="tier-cat-desc">{pass.description}</p>
+                      </div>
+                      <div className="tier-price-box">
+                        <span className="tier-price">{pInfo.displayPrice}</span>
+                        {isOfferActive && (
+                          <del className="tier-struck-price">{pInfo.normalDisplayPrice}</del>
+                        )}
+                      </div>
                     </div>
-                    <div className="tier-price-box">
-                      <span className="tier-price">{tier.price}</span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="pricing-included-box">
@@ -1047,12 +1072,26 @@ export default function Events() {
           margin: 2px 0 0;
           line-height: 1.35;
         }
+        .tier-price-box {
+          display: flex;
+          align-items: baseline;
+          gap: 0.5rem;
+        }
         .tier-price {
           font-family: var(--font-mono);
           font-size: 1.4rem;
           font-weight: 800;
           color: var(--purple-light);
           white-space: nowrap;
+        }
+        .tier-struck-price {
+          font-family: var(--font-mono);
+          font-size: 0.88rem;
+          color: var(--muted);
+          text-decoration: line-through;
+          text-decoration-color: rgba(138, 43, 226, 0.7);
+          opacity: 0.75;
+          user-select: none;
         }
         .pricing-included-box {
           display: flex;

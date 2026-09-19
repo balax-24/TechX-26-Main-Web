@@ -1,6 +1,21 @@
-// TechX Madras 2026 - Centralized Registration Options & Payment Configuration
-// Configurable paymentUrl field for future Razorpay Payment Links / Checkout URLs
+// TechX Madras 2026 - Centralized Registration Options & Dynamic Pricing Logic
+// Authoritative Timezone: Asia/Kolkata (IST = UTC+05:30)
 
+// ----------------------------------------------------
+// OFFER WINDOW CONFIGURATION (Asia/Kolkata / IST)
+// ----------------------------------------------------
+// ----------------------------------------------------
+// OFFER WINDOW CONFIGURATION (Asia/Kolkata / IST)
+// ----------------------------------------------------
+// Authoritative cutoff: 5 October 2026 at 00:00:00 IST (2026-10-05 00:00:00 Asia/Kolkata)
+// The early registration offer is ACTIVE FROM NOW until 5 October 2026 00:00:00 IST.
+// At exactly 5 October 2026 00:00:00 IST, website switches back to standard pricing.
+export const OFFER_END_DATE_IST = "2026-10-05T00:00:00+05:30";
+export const OFFER_END_MS = new Date(OFFER_END_DATE_IST).getTime();
+
+// ----------------------------------------------------
+// CENTRALIZED REGISTRATION OPTIONS
+// ----------------------------------------------------
 export const registrationOptions = [
   // --------------------------------------------------
   // DAY 1 — 14 OCTOBER 2026
@@ -12,7 +27,9 @@ export const registrationOptions = [
     date: "14 OCTOBER 2026",
     category: "IEEE COMPUTER SOCIETY MEMBER",
     shortCategory: "IEEE CS MEMBER",
-    price: 399,
+    normalPrice: 399,
+    offerPrice: 299,
+    price: 399, // default reference
     displayPrice: "₹399*",
     label: "Day 1 Pass",
     description: "Active IEEE Computer Society student members with valid membership ID.",
@@ -32,6 +49,8 @@ export const registrationOptions = [
     date: "14 OCTOBER 2026",
     category: "IEEE NON-CS MEMBER",
     shortCategory: "IEEE NON-CS",
+    normalPrice: 499,
+    offerPrice: 399,
     price: 499,
     displayPrice: "₹499*",
     label: "Day 1 Pass",
@@ -52,6 +71,8 @@ export const registrationOptions = [
     date: "14 OCTOBER 2026",
     category: "NON-IEEE",
     shortCategory: "NON-IEEE",
+    normalPrice: 599,
+    offerPrice: 499,
     price: 599,
     displayPrice: "₹599*",
     label: "Day 1 Pass",
@@ -76,6 +97,8 @@ export const registrationOptions = [
     date: "15 OCTOBER 2026",
     category: "IEEE COMPUTER SOCIETY MEMBER",
     shortCategory: "IEEE CS MEMBER",
+    normalPrice: 299,
+    offerPrice: 199,
     price: 299,
     displayPrice: "₹299*",
     label: "Day 2 Pass",
@@ -96,6 +119,8 @@ export const registrationOptions = [
     date: "15 OCTOBER 2026",
     category: "IEEE NON-CS MEMBER",
     shortCategory: "IEEE NON-CS",
+    normalPrice: 399,
+    offerPrice: 299,
     price: 399,
     displayPrice: "₹399*",
     label: "Day 2 Pass",
@@ -116,6 +141,8 @@ export const registrationOptions = [
     date: "15 OCTOBER 2026",
     category: "NON-IEEE",
     shortCategory: "NON-IEEE",
+    normalPrice: 499,
+    offerPrice: 399,
     price: 499,
     displayPrice: "₹499*",
     label: "Day 2 Pass",
@@ -131,6 +158,9 @@ export const registrationOptions = [
   }
 ];
 
+// ----------------------------------------------------
+// REGISTRATION METADATA & CONFIGURATION
+// ----------------------------------------------------
 export const registrationMeta = {
   title: "TECHX'26 REGISTRATION",
   subtitle: "14–15 OCTOBER 2026 // Sri Sai Ram Institute of Technology",
@@ -138,14 +168,132 @@ export const registrationMeta = {
   footnote: "*Indicative INR conversion of proposal pricing. Final registration fees will be confirmed by the organizers."
 };
 
-// Isolated configurable offer object
-export const registrationOffer = {
-  active: false, // Set to true when organizers supply official offer terms
-  title: "TECHX'26 REGISTRATION OFFER",
-  statusBadge: "OFFICIAL OFFER STATUS",
-  statusHeading: "REGISTRATION OFFER",
-  statusSub: "Coming soon",
-  placeholderText: "[OFFER CONTENT WILL BE UPDATED]",
-  description: "Official registration incentives, institutional group concessions, or early delegate packages will be published here upon organizer confirmation.",
-  note: "No unverified discounts or promotional codes are applied in advance."
+export const OFFER_CONFIG = {
+  title: "EARLY REGISTRATION OFFER",
+  savingsHeading: "SAVE ₹100 ON EVERY REGISTRATION",
+  savingsShort: "SAVE ₹100",
+  bodyText: "Register now and save ₹100 on every registration.",
+  discountAmount: 100,
+  endDateIST: OFFER_END_DATE_IST,
+  timezone: "Asia/Kolkata (IST)",
+  endedTitle: "STANDARD REGISTRATION",
+  endedHeading: "STANDARD REGISTRATION",
+  endedMessage: "Standard registration fees apply for all conference delegates."
 };
+
+// Legacy backwards-compatible export
+export const registrationOffer = {
+  active: true,
+  title: OFFER_CONFIG.title,
+  statusBadge: "OFFICIAL REGISTRATION OFFER",
+  statusHeading: OFFER_CONFIG.title,
+  statusSub: OFFER_CONFIG.savingsHeading,
+  description: "Register now and save ₹100 on every registration.",
+  endedTitle: OFFER_CONFIG.endedHeading
+};
+
+// ----------------------------------------------------
+// TIMEZONE-SAFE EVALUATION FUNCTIONS
+// ----------------------------------------------------
+// Resolves any input timestamp or defaults to current epoch ms.
+// Because comparison is in epoch ms against explicit +05:30 timestamps,
+// it is completely timezone-invariant across all global visitor locations.
+function resolveTimestamp(timestamp) {
+  if (timestamp === undefined || timestamp === null) {
+    return Date.now();
+  }
+  if (typeof timestamp === 'number') {
+    return timestamp;
+  }
+  if (timestamp instanceof Date) {
+    return timestamp.getTime();
+  }
+  return new Date(timestamp).getTime();
+}
+
+/**
+ * Returns true if the offer is active:
+ * currentTime < 2026-10-05 00:00:00 Asia/Kolkata
+ */
+export function isEarlyOfferActive(timestamp = Date.now()) {
+  const currentMs = resolveTimestamp(timestamp);
+  return currentMs < OFFER_END_MS;
+}
+
+/**
+ * Returns true if current time is on or after 5 October 2026 00:00:00 IST.
+ */
+export function hasEarlyOfferEnded(timestamp = Date.now()) {
+  const currentMs = resolveTimestamp(timestamp);
+  return currentMs >= OFFER_END_MS;
+}
+
+/**
+ * Determines current price for a pass option based on the centralized date condition.
+ */
+export function getRegistrationPrice(option, timestamp = Date.now()) {
+  if (!option) return 0;
+  return isEarlyOfferActive(timestamp) ? option.offerPrice : option.normalPrice;
+}
+
+/**
+ * Returns complete pricing details and display strings for a pass option.
+ */
+export function getRegistrationPricingInfo(option, timestamp = Date.now()) {
+  if (!option) return null;
+  const currentMs = resolveTimestamp(timestamp);
+  const isOffer = isEarlyOfferActive(currentMs);
+  const ended = hasEarlyOfferEnded(currentMs);
+  const effectivePrice = isOffer ? option.offerPrice : option.normalPrice;
+
+  return {
+    id: option.id,
+    dayNumber: option.dayNumber,
+    day: option.day,
+    category: option.category,
+    shortCategory: option.shortCategory,
+    normalPrice: option.normalPrice,
+    offerPrice: option.offerPrice,
+    effectivePrice,
+    displayPrice: `₹${effectivePrice}*`,
+    normalDisplayPrice: `₹${option.normalPrice}*`,
+    offerDisplayPrice: `₹${option.offerPrice}*`,
+    isOfferActive: isOffer,
+    hasEnded: ended,
+    savingsAmount: option.normalPrice - option.offerPrice,
+    savingsText: `SAVE ₹${option.normalPrice - option.offerPrice}`
+  };
+}
+
+/**
+ * Calculates countdown time remaining to 5 October 2026 00:00:00 IST.
+ */
+export function getOfferTimeRemaining(timestamp = Date.now()) {
+  const currentMs = resolveTimestamp(timestamp);
+  const difference = OFFER_END_MS - currentMs;
+
+  if (difference <= 0) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      totalSeconds: 0,
+      isExpired: true
+    };
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+  return {
+    days,
+    hours,
+    minutes,
+    seconds,
+    totalSeconds: Math.floor(difference / 1000),
+    isExpired: false
+  };
+}

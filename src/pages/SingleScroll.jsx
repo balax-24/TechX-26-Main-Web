@@ -9,7 +9,8 @@ import Reveal from '../components/Reveal';
 import Countdown from '../components/Countdown';
 import { eventsData } from '../data/events';
 import { scheduleData } from '../data/schedule';
-import { registrationOptions, registrationMeta, registrationOffer } from '../data/registration';
+import { registrationOptions, registrationMeta } from '../data/registration';
+import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 import { eventMeta } from '../data/contacts';
 import { techxAward } from '../data/leadership';
 
@@ -17,6 +18,7 @@ import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 import logoImg from '../assets/logo/techx-logo-cropped.png';
 
 export default function SingleScroll() {
+  const { isOfferActive, hasEnded, getPassInfo, offerConfig } = useRegistrationPricing();
   const [activeNav, setActiveNav] = useState('top');
 
   // Listen to scroll position for sticky anchor navigation highlight
@@ -468,10 +470,16 @@ export default function SingleScroll() {
       <section className="ss-section ss-registration-section" id="register">
         <div className="container">
           <Reveal variant="header" className="ss-center-head">
-            <span className="section-eyebrow">OFFICIAL PASSES</span>
-            <h2 className="ss-section-heading">REGISTER FOR TECHX'26</h2>
+            <span className="section-eyebrow">
+              {isOfferActive ? 'EARLY REGISTRATION OFFER' : 'OFFICIAL PASSES'}
+            </span>
+            <h2 className="ss-section-heading">
+              {isOfferActive ? 'SAVE ₹100 ON EVERY REGISTRATION' : 'STANDARD REGISTRATION'}
+            </h2>
             <p className="ss-section-sub">
-              Choose your participation day and category. Registration fees shown are indicative and subject to final confirmation.
+              {isOfferActive 
+                ? 'Register now and save ₹100 on every registration.' 
+                : 'Standard registration fees apply for all conference delegates.'}
             </p>
           </Reveal>
 
@@ -485,19 +493,29 @@ export default function SingleScroll() {
                 <span className="ss-day-col-sub">Inauguration, Mentorship & 24H Hackathon</span>
               </div>
               <div className="ss-pass-cards-list">
-                {day1Passes.map((pass) => (
-                  <div key={pass.id} className="ss-pricing-tier-card">
-                    <div className="ss-pt-top">
-                      <span className="ss-pt-category">{pass.shortCategory}</span>
-                      <span className="ss-pt-price">{pass.displayPrice}</span>
+                {day1Passes.map((pass) => {
+                  const pInfo = getPassInfo(pass);
+                  return (
+                    <div key={pass.id} className="ss-pricing-tier-card">
+                      <div className="ss-pt-top">
+                        <span className="ss-pt-category">{pass.shortCategory}</span>
+                        <div className="ss-pt-price-cluster">
+                          <span className="ss-pt-price">{pInfo.displayPrice}</span>
+                          {isOfferActive && (
+                            <del className="ss-pt-struck" aria-label={`Standard price ${pInfo.normalDisplayPrice}`}>
+                              {pInfo.normalDisplayPrice}
+                            </del>
+                          )}
+                        </div>
+                      </div>
+                      <p className="ss-pt-desc">{pass.description}</p>
+                      <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
+                        <span>SELECT PASS</span>
+                        <ArrowRight size={14} />
+                      </Link>
                     </div>
-                    <p className="ss-pt-desc">{pass.description}</p>
-                    <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
-                      <span>SELECT PASS</span>
-                      <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -509,33 +527,47 @@ export default function SingleScroll() {
                 <span className="ss-day-col-sub">Cyber CTF, TinyML Workshop, Pitch & Coding</span>
               </div>
               <div className="ss-pass-cards-list">
-                {day2Passes.map((pass) => (
-                  <div key={pass.id} className="ss-pricing-tier-card">
-                    <div className="ss-pt-top">
-                      <span className="ss-pt-category">{pass.shortCategory}</span>
-                      <span className="ss-pt-price">{pass.displayPrice}</span>
+                {day2Passes.map((pass) => {
+                  const pInfo = getPassInfo(pass);
+                  return (
+                    <div key={pass.id} className="ss-pricing-tier-card">
+                      <div className="ss-pt-top">
+                        <span className="ss-pt-category">{pass.shortCategory}</span>
+                        <div className="ss-pt-price-cluster">
+                          <span className="ss-pt-price">{pInfo.displayPrice}</span>
+                          {isOfferActive && (
+                            <del className="ss-pt-struck" aria-label={`Standard price ${pInfo.normalDisplayPrice}`}>
+                              {pInfo.normalDisplayPrice}
+                            </del>
+                          )}
+                        </div>
+                      </div>
+                      <p className="ss-pt-desc">{pass.description}</p>
+                      <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
+                        <span>SELECT PASS</span>
+                        <ArrowRight size={14} />
+                      </Link>
                     </div>
-                    <p className="ss-pt-desc">{pass.description}</p>
-                    <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
-                      <span>SELECT PASS</span>
-                      <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </Reveal>
 
           {/* Disclaimer & Offer State */}
           <div className="ss-pricing-foot-row">
-            <Reveal variant="card" className="ss-offer-status-card">
+            <Reveal variant="card" className={`ss-offer-status-card ${hasEnded ? 'ss-offer-status-ended' : ''}`}>
               <div className="ss-offer-pill">
-                <Sparkles size={14} color="var(--purple-light)" />
-                <span>OFFICIAL OFFER STATUS</span>
+                <Sparkles size={14} color={hasEnded ? 'var(--muted)' : 'var(--purple-light)'} />
+                <span>{hasEnded ? 'REGISTRATION STATUS' : 'OFFICIAL REGISTRATION OFFER'}</span>
               </div>
-              <h4>{registrationOffer.statusHeading}</h4>
-              <div className="ss-offer-tag">{registrationOffer.statusSub}</div>
-              <p className="ss-offer-note">{registrationOffer.description}</p>
+              <h4>{hasEnded ? offerConfig.endedHeading : offerConfig.title}</h4>
+              <div className="ss-offer-tag">
+                {hasEnded ? 'STANDARD TIERS ACTIVE' : offerConfig.savingsHeading}
+              </div>
+              <p className="ss-offer-note">
+                {hasEnded ? offerConfig.endedMessage : offerConfig.bodyText}
+              </p>
             </Reveal>
 
             <p className="ss-price-disclaimer">
@@ -1472,11 +1504,62 @@ export default function SingleScroll() {
           color: #FFFFFF;
         }
 
+        .ss-offer-headline-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-top: 0.85rem;
+          padding: 0.45rem 1.15rem;
+          background: rgba(138, 43, 226, 0.14);
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          border-radius: 999px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .ss-offer-highlight {
+          font-family: var(--font-heading);
+          font-weight: 800;
+          font-size: 0.88rem;
+          color: #22C55E;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+
+        .ss-offer-sep {
+          color: rgba(255, 255, 255, 0.3);
+          font-size: 0.8rem;
+        }
+
+        .ss-offer-dates {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          color: #E2D9F3;
+          letter-spacing: 0.08em;
+          font-weight: 600;
+        }
+
+        .ss-pt-price-cluster {
+          display: flex;
+          align-items: baseline;
+          gap: 0.5rem;
+        }
+
         .ss-pt-price {
           font-family: var(--font-heading);
           font-size: 1.3rem;
           font-weight: 800;
           color: var(--purple-light);
+        }
+
+        .ss-pt-struck {
+          font-family: var(--font-mono);
+          font-size: 0.85rem;
+          color: var(--gray-light);
+          text-decoration: line-through;
+          text-decoration-color: rgba(138, 43, 226, 0.7);
+          opacity: 0.75;
+          user-select: none;
         }
 
         .ss-pt-desc {
