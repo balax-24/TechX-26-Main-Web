@@ -676,10 +676,10 @@ export default function EventDetails() {
           ============================================================ */}
           {event.id === 'nano-mentoring' && (
             <Reveal variant="pop" className="detail-section-block mentoring-block">
-              <span className="section-eyebrow">DIRECT GUIDANCE</span>
+              <span className="section-eyebrow">ONE-ON-ONE MENTORING</span>
               <h2 className="detail-block-heading">PRACTICAL INDUSTRY PERSPECTIVES</h2>
               <p className="detail-block-sub">
-                An interaction session connecting student technologists with experienced professionals for practical guidance, modern engineering insights, and career navigation.
+                One-on-one mentoring with experienced professionals, focused on practical guidance and career perspectives.
               </p>
 
               <div className="mentoring-focus-grid">

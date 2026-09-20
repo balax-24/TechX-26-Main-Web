@@ -69,7 +69,7 @@ export default function Speakers() {
                 <h2 className="clean-status-title">SPEAKERS</h2>
                 <div className="clean-status-tag">Speaker announcements coming soon.</div>
                 <p className="clean-status-desc">
-                  Speaker information will be published here once confirmed. The speaker roster will feature keynote thought leaders in Edge AI and distributed systems, alongside 6 industry mentors for the dedicated Nano Mentoring session and an honorable evaluation jury.
+                  Speaker information will be published here once confirmed. The speaker roster will feature keynote thought leaders in Edge AI and distributed systems, alongside experienced industry mentors for the dedicated one-on-one Nano Mentoring session and an honorable evaluation jury.
                 </p>
 
                 <div className="clean-status-meta-grid">
@@ -79,7 +79,7 @@ export default function Speakers() {
                   </div>
                   <div className="meta-block">
                     <span className="meta-label">NANO MENTORING</span>
-                    <span className="meta-val">6 Industry Technical Mentors</span>
+                    <span className="meta-val">Experienced Industry Mentors</span>
                   </div>
                   <div className="meta-block">
                     <span className="meta-label">EVALUATION</span>

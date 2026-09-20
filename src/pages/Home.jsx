@@ -197,20 +197,20 @@ export default function Home() {
                 <Terminal size={22} color="var(--purple-light)" />
               </div>
               <span className="dim-tag">DIMENSION 01</span>
-              <h3 className="dim-title">COMPETE & BUILD</h3>
+              <h3 className="dim-title">COMPETE</h3>
               <p className="dim-text">
-                Push endurance and engineering capabilities in the 24-hour VerdictX open-domain hackathon and real-time algorithmic showdowns under dynamic judge constraints.
+                Challenge yourself through technical competitions. Test problem-solving speed, endurance, and analytical thinking against real-world engineering benchmarks.
               </p>
             </div>
 
             <div className="experience-dimension-card reveal-card">
               <div className="dim-icon-wrap">
-                <Shield size={22} color="var(--purple-light)" />
+                <Code size={22} color="var(--purple-light)" />
               </div>
               <span className="dim-tag">DIMENSION 02</span>
-              <h3 className="dim-title">INVESTIGATE & SOLVE</h3>
+              <h3 className="dim-title">BUILD</h3>
               <p className="dim-text">
-                Deconstruct vulnerability vectors, decipher cryptographic clues, and execute tactical forensics during the multi-round Sherlock & Syntax cybersecurity CTF.
+                Turn ideas into working solutions. Architect resilient systems, write production-ready code, and transform concepts into functional prototypes.
               </p>
             </div>
 
@@ -219,20 +219,9 @@ export default function Home() {
                 <Cpu size={22} color="var(--purple-light)" />
               </div>
               <span className="dim-tag">DIMENSION 03</span>
-              <h3 className="dim-title">LEARN & DEPLOY</h3>
+              <h3 className="dim-title">LEARN</h3>
               <p className="dim-text">
-                Step into on-device intelligence during the Edge AI & TinyML masterclass, flashing neural network models onto silicon hardware with zero cloud latency.
-              </p>
-            </div>
-
-            <div className="experience-dimension-card reveal-card">
-              <div className="dim-icon-wrap">
-                <Lightbulb size={22} color="var(--purple-light)" />
-              </div>
-              <span className="dim-tag">DIMENSION 04</span>
-              <h3 className="dim-title">PITCH & VALIDATE</h3>
-              <p className="dim-text">
-                Pitch commercially viable software architectures, venture ideas, and technical roadmaps to venture analysts and academic leaders in Idea Alchemy.
+                Gain practical exposure to emerging technologies. Explore modern engineering workflows, system paradigms, and hands-on technical practices.
               </p>
             </div>
 
@@ -240,10 +229,10 @@ export default function Home() {
               <div className="dim-icon-wrap">
                 <Users size={22} color="var(--purple-light)" />
               </div>
-              <span className="dim-tag">DIMENSION 05</span>
-              <h3 className="dim-title">MENTOR & CONNECT</h3>
+              <span className="dim-tag">DIMENSION 04</span>
+              <h3 className="dim-title">CONNECT</h3>
               <p className="dim-text">
-                Engage in direct dialogue with senior engineers in Nano Mentoring and connect with the global IEEE Computer Society professional network.
+                Interact with mentors, peers, and the IEEE Computer Society community. Build lasting relationships across institutions and explore future pathways.
               </p>
             </div>
           </Reveal>
@@ -379,8 +368,8 @@ export default function Home() {
 
             <div className="why-statement-item reveal-card">
               <span className="why-num">04</span>
-              <h4>MENTORSHIP & INDUSTRY INSIGHTS</h4>
-              <p>Gain practical insights, guidance, and industry perspectives through Nano Mentoring sessions with practicing engineers.</p>
+              <h4>ONE-ON-ONE MENTORSHIP</h4>
+              <p>One-on-one mentoring with experienced professionals, focused on practical guidance and career perspectives.</p>
             </div>
           </Reveal>
         </div>
@@ -877,18 +866,18 @@ export default function Home() {
         /* Experiential Dimensions Grid */
         .experience-dimensions-grid {
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 1.5rem;
           margin-bottom: 5.5rem;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1024px) {
           .experience-dimensions-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
           }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
           .experience-dimensions-grid {
             grid-template-columns: 1fr;
           }

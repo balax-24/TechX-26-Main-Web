@@ -128,9 +128,6 @@ export default function Events() {
                     <div className="card-number-badge">
                       <span className="evt-num">{evt.number}</span>
                       <span className="badge-tech">{evt.badge}</span>
-                      {evt.id === 'verdictx' && (
-                        <span className="badge-overnight-pill">24-HOUR OVERNIGHT</span>
-                      )}
                     </div>
                     <div className="card-timing-pill">
                       <Clock size={14} />
@@ -797,7 +794,7 @@ export default function Events() {
           color: var(--white);
           letter-spacing: -0.03em;
         }
-        .badge-overnight-pill, .badge-parallel-pill {
+        .badge-parallel-pill {
           background: rgba(138, 43, 226, 0.25);
           border: 1px solid var(--purple-light);
           color: var(--white);

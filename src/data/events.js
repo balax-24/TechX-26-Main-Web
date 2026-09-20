@@ -15,8 +15,8 @@ export const eventsData = [
     time: "10:00 AM",
     title: "Nano Mentoring",
     publicTitle: "NANO MENTORING",
-    subtitle: "Industry Insights & Guidance",
-    badge: "MENTORING",
+    subtitle: "One-on-One Mentoring & Career Perspectives",
+    badge: "ONE-ON-ONE MENTORING",
     accent: "#8A2BE2",
     teamSize: "Open to Attendees",
     participants: 80,
@@ -24,12 +24,12 @@ export const eventsData = [
     duration: "Day 1 // 10:00 AM",
     date: "14th October 2026",
     venueRoom: "Campus Auditorium",
-    shortDescription: "An interactive mentoring session with industry professionals providing career navigation, practical insights, and professional perspectives.",
-    fullDescription: "Nano Mentoring connects student technologists with experienced engineers for practical career guidance, industry perspectives, and professional roadmap discussions.",
+    shortDescription: "One-on-one mentoring with experienced professionals, focused on practical guidance and career perspectives.",
+    fullDescription: "One-on-one mentoring with experienced professionals, focused on practical guidance and career perspectives. Connect directly with seasoned engineers and industry leaders for personalized career navigation and technical mentorship.",
     highlights: [
-      "Direct interaction session with experienced professionals",
-      "Practical insights, guidance, and industry perspectives",
-      "Career development and modern technology guidance",
+      "One-on-one mentoring",
+      "Practical guidance and industry perspectives",
+      "Career development guidance",
       "Presented alongside Benefits of IEEE Computer Society Membership"
     ],
     sessionFocus: [
@@ -217,7 +217,6 @@ export const eventsData = [
     fullDescription: "Sherlock & Syntax is a 2.5-hour live cybersecurity Capture The Flag arena where 30 teams solve tiered challenges across web security, cryptography, forensics, and reverse engineering.",
     highlights: [
       "Standard skill-based cybersecurity Capture The Flag competition (Alpha Hall)",
-      "30 Teams × 3 Members = 90 Total Participants",
       "15–20 Challenges distributed across Easy, Medium, and Hard tiers",
       "Fully automated platform scoring with earliest-time tie-break rule"
     ],
