@@ -4,9 +4,6 @@
 // ----------------------------------------------------
 // OFFER WINDOW CONFIGURATION (Asia/Kolkata / IST)
 // ----------------------------------------------------
-// ----------------------------------------------------
-// OFFER WINDOW CONFIGURATION (Asia/Kolkata / IST)
-// ----------------------------------------------------
 // Authoritative cutoff: 5 October 2026 at 00:00:00 IST (2026-10-05 00:00:00 Asia/Kolkata)
 // The early registration offer is ACTIVE FROM NOW until 5 October 2026 00:00:00 IST.
 // At exactly 5 October 2026 00:00:00 IST, website switches back to standard pricing.
@@ -14,86 +11,148 @@ export const OFFER_END_DATE_IST = "2026-10-05T00:00:00+05:30";
 export const OFFER_END_MS = new Date(OFFER_END_DATE_IST).getTime();
 
 // ----------------------------------------------------
-// CENTRALIZED REGISTRATION OPTIONS
+// SHARED PASS INFORMATION BLOCKS (Shown ONCE per pass type)
+// ----------------------------------------------------
+export const passSharedInfo = {
+  fullPass: {
+    id: "full-event-pass",
+    dayNumber: 1,
+    title: "FULL EVENT PASS",
+    dates: "14–15 OCTOBER 2026",
+    accessLabel: "DAY 1 + DAY 2 ACCESS",
+    pricingSectionLabel: "DAY 1 REGISTRATION",
+    pricingSectionSub: "Full Event Pass — Gives access to both Day 1 and Day 2 of TECHX'26.",
+    description: "Your pass gives access to both Day 1 and Day 2 of TECHX'26.",
+    inclusionsTitle: "PASS INCLUDES",
+    scheduleGroups: [
+      {
+        dayHeading: "DAY 1 — 14 OCTOBER",
+        events: [
+          "Inauguration & Event Briefing",
+          "Nano Mentoring",
+          "IEEE Computer Society Membership Session",
+          "VerdictX: Code & Conquer — 24-Hour Hackathon"
+        ]
+      },
+      {
+        dayHeading: "DAY 2 — 15 OCTOBER",
+        events: [
+          "Sherlock & Syntax — Cybersecurity CTF",
+          "Edge AI & TinyML: AI Beyond the Cloud",
+          "Idea Alchemy — Business & Idea Pitch",
+          "CodeNomics"
+        ]
+      }
+    ],
+    compactSummary: "Full access to all Day 1 and Day 2 tracks: Inauguration, Mentoring, Hackathon, Cyber CTF, TinyML, Pitch, and CodeNomics.",
+    benefitsTitle: "ADDITIONAL BENEFITS",
+    benefits: [
+      "Food and refreshments will be provided",
+      "Certificates will be provided"
+    ]
+  },
+  day2Pass: {
+    id: "day2-pass",
+    dayNumber: 2,
+    title: "DAY 2 PASS",
+    dates: "15 OCTOBER 2026",
+    accessLabel: "DAY 2 ACCESS ONLY",
+    pricingSectionLabel: "DAY 2 REGISTRATION",
+    pricingSectionSub: "Day 2 Pass — Access to Day 2 of TECHX'26.",
+    description: "Access to Day 2 of TECHX'26.",
+    inclusionsTitle: "DAY 2 INCLUDES",
+    scheduleGroups: [
+      {
+        dayHeading: "DAY 2 — 15 OCTOBER",
+        events: [
+          "Sherlock & Syntax — Cybersecurity CTF",
+          "Edge AI & TinyML: AI Beyond the Cloud",
+          "Idea Alchemy — Business & Idea Pitch",
+          "CodeNomics"
+        ]
+      }
+    ],
+    compactSummary: "Access to all Day 2 tracks: Cyber CTF, TinyML Workshop, Startup Pitch, and CodeNomics.",
+    benefitsTitle: "ADDITIONAL BENEFITS",
+    benefits: [
+      "Food and refreshments will be provided",
+      "Certificates will be provided"
+    ]
+  }
+};
+
+// ----------------------------------------------------
+// CENTRALIZED REGISTRATION PRICING OPTIONS
+// (Cards contain ONLY: category, price, offer indicator, register button)
 // ----------------------------------------------------
 export const registrationOptions = [
   // --------------------------------------------------
-  // DAY 1 — 14 OCTOBER 2026
+  // DAY 1 / FULL EVENT PASS — 14–15 OCTOBER 2026
   // --------------------------------------------------
   {
     id: "day1-ieee-cs",
     day: "DAY 1",
     dayNumber: 1,
-    date: "14 OCTOBER 2026",
+    passType: "FULL EVENT PASS",
+    accessLabel: "DAY 1 + DAY 2 ACCESS",
+    date: "14–15 OCTOBER 2026",
     category: "IEEE COMPUTER SOCIETY MEMBER",
     shortCategory: "IEEE CS MEMBER",
     normalPrice: 399,
     offerPrice: 299,
     price: 399, // default reference
     displayPrice: "₹399*",
-    label: "Day 1 Pass",
+    label: "Full Event Pass",
     description: "Active IEEE Computer Society student members with valid membership ID.",
-    paymentUrl: "", // Ready for Razorpay Payment Link
+    paymentUrl: "", // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    features: [
-      "Inauguration & Event Briefing (09:00 AM)",
-      "Nano Mentoring Session (10:00 AM)",
-      "IEEE Computer Society Membership Session (10:00 AM)",
-      "VerdictX 24-Hour Hackathon Entry (Continues Overnight)"
-    ]
   },
   {
     id: "day1-ieee-non-cs",
     day: "DAY 1",
     dayNumber: 1,
-    date: "14 OCTOBER 2026",
+    passType: "FULL EVENT PASS",
+    accessLabel: "DAY 1 + DAY 2 ACCESS",
+    date: "14–15 OCTOBER 2026",
     category: "IEEE NON-CS MEMBER",
     shortCategory: "IEEE NON-CS",
     normalPrice: 499,
     offerPrice: 399,
     price: 499,
     displayPrice: "₹499*",
-    label: "Day 1 Pass",
+    label: "Full Event Pass",
     description: "Active IEEE student members from other society chapters.",
-    paymentUrl: "", // Ready for Razorpay Payment Link
+    paymentUrl: "", // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    features: [
-      "Inauguration & Event Briefing (09:00 AM)",
-      "Nano Mentoring Session (10:00 AM)",
-      "IEEE Computer Society Membership Session (10:00 AM)",
-      "VerdictX 24-Hour Hackathon Entry (Continues Overnight)"
-    ]
   },
   {
     id: "day1-non-ieee",
     day: "DAY 1",
     dayNumber: 1,
-    date: "14 OCTOBER 2026",
+    passType: "FULL EVENT PASS",
+    accessLabel: "DAY 1 + DAY 2 ACCESS",
+    date: "14–15 OCTOBER 2026",
     category: "NON-IEEE",
     shortCategory: "NON-IEEE",
     normalPrice: 599,
     offerPrice: 499,
     price: 599,
     displayPrice: "₹599*",
-    label: "Day 1 Pass",
+    label: "Full Event Pass",
     description: "Student technologists, engineers, and delegates from all institutions.",
-    paymentUrl: "", // Ready for Razorpay Payment Link
+    paymentUrl: "", // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
-    features: [
-      "Inauguration & Event Briefing (09:00 AM)",
-      "Nano Mentoring Session (10:00 AM)",
-      "IEEE Computer Society Membership Session (10:00 AM)",
-      "VerdictX 24-Hour Hackathon Entry (Continues Overnight)"
-    ]
   },
 
   // --------------------------------------------------
-  // DAY 2 — 15 OCTOBER 2026
+  // DAY 2 PASS — 15 OCTOBER 2026 (DAY 2 ACCESS ONLY)
   // --------------------------------------------------
   {
     id: "day2-ieee-cs",
     day: "DAY 2",
     dayNumber: 2,
+    passType: "DAY 2 PASS",
+    accessLabel: "DAY 2 ACCESS ONLY",
     date: "15 OCTOBER 2026",
     category: "IEEE COMPUTER SOCIETY MEMBER",
     shortCategory: "IEEE CS MEMBER",
@@ -103,19 +162,15 @@ export const registrationOptions = [
     displayPrice: "₹299*",
     label: "Day 2 Pass",
     description: "Active IEEE Computer Society student members with valid membership ID.",
-    paymentUrl: "", // Ready for Razorpay Payment Link
+    paymentUrl: "", // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    features: [
-      "Sherlock & Syntax Cybersecurity CTF (09:00 AM – 12:15 PM)",
-      "Edge AI & TinyML Hands-on Workshop (10:45 AM – 12:15 PM)",
-      "Idea Alchemy Startup Pitch OR CodeNomics Programming (01:15 PM)",
-      "Grand Valedictory Ceremony & Awards Distribution (03:30 PM)"
-    ]
   },
   {
     id: "day2-ieee-non-cs",
     day: "DAY 2",
     dayNumber: 2,
+    passType: "DAY 2 PASS",
+    accessLabel: "DAY 2 ACCESS ONLY",
     date: "15 OCTOBER 2026",
     category: "IEEE NON-CS MEMBER",
     shortCategory: "IEEE NON-CS",
@@ -125,19 +180,15 @@ export const registrationOptions = [
     displayPrice: "₹399*",
     label: "Day 2 Pass",
     description: "Active IEEE student members from other society chapters.",
-    paymentUrl: "", // Ready for Razorpay Payment Link
+    paymentUrl: "", // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    features: [
-      "Sherlock & Syntax Cybersecurity CTF (09:00 AM – 12:15 PM)",
-      "Edge AI & TinyML Hands-on Workshop (10:45 AM – 12:15 PM)",
-      "Idea Alchemy Startup Pitch OR CodeNomics Programming (01:15 PM)",
-      "Grand Valedictory Ceremony & Awards Distribution (03:30 PM)"
-    ]
   },
   {
     id: "day2-non-ieee",
     day: "DAY 2",
     dayNumber: 2,
+    passType: "DAY 2 PASS",
+    accessLabel: "DAY 2 ACCESS ONLY",
     date: "15 OCTOBER 2026",
     category: "NON-IEEE",
     shortCategory: "NON-IEEE",
@@ -147,14 +198,8 @@ export const registrationOptions = [
     displayPrice: "₹499*",
     label: "Day 2 Pass",
     description: "Student technologists, engineers, and delegates from all institutions.",
-    paymentUrl: "", // Ready for Razorpay Payment Link
+    paymentUrl: "", // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
-    features: [
-      "Sherlock & Syntax Cybersecurity CTF (09:00 AM – 12:15 PM)",
-      "Edge AI & TinyML Hands-on Workshop (10:45 AM – 12:15 PM)",
-      "Idea Alchemy Startup Pitch OR CodeNomics Programming (01:15 PM)",
-      "Grand Valedictory Ceremony & Awards Distribution (03:30 PM)"
-    ]
   }
 ];
 
@@ -163,9 +208,10 @@ export const registrationOptions = [
 // ----------------------------------------------------
 export const registrationMeta = {
   title: "TECHX'26 REGISTRATION",
-  subtitle: "14–15 OCTOBER 2026 // Sri Sai Ram Institute of Technology",
+  subtitle: "14-15 OCTOBER 2026 // Sri Sai Ram Institute of Technology",
   intro: "Choose your registration category below. Registration fees shown are indicative and subject to final confirmation by the organizers.",
-  footnote: "*Indicative INR conversion of proposal pricing. Final registration fees will be confirmed by the organizers."
+  footnote: "*Indicative INR conversion of proposal pricing. Final registration fees will be confirmed by the organizers.",
+  paymentNotice: "Payment portals will be opened following formal institutional sanction. KKonfHub registration links will be published directly on this portal."
 };
 
 export const OFFER_CONFIG = {
@@ -195,9 +241,6 @@ export const registrationOffer = {
 // ----------------------------------------------------
 // TIMEZONE-SAFE EVALUATION FUNCTIONS
 // ----------------------------------------------------
-// Resolves any input timestamp or defaults to current epoch ms.
-// Because comparison is in epoch ms against explicit +05:30 timestamps,
-// it is completely timezone-invariant across all global visitor locations.
 function resolveTimestamp(timestamp) {
   if (timestamp === undefined || timestamp === null) {
     return Date.now();

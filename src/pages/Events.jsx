@@ -419,7 +419,7 @@ export default function Events() {
             {/* Day 1 Pass Card */}
             <div className="pricing-card reveal-card">
               <div className="pricing-card-top">
-                <span className="pricing-day-tag">{ticketPricing.day1.dayNumber} PASS</span>
+                <span className="pricing-day-tag">{ticketPricing.day1.accessLabel || "DAY 1 + DAY 2 ACCESS"}</span>
                 <h3 className="pricing-card-title">{ticketPricing.day1.title}</h3>
                 <span className="pricing-card-date">{ticketPricing.day1.date}</span>
               </div>
@@ -459,7 +459,7 @@ export default function Events() {
 
               <div className="pricing-card-action">
                 <Link to="/register" className="btn btn-primary" style={{ width: '100%' }}>
-                  <span>REGISTER FOR DAY 1</span>
+                  <span>REGISTER FOR FULL EVENT PASS</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>
@@ -468,7 +468,7 @@ export default function Events() {
             {/* Day 2 Pass Card */}
             <div className="pricing-card reveal-card">
               <div className="pricing-card-top">
-                <span className="pricing-day-tag">{ticketPricing.day2.dayNumber} PASS</span>
+                <span className="pricing-day-tag">{ticketPricing.day2.accessLabel || "DAY 2 ACCESS ONLY"}</span>
                 <h3 className="pricing-card-title">{ticketPricing.day2.title}</h3>
                 <span className="pricing-card-date">{ticketPricing.day2.date}</span>
               </div>
@@ -508,7 +508,7 @@ export default function Events() {
 
               <div className="pricing-card-action">
                 <Link to="/register" className="btn btn-primary" style={{ width: '100%' }}>
-                  <span>REGISTER FOR DAY 2</span>
+                  <span>REGISTER FOR DAY 2 PASS</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>

@@ -9,7 +9,7 @@ import Reveal from '../components/Reveal';
 import Countdown from '../components/Countdown';
 import { eventsData } from '../data/events';
 import { scheduleData } from '../data/schedule';
-import { registrationOptions, registrationMeta } from '../data/registration';
+import { registrationOptions, registrationMeta, passSharedInfo } from '../data/registration';
 import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 import { eventMeta } from '../data/contacts';
 import { techxAward } from '../data/leadership';
@@ -483,15 +483,36 @@ export default function SingleScroll() {
             </p>
           </Reveal>
 
-          {/* Pricing Grid */}
+          {/* Pricing Grid with Shared Information (Shown ONCE per pass type) */}
           <Reveal variant="stagger" className="ss-passes-dual-grid">
-            {/* Day 1 Passes */}
+            {/* Full Event Pass / Day 1 */}
             <div className="ss-day-pass-column reveal-card">
               <div className="ss-day-col-header">
-                <span className="ss-day-pill">DAY 01</span>
-                <h3>14 OCTOBER 2026</h3>
-                <span className="ss-day-col-sub">Inauguration, Mentorship & 24H Hackathon</span>
+                <div className="ss-day-pill-row">
+                  <span className="ss-day-pill">{passSharedInfo.fullPass.title}</span>
+                  <span className="ss-access-pill-primary">{passSharedInfo.fullPass.accessLabel}</span>
+                </div>
+                <h3>{passSharedInfo.fullPass.dates}</h3>
+                <p className="ss-day-col-desc">{passSharedInfo.fullPass.description}</p>
+                
+                <div className="ss-shared-summary-box">
+                  <span className="ss-shared-title">{passSharedInfo.fullPass.inclusionsTitle}:</span>
+                  <p className="ss-shared-events-text">{passSharedInfo.fullPass.compactSummary}</p>
+                  <div className="ss-shared-benefits-row">
+                    {passSharedInfo.fullPass.benefits.map((benefit, bIdx) => (
+                      <div key={bIdx} className="ss-benefit-chip">
+                        <CheckCircle2 size={13} className="ss-benefit-check-icon" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+
+              <div className="ss-pricing-list-heading">
+                <span>{passSharedInfo.fullPass.pricingSectionLabel}</span>
+              </div>
+
               <div className="ss-pass-cards-list">
                 {day1Passes.map((pass) => {
                   const pInfo = getPassInfo(pass);
@@ -510,7 +531,7 @@ export default function SingleScroll() {
                       </div>
                       <p className="ss-pt-desc">{pass.description}</p>
                       <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
-                        <span>SELECT PASS</span>
+                        <span>REGISTER & PAY</span>
                         <ArrowRight size={14} />
                       </Link>
                     </div>
@@ -519,13 +540,34 @@ export default function SingleScroll() {
               </div>
             </div>
 
-            {/* Day 2 Passes */}
+            {/* Day 2 Pass */}
             <div className="ss-day-pass-column reveal-card">
               <div className="ss-day-col-header">
-                <span className="ss-day-pill">DAY 02</span>
-                <h3>15 OCTOBER 2026</h3>
-                <span className="ss-day-col-sub">Cyber CTF, TinyML Workshop, Pitch & Coding</span>
+                <div className="ss-day-pill-row">
+                  <span className="ss-day-pill ss-day-pill-alt">{passSharedInfo.day2Pass.title}</span>
+                  <span className="ss-access-pill-secondary">{passSharedInfo.day2Pass.accessLabel}</span>
+                </div>
+                <h3>{passSharedInfo.day2Pass.dates}</h3>
+                <p className="ss-day-col-sub">{passSharedInfo.day2Pass.description}</p>
+                
+                <div className="ss-shared-summary-box">
+                  <span className="ss-shared-title">{passSharedInfo.day2Pass.inclusionsTitle}:</span>
+                  <p className="ss-shared-events-text">{passSharedInfo.day2Pass.compactSummary}</p>
+                  <div className="ss-shared-benefits-row">
+                    {passSharedInfo.day2Pass.benefits.map((benefit, bIdx) => (
+                      <div key={bIdx} className="ss-benefit-chip">
+                        <CheckCircle2 size={13} className="ss-benefit-check-icon" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+
+              <div className="ss-pricing-list-heading">
+                <span>{passSharedInfo.day2Pass.pricingSectionLabel}</span>
+              </div>
+
               <div className="ss-pass-cards-list">
                 {day2Passes.map((pass) => {
                   const pInfo = getPassInfo(pass);
@@ -544,7 +586,7 @@ export default function SingleScroll() {
                       </div>
                       <p className="ss-pt-desc">{pass.description}</p>
                       <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
-                        <span>SELECT PASS</span>
+                        <span>REGISTER & PAY</span>
                         <ArrowRight size={14} />
                       </Link>
                     </div>
@@ -571,7 +613,7 @@ export default function SingleScroll() {
             </Reveal>
 
             <p className="ss-price-disclaimer">
-              {registrationMeta.footnote}
+              {registrationMeta.footnote} Payment portals will be opened following formal institutional sanction. KKonfHub registration links will be published directly on this portal.
             </p>
 
             <div className="ss-final-reg-action">
@@ -1470,6 +1512,109 @@ export default function SingleScroll() {
           font-family: var(--font-heading);
           font-size: 1.35rem;
           margin-bottom: 0.3rem;
+        }
+
+        
+        .ss-day-pill-row {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          margin-bottom: 0.5rem;
+        }
+
+        .ss-day-pill-alt {
+          background: rgba(138, 43, 226, 0.2);
+          border: 1px solid rgba(138, 43, 226, 0.4);
+          color: var(--purple-light);
+        }
+
+        .ss-access-pill-primary {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #ffffff;
+          background: rgba(138, 43, 226, 0.35);
+          border: 1px solid rgba(168, 85, 247, 0.45);
+          padding: 0.2rem 0.5rem;
+          border-radius: 3px;
+        }
+
+        .ss-access-pill-secondary {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: var(--text-secondary);
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 0.2rem 0.5rem;
+          border-radius: 3px;
+        }
+
+        .ss-day-col-desc {
+          font-size: 0.85rem;
+          color: var(--text-secondary, #d1d5db);
+          margin-bottom: 0.75rem;
+          line-height: 1.4;
+        }
+
+        .ss-shared-summary-box {
+          margin-top: 0.85rem;
+          background: rgba(138, 43, 226, 0.06);
+          border: 1px solid rgba(138, 43, 226, 0.2);
+          border-radius: 6px;
+          padding: 0.85rem 1rem;
+        }
+
+        .ss-shared-title {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light);
+          display: block;
+          margin-bottom: 0.35rem;
+          font-weight: 700;
+        }
+
+        .ss-shared-events-text {
+          font-size: 0.82rem;
+          color: var(--text-secondary, #d1d5db);
+          line-height: 1.45;
+          margin: 0 0 0.65rem 0;
+        }
+
+        .ss-shared-benefits-row {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          padding-top: 0.5rem;
+          border-top: 1px dashed rgba(138, 43, 226, 0.2);
+        }
+
+        .ss-benefit-chip {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.78rem;
+          color: #f3f4f6;
+          font-weight: 500;
+        }
+
+        .ss-benefit-check-icon {
+          color: #22C55E;
+          flex-shrink: 0;
+        }
+
+        .ss-pricing-list-heading {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          letter-spacing: 0.1em;
+          color: var(--text-tertiary);
+          margin: 1.25rem 0 0.85rem 0;
+          text-transform: uppercase;
+          font-weight: 700;
         }
 
         .ss-day-col-sub {

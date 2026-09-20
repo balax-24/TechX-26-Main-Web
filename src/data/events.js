@@ -499,14 +499,18 @@ export const ticketPricing = {
   sectionTitle: "REGISTRATION / TICKET PRICING",
   subtitle: "Indicative fee structure for conference and event delegate passes across Day 1 and Day 2.",
   day1: {
-    dayNumber: "DAY 1",
-    date: "14 OCTOBER 2026",
-    title: "DAY 1 PASS",
+    dayNumber: "DAY 1 + DAY 2",
+    accessLabel: "DAY 1 + DAY 2 ACCESS",
+    date: "14–15 OCTOBER 2026",
+    title: "FULL EVENT PASS",
     eventsIncluded: [
-      "Inauguration & Event Briefing (09:00 AM)",
-      "Nano Mentoring Session (10:00 AM)",
-      "IEEE Computer Society Membership Session (10:00 AM)",
-      "VerdictX 24-Hour Hackathon Entry (01:30 PM, Continues Overnight)"
+      "Full 2-Day Conference Entry (14–15 October 2026)",
+      "Inauguration & Event Briefing",
+      "Nano Mentoring & IEEE CS Membership Session",
+      "VerdictX: Code & Conquer — 24-Hour Hackathon",
+      "All Day 2 Tracks, CTF & Keynotes Included",
+      "Food and refreshments will be provided",
+      "Certificates will be provided"
     ],
     tiers: [
       {
@@ -530,14 +534,18 @@ export const ticketPricing = {
     ]
   },
   day2: {
-    dayNumber: "DAY 2",
+    dayNumber: "DAY 2 ONLY",
+    accessLabel: "DAY 2 ACCESS ONLY",
     date: "15 OCTOBER 2026",
     title: "DAY 2 PASS",
     eventsIncluded: [
-      "Sherlock & Syntax Cybersecurity CTF (09:00 AM – 12:15 PM)",
-      "Edge AI & TinyML Hands-on Workshop (10:45 AM – 12:15 PM)",
-      "Idea Alchemy Startup Pitch OR CodeNomics Programming (01:15 PM)",
-      "Grand Valedictory Ceremony & Awards Distribution (03:30 PM)"
+      "Day 2 Conference Entry (15 October 2026 Only)",
+      "Sherlock & Syntax — Cybersecurity CTF",
+      "Edge AI & TinyML: AI Beyond the Cloud",
+      "Idea Alchemy (Startup Pitch) OR CodeNomics",
+      "Grand Valedictory Ceremony & Awards Distribution",
+      "Food and refreshments will be provided",
+      "Certificates will be provided"
     ],
     tiers: [
       {

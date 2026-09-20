@@ -16,9 +16,12 @@ import {
   Award,
   ExternalLink,
   ChevronRight,
-  Info
+  Info,
+  Sparkles,
+  Layers,
+  Gift
 } from 'lucide-react';
-import { registrationOptions, registrationMeta } from '../data/registration';
+import { registrationOptions, registrationMeta, passSharedInfo } from '../data/registration';
 import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 import { eventsData } from '../data/events';
 import Reveal from '../components/Reveal';
@@ -28,17 +31,29 @@ export default function Register() {
   const { isOfferActive, hasEnded, getPassInfo, offerConfig } = useRegistrationPricing();
   const [searchParams, setSearchParams] = useSearchParams();
   const eventParam = searchParams.get('event');
+  const passParam = searchParams.get('pass');
 
   // Find referenced event if provided via query param
   const matchedEvent = eventParam 
     ? eventsData.find(e => e.id.toLowerCase() === eventParam.toLowerCase()) 
     : null;
 
-  // Selected pass for modal / checkout flow
+  // Selected pass for details / checkout flow
   const [selectedPass, setSelectedPass] = useState(null);
   const [step, setStep] = useState('list'); // 'list' | 'details' | 'coming-soon'
 
-  // Optional participant details form state (no backend invented)
+  // Auto-select pass if passed via query param on initial load
+  useEffect(() => {
+    if (passParam) {
+      const found = registrationOptions.find(p => p.id.toLowerCase() === passParam.toLowerCase());
+      if (found) {
+        setSelectedPass(found);
+        setStep('details');
+      }
+    }
+  }, [passParam]);
+
+  // Optional participant details form state
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -67,13 +82,13 @@ export default function Register() {
 
     if (!selectedPass) return;
 
-    // IF paymentUrl exists: redirect to the configured payment URL
+    // IF real paymentUrl exists: redirect to the configured KKonfHub payment URL
     if (selectedPass.paymentUrl && selectedPass.paymentUrl.trim() !== '') {
       window.location.href = selectedPass.paymentUrl;
       return;
     }
 
-    // IF paymentUrl is empty: show clean coming soon screen
+    // IF paymentUrl is empty: show clean coming soon screen (no fake payments)
     setStep('coming-soon');
   };
 
@@ -85,6 +100,8 @@ export default function Register() {
 
   const day1Passes = registrationOptions.filter(opt => opt.dayNumber === 1);
   const day2Passes = registrationOptions.filter(opt => opt.dayNumber === 2);
+  const fullPassShared = passSharedInfo.fullPass;
+  const day2PassShared = passSharedInfo.day2Pass;
 
   return (
     <div className="register-page-root">
@@ -131,8 +148,8 @@ export default function Register() {
                 </h2>
                 <p className="context-desc">
                   {matchedEvent 
-                    ? `This event is scheduled on ${matchedEvent.eventDate} (${matchedEvent.dayLabel}). Entry is included with any ${matchedEvent.dayLabel} Pass below.`
-                    : `Please select the appropriate Day Pass below to register for this track.`
+                    ? `This event is scheduled on ${matchedEvent.eventDate} (${matchedEvent.dayLabel}). Entry is included with any ${matchedEvent.dayLabel === 'Day 1' ? 'Full Event' : 'Day 2'} Pass below.`
+                    : `Please select the appropriate Pass below to register for this track.`
                   }
                 </p>
               </div>
@@ -146,7 +163,6 @@ export default function Register() {
             </div>
           )}
         </Reveal>
-
         {/* ============================================================
             2. PASS LISTING VIEW (DAY 1 & DAY 2)
         ============================================================ */}
@@ -156,25 +172,78 @@ export default function Register() {
             <RegistrationOffer />
 
             {/* --------------------------------------------------
-                DAY 1 — 14 OCTOBER 2026
+                1. FULL EVENT PASS SECTION (14–15 OCTOBER 2026)
+                DAY 1 + DAY 2 ACCESS
             -------------------------------------------------- */}
             <section 
-              className={`day-section day-1-section ${matchedEvent && matchedEvent.day === 1 ? 'day-section-highlighted' : ''}`}
-              aria-labelledby="day-1-heading"
+              className={`day-section full-event-section ${matchedEvent && matchedEvent.day === 1 ? 'day-section-highlighted' : ''}`}
+              aria-labelledby="full-event-heading"
             >
-              <Reveal variant="header" className="day-section-header">
-                <div className="day-header-left">
-                  <span className="day-badge">PHASE 01</span>
-                  <h2 id="day-1-heading" className="day-heading">
-                    DAY 1 REGISTRATION<br />
-                    <span className="day-sub-date">14 OCTOBER 2026</span>
+              {/* Pass Main Header */}
+              <Reveal variant="header" className="pass-section-header">
+                <div className="pass-header-left">
+                  <div className="pass-badge-row">
+                    <span className="pass-phase-badge">PHASE 01</span>
+                    <span className="pass-access-pill-primary">DAY 1 + DAY 2 ACCESS</span>
+                  </div>
+                  <h2 id="full-event-heading" className="pass-main-heading">
+                    {fullPassShared.title}
                   </h2>
-                </div>
-                <div className="day-header-right">
-                  <span className="day-meta-pill">INAUGURATION • NANO MENTORING • VERDICTX HACKATHON</span>
+                  <span className="pass-header-dates">{fullPassShared.dates}</span>
+                  <p className="pass-header-desc">{fullPassShared.description}</p>
                 </div>
               </Reveal>
 
+              {/* SHARED INFORMATION BLOCK (Shown ONCE above the 3 pricing cards) */}
+              <Reveal variant="card" className="shared-info-panel" role="region" aria-label="Full Event Pass Inclusions and Benefits">
+                {/* Inclusions Area */}
+                <div className="shared-inclusions-col">
+                  <div className="shared-block-header">
+                    <Layers size={16} className="shared-header-icon" />
+                    <h3 className="shared-block-title">{fullPassShared.inclusionsTitle}</h3>
+                  </div>
+
+                  <div className="shared-schedule-dual-grid">
+                    {fullPassShared.scheduleGroups.map((group, gIdx) => (
+                      <div key={gIdx} className="shared-day-group">
+                        <span className="shared-day-label">{group.dayHeading}</span>
+                        <ul className="shared-events-list">
+                          {group.events.map((evt, eIdx) => (
+                            <li key={eIdx}>
+                              <span className="shared-bullet">•</span>
+                              <span className="shared-event-name">{evt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Additional Benefits Area (Shown ONCE) */}
+                <div className="shared-benefits-col">
+                  <div className="shared-block-header">
+                    <Gift size={16} className="shared-header-icon" />
+                    <h3 className="shared-block-title">{fullPassShared.benefitsTitle}</h3>
+                  </div>
+                  <ul className="shared-benefits-list">
+                    {fullPassShared.benefits.map((benefit, bIdx) => (
+                      <li key={bIdx}>
+                        <CheckCircle2 size={16} className="shared-benefit-check" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+
+              {/* Day 1 Pricing Sub-Header */}
+              <div className="pricing-sub-header">
+                <h3 className="pricing-sub-title">{fullPassShared.pricingSectionLabel}</h3>
+                <span className="pricing-sub-note">Select your delegate category below to proceed to registration.</span>
+              </div>
+
+              {/* Day 1 Pricing Cards (ONLY: category, price, offer indicator, register button) */}
               <Reveal variant="stagger" className="passes-grid">
                 {day1Passes.map((pass) => {
                   const pInfo = getPassInfo(pass);
@@ -183,9 +252,9 @@ export default function Register() {
                       <div className="pass-card-top">
                         <div className="pass-label-strip">
                           <span className="pass-label-tag">{pass.label}</span>
-                          <span className="pass-day-indicator">14 OCT</span>
+                          <span className="pass-day-indicator">14–15 OCT</span>
                         </div>
-                        <h3 className="pass-category-title">{pass.category}</h3>
+                        <h4 className="pass-category-title">{pass.category}</h4>
                         <p className="pass-category-desc">{pass.description}</p>
                       </div>
 
@@ -208,23 +277,11 @@ export default function Register() {
                         )}
                       </div>
 
-                      <div className="pass-features-block">
-                        <span className="features-label">PASS INCLUDES:</span>
-                        <ul className="features-list">
-                          {pass.features.map((feat, idx) => (
-                            <li key={idx}>
-                              <CheckCircle2 size={14} className="feature-check-icon" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
                       <div className="pass-card-footer">
                         <button 
                           onClick={() => handleSelectPass(pass)} 
                           className="btn btn-primary pass-action-btn"
-                          aria-label={`Register & Pay for Day 1 ${pass.category} at ${pInfo.displayPrice}`}
+                          aria-label={`Register & Pay for Full Event Pass ${pass.category} at ${pInfo.displayPrice}`}
                         >
                           <span>REGISTER & PAY</span>
                           <ArrowRight size={16} />
@@ -242,27 +299,78 @@ export default function Register() {
               <span className="divider-label">CONFERENCE TIMELINE CONTINUES</span>
               <div className="divider-line" />
             </div>
-
             {/* --------------------------------------------------
-                DAY 2 — 15 OCTOBER 2026
+                2. DAY 2 PASS SECTION (15 OCTOBER 2026)
+                DAY 2 ACCESS ONLY
             -------------------------------------------------- */}
             <section 
               className={`day-section day-2-section ${matchedEvent && matchedEvent.day === 2 ? 'day-section-highlighted' : ''}`}
               aria-labelledby="day-2-heading"
             >
-              <Reveal variant="header" className="day-section-header">
-                <div className="day-header-left">
-                  <span className="day-badge day-badge-alt">PHASE 02</span>
-                  <h2 id="day-2-heading" className="day-heading">
-                    DAY 2 REGISTRATION<br />
-                    <span className="day-sub-date">15 OCTOBER 2026</span>
+              {/* Pass Main Header */}
+              <Reveal variant="header" className="pass-section-header">
+                <div className="pass-header-left">
+                  <div className="pass-badge-row">
+                    <span className="pass-phase-badge day-badge-alt">PHASE 02</span>
+                    <span className="pass-access-pill-secondary">DAY 2 ACCESS ONLY</span>
+                  </div>
+                  <h2 id="day-2-heading" className="pass-main-heading">
+                    {day2PassShared.title}
                   </h2>
-                </div>
-                <div className="day-header-right">
-                  <span className="day-meta-pill">CYBERSECURITY CTF • TINYML • STARTUP PITCH • VALEDICTORY</span>
+                  <span className="pass-header-dates">{day2PassShared.dates}</span>
+                  <p className="pass-header-desc">{day2PassShared.description}</p>
                 </div>
               </Reveal>
 
+              {/* SHARED INFORMATION BLOCK (Shown ONCE above the 3 pricing cards) */}
+              <Reveal variant="card" className="shared-info-panel" role="region" aria-label="Day 2 Pass Inclusions and Benefits">
+                {/* Inclusions Area */}
+                <div className="shared-inclusions-col">
+                  <div className="shared-block-header">
+                    <Layers size={16} className="shared-header-icon" />
+                    <h3 className="shared-block-title">{day2PassShared.inclusionsTitle}</h3>
+                  </div>
+
+                  <div className="shared-schedule-single-grid">
+                    {day2PassShared.scheduleGroups.map((group, gIdx) => (
+                      <div key={gIdx} className="shared-day-group">
+                        <ul className="shared-events-list">
+                          {group.events.map((evt, eIdx) => (
+                            <li key={eIdx}>
+                              <span className="shared-bullet">•</span>
+                              <span className="shared-event-name">{evt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Additional Benefits Area (Shown ONCE) */}
+                <div className="shared-benefits-col">
+                  <div className="shared-block-header">
+                    <Gift size={16} className="shared-header-icon" />
+                    <h3 className="shared-block-title">{day2PassShared.benefitsTitle}</h3>
+                  </div>
+                  <ul className="shared-benefits-list">
+                    {day2PassShared.benefits.map((benefit, bIdx) => (
+                      <li key={bIdx}>
+                        <CheckCircle2 size={16} className="shared-benefit-check" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+
+              {/* Day 2 Pricing Sub-Header */}
+              <div className="pricing-sub-header">
+                <h3 className="pricing-sub-title">{day2PassShared.pricingSectionLabel}</h3>
+                <span className="pricing-sub-note">Select your delegate category below to proceed to registration.</span>
+              </div>
+
+              {/* Day 2 Pricing Cards (ONLY: category, price, offer indicator, register button) */}
               <Reveal variant="stagger" className="passes-grid">
                 {day2Passes.map((pass) => {
                   const pInfo = getPassInfo(pass);
@@ -273,7 +381,7 @@ export default function Register() {
                           <span className="pass-label-tag pass-label-alt">{pass.label}</span>
                           <span className="pass-day-indicator">15 OCT</span>
                         </div>
-                        <h3 className="pass-category-title">{pass.category}</h3>
+                        <h4 className="pass-category-title">{pass.category}</h4>
                         <p className="pass-category-desc">{pass.description}</p>
                       </div>
 
@@ -294,18 +402,6 @@ export default function Register() {
                         ) : (
                           <span className="pass-tax-note">Indicative proposal tier</span>
                         )}
-                      </div>
-
-                      <div className="pass-features-block">
-                        <span className="features-label">PASS INCLUDES:</span>
-                        <ul className="features-list">
-                          {pass.features.map((feat, idx) => (
-                            <li key={idx}>
-                              <CheckCircle2 size={14} className="feature-check-icon" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
                       </div>
 
                       <div className="pass-card-footer">
@@ -324,21 +420,21 @@ export default function Register() {
               </Reveal>
             </section>
 
-            {/* Official Pricing Footnote */}
+            {/* Official Payment Information Notice */}
             <Reveal variant="pop" className="register-footnote-box" role="note">
               <AlertCircle size={18} className="footnote-alert-icon" />
               <div className="footnote-content">
+                <span className="footnote-notice-title">PAYMENT INFORMATION</span>
                 <p className="footnote-main-text">
                   {registrationMeta.footnote}
                 </p>
                 <p className="footnote-sub-text">
-                  Payment portals will be opened following formal institutional sanction. Razorpay Payment Links will be published directly on this portal.
+                  Payment portals will be opened following formal institutional sanction. KKonfHub registration links will be published directly on this portal.
                 </p>
               </div>
             </Reveal>
           </div>
         )}
-
         {/* ============================================================
             3. OPTIONAL PARTICIPANT DETAILS FORM STEP
         ============================================================ */}
@@ -470,10 +566,10 @@ export default function Register() {
                     >
                       <option value="">General Conference Access</option>
                       {eventsData
-                        .filter(e => e.day === selectedPass.dayNumber)
+                        .filter(e => selectedPass.dayNumber === 1 || e.day === selectedPass.dayNumber)
                         .map(e => (
                           <option key={e.id} value={e.title}>
-                            {e.title} ({e.time})
+                            {e.title} (Day {e.day} • {e.time})
                           </option>
                         ))}
                     </select>
@@ -492,7 +588,7 @@ export default function Register() {
                       onClick={handleProceedToPayment}
                       className="form-skip-btn"
                     >
-                      Skip details & continue directly →
+                      Skip details & continue directly  
                     </button>
                   </div>
                 </form>
@@ -501,10 +597,12 @@ export default function Register() {
               {/* Right Column: Order Summary */}
               {(() => {
                 const selectedInfo = selectedPass ? getPassInfo(selectedPass) : null;
+                const shared = selectedPass.dayNumber === 1 ? fullPassShared : day2PassShared;
                 return (
                   <aside className="details-summary-card" aria-labelledby="summary-heading">
                     <span className="summary-eyebrow">ORDER SUMMARY</span>
-                    <h3 id="summary-heading" className="summary-pass-name">{selectedPass.label}</h3>
+                    <h3 id="summary-heading" className="summary-pass-name">{selectedPass.passType || selectedPass.label}</h3>
+                    <div className="summary-access-badge">{selectedPass.accessLabel}</div>
                     <span className="summary-category">{selectedPass.category}</span>
                     <span className="summary-date-line">{selectedPass.date}</span>
 
@@ -530,10 +628,18 @@ export default function Register() {
                     <div className="summary-inclusions">
                       <span className="inclusions-title">INCLUSIONS:</span>
                       <ul>
-                        {selectedPass.features.map((f, i) => (
-                          <li key={i}>
-                            <CheckCircle2 size={13} color="var(--purple-light)" />
-                            <span>{f}</span>
+                        {shared.scheduleGroups.map((g) => (
+                          g.events.map((feat, i) => (
+                            <li key={`${g.dayHeading}-${i}`}>
+                              <CheckCircle2 size={13} color="var(--purple-light)" />
+                              <span>{feat}</span>
+                            </li>
+                          ))
+                        ))}
+                        {shared.benefits.map((b, i) => (
+                          <li key={`b-${i}`} className="summary-benefit-item">
+                            <CheckCircle2 size={13} color="#22C55E" />
+                            <span>{b}</span>
                           </li>
                         ))}
                       </ul>
@@ -593,47 +699,45 @@ export default function Register() {
 
               <div className="coming-soon-footnote">
                 <Info size={14} />
-                <span>Official Razorpay payment links will be activated once organizer approvals are completed.</span>
+                <span>Payment portals will be opened following formal institutional sanction. KKonfHub registration links will be published directly on this portal.</span>
               </div>
             </div>
           </Reveal>
         )}
-      </div>
 
-      {/* ============================================================
-          SCOPED STYLES
-      ============================================================ */}
+      </div>
       <style>{`
+        /* ============================================================
+           REGISTER PAGE LAYOUT & FOUNDATIONS
+        ============================================================ */
         .register-page-root {
-          position: relative;
           min-height: 100vh;
-          background-color: var(--black, #000000);
-          color: var(--text-primary, #ffffff);
-          padding-top: calc(var(--nav-height, 70px) + 2rem);
-          padding-bottom: 6rem;
+          background: #030305;
+          color: #f3f4f6;
+          position: relative;
+          padding: 8rem 0 6rem 0;
           overflow: hidden;
         }
 
-        /* Subtle Technical Grid Background */
         .register-grid-bg {
           position: absolute;
           inset: 0;
           background-image: 
-            linear-gradient(rgba(138, 43, 226, 0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(138, 43, 226, 0.04) 1px, transparent 1px);
-          background-size: 48px 48px;
+            linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+          background-size: 40px 40px;
           pointer-events: none;
           z-index: 0;
         }
 
         .register-purple-glow {
           position: absolute;
-          top: 0;
+          top: 5%;
           left: 50%;
           transform: translateX(-50%);
           width: 800px;
-          height: 380px;
-          background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 70%);
+          height: 400px;
+          background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, rgba(3, 3, 5, 0) 70%);
           pointer-events: none;
           z-index: 0;
         }
@@ -641,73 +745,70 @@ export default function Register() {
         .register-container {
           position: relative;
           z-index: 1;
-          max-width: 1240px;
+          max-width: 1200px;
           margin: 0 auto;
           padding: 0 1.5rem;
         }
 
-        /* ============================================================
-           HEADER STYLES
-        ============================================================ */
+        /* Header Architecture */
         .register-header {
           text-align: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3.5rem;
         }
 
         .register-eyebrow-strip {
           display: inline-flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.65rem;
           font-family: var(--font-mono, monospace);
           font-size: 0.75rem;
           letter-spacing: 0.16em;
           color: var(--purple-light, #c084fc);
-          margin-bottom: 1.25rem;
-          text-transform: uppercase;
+          margin-bottom: 1rem;
         }
 
         .eyebrow-badge {
-          background: rgba(138, 43, 226, 0.15);
-          border: 1px solid rgba(138, 43, 226, 0.35);
-          padding: 0.25rem 0.75rem;
+          background: rgba(138, 43, 226, 0.12);
+          border: 1px solid rgba(138, 43, 226, 0.3);
+          padding: 0.25rem 0.65rem;
           border-radius: 4px;
         }
 
         .eyebrow-sep {
-          color: var(--text-tertiary, #666666);
+          color: rgba(255, 255, 255, 0.2);
         }
 
         .eyebrow-meta {
-          color: var(--text-secondary, #a3a3a3);
+          color: var(--text-secondary, #9ca3af);
         }
 
         .register-main-title {
           font-family: var(--font-display, sans-serif);
-          font-size: clamp(2.5rem, 6vw, 4.5rem);
+          font-size: clamp(2.4rem, 5vw, 4rem);
           font-weight: 800;
           letter-spacing: 0.02em;
-          line-height: 1.05;
-          margin: 0 0 1.25rem 0;
-          text-transform: uppercase;
           color: #ffffff;
+          line-height: 1.1;
+          margin: 0 0 1rem 0;
+          text-transform: uppercase;
         }
 
         .register-subtitle-box {
-          display: inline-flex;
+          display: flex;
           align-items: center;
           justify-content: center;
           flex-wrap: wrap;
-          gap: 0.75rem 1rem;
+          gap: 1rem;
           font-family: var(--font-mono, monospace);
-          font-size: 0.9rem;
-          color: var(--text-secondary, #a3a3a3);
-          margin-bottom: 1.5rem;
+          font-size: 0.88rem;
+          color: var(--text-secondary, #d1d5db);
+          margin-bottom: 1.25rem;
         }
 
         .subtitle-item {
-          display: inline-flex;
+          display: flex;
           align-items: center;
-          gap: 0.45rem;
+          gap: 0.5rem;
         }
 
         .subtitle-icon {
@@ -715,19 +816,19 @@ export default function Register() {
         }
 
         .subtitle-dot {
-          color: var(--text-tertiary, #555555);
+          color: rgba(255, 255, 255, 0.25);
         }
 
         .register-intro-text {
-          max-width: 720px;
+          max-width: 680px;
           margin: 0 auto;
           font-family: var(--font-sans, sans-serif);
-          font-size: 1.05rem;
+          font-size: 1rem;
           line-height: 1.6;
-          color: var(--text-secondary, #d1d5db);
+          color: var(--text-secondary, #9ca3af);
         }
 
-        /* Event Specific Banner */
+        /* Event Context Banner */
         .event-context-banner {
           margin-top: 2.25rem;
           background: rgba(138, 43, 226, 0.08);
@@ -790,7 +891,7 @@ export default function Register() {
         }
 
         /* ============================================================
-           DAY SECTIONS & HEADINGS
+           PASS SECTIONS & HEADINGS
         ============================================================ */
         .day-section {
           margin-bottom: 4rem;
@@ -800,24 +901,26 @@ export default function Register() {
           position: relative;
         }
 
-        .day-section-header {
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 1rem;
+        .pass-section-header {
           border-bottom: 1px solid rgba(138, 43, 226, 0.25);
-          padding-bottom: 1rem;
-          margin-bottom: 2rem;
+          padding-bottom: 1.25rem;
+          margin-bottom: 1.75rem;
         }
 
-        .day-header-left {
+        .pass-header-left {
           display: flex;
           flex-direction: column;
-          gap: 0.4rem;
+          gap: 0.5rem;
         }
 
-        .day-badge {
+        .pass-badge-row {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+
+        .pass-phase-badge {
           font-family: var(--font-mono, monospace);
           font-size: 0.7rem;
           letter-spacing: 0.16em;
@@ -827,7 +930,30 @@ export default function Register() {
           display: inline-block;
           padding: 0.2rem 0.6rem;
           border-radius: 4px;
-          width: fit-content;
+        }
+
+        .pass-access-pill-primary {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #ffffff;
+          background: linear-gradient(90deg, rgba(138, 43, 226, 0.35), rgba(168, 85, 247, 0.25));
+          border: 1px solid rgba(168, 85, 247, 0.45);
+          padding: 0.2rem 0.75rem;
+          border-radius: 4px;
+        }
+
+        .pass-access-pill-secondary {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 0.2rem 0.75rem;
+          border-radius: 4px;
         }
 
         .day-badge-alt {
@@ -836,39 +962,210 @@ export default function Register() {
           border-color: rgba(138, 43, 226, 0.35);
         }
 
-        .day-heading {
+        .pass-main-heading {
           font-family: var(--font-display, sans-serif);
-          font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-          font-weight: 700;
-          letter-spacing: 0.03em;
+          font-size: clamp(2rem, 3.8vw, 2.75rem);
+          font-weight: 800;
+          letter-spacing: 0.02em;
           line-height: 1.1;
           color: #ffffff;
           margin: 0;
           text-transform: uppercase;
         }
 
-        .day-sub-date {
+        .pass-header-dates {
           font-family: var(--font-mono, monospace);
-          font-size: 0.95rem;
+          font-size: 1rem;
           color: var(--purple-light, #c084fc);
           letter-spacing: 0.1em;
           font-weight: 600;
           display: inline-block;
-          margin-top: 0.25rem;
         }
 
-        .day-header-right {
+        .pass-header-desc {
+          font-family: var(--font-sans, sans-serif);
+          font-size: 0.95rem;
+          color: var(--text-secondary, #d1d5db);
+          margin: 0;
+          max-width: 680px;
+          line-height: 1.5;
+        }
+        /* ============================================================
+           SHARED INFORMATION BLOCK (Shown ONCE per registration type)
+        ============================================================ */
+        .shared-info-panel {
+          background: #08080c;
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          border-radius: 8px;
+          padding: 2rem 2.25rem;
+          margin-bottom: 2rem;
+          display: grid;
+          grid-template-columns: 2.2fr 1fr;
+          gap: 2.5rem;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .shared-info-panel::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.8), transparent);
+        }
+
+        .shared-inclusions-col {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .shared-block-header {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .shared-header-icon {
+          color: var(--purple-light, #c084fc);
+        }
+
+        .shared-block-title {
           font-family: var(--font-mono, monospace);
-          font-size: 0.75rem;
-          letter-spacing: 0.1em;
-          color: var(--text-tertiary, #888888);
+          font-size: 0.78rem;
+          letter-spacing: 0.16em;
+          color: var(--purple-light, #c084fc);
+          margin: 0;
+          text-transform: uppercase;
+          font-weight: 700;
         }
 
-        .day-meta-pill {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          padding: 0.4rem 0.85rem;
-          border-radius: 4px;
+        .shared-schedule-dual-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+        }
+
+        .shared-schedule-single-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .shared-day-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.6rem;
+        }
+
+        .shared-day-label {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.72rem;
+          letter-spacing: 0.1em;
+          color: #ffffff;
+          font-weight: 700;
+          background: rgba(255, 255, 255, 0.05);
+          border-left: 2px solid var(--purple-light, #c084fc);
+          padding: 0.25rem 0.5rem;
+          border-radius: 0 4px 4px 0;
+          display: inline-block;
+          width: fit-content;
+        }
+
+        .shared-events-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.45rem;
+        }
+
+        .shared-events-list li {
+          display: flex;
+          align-items: baseline;
+          gap: 0.5rem;
+          font-family: var(--font-sans, sans-serif);
+          font-size: 0.88rem;
+          color: var(--text-secondary, #d1d5db);
+          line-height: 1.45;
+        }
+
+        .shared-bullet {
+          color: var(--purple-light, #c084fc);
+          font-weight: bold;
+          flex-shrink: 0;
+        }
+
+        .shared-event-name {
+          flex: 1;
+        }
+
+        /* Benefits Column */
+        .shared-benefits-col {
+          display: flex;
+          flex-direction: column;
+          background: rgba(138, 43, 226, 0.04);
+          border: 1px solid rgba(138, 43, 226, 0.16);
+          border-radius: 6px;
+          padding: 1.25rem 1.5rem;
+        }
+
+        .shared-benefits-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem;
+        }
+
+        .shared-benefits-list li {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          font-family: var(--font-sans, sans-serif);
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #f3f4f6;
+          line-height: 1.4;
+        }
+
+        .shared-benefit-check {
+          color: #22C55E;
+          flex-shrink: 0;
+        }
+
+        /* Pricing Sub-Header */
+        .pricing-sub-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.65rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .pricing-sub-title {
+          font-family: var(--font-display, sans-serif);
+          font-size: 1.2rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: #ffffff;
+          margin: 0;
+          text-transform: uppercase;
+        }
+
+        .pricing-sub-note {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.76rem;
+          color: var(--text-tertiary, #9ca3af);
+          letter-spacing: 0.04em;
         }
 
         /* Divider Strip */
@@ -893,9 +1190,8 @@ export default function Register() {
           text-transform: uppercase;
           white-space: nowrap;
         }
-
         /* ============================================================
-           PASSES GRID (3 Desktop, 2 Tablet, 1 Mobile)
+           PASSES PRICING CARDS (Compact, Clean, ZERO Event Repetition)
         ============================================================ */
         .passes-grid {
           display: grid;
@@ -904,12 +1200,21 @@ export default function Register() {
         }
 
         @media (max-width: 1024px) {
+          .shared-info-panel {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+          }
           .passes-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
         @media (max-width: 640px) {
+          .shared-schedule-dual-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
           .passes-grid {
             grid-template-columns: 1fr;
           }
@@ -921,7 +1226,7 @@ export default function Register() {
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-top: 2px solid rgba(138, 43, 226, 0.5);
           border-radius: 8px;
-          padding: 2rem 1.75rem;
+          padding: 1.75rem 1.6rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -936,14 +1241,14 @@ export default function Register() {
         }
 
         .pass-card-top {
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
 
         .pass-label-strip {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 0.85rem;
+          margin-bottom: 0.75rem;
         }
 
         .pass-label-tag {
@@ -974,44 +1279,45 @@ export default function Register() {
 
         .pass-category-title {
           font-family: var(--font-display, sans-serif);
-          font-size: 1.35rem;
+          font-size: 1.25rem;
           font-weight: 700;
           letter-spacing: 0.02em;
           color: #ffffff;
-          margin: 0 0 0.5rem 0;
+          margin: 0 0 0.45rem 0;
           line-height: 1.25;
         }
 
         .pass-category-desc {
           font-family: var(--font-sans, sans-serif);
-          font-size: 0.88rem;
-          line-height: 1.5;
+          font-size: 0.85rem;
+          line-height: 1.45;
           color: var(--text-secondary, #9ca3af);
           margin: 0;
-          min-height: 2.7rem;
+          min-height: 2.5rem;
         }
 
         /* Pricing Block */
         .pass-pricing-block {
-          padding: 1.25rem 0;
+          padding: 1.15rem 0;
           border-top: 1px dashed rgba(255, 255, 255, 0.1);
           border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.4rem;
         }
 
         .pass-price-display {
           display: flex;
           align-items: baseline;
           gap: 0.65rem;
+          margin-bottom: 0.4rem;
           flex-wrap: wrap;
         }
 
         .pass-price-num {
           font-family: var(--font-display, sans-serif);
-          font-size: 2.4rem;
+          font-size: 2.1rem;
           font-weight: 800;
-          letter-spacing: -0.01em;
           color: #ffffff;
+          letter-spacing: -0.02em;
         }
 
         .pass-price-struck {
@@ -1020,85 +1326,40 @@ export default function Register() {
           color: var(--text-tertiary, #888888);
           text-decoration: line-through;
           text-decoration-color: rgba(138, 43, 226, 0.7);
-          opacity: 0.85;
+          opacity: 0.8;
           user-select: none;
         }
 
         .pass-price-sub {
           font-family: var(--font-mono, monospace);
-          font-size: 0.78rem;
+          font-size: 0.72rem;
           color: var(--text-tertiary, #888888);
-          letter-spacing: 0.06em;
         }
 
         .pass-save-strip {
-          margin-top: 0.35rem;
+          display: flex;
+          align-items: center;
         }
 
         .pass-save-pill {
-          display: inline-block;
           font-family: var(--font-mono, monospace);
           font-size: 0.68rem;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           font-weight: 700;
           color: #22C55E;
           background: rgba(34, 197, 94, 0.1);
-          border: 1px solid rgba(34, 197, 94, 0.28);
-          padding: 0.15rem 0.5rem;
+          border: 1px solid rgba(34, 197, 94, 0.25);
+          padding: 0.2rem 0.55rem;
           border-radius: 4px;
-          text-transform: uppercase;
         }
 
         .pass-tax-note {
-          display: block;
           font-family: var(--font-mono, monospace);
-          font-size: 0.72rem;
-          color: var(--purple-light, #c084fc);
-          letter-spacing: 0.06em;
-          margin-top: 0.25rem;
-        }
-
-        /* Features */
-        .pass-features-block {
-          flex: 1;
-          margin-bottom: 2rem;
-        }
-
-        .features-label {
-          font-family: var(--font-mono, monospace);
-          font-size: 0.7rem;
-          letter-spacing: 0.14em;
+          font-size: 0.68rem;
           color: var(--text-tertiary, #777777);
-          display: block;
-          margin-bottom: 0.85rem;
+          letter-spacing: 0.06em;
         }
 
-        .features-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0.65rem;
-        }
-
-        .features-list li {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.6rem;
-          font-family: var(--font-sans, sans-serif);
-          font-size: 0.85rem;
-          line-height: 1.45;
-          color: var(--text-secondary, #d1d5db);
-        }
-
-        .feature-check-icon {
-          color: var(--purple-light, #c084fc);
-          flex-shrink: 0;
-          margin-top: 3px;
-        }
-
-        /* Action */
         .pass-card-footer {
           margin-top: auto;
         }
@@ -1108,20 +1369,21 @@ export default function Register() {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.65rem;
-          padding: 0.95rem 1.5rem;
+          gap: 0.5rem;
+          padding: 0.9rem 1.25rem;
           font-size: 0.88rem;
           font-weight: 600;
           letter-spacing: 0.08em;
         }
 
-        /* Footnote Box */
+        /* Footnote / Payment Notice */
         .register-footnote-box {
           margin-top: 3.5rem;
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.08);
+          border-left: 3px solid var(--purple-light, #c084fc);
           border-radius: 6px;
-          padding: 1.25rem 1.75rem;
+          padding: 1.5rem 1.75rem;
           display: flex;
           align-items: flex-start;
           gap: 1rem;
@@ -1130,35 +1392,43 @@ export default function Register() {
         .footnote-alert-icon {
           color: var(--purple-light, #c084fc);
           flex-shrink: 0;
-          margin-top: 2px;
+          margin-top: 0.15rem;
         }
 
         .footnote-content {
           flex: 1;
         }
 
+        .footnote-notice-title {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.72rem;
+          letter-spacing: 0.16em;
+          color: var(--purple-light, #c084fc);
+          display: block;
+          font-weight: 700;
+          margin-bottom: 0.35rem;
+        }
+
         .footnote-main-text {
           font-family: var(--font-mono, monospace);
-          font-size: 0.82rem;
-          color: #ffffff;
-          margin: 0 0 0.35rem 0;
+          font-size: 0.78rem;
+          color: var(--text-secondary, #d1d5db);
           line-height: 1.5;
+          margin: 0 0 0.4rem 0;
         }
 
         .footnote-sub-text {
           font-family: var(--font-sans, sans-serif);
-          font-size: 0.8rem;
-          color: var(--text-tertiary, #888888);
+          font-size: 0.84rem;
+          color: var(--text-secondary, #a3a3a3);
+          line-height: 1.5;
           margin: 0;
-          line-height: 1.4;
         }
-
         /* ============================================================
-           PARTICIPANT DETAILS FORM STEP
+           STEP 2: PARTICIPANT DETAILS FLOW
         ============================================================ */
         .details-flow-wrapper {
-          max-width: 1080px;
-          margin: 0 auto;
+          padding: 1rem 0;
         }
 
         .details-header-bar {
@@ -1167,19 +1437,21 @@ export default function Register() {
           justify-content: space-between;
           flex-wrap: wrap;
           gap: 1rem;
-          margin-bottom: 2rem;
+          margin-bottom: 2.25rem;
+          padding-bottom: 1.25rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .details-back-nav-btn {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: none;
+          border: 1px solid rgba(255, 255, 255, 0.12);
           color: var(--text-secondary, #d1d5db);
           font-family: var(--font-mono, monospace);
-          font-size: 0.78rem;
-          letter-spacing: 0.08em;
+          font-size: 0.76rem;
+          letter-spacing: 0.1em;
           padding: 0.55rem 1rem;
           border-radius: 4px;
           cursor: pointer;
@@ -1187,55 +1459,57 @@ export default function Register() {
         }
 
         .details-back-nav-btn:hover {
-          background: rgba(255, 255, 255, 0.08);
+          background: rgba(138, 43, 226, 0.15);
+          border-color: rgba(138, 43, 226, 0.4);
           color: #ffffff;
-          border-color: rgba(255, 255, 255, 0.3);
         }
 
         .details-step-badge {
           font-family: var(--font-mono, monospace);
-          font-size: 0.75rem;
+          font-size: 0.72rem;
           letter-spacing: 0.14em;
           color: var(--purple-light, #c084fc);
         }
 
         .details-grid-layout {
           display: grid;
-          grid-template-columns: 1.5fr 1fr;
-          gap: 2rem;
+          grid-template-columns: 1.6fr 1fr;
+          gap: 2.5rem;
+          align-items: flex-start;
         }
 
-        @media (max-width: 860px) {
+        @media (max-width: 900px) {
           .details-grid-layout {
             grid-template-columns: 1fr;
           }
         }
 
+        /* Form Card */
         .details-form-card {
-          background: #09090e;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: #08080c;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 8px;
-          padding: 2.25rem;
+          padding: 2.25rem 2rem;
         }
 
         .form-card-intro {
           margin-bottom: 2rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
           padding-bottom: 1.25rem;
         }
 
         .form-card-title {
           font-family: var(--font-display, sans-serif);
-          font-size: 1.4rem;
+          font-size: 1.45rem;
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 0.4rem 0;
           letter-spacing: 0.02em;
+          margin: 0 0 0.5rem 0;
         }
 
         .form-card-desc {
           font-family: var(--font-sans, sans-serif);
-          font-size: 0.88rem;
+          font-size: 0.9rem;
           color: var(--text-secondary, #9ca3af);
           margin: 0;
           line-height: 1.5;
@@ -1244,7 +1518,7 @@ export default function Register() {
         .delegate-form {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.35rem;
         }
 
         .form-field-group {
@@ -1256,7 +1530,7 @@ export default function Register() {
         .form-row-dual {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.25rem;
+          gap: 1rem;
         }
 
         @media (max-width: 600px) {
@@ -1266,40 +1540,41 @@ export default function Register() {
         }
 
         .field-label {
-          display: inline-flex;
+          display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.45rem;
           font-family: var(--font-mono, monospace);
           font-size: 0.75rem;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.06em;
           color: var(--text-secondary, #d1d5db);
         }
 
         .field-hint {
-          color: var(--text-tertiary, #777777);
+          color: var(--text-tertiary, #666666);
           font-size: 0.7rem;
         }
 
         .field-required-note {
           color: var(--purple-light, #c084fc);
-          font-size: 0.7rem;
+          font-size: 0.68rem;
+          margin-left: auto;
         }
 
         .field-input {
-          background: #030305;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          border-radius: 4px;
-          padding: 0.8rem 1rem;
-          color: #ffffff;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 6px;
+          padding: 0.85rem 1rem;
           font-family: var(--font-sans, sans-serif);
-          font-size: 0.92rem;
+          font-size: 0.9rem;
+          color: #ffffff;
+          outline: none;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .field-input:focus {
-          outline: none;
-          border-color: var(--purple-main, #8a2be2);
-          box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.25);
+          border-color: var(--purple-light, #c084fc);
+          box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
         }
 
         .field-select {
@@ -1371,7 +1646,20 @@ export default function Register() {
           font-size: 1.5rem;
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 0.2rem 0;
+          margin: 0 0 0.25rem 0;
+        }
+
+        .summary-access-badge {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.72rem;
+          letter-spacing: 0.12em;
+          color: var(--purple-light, #c084fc);
+          background: rgba(138, 43, 226, 0.12);
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          width: fit-content;
+          margin-bottom: 0.6rem;
         }
 
         .summary-category {
@@ -1474,6 +1762,11 @@ export default function Register() {
           line-height: 1.4;
         }
 
+        .summary-benefit-item {
+          font-weight: 500;
+          color: #f3f4f6 !important;
+        }
+
         .summary-guarantee-note {
           display: flex;
           align-items: center;
@@ -1486,7 +1779,7 @@ export default function Register() {
         }
 
         /* ============================================================
-           CLEAN COMING SOON SCREEN
+           CLEAN COMING SOON SCREEN (KKonfHub Gateway)
         ============================================================ */
         .coming-soon-wrapper {
           display: flex;
@@ -1583,6 +1876,8 @@ export default function Register() {
           font-size: 0.72rem;
           color: var(--text-tertiary, #888888);
           line-height: 1.4;
+          text-align: center;
+          justify-content: center;
         }
       `}</style>
     </div>
