@@ -4,6 +4,7 @@ import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
 import { partners } from '../data/partners';
 import { eventMeta } from '../data/contacts';
+import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 
 export default function Partners() {
   return (
@@ -54,6 +55,20 @@ export default function Partners() {
       {/* Main Partners Section */}
       <section className="partners-display-section">
         <div className="container">
+          {/* Organizing Society & Global 80 Years Affiliation */}
+          <Reveal variant="card" className="society-charter-panel">
+            <div className="society-charter-brand">
+              <img src={csSypLogoWhite} alt="IEEE Computer Society SYP 80 Years Official Anniversary Logo" className="society-syp-logo" />
+            </div>
+            <div className="society-charter-text">
+              <span className="charter-badge">GLOBAL PROFESSIONAL SOCIETY AFFILIATION</span>
+              <h3 className="charter-title">IEEE COMPUTER SOCIETY // CS SYP</h3>
+              <p className="charter-desc">
+                Organized under the charter of the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology in celebration of 80 years of computing innovation.
+              </p>
+            </div>
+          </Reveal>
+
           <Reveal variant="header" className="partners-block-head">
             <span className="section-eyebrow">ECOSYSTEM NETWORK</span>
             <h2 className="partners-block-title">OUR PARTNERS</h2>

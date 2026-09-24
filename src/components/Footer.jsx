@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail, MapPin, Calendar, Heart, Shield } from 'lucide-react';
 import logoImg from '../assets/logo/techx-logo-cropped.png';
+import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 import { eventMeta } from '../data/contacts';
 
 export default function Footer() {
@@ -26,6 +27,9 @@ export default function Footer() {
 
         {/* Institution & Chapter Metadata */}
         <div className="footer-organizer-block">
+          <div className="footer-syp-brand-row">
+            <img src={csSypLogoWhite} alt="IEEE Computer Society SYP 80 Years Official Anniversary Logo" className="footer-cs-syp-logo" />
+          </div>
           <span className="footer-org-society">IEEE COMPUTER SOCIETY STUDENT BRANCH CHAPTER</span>
           <span className="footer-org-sep">•</span>
           <span className="footer-org-institution">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
@@ -121,6 +125,23 @@ export default function Footer() {
           color: var(--purple-light);
           text-transform: uppercase;
           margin: 0;
+        }
+                .footer-syp-brand-row {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 0.85rem;
+        }
+        .footer-cs-syp-logo {
+          height: 26px;
+          width: auto;
+          max-width: 200px;
+          object-fit: contain;
+          opacity: 0.9;
+          transition: opacity 0.2s ease;
+        }
+        .footer-cs-syp-logo:hover {
+          opacity: 1;
         }
         .footer-organizer-block {
           display: flex;

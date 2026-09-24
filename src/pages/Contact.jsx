@@ -15,6 +15,16 @@ export default function Contact() {
   });
   const [submitted, setSubmitted] = useState(false);
 
+  const [copied, setCopied] = useState(false);
+
+  const getMailtoUri = () => {
+    const subject = encodeURIComponent(`[TechX'26 Enquiry] ${formData.topic} - ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nInstitution: ${formData.institution || 'N/A'}\nTopic: ${formData.topic}\n\nMessage:\n${formData.message}`
+    );
+    return `mailto:${eventMeta.email}?subject=${subject}&body=${body}`;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.message) {
@@ -25,8 +35,19 @@ export default function Contact() {
       } catch (err) {
         console.error(err);
       }
+      // Trigger native email client directly to official techx email
+      const uri = getMailtoUri();
+      window.location.href = uri;
       setSubmitted(true);
     }
+  };
+
+  const handleCopy = () => {
+    const text = `To: ${eventMeta.email}\nSubject: [TechX'26 Enquiry] ${formData.topic} - ${formData.name}\n\nName: ${formData.name}\nEmail: ${formData.email}\nInstitution: ${formData.institution || 'N/A'}\nTopic: ${formData.topic}\n\nMessage:\n${formData.message}`;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }).catch(console.error);
   };
 
   return (
@@ -260,22 +281,60 @@ export default function Contact() {
               {submitted ? (
                 <div className="submission-success-view">
                   <div className="success-icon-wrap">
-                    <CheckCircle2 size={42} color="var(--purple-light)" />
+                    <Mail size={38} color="var(--purple-light)" />
                   </div>
-                  <h4>INQUIRY RECORDED</h4>
-                  <p>
-                    Thank you, <strong>{formData.name}</strong>. Your inquiry has been submitted to the organizing secretariat. A representative will respond to <strong>{formData.email}</strong>.
+                  <div className="success-meta-pill" style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.12em',
+                    color: '#22c55e',
+                    background: 'rgba(34, 197, 94, 0.1)',
+                    border: '1px solid rgba(34, 197, 94, 0.3)',
+                    padding: '0.35rem 0.85rem',
+                    borderRadius: '999px',
+                    marginBottom: '0.5rem'
+                  }}>
+                    DIRECT DISPATCH READY
+                  </div>
+                  <h4>TRANSMIT ENQUIRY TO TECHX</h4>
+                  <p style={{ maxWidth: '560px', margin: '0 auto 1.25rem', lineHeight: '1.6', color: 'rgba(255, 255, 255, 0.85)' }}>
+                    Your inquiry details have been composed for <strong>{eventMeta.email}</strong>. Your device email client has been prompted to send.
                   </p>
-                  <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({ name: '', email: '', institution: '', topic: 'General Event Inquiry', message: '' });
-                    }}
-                    className="btn btn-secondary"
-                    style={{ marginTop: '1.5rem' }}
-                  >
-                    <span>SEND ANOTHER INQUIRY</span>
-                  </button>
+
+                  <div className="dispatch-action-buttons" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '0.5rem' }}>
+                    <a
+                      href={getMailtoUri()}
+                      className="btn btn-primary"
+                      style={{ padding: '0.85rem 1.6rem' }}
+                    >
+                      <Mail size={16} />
+                      <span>OPEN EMAIL CLIENT ({eventMeta.email})</span>
+                      <ArrowRight size={16} />
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      className="btn btn-secondary"
+                      style={{ padding: '0.85rem 1.4rem' }}
+                    >
+                      <span>{copied ? '✓ COPIED TO CLIPBOARD' : 'COPY INQUIRY TEXT'}</span>
+                    </button>
+                  </div>
+
+                  <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', width: '100%', maxWidth: '520px' }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({ name: '', email: '', institution: '', topic: 'General Event Inquiry', message: '' });
+                      }}
+                      className="btn btn-secondary"
+                      style={{ fontSize: '0.82rem', padding: '0.65rem 1.25rem' }}
+                    >
+                      <span>EDIT OR WRITE ANOTHER INQUIRY</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="dispatch-form">

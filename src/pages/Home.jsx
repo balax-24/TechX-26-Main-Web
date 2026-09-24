@@ -13,6 +13,7 @@ import { eventMeta } from '../data/contacts';
 import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
+import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 
 export default function Home() {
   const { isOfferActive, hasEnded, isUpcoming, offerConfig } = useRegistrationPricing();
@@ -123,7 +124,7 @@ export default function Home() {
 
             <Reveal variant="pop" delay={120} className="editorial-right-col">
               <p className="editorial-lead-statement">
-                TECHX MADRAS is a premier technical symposium by the IEEE Computer Society SBC at Sri Sai Ram Institute of Technology, uniting competitive engineering, hands-on workshops, and IEEE mentorship across two days in Chennai.
+                TECHX MADRAS brings together competitive engineering, hands-on technology experiences, and IEEE Computer Society engagement across two days in Chennai.
               </p>
 
               {/* The TechX Journey Sub-section */}
@@ -144,6 +145,9 @@ export default function Home() {
                     <p className="edition-desc">
                       TechX Madras 2025 earned the prestigious global <strong>Outstanding Host Award — 1st Place</strong> from the IEEE Computer Society SYP Committee.
                     </p>
+                    <div className="edition-syp-logo-wrap">
+                      <img src={csSypLogoWhite} alt="IEEE Computer Society SYP 80 Years Official Anniversary Logo" className="edition-syp-logo" />
+                    </div>
                   </div>
 
                   {/* TechX'26 */}
@@ -749,7 +753,27 @@ export default function Home() {
           margin-top: 0.25rem;
         }
 
-        .journey-progression-cards {
+        
+          .edition-syp-logo-wrap {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+          }
+          .edition-syp-logo {
+            height: 24px;
+            width: auto;
+            max-width: 190px;
+            object-fit: contain;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+          }
+          .edition-syp-logo:hover {
+            opacity: 1;
+          }
+
+          .journey-progression-cards {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 1.5rem;

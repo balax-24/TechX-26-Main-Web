@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, ChevronRight, Clock, Users, MapPin, Calendar, Mail,
+  ArrowRight, ChevronRight, Clock, Users, MapPin, Calendar, Mail, CheckCircle2,
   Award, Sparkles, Terminal, Shield, Cpu, Lightbulb, Coins,
   Navigation, ExternalLink, ArrowUp
 } from 'lucide-react';
@@ -16,6 +16,7 @@ import { techxAward } from '../data/leadership';
 
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 import logoImg from '../assets/logo/techx-logo-cropped.png';
+import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 
 export default function SingleScroll() {
   const { isOfferActive, hasEnded, getPassInfo, offerConfig } = useRegistrationPricing();
@@ -197,7 +198,7 @@ export default function SingleScroll() {
 
             <Reveal variant="pop" delay={100} className="ss-split-right">
               <p className="ss-lead-statement">
-                TECHX MADRAS is a premier technical symposium organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+                TECHX MADRAS brings together competitive engineering, hands-on technology experiences, and IEEE Computer Society engagement across two days in Chennai.
               </p>
               <p className="ss-body-text">
                 Conceived as an arena of genuine engineering capability, TechX brings together technical competition, hands-on masterclasses, cybersecurity forensics, and professional IEEE mentorship across two high-impact days in Chennai.
@@ -246,6 +247,9 @@ export default function SingleScroll() {
               <p className="ss-j-desc">
                 TechX Madras 2025 united technologists and mentors across the region, earning the prestigious global <strong>Outstanding Host Award — 1st Place</strong> from the IEEE Computer Society Students & Young Professionals (SYP) Committee.
               </p>
+              <div className="ss-syp-logo-wrap">
+                <img src={csSypLogoWhite} alt="IEEE Computer Society SYP 80 Years Official Anniversary Logo" className="ss-syp-logo" />
+              </div>
             </div>
 
             <div className="ss-journey-arrow-col">
@@ -1072,7 +1076,21 @@ export default function SingleScroll() {
           transform: rotate(-90deg);
         }
 
-        .ss-journey-card {
+        
+          .ss-syp-logo-wrap {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+          }
+          .ss-syp-logo {
+            height: 22px;
+            width: auto;
+            max-width: 170px;
+            object-fit: contain;
+            opacity: 0.9;
+          }
+
+          .ss-journey-card {
           padding: 2.2rem;
           background: rgba(20, 20, 28, 0.75);
           border: 1px solid rgba(255, 255, 255, 0.08);

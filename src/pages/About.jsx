@@ -5,6 +5,7 @@ import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
 import { leadershipData, techxJourney, techxAward } from '../data/leadership';
 import sairamCampusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
+import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 
 export default function About() {
   return (
@@ -35,7 +36,7 @@ export default function About() {
               <h2 className="overview-heading">WHAT IS TECHX?</h2>
 
               <p className="overview-lead">
-                TECHX MADRAS is a flagship technology symposium organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
+                TECHX MADRAS is a flagship technology conference organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
               </p>
 
               <p className="overview-body">
@@ -168,14 +169,18 @@ export default function About() {
                 The IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology provides an enduring launchpad for student researchers, developers, and builders.
               </p>
               <p className="chapter-desc">
-                Operating under the world's premier computing society, the chapter fosters academic excellence, peer-led research, hackathon culture, and direct professional development through global IEEE programs, certifications, and technical symposiums.
+                Operating under the world's premier computing society, the chapter fosters academic excellence, peer-led research, hackathon culture, and direct professional development through global IEEE programs, certifications, and technical conferences.
               </p>
             </div>
             <div className="chapter-badge-side">
-              <div className="chapter-seal-box">
-                <ShieldCheck size={36} color="var(--purple-light)" />
-                <span className="seal-code">IEEE CS SBC</span>
-                <span className="seal-sub">SIT CHENNAI</span>
+              <div className="chapter-seal-box chapter-syp-brand-box">
+                <img
+                  src={csSypLogoWhite}
+                  alt="IEEE Computer Society SYP 80 Years Official Anniversary Logo"
+                  className="chapter-syp-logo-img"
+                />
+                <span className="seal-code">IEEE COMPUTER SOCIETY SBC</span>
+                <span className="seal-sub">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
               </div>
             </div>
           </Reveal>
