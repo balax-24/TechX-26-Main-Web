@@ -407,12 +407,6 @@ export default function Home() {
               <p className="partners-preview-sub">
                 Official industry sponsors, developer tooling platforms, and community partners supporting TechX'26 will be announced soon.
               </p>
-              <div className="partners-head-link">
-                <Link to="/partners" className="editorial-text-link">
-                  <span>EXPLORE PARTNERSHIP DIRECTORY</span>
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
             </Reveal>
 
             <Reveal variant="card" delay={120} className="partners-announcement-card">

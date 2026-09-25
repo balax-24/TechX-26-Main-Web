@@ -53,7 +53,7 @@ export default function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/speakers" element={<Speakers />} />
-          <Route path="/partners" element={<Partners />} />
+          <Route path="/partners" element={<Navigate to="/" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/venue" element={<Navigate to="/contact" replace />} />
           <Route path="/contact" element={<Contact />} />

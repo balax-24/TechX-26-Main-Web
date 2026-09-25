@@ -46,9 +46,7 @@ export default function Footer() {
           <Link to="/schedule">SCHEDULE</Link>
           <span className="nav-dot">•</span>
           <Link to="/speakers">SPEAKERS</Link>
-          <span className="nav-dot">•</span>
-          <Link to="/partners">PARTNERS</Link>
-          <span className="nav-dot">•</span>
+          <span className="nav-dot"> · </span>
           <Link to="/contact">CONTACT</Link>
           <span className="nav-dot">•</span>
           <Link to="/register">REGISTER</Link>
@@ -106,11 +104,11 @@ export default function Footer() {
           margin-bottom: 0.75rem;
         }
         .footer-logo-emblem {
-          height: clamp(52px, 7vw, 70px);
+          height: clamp(90px, 13vw, 126px);
           width: auto;
-          max-width: 220px;
+          max-width: 280px;
           object-fit: contain;
-          filter: drop-shadow(0 0 16px rgba(138, 43, 226, 0.4));
+          filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.45));
         }
         .footer-monument-title {
           font-family: var(--font-display);

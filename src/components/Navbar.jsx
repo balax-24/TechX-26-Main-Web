@@ -34,17 +34,15 @@ export default function Navbar() {
     { to: '/events', label: 'EVENTS' },
     { to: '/schedule', label: 'SCHEDULE' },
     { to: '/speakers', label: 'SPEAKERS' },
-    { to: '/partners', label: 'PARTNERS' },
     { to: '/contact', label: 'CONTACT' },
   ];
 
   const mobileNavLinks = [
     { to: '/', label: 'HOME' },
+    { to: '/about', label: 'ABOUT' },
     { to: '/events', label: 'EVENTS' },
     { to: '/schedule', label: 'SCHEDULE' },
     { to: '/speakers', label: 'SPEAKERS' },
-    { to: '/partners', label: 'PARTNERS' },
-    { to: '/about', label: 'ABOUT' },
     { to: '/contact', label: 'CONTACT' },
     { to: '/register', label: 'REGISTER' },
   ];
@@ -193,24 +191,24 @@ export default function Navbar() {
           text-decoration: none;
         }
         .navbar-brand-logo {
-          height: 52px;
+          height: 94px;
           width: auto;
-          max-width: 140px;
+          max-width: 160px;
           object-fit: contain;
-          filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.5));
+          filter: drop-shadow(0 0 16px rgba(138, 43, 226, 0.5));
           transition: transform 0.25s ease;
         }
         @media (max-width: 768px) {
           .navbar-brand-logo {
-            height: 44px;
-            max-width: 110px;
+            height: 72px;
+            max-width: 130px;
           }
         }
         .navbar-logo-link:hover .navbar-brand-logo {
           transform: scale(1.04);
         }
         .navbar-brand-logo-mobile {
-          height: 44px;
+          height: 72px;
           width: auto;
           max-width: 130px;
           object-fit: contain;

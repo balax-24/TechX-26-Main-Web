@@ -108,10 +108,10 @@ export default function LoadingScreen({ onComplete }) {
           margin-bottom: 0.75rem;
         }
         .loader-logo-img {
-          height: clamp(60px, 11vw, 90px);
+          height: clamp(96px, 16vw, 150px);
           width: auto;
           object-fit: contain;
-          filter: drop-shadow(0 0 20px rgba(184, 108, 255, 0.6));
+          filter: drop-shadow(0 0 25px rgba(184, 108, 255, 0.7));
         }
         .loader-title-wrap {
           opacity: 0;
