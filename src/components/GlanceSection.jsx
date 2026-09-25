@@ -62,7 +62,7 @@ export default function GlanceSection() {
           <span className="section-eyebrow glance-phase-1">THE HORIZON</span>
           <h2 className="glance-title glance-phase-1">TECHX'26 AT A GLANCE</h2>
           <p className="glance-subtitle glance-phase-1">
-            Verified schedule parameters, experiences, and delegate scale under the IEEE Computer Society SBC charter.
+            Verified schedule parameters, events, and delegate scale under the IEEE Computer Society SBC charter.
           </p>
         </div>
 
@@ -104,14 +104,14 @@ export default function GlanceSection() {
           {/* Divider 3 */}
           <div className="glance-metric-divider glance-phase-4" aria-hidden="true"></div>
 
-          {/* Metric 4: 07 EXPERIENCES (Numerical counter) */}
+          {/* Metric 4: 07 EVENTS (Numerical counter) */}
           <div className="glance-metric-item">
             <div className="metric-reveal-mask">
               <span className="metric-large-number glance-phase-2 metric-number-counter">
                 {countNumber}
               </span>
             </div>
-            <span className="metric-label-tag glance-phase-3">EXPERIENCES</span>
+            <span className="metric-label-tag glance-phase-3">EVENTS</span>
             <p className="metric-desc glance-phase-3">
               Edge AI, competitive programming, innovation, mentoring & IEEE CS engagement
             </p>

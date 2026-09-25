@@ -224,7 +224,7 @@ export default function SingleScroll() {
                 </div>
                 <div className="ss-stat-box">
                   <span className="ss-stat-num">07</span>
-                  <span className="ss-stat-lbl">EXPERIENCES</span>
+                  <span className="ss-stat-lbl">EVENTS</span>
                 </div>
                 <div className="ss-stat-box">
                   <span className="ss-stat-num">24H</span>
@@ -350,7 +350,7 @@ export default function SingleScroll() {
             <span className="section-eyebrow">THE EXPERIENCE ARCHITECTURE</span>
             <h2 className="ss-section-heading">FEATURED EVENTS</h2>
             <p className="ss-section-sub">
-              Seven technical and professional experiences designed to challenge every facet of modern engineering.
+              Seven technical and professional events designed to challenge every facet of modern engineering.
             </p>
           </Reveal>
 

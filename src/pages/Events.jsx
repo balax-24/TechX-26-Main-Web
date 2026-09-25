@@ -36,7 +36,7 @@ export default function Events() {
                 <span className="text-purple-highlight">CONFERENCE EVENTS</span>
               </h1>
               <p className="events-hero-sub">
-                Seven technical and professional experiences organized chronologically across Day 1 (13 October) and Day 2 (14 October 2026).
+                Seven technical and professional events organized chronologically across Day 1 (13 October) and Day 2 (14 October 2026).
               </p>
 
               {/* Quick Day Navigation / Jump Anchors */}
@@ -45,7 +45,7 @@ export default function Events() {
                   onClick={() => setSelectedDayTab('all')}
                   className={`day-nav-btn ${selectedDayTab === 'all' ? 'day-nav-active' : ''}`}
                 >
-                  ALL EXPERIENCES (01–07)
+                  ALL EVENTS
                 </button>
                 <button
                   onClick={() => setSelectedDayTab('day1')}
