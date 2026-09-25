@@ -13,7 +13,7 @@ export default function Countdown({ targetDate = eventMeta.targetDate, compact =
   useEffect(() => {
     const calculateTime = () => {
       const target = new Date(targetDate).getTime();
-      const end = new Date("2026-10-15T18:00:00+05:30").getTime();
+      const end = new Date("2026-10-14T18:00:00+05:30").getTime();
       const now = new Date().getTime();
 
       if (now >= end) {
@@ -83,10 +83,10 @@ export default function Countdown({ targetDate = eventMeta.targetDate, compact =
         <div className="countdown-header-block">
           <div className="countdown-eyebrow-pill">
             <span className="countdown-pulse-dot"></span>
-            <span>COUNTDOWN TO TECHX'26</span>
+            <span>TECHX'26 BEGINS IN</span>
           </div>
           <div className="countdown-date-subtitle">
-            OCTOBER 14, 2026 // 09:00 IST
+            OCTOBER 13, 2026 // 09:00 IST
           </div>
         </div>
       )}

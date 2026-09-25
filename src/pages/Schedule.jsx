@@ -39,7 +39,7 @@ export default function Schedule() {
                 <Sun size={18} />
                 <span>DAY 01</span>
               </div>
-              <strong>WEDNESDAY, 14 OCT 2026</strong>
+              <strong>TUESDAY, 13 OCT 2026</strong>
               <span className="tab-sub">Inauguration & 24H Hackathon Commencement</span>
             </button>
 
@@ -51,7 +51,7 @@ export default function Schedule() {
                 <Moon size={18} />
                 <span>DAY 02</span>
               </div>
-              <strong>THURSDAY, 15 OCT 2026</strong>
+              <strong>WEDNESDAY, 14 OCT 2026</strong>
               <span className="tab-sub">Cyber CTF, TinyML Workshop, Pitch & Coding</span>
             </button>
           </div>
@@ -66,15 +66,7 @@ export default function Schedule() {
             <p className="curr-day-sub">{currentSchedule.subtitle}</p>
           </Reveal>
 
-          {activeDay === 'day1' && (
-            <Reveal variant="card" className="overnight-banner">
-              <span className="overnight-pulse"></span>
-              <div className="overnight-content">
-                <strong>24-HOUR OVERNIGHT MARATHON NOTICE</strong>
-                <p>The VerdictX: Code & Conquer hackathon spans continuously overnight in Steve Jobs Hall from 01:30 PM on Day 1 through Round 3 Defense on Day 2 morning.</p>
-              </div>
-            </Reveal>
-          )}
+          
 
           {/* The Timeline Track */}
           <div className="timeline-track">
@@ -261,39 +253,6 @@ export default function Schedule() {
           font-size: 0.88rem;
           color: var(--purple-light);
         }
-        .overnight-banner {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-          background: rgba(138, 43, 226, 0.12);
-          border: 1px solid var(--purple-light);
-          border-radius: var(--radius-sm);
-          padding: 1.25rem 1.75rem;
-          max-width: 820px;
-          margin: 0 auto 4rem;
-        }
-        .overnight-pulse {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: var(--purple-light);
-          box-shadow: 0 0 15px var(--purple-light);
-          animation: pulseGlow 1.8s infinite;
-          flex-shrink: 0;
-        }
-        .overnight-content strong {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
-          letter-spacing: 0.1em;
-          color: var(--white);
-          margin-bottom: 0.25rem;
-        }
-        .overnight-content p {
-          font-size: 0.88rem;
-          color: var(--off-white);
-        }
-
         /* Timeline Track */
         .timeline-track {
           position: relative;
@@ -516,27 +475,35 @@ export default function Schedule() {
           gap: 0.5rem;
         }
         .parallel-tree-box {
-          margin-top: 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          padding: 1.15rem;
+          margin-top: 1.25rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          padding: 1.25rem;
           background: rgba(0, 0, 0, 0.45);
           border: 1px solid rgba(138, 43, 226, 0.35);
           border-radius: var(--radius-sm);
         }
+        @media (max-width: 768px) {
+          .parallel-tree-box {
+            grid-template-columns: 1fr;
+          }
+        }
         .parallel-tree-branch {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(138, 43, 226, 0.25);
+          border-radius: var(--radius-sm);
+          padding: 1.15rem;
           display: flex;
-          align-items: flex-start;
-          gap: 0.85rem;
+          flex-direction: column;
+          gap: 0.65rem;
+          transition: border-color 0.2s ease;
+        }
+        .parallel-tree-branch:hover {
+          border-color: var(--purple-light);
         }
         .branch-symbol {
-          font-family: var(--font-mono);
-          font-size: 1.5rem;
-          font-weight: 800;
-          color: var(--purple-light);
-          line-height: 1.1;
-          user-select: none;
+          display: none;
         }
         .branch-details {
           flex: 1;

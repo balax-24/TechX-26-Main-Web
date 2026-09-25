@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, ChevronRight, Clock, Users, MapPin, Calendar, Mail, CheckCircle2,
-  Award, Sparkles, Terminal, Shield, Cpu, Lightbulb, Coins,
+  Award, Sparkles, Terminal, Code, Shield, Cpu, Lightbulb, Coins,
   Navigation, ExternalLink, ArrowUp
 } from 'lucide-react';
 import Reveal from '../components/Reveal';
@@ -15,7 +15,6 @@ import { eventMeta } from '../data/contacts';
 import { techxAward } from '../data/leadership';
 
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
-import logoImg from '../assets/logo/techx-logo-cropped.png';
 import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 
 export default function SingleScroll() {
@@ -98,7 +97,7 @@ export default function SingleScroll() {
             </p>
 
             <div className="ss-editorial-strip">
-              <span>14 — 15 OCTOBER 2026</span>
+              <span>13 — 14 OCTOBER 2026</span>
               <span className="ss-sep">•</span>
               <span>SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
               <span className="ss-sep">•</span>
@@ -197,12 +196,27 @@ export default function SingleScroll() {
             </Reveal>
 
             <Reveal variant="pop" delay={100} className="ss-split-right">
-              <p className="ss-lead-statement">
-                TECHX MADRAS brings together competitive engineering, hands-on technology experiences, and IEEE Computer Society engagement across two days in Chennai.
-              </p>
-              <p className="ss-body-text">
-                Conceived as an arena of genuine engineering capability, TechX brings together technical competition, hands-on masterclasses, cybersecurity forensics, and professional IEEE mentorship across two high-impact days in Chennai.
-              </p>
+              <div className="editorial-hierarchy-stack">
+                <div className="hierarchy-tier-item">
+                  <span className="hierarchy-tier-tag">GLOBAL TECHX</span>
+                  <p className="hierarchy-tier-desc">
+                    An international technical initiative powered by the IEEE Computer Society to cultivate engineering leadership and computing excellence across premier institutions worldwide.
+                  </p>
+                </div>
+                <div className="hierarchy-tier-item">
+                  <span className="hierarchy-tier-tag">TECHX MADRAS</span>
+                  <p className="hierarchy-tier-desc">
+                    The regional Chennai edition hosted by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology—honored globally with the 1st Place Outstanding Host Award for TechX 2025.
+                  </p>
+                </div>
+                <div className="hierarchy-tier-item">
+                  <span className="hierarchy-tier-tag">TECHX'26</span>
+                  <p className="hierarchy-tier-desc">
+                    The current 2026 edition on 13–14 October 2026, delivering an intensive 24-hour hackathon, cybersecurity CTF, edge TinyML masterclass, startup pitching, and algorithmic challenges.
+                  </p>
+                </div>
+              </div>
+
               <div className="ss-stats-strip">
                 <div className="ss-stat-box">
                   <span className="ss-stat-num">02</span>
@@ -217,7 +231,7 @@ export default function SingleScroll() {
                   <span className="ss-stat-lbl">HACKATHON</span>
                 </div>
                 <div className="ss-stat-box">
-                  <span className="ss-stat-num">650+</span>
+                  <span className="ss-stat-num">250+</span>
                   <span className="ss-stat-lbl">DELEGATES</span>
                 </div>
               </div>
@@ -259,7 +273,7 @@ export default function SingleScroll() {
             <div className="ss-journey-card ss-journey-card-highlight reveal-card">
               <div className="ss-j-badge-row">
                 <span className="ss-edition-pill ss-edition-active">TECHX'26</span>
-                <span className="ss-date-pill">14 — 15 OCTOBER 2026</span>
+                <span className="ss-date-pill">13 — 14 OCTOBER 2026</span>
               </div>
               <h3 className="ss-j-title">THE NEXT CHAPTER</h3>
               <p className="ss-j-desc">
@@ -270,8 +284,65 @@ export default function SingleScroll() {
         </div>
       </section>
 
+            {/* ============================================================
+          4. TECHX EXPERIENCE
+      ============================================================ */}
+      <section className="ss-section ss-experience-section" id="experience">
+        <div className="container">
+          <Reveal variant="header" className="ss-center-head">
+            <span className="section-eyebrow">PARTICIPANT JOURNEY</span>
+            <h2 className="ss-section-heading">THE TECHX EXPERIENCE</h2>
+            <p className="ss-section-sub">
+              Four core dimensions shaping your experience at TECHX'26.
+            </p>
+          </Reveal>
+
+          <Reveal variant="stagger" className="ss-experience-grid">
+            <div className="ss-exp-card reveal-card">
+              <div className="ss-exp-icon">
+                <Terminal size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="ss-exp-title">COMPETE</h3>
+              <p className="ss-exp-desc">
+                Challenge yourself through technical competitions. Test problem-solving speed, endurance, and analytical thinking against practical benchmarks in high-energy technical arenas.
+              </p>
+            </div>
+
+            <div className="ss-exp-card reveal-card">
+              <div className="ss-exp-icon">
+                <Code size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="ss-exp-title">BUILD</h3>
+              <p className="ss-exp-desc">
+                Turn ideas into working solutions. Architect resilient systems, write production-ready code, and transform concepts into functional prototypes under real-world constraints.
+              </p>
+            </div>
+
+            <div className="ss-exp-card reveal-card">
+              <div className="ss-exp-icon">
+                <Cpu size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="ss-exp-title">LEARN</h3>
+              <p className="ss-exp-desc">
+                Gain hands-on exposure to embedded intelligence, cybersecurity techniques, and modern engineering workflows led by experienced mentors.
+              </p>
+            </div>
+
+            <div className="ss-exp-card reveal-card">
+              <div className="ss-exp-icon">
+                <Users size={22} color="var(--purple-light)" />
+              </div>
+              <h3 className="ss-exp-title">CONNECT</h3>
+              <p className="ss-exp-desc">
+                Interact with fellow developers, industry professionals, and the global IEEE Computer Society network to build lasting collaborations.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ============================================================
-          4. TECHX EXPERIENCE + 7 FEATURED EVENTS
+          5. FEATURED EVENTS
       ============================================================ */}
       <section className="ss-section ss-events-section" id="events">
         <div className="container">
@@ -288,7 +359,6 @@ export default function SingleScroll() {
               <div key={evt.id} className="ss-event-card reveal-card">
                 <div className="ss-event-card-top">
                   <div className="ss-num-badge-group">
-                    <span className="ss-evt-num">{evt.number}</span>
                     <span className="badge-tech">{evt.badge}</span>
                   </div>
                   <span className="ss-evt-day">{evt.dayLabel}</span>
@@ -325,14 +395,14 @@ export default function SingleScroll() {
       </section>
 
       {/* ============================================================
-          5. DAY 1 SCHEDULE (14 OCTOBER 2026)
+          6. DAY 1 SCHEDULE (13 OCTOBER 2026)
       ============================================================ */}
       <section className="ss-section ss-schedule-section" id="schedule">
         <div className="container">
           <Reveal variant="header" className="ss-center-head">
             <span className="section-eyebrow">ITINERARY // DAY 01</span>
-            <h2 className="ss-section-heading">DAY 1 — 14 OCTOBER 2026</h2>
-            <p className="ss-section-sub">Inauguration, IEEE Mentorship & 24-Hour Overnight Hackathon Commencement</p>
+            <h2 className="ss-section-heading">DAY 1 — 13 OCTOBER 2026</h2>
+            <p className="ss-section-sub">Inauguration, IEEE Mentorship & 24-Hour Hackathon Commencement</p>
           </Reveal>
 
           <Reveal variant="stagger" className="ss-timeline-compact">
@@ -358,13 +428,13 @@ export default function SingleScroll() {
       </section>
 
       {/* ============================================================
-          6. DAY 2 SCHEDULE (15 OCTOBER 2026)
+          7. DAY 2 SCHEDULE (14 OCTOBER 2026)
       ============================================================ */}
       <section className="ss-section ss-schedule-section ss-day2-bg">
         <div className="container">
           <Reveal variant="header" className="ss-center-head">
             <span className="section-eyebrow">ITINERARY // DAY 02</span>
-            <h2 className="ss-section-heading">DAY 2 — 15 OCTOBER 2026</h2>
+            <h2 className="ss-section-heading">DAY 2 — 14 OCTOBER 2026</h2>
             <p className="ss-section-sub">Cybersecurity CTF, Edge AI Workshop, Startup Pitch, Gamified Coding & Valedictory</p>
           </Reveal>
 
@@ -442,7 +512,7 @@ export default function SingleScroll() {
                 <div className="ss-venue-details-list">
                   <div className="ss-v-detail">
                     <span className="ss-vd-label">EVENT DATES:</span>
-                    <strong className="ss-vd-val">14 — 15 OCTOBER 2026</strong>
+                    <strong className="ss-vd-val">13 — 14 OCTOBER 2026</strong>
                   </div>
                   <div className="ss-v-detail">
                     <span className="ss-vd-label">CAMPUS VENUES:</span>
@@ -1148,6 +1218,84 @@ export default function SingleScroll() {
         }
 
         /* 4. Events Grid */
+        .ss-experience-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+          margin-top: 2.5rem;
+        }
+        @media (max-width: 992px) {
+          .ss-experience-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 600px) {
+          .ss-experience-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .ss-exp-card {
+          background: #0A0612;
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          border-radius: var(--radius-md);
+          padding: 2rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .ss-exp-card:hover {
+          transform: translateY(-4px);
+          border-color: var(--purple-light);
+        }
+        .ss-exp-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: var(--radius-sm);
+          background: rgba(138, 43, 226, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1.25rem;
+        }
+        .ss-exp-title {
+          font-family: var(--font-display);
+          font-size: 1.6rem;
+          letter-spacing: 0.05em;
+          color: var(--white);
+          margin-bottom: 0.65rem;
+        }
+        .ss-exp-desc {
+          font-size: 0.92rem;
+          color: #C2B8D2;
+          line-height: 1.6;
+          margin: 0;
+        }
+        .editorial-hierarchy-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          margin-bottom: 2rem;
+        }
+        .hierarchy-tier-item {
+          padding-left: 1.25rem;
+          border-left: 2px solid rgba(138, 43, 226, 0.45);
+        }
+        .hierarchy-tier-tag {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          letter-spacing: 0.14em;
+          color: var(--purple-light);
+          font-weight: 700;
+          display: block;
+          margin-bottom: 0.35rem;
+        }
+        .hierarchy-tier-desc {
+          font-size: 0.95rem;
+          color: #D1C7E0;
+          line-height: 1.6;
+          margin: 0;
+        }
         .ss-events-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

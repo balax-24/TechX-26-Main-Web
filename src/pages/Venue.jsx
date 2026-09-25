@@ -23,7 +23,7 @@ export default function Venue() {
             <div className="venue-hero-meta-bar">
               <div className="meta-pill">
                 <Calendar size={15} color="var(--purple-light)" />
-                <span>14 — 15 OCTOBER 2026</span>
+                <span>13 — 14 OCTOBER 2026</span>
               </div>
               <div className="meta-pill">
                 <MapPin size={15} color="var(--purple-light)" />
@@ -97,7 +97,7 @@ export default function Venue() {
 
                 <div className="spec-row">
                   <span className="spec-title">DATES</span>
-                  <strong className="spec-val">14 — 15 OCTOBER 2026</strong>
+                  <strong className="spec-val">13 — 14 OCTOBER 2026</strong>
                 </div>
 
                 <div className="spec-row">

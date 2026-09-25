@@ -11,7 +11,7 @@ export const techxJourney = [
     event: "TECHX MADRAS 2026",
     year: "2026",
     tagline: "THE NEXT CHAPTER",
-    summary: "14 — 15 OCTOBER 2026. The next chapter begins with an expanded 24-hour software engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas."
+    summary: "13 — 14 OCTOBER 2026. The next chapter begins with an expanded 24-hour software engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas."
   }
 ];
 

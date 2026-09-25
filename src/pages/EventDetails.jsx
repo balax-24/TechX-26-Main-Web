@@ -48,7 +48,7 @@ export default function EventDetails() {
           <div className="detail-hero-grid">
             <Reveal variant="header" className="detail-hero-text">
               <div className="detail-eyebrow-row">
-                <span className="event-detail-num">{event.number}</span>
+                
                 <span className="badge-tech">{event.badge}</span>
                 {event.id === 'idea-alchemy' && (
                   <span className="badge-tech" style={{ background: 'rgba(138, 43, 226, 0.25)', borderColor: 'var(--purple-light)' }}>
@@ -795,7 +795,7 @@ export default function EventDetails() {
           <Reveal variant="card" className="detail-bottom-enroll">
             <div className="enroll-content">
               <h3>READY TO COMPETE IN {event.title}?</h3>
-              <p>14–15 October 2026 • Sri Sai Ram Institute of Technology</p>
+              <p>13–14 October 2026 • Sri Sai Ram Institute of Technology</p>
             </div>
             <Link to={`/register?event=${event.id}`} className="btn btn-primary">
               <span>REGISTER FOR TECHX'26</span>

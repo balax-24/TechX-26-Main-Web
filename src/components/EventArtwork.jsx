@@ -92,13 +92,13 @@ export default function EventArtwork({ eventId, eventTitle }) {
                 </div>
                 <div className="art-telemetry-card">
                   <span className="t-lbl">DECRYPTION SPRINT</span>
-                  <strong className="t-val">30 TEAMS</strong>
+                  <strong className="t-val">TEAM CTF</strong>
                   <span className="t-sub">ALPHA HALL</span>
                 </div>
                 <div className="art-telemetry-card">
                   <span className="t-lbl">TIMING ROADMAP</span>
                   <strong className="t-val">09:00 AM</strong>
-                  <span className="t-sub">15 OCTOBER 2026</span>
+                  <span className="t-sub">14 OCTOBER 2026</span>
                 </div>
               </div>
             </div>

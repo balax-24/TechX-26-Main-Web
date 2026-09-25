@@ -69,7 +69,7 @@ export default function Contact() {
             <div className="contact-meta-pills">
               <div className="contact-pill">
                 <Calendar size={15} color="var(--purple-light)" />
-                <span>14 — 15 OCTOBER 2026</span>
+                <span>13 — 14 OCTOBER 2026</span>
               </div>
               <div className="contact-pill">
                 <MapPin size={15} color="var(--purple-light)" />
@@ -190,7 +190,7 @@ export default function Contact() {
                 </div>
                 <div className="spec-row">
                   <span className="spec-label">DATES</span>
-                  <strong className="spec-val">14 — 15 OCTOBER 2026</strong>
+                  <strong className="spec-val">13 — 14 OCTOBER 2026</strong>
                 </div>
                 <div className="spec-row">
                   <span className="spec-label">CITY / REGION</span>

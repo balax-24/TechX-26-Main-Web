@@ -1,11 +1,11 @@
-// TechX Madras 2026 - Official Schedule Data
-// Source: Official TechX Proposal & Event Documentation
-// Room Assignments: Hackathon in Steve Jobs Hall; CTF & CodeNomics in Alpha Hall; Workshop & Pitch in Apple Hall.
+// TechX Madras 2026 - Official High-Level Schedule Data
+// Authoritative Event Dates: 13–14 October 2026
+// Single Source of Truth for Conference Itinerary
 
 export const scheduleData = {
   day1: {
-    date: "Wednesday, 14 October 2026",
-    title: "DAY 01 — INAUGURATION & 24-HOUR OVERNIGHT HACKATHON",
+    date: "Tuesday, 13 October 2026",
+    title: "DAY 01 — INAUGURATION, MENTORSHIP & 24-HOUR HACKATHON",
     subtitle: "From inaugural briefing to 24-hour continuous prototype engineering.",
     timeline: [
       {
@@ -22,155 +22,42 @@ export const scheduleData = {
         venue: "Campus Auditorium",
         category: "Mentorship & Community",
         highlight: true,
+        badge: "CAREER & COMMUNITY",
         desc: "Industry mentoring interactions and orientation on global IEEE Computer Society membership advantages."
       },
       {
-        time: "12:15 PM – 01:15 PM",
-        title: "Lunch Break",
-        venue: "Campus Dining Arena",
-        category: "Break",
-        highlight: false,
-        desc: "Lunch and informal networking for participants and guests."
-      },
-      {
-        time: "01:30 PM",
-        title: "Commencement of Hackathon (VerdictX: Code & Conquer)",
+        time: "AFTERNOON",
+        title: "VerdictX: Code & Conquer — 24-Hour Hackathon",
         venue: "Steve Jobs Hall",
         category: "Hackathon",
         highlight: true,
-        badge: "FLAGSHIP KICKOFF",
-        desc: "Kickoff of the 24-hour open-domain hackathon; teams receive problem statements and start ideation."
-      },
-      {
-        time: "03:30 PM",
-        title: "Break",
-        venue: "Steve Jobs Hall Foyer",
-        category: "Break",
-        highlight: false,
-        desc: "Afternoon break before Round 1 presentations begin."
-      },
-      {
-        time: "03:45 PM",
-        title: "Round 1 Evaluation — Idea Validation & Presentation",
-        venue: "Steve Jobs Hall",
-        category: "Evaluation",
-        highlight: false,
-        desc: "Teams present proposed solution architectures and technology stacks (3 mins per team)."
-      },
-      {
-        time: "04:30 PM",
-        title: "Round 2 — Prototype Development",
-        venue: "Steve Jobs Hall",
-        category: "Engineering",
-        highlight: false,
-        desc: "Teams build working prototypes with modern tools, APIs, and libraries."
-      },
-      {
-        time: "07:30 PM",
-        title: "Dinner",
-        venue: "Campus Dining Arena",
-        category: "Break",
-        highlight: false,
-        desc: "Dinner break fueling teams for the evening sprint."
-      },
-      {
-        time: "09:00 PM",
-        title: "Round 2 Evaluation — Prototype Review & Dynamic Constraint Allocation",
-        venue: "Steve Jobs Hall",
-        category: "Evaluation",
-        highlight: true,
-        desc: "Judges evaluate prototypes and inject two dynamic technical constraints."
-      },
-      {
-        time: "11:00 PM – 03:30 AM",
-        title: "Prototype Enhancement & Development (Overnight Sprint)",
-        venue: "Steve Jobs Hall",
-        category: "Overnight Sprint",
-        highlight: true,
-        badge: "OVERNIGHT SPRINT",
-        desc: "Continuous overnight sprint implementing dynamic constraints, testing, and hardening code."
-      },
-      {
-        time: "12:00 AM",
-        title: "Midnight Refreshment Break",
-        venue: "Steve Jobs Hall",
-        category: "Break",
-        highlight: false,
-        desc: "Midnight refreshments and coffee across hackathon bays."
-      },
-      {
-        time: "03:30 AM – 04:30 AM",
-        title: "Final Submission Window",
-        venue: "Steve Jobs Hall",
-        category: "Submission",
-        highlight: true,
-        desc: "Teams submit code repository, README, demo video, and slides."
-      },
-      {
-        time: "04:30 AM – 05:30 AM",
-        title: "Peer Project Review & Technical Analysis",
-        venue: "Steve Jobs Hall",
-        category: "Review",
-        highlight: false,
-        desc: "Cross-team peer evaluation and architectural review on assigned repositories."
-      },
-      {
-        time: "08:30 AM – 10:30 AM",
-        title: "Round 3 — Technical Debate & Project Defense",
-        venue: "Steve Jobs Hall",
-        category: "Final Defense",
-        highlight: true,
-        badge: "FINAL BENCH",
-        desc: "Five-minute presentation followed by a seven-minute technical defense and debate."
+        badge: "FLAGSHIP 24-HOUR HACKATHON",
+        desc: "Commencement of the 24-hour open-domain hackathon. Teams receive problem statements, architect solutions, and build working prototypes."
       }
     ]
   },
   day2: {
-    date: "Thursday, 15 October 2026",
+    date: "Wednesday, 14 October 2026",
     title: "DAY 02 — CYBERSECURITY CTF, EDGE AI, PITCH & CODING",
     subtitle: "Capture The Flag, hands-on TinyML workshop, startup pitch, gamified coding & grand valedictory.",
     timeline: [
       {
-        time: "08:30 AM – 09:00 AM",
-        title: "Day 2 Registration Desk",
-        venue: "Main Concourse",
-        category: "General",
-        highlight: false,
-        desc: "Check-in and badge collection for Day 2 competitive tracks and workshops."
-      },
-      {
-        time: "09:00 AM – 12:15 PM",
-        title: "Sherlock & Syntax — Cybersecurity Capture The Flag (CTF)",
+        time: "09:00 AM",
+        title: "Sherlock & Syntax — Cybersecurity CTF",
         venue: "Alpha Hall",
         category: "Cybersecurity CTF",
         highlight: true,
         badge: "CYBERSECURITY CTF",
-        desc: "Live 2.5-hour skill-based CTF across web exploitation, cryptography, forensics, and reverse engineering."
+        desc: "Live skill-based Capture The Flag competition spanning web exploitation, cryptography, forensics, and reverse engineering."
       },
       {
-        time: "10:30 AM",
-        title: "Refreshment Break",
-        venue: "Central Foyer",
-        category: "Break",
-        highlight: false,
-        desc: "Morning refreshments and tea."
-      },
-      {
-        time: "10:45 AM – 12:15 PM",
-        title: "Workshop — Edge AI & TinyML: AI Beyond the Cloud",
+        time: "10:45 AM",
+        title: "Edge AI & TinyML: AI Beyond the Cloud",
         venue: "Apple Hall",
         category: "Workshop",
         highlight: true,
         badge: "HANDS-ON WORKSHOP",
-        desc: "Hands-on masterclass on low-latency machine learning deployment to edge microcontrollers."
-      },
-      {
-        time: "12:15 PM – 01:15 PM",
-        title: "Lunch Break",
-        venue: "Campus Dining Arena",
-        category: "Break",
-        highlight: false,
-        desc: "Lunch and networking for delegates, mentors, and speakers."
+        desc: "Hands-on masterclass on low-latency machine learning deployment to edge microcontrollers and hardware devices."
       },
       {
         time: "01:15 PM",
@@ -179,33 +66,33 @@ export const scheduleData = {
         category: "Parallel Tracks",
         highlight: true,
         isParallel: true,
-        badge: "CONCURRENT SESSIONS",
+        badge: "PARALLEL TRACKS",
         tracks: [
           {
             title: "Idea Alchemy — Business & Idea Pitch",
-            time: "01:15 PM – 03:00 PM",
+            time: "01:15 PM",
             venue: "Apple Hall",
             badge: "BUSINESS & IDEA PITCH",
-            desc: "Startup innovation pitches followed by the Round 2 finalist pivot challenge."
+            desc: "Startup innovation pitches followed by the finalist business constraint pivot challenge."
           },
           {
-            title: "CodeNomics — Gamified Competitive Programming",
-            time: "01:15 PM – 03:30 PM",
+            title: "CodeNomics",
+            time: "01:15 PM",
             venue: "Alpha Hall",
             badge: "COMPETITIVE PROGRAMMING",
-            desc: "Gamified HackerRank problem solving powered by tactical TechCoin portal gameplay."
+            desc: "Gamified competitive programming with dynamic algorithmic challenges and strategic gameplay."
           }
         ],
-        desc: "Idea Alchemy and CodeNomics run concurrently in separate halls."
+        desc: "Idea Alchemy and CodeNomics run concurrently in parallel halls at 01:15 PM."
       },
       {
         time: "03:30 PM",
-        title: "Valedictory Ceremony, Prize Distribution & Closing Remarks",
+        title: "Valedictory, Prize Distribution & Closing Remarks",
         venue: "Campus Auditorium",
         category: "Grand Finale",
         highlight: true,
         badge: "VALEDICTORY",
-        desc: "Announcement of winners across all tracks, certificate distribution, and closing address."
+        desc: "Announcement of winners across all competitive tracks, presentation of awards and certificates, and closing remarks."
       }
     ]
   }

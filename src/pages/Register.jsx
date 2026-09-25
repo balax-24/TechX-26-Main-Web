@@ -125,7 +125,7 @@ export default function Register() {
           <div className="register-subtitle-box">
             <div className="subtitle-item">
               <Calendar size={16} className="subtitle-icon" />
-              <span>14–15 OCTOBER 2026</span>
+              <span>13–14 OCTOBER 2026</span>
             </div>
             <span className="subtitle-dot">•</span>
             <div className="subtitle-item">
@@ -172,7 +172,7 @@ export default function Register() {
             <RegistrationOffer />
 
             {/* --------------------------------------------------
-                1. FULL EVENT PASS SECTION (14–15 OCTOBER 2026)
+                1. FULL EVENT PASS SECTION (13–14 OCTOBER 2026)
                 DAY 1 + DAY 2 ACCESS
             -------------------------------------------------- */}
             <section 
@@ -252,7 +252,7 @@ export default function Register() {
                       <div className="pass-card-top">
                         <div className="pass-label-strip">
                           <span className="pass-label-tag">{pass.label}</span>
-                          <span className="pass-day-indicator">14–15 OCT</span>
+                          <span className="pass-day-indicator">13–14 OCT</span>
                         </div>
                         <h4 className="pass-category-title">{pass.category}</h4>
                         <p className="pass-category-desc">{pass.description}</p>
@@ -300,7 +300,7 @@ export default function Register() {
               <div className="divider-line" />
             </div>
             {/* --------------------------------------------------
-                2. DAY 2 PASS SECTION (15 OCTOBER 2026)
+                2. DAY 2 PASS SECTION (14 OCTOBER 2026)
                 DAY 2 ACCESS ONLY
             -------------------------------------------------- */}
             <section 
@@ -379,7 +379,7 @@ export default function Register() {
                       <div className="pass-card-top">
                         <div className="pass-label-strip">
                           <span className="pass-label-tag pass-label-alt">{pass.label}</span>
-                          <span className="pass-day-indicator">15 OCT</span>
+                          <span className="pass-day-indicator">14 OCT</span>
                         </div>
                         <h4 className="pass-category-title">{pass.category}</h4>
                         <p className="pass-category-desc">{pass.description}</p>

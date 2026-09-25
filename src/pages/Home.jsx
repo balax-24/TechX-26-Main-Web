@@ -69,7 +69,7 @@ export default function Home() {
 
             {/* 4. Editorial Information Strip */}
             <div className="hero-editorial-strip">
-              <span className="strip-item">14 — 15 OCTOBER 2026</span>
+              <span className="strip-item">13 — 14 OCTOBER 2026</span>
               <span className="strip-sep">•</span>
               <span className="strip-item">SRI SAI RAM INSTITUTE OF TECHNOLOGY</span>
               <span className="strip-sep">•</span>
@@ -123,9 +123,28 @@ export default function Home() {
             </Reveal>
 
             <Reveal variant="pop" delay={120} className="editorial-right-col">
-              <p className="editorial-lead-statement">
-                TECHX MADRAS brings together competitive engineering, hands-on technology experiences, and IEEE Computer Society engagement across two days in Chennai.
-              </p>
+              <div className="editorial-hierarchy-stack">
+                <div className="hierarchy-tier-item">
+                  <span className="hierarchy-tier-tag">GLOBAL TECHX</span>
+                  <p className="hierarchy-tier-desc">
+                    An international technical initiative powered by the IEEE Computer Society to foster technical leadership, collaborative engineering, and innovation across premier institutions worldwide.
+                  </p>
+                </div>
+
+                <div className="hierarchy-tier-item">
+                  <span className="hierarchy-tier-tag">TECHX MADRAS</span>
+                  <p className="hierarchy-tier-desc">
+                    The regional Chennai edition hosted by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology—honored globally with the 1st Place Outstanding Host Award for TechX 2025.
+                  </p>
+                </div>
+
+                <div className="hierarchy-tier-item">
+                  <span className="hierarchy-tier-tag">TECHX'26</span>
+                  <p className="hierarchy-tier-desc">
+                    The current 2026 edition on 13–14 October 2026, delivering an intensive 24-hour hackathon, cybersecurity CTF, edge TinyML masterclass, startup pitch, and competitive programming.
+                  </p>
+                </div>
+              </div>
 
               {/* The TechX Journey Sub-section */}
               <div className="journey-summary-block">
@@ -154,7 +173,7 @@ export default function Home() {
                   <div className="journey-edition-card edition-card-highlight">
                     <div className="edition-header-row">
                       <span className="edition-badge edition-badge-active">TECHX'26</span>
-                      <span className="edition-date-tag">14 — 15 OCTOBER 2026</span>
+                      <span className="edition-date-tag">13 — 14 OCTOBER 2026</span>
                     </div>
                     <h4 className="edition-title">THE NEXT CHAPTER</h4>
                     <p className="edition-desc">
@@ -200,7 +219,7 @@ export default function Home() {
               <div className="dim-icon-wrap">
                 <Terminal size={22} color="var(--purple-light)" />
               </div>
-              <span className="dim-tag">DIMENSION 01</span>
+              <span className="dim-tag">EXPERIENCE</span>
               <h3 className="dim-title">COMPETE</h3>
               <p className="dim-text">
                 Challenge yourself through technical competitions. Test problem-solving speed, endurance, and analytical thinking against real-world engineering benchmarks.
@@ -211,7 +230,7 @@ export default function Home() {
               <div className="dim-icon-wrap">
                 <Code size={22} color="var(--purple-light)" />
               </div>
-              <span className="dim-tag">DIMENSION 02</span>
+              <span className="dim-tag">EXPERIENCE</span>
               <h3 className="dim-title">BUILD</h3>
               <p className="dim-text">
                 Turn ideas into working solutions. Architect resilient systems, write production-ready code, and transform concepts into functional prototypes.
@@ -222,7 +241,7 @@ export default function Home() {
               <div className="dim-icon-wrap">
                 <Cpu size={22} color="var(--purple-light)" />
               </div>
-              <span className="dim-tag">DIMENSION 03</span>
+              <span className="dim-tag">EXPERIENCE</span>
               <h3 className="dim-title">LEARN</h3>
               <p className="dim-text">
                 Gain practical exposure to emerging technologies. Explore modern engineering workflows, system paradigms, and hands-on technical practices.
@@ -233,7 +252,7 @@ export default function Home() {
               <div className="dim-icon-wrap">
                 <Users size={22} color="var(--purple-light)" />
               </div>
-              <span className="dim-tag">DIMENSION 04</span>
+              <span className="dim-tag">EXPERIENCE</span>
               <h3 className="dim-title">CONNECT</h3>
               <p className="dim-text">
                 Interact with mentors, peers, and the IEEE Computer Society community. Build lasting relationships across institutions and explore future pathways.
@@ -252,7 +271,7 @@ export default function Home() {
                 </p>
               </div>
               <Link to="/events" className="btn btn-secondary">
-                <span>VIEW ALL 07 EVENTS</span>
+                <span>VIEW ALL EVENTS</span>
                 <ArrowRight size={15} />
               </Link>
             </Reveal>
@@ -268,7 +287,6 @@ export default function Home() {
                   {hackathonEvents.map((evt) => (
                     <Link key={evt.id} to={`/events/${evt.id}`} className="featured-event-card">
                       <div className="f-card-top">
-                        <span className="f-num">{evt.number}</span>
                         <span className="f-badge">{evt.badge}</span>
                         <span className="f-day">{evt.dateShort}</span>
                       </div>
@@ -293,7 +311,6 @@ export default function Home() {
                   {technicalLabEvents.map((evt) => (
                     <Link key={evt.id} to={`/events/${evt.id}`} className="featured-event-card">
                       <div className="f-card-top">
-                        <span className="f-num">{evt.number}</span>
                         <span className="f-badge">{evt.badge}</span>
                         <span className="f-day">{evt.dateShort}</span>
                       </div>
@@ -318,7 +335,6 @@ export default function Home() {
                   {competitiveDevEvents.map((evt) => (
                     <Link key={evt.id} to={`/events/${evt.id}`} className="featured-event-card">
                       <div className="f-card-top">
-                        <span className="f-num">{evt.number}</span>
                         <span className="f-badge">{evt.badge}</span>
                         <span className="f-day">{evt.dateShort}</span>
                       </div>
@@ -436,7 +452,7 @@ export default function Home() {
               </p>
             ) : (
               <p className="final-cta-dates">
-                14 — 15 OCTOBER 2026 • SRI SAI RAM INSTITUTE OF TECHNOLOGY
+                13 — 14 OCTOBER 2026 • SRI SAI RAM INSTITUTE OF TECHNOLOGY
               </p>
             )}
             <div className="final-cta-actions">
@@ -692,6 +708,31 @@ export default function Home() {
           padding: 7.5rem 0;
         }
 
+        .editorial-hierarchy-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          margin-bottom: 2rem;
+        }
+        .hierarchy-tier-item {
+          padding-left: 1.25rem;
+          border-left: 2px solid rgba(138, 43, 226, 0.45);
+        }
+        .hierarchy-tier-tag {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          letter-spacing: 0.14em;
+          color: var(--purple-light);
+          font-weight: 700;
+          display: block;
+          margin-bottom: 0.35rem;
+        }
+        .hierarchy-tier-desc {
+          font-size: 0.95rem;
+          color: #D1C7E0;
+          line-height: 1.6;
+          margin: 0;
+        }
         .what-is-editorial-layout {
           display: grid;
           grid-template-columns: 1fr 1.6fr;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logoImg from '../assets/logo/techx-logo-cropped.png';
+import logoImg from '../assets/logo/TechX White New.png';
 
 export default function LoadingScreen({ onComplete }) {
   const [phase, setPhase] = useState(0); 
@@ -56,7 +56,7 @@ export default function LoadingScreen({ onComplete }) {
         {/* Tagline & Dates */}
         <div className={`loader-tagline-wrap ${phase >= 4 ? 'loader-visible' : ''}`}>
           <span className="loader-tagline-line">IGNITE THE CODE. OWN THE FUTURE.</span>
-          <span className="loader-date-line">14 — 15 OCTOBER 2026</span>
+          <span className="loader-date-line">13 — 14 OCTOBER 2026</span>
         </div>
       </div>
 
@@ -108,8 +108,9 @@ export default function LoadingScreen({ onComplete }) {
           margin-bottom: 0.75rem;
         }
         .loader-logo-img {
-          height: clamp(48px, 8vw, 72px);
+          height: clamp(60px, 11vw, 90px);
           width: auto;
+          object-fit: contain;
           filter: drop-shadow(0 0 20px rgba(184, 108, 255, 0.6));
         }
         .loader-title-wrap {

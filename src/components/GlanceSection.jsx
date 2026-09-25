@@ -71,7 +71,7 @@ export default function GlanceSection() {
           {/* Metric 1: 14—15 */}
           <div className="glance-metric-item">
             <div className="metric-reveal-mask">
-              <span className="metric-large-number glance-phase-2">14—15</span>
+              <span className="metric-large-number glance-phase-2">13—14</span>
             </div>
             <span className="metric-label-tag glance-phase-3">OCTOBER 2026</span>
             <p className="metric-desc glance-phase-3">Two days of technology, competition, learning, and community</p>

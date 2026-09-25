@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import logoImg from '../assets/logo/techx-logo-cropped.png';
+import logoImg from '../assets/logo/TechX White New.png';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,11 +30,11 @@ export default function Navbar() {
 
   const desktopNavLinks = [
     { to: '/', label: 'HOME' },
+    { to: '/about', label: 'ABOUT' },
     { to: '/events', label: 'EVENTS' },
     { to: '/schedule', label: 'SCHEDULE' },
     { to: '/speakers', label: 'SPEAKERS' },
     { to: '/partners', label: 'PARTNERS' },
-    { to: '/about', label: 'ABOUT' },
     { to: '/contact', label: 'CONTACT' },
   ];
 
@@ -147,7 +147,7 @@ export default function Navbar() {
 
               <div className="mobile-organizer-info">
                 <span>IEEE COMPUTER SOCIETY STUDENT BRANCH CHAPTER</span>
-                <p>Sri Sai Ram Institute of Technology • 14 & 15 Oct 2026</p>
+                <p>Sri Sai Ram Institute of Technology • 13 & 14 Oct 2026</p>
               </div>
             </div>
           </div>
@@ -193,18 +193,27 @@ export default function Navbar() {
           text-decoration: none;
         }
         .navbar-brand-logo {
-          height: 40px;
+          height: 52px;
           width: auto;
+          max-width: 140px;
           object-fit: contain;
           filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.5));
           transition: transform 0.25s ease;
+        }
+        @media (max-width: 768px) {
+          .navbar-brand-logo {
+            height: 44px;
+            max-width: 110px;
+          }
         }
         .navbar-logo-link:hover .navbar-brand-logo {
           transform: scale(1.04);
         }
         .navbar-brand-logo-mobile {
-          height: 36px;
+          height: 44px;
           width: auto;
+          max-width: 130px;
+          object-fit: contain;
         }
         .navbar-desktop-nav {
           display: flex;

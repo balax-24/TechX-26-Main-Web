@@ -18,15 +18,15 @@ export const passSharedInfo = {
     id: "full-event-pass",
     dayNumber: 1,
     title: "FULL EVENT PASS",
-    dates: "14–15 OCTOBER 2026",
+    dates: "13–14 OCTOBER 2026",
     accessLabel: "DAY 1 + DAY 2 ACCESS",
-    pricingSectionLabel: "DAY 1 REGISTRATION",
+    pricingSectionLabel: "FULL EVENT REGISTRATION",
     pricingSectionSub: "Full Event Pass — Gives access to both Day 1 and Day 2 of TECHX'26.",
     description: "Your pass gives access to both Day 1 and Day 2 of TECHX'26.",
     inclusionsTitle: "PASS INCLUDES",
     scheduleGroups: [
       {
-        dayHeading: "DAY 1 — 14 OCTOBER",
+        dayHeading: "DAY 1 — 13 OCTOBER",
         events: [
           "Inauguration & Event Briefing",
           "Nano Mentoring",
@@ -35,7 +35,7 @@ export const passSharedInfo = {
         ]
       },
       {
-        dayHeading: "DAY 2 — 15 OCTOBER",
+        dayHeading: "DAY 2 — 14 OCTOBER",
         events: [
           "Sherlock & Syntax — Cybersecurity CTF",
           "Edge AI & TinyML: AI Beyond the Cloud",
@@ -55,7 +55,7 @@ export const passSharedInfo = {
     id: "day2-pass",
     dayNumber: 2,
     title: "DAY 2 PASS",
-    dates: "15 OCTOBER 2026",
+    dates: "14 OCTOBER 2026",
     accessLabel: "DAY 2 ACCESS ONLY",
     pricingSectionLabel: "DAY 2 REGISTRATION",
     pricingSectionSub: "Day 2 Pass — Access to Day 2 of TECHX'26.",
@@ -63,7 +63,7 @@ export const passSharedInfo = {
     inclusionsTitle: "DAY 2 INCLUDES",
     scheduleGroups: [
       {
-        dayHeading: "DAY 2 — 15 OCTOBER",
+        dayHeading: "DAY 2 — 14 OCTOBER",
         events: [
           "Sherlock & Syntax — Cybersecurity CTF",
           "Edge AI & TinyML: AI Beyond the Cloud",
@@ -87,7 +87,7 @@ export const passSharedInfo = {
 // ----------------------------------------------------
 export const registrationOptions = [
   // --------------------------------------------------
-  // DAY 1 / FULL EVENT PASS — 14–15 OCTOBER 2026
+  // DAY 1 / FULL EVENT PASS — 13–14 OCTOBER 2026
   // --------------------------------------------------
   {
     id: "day1-ieee-cs",
@@ -95,7 +95,7 @@ export const registrationOptions = [
     dayNumber: 1,
     passType: "FULL EVENT PASS",
     accessLabel: "DAY 1 + DAY 2 ACCESS",
-    date: "14–15 OCTOBER 2026",
+    date: "13–14 OCTOBER 2026",
     category: "IEEE COMPUTER SOCIETY MEMBER",
     shortCategory: "IEEE CS MEMBER",
     normalPrice: 399,
@@ -113,7 +113,7 @@ export const registrationOptions = [
     dayNumber: 1,
     passType: "FULL EVENT PASS",
     accessLabel: "DAY 1 + DAY 2 ACCESS",
-    date: "14–15 OCTOBER 2026",
+    date: "13–14 OCTOBER 2026",
     category: "IEEE NON-CS MEMBER",
     shortCategory: "IEEE NON-CS",
     normalPrice: 499,
@@ -131,7 +131,7 @@ export const registrationOptions = [
     dayNumber: 1,
     passType: "FULL EVENT PASS",
     accessLabel: "DAY 1 + DAY 2 ACCESS",
-    date: "14–15 OCTOBER 2026",
+    date: "13–14 OCTOBER 2026",
     category: "NON-IEEE",
     shortCategory: "NON-IEEE",
     normalPrice: 599,
@@ -145,7 +145,7 @@ export const registrationOptions = [
   },
 
   // --------------------------------------------------
-  // DAY 2 PASS — 15 OCTOBER 2026 (DAY 2 ACCESS ONLY)
+  // DAY 2 PASS — 14 OCTOBER 2026 (DAY 2 ACCESS ONLY)
   // --------------------------------------------------
   {
     id: "day2-ieee-cs",
@@ -153,7 +153,7 @@ export const registrationOptions = [
     dayNumber: 2,
     passType: "DAY 2 PASS",
     accessLabel: "DAY 2 ACCESS ONLY",
-    date: "15 OCTOBER 2026",
+    date: "14 OCTOBER 2026",
     category: "IEEE COMPUTER SOCIETY MEMBER",
     shortCategory: "IEEE CS MEMBER",
     normalPrice: 299,
@@ -171,7 +171,7 @@ export const registrationOptions = [
     dayNumber: 2,
     passType: "DAY 2 PASS",
     accessLabel: "DAY 2 ACCESS ONLY",
-    date: "15 OCTOBER 2026",
+    date: "14 OCTOBER 2026",
     category: "IEEE NON-CS MEMBER",
     shortCategory: "IEEE NON-CS",
     normalPrice: 399,
@@ -189,7 +189,7 @@ export const registrationOptions = [
     dayNumber: 2,
     passType: "DAY 2 PASS",
     accessLabel: "DAY 2 ACCESS ONLY",
-    date: "15 OCTOBER 2026",
+    date: "14 OCTOBER 2026",
     category: "NON-IEEE",
     shortCategory: "NON-IEEE",
     normalPrice: 499,
@@ -208,7 +208,7 @@ export const registrationOptions = [
 // ----------------------------------------------------
 export const registrationMeta = {
   title: "TECHX'26 REGISTRATION",
-  subtitle: "14-15 OCTOBER 2026 // Sri Sai Ram Institute of Technology",
+  subtitle: "13–14 OCTOBER 2026 // Sri Sai Ram Institute of Technology",
   intro: "Choose your registration category below. Registration fees shown are indicative and subject to final confirmation by the organizers.",
   footnote: "*Indicative INR conversion of proposal pricing. Final registration fees will be confirmed by the organizers.",
   paymentNotice: "Payment portals will be opened following formal institutional sanction. KKonfHub registration links will be published directly on this portal."

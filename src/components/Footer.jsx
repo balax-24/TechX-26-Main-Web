@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail, MapPin, Calendar, Heart, Shield } from 'lucide-react';
-import logoImg from '../assets/logo/techx-logo-cropped.png';
+import logoImg from '../assets/logo/TechX White New.png';
 import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
 import { eventMeta } from '../data/contacts';
 
@@ -39,6 +39,8 @@ export default function Footer() {
         <nav className="footer-minimal-nav" aria-label="Footer Navigation">
           <Link to="/">HOME</Link>
           <span className="nav-dot">•</span>
+          <Link to="/about">ABOUT</Link>
+          <span className="nav-dot">•</span>
           <Link to="/events">EVENTS</Link>
           <span className="nav-dot">•</span>
           <Link to="/schedule">SCHEDULE</Link>
@@ -46,8 +48,6 @@ export default function Footer() {
           <Link to="/speakers">SPEAKERS</Link>
           <span className="nav-dot">•</span>
           <Link to="/partners">PARTNERS</Link>
-          <span className="nav-dot">•</span>
-          <Link to="/about">ABOUT</Link>
           <span className="nav-dot">•</span>
           <Link to="/contact">CONTACT</Link>
           <span className="nav-dot">•</span>
@@ -106,8 +106,10 @@ export default function Footer() {
           margin-bottom: 0.75rem;
         }
         .footer-logo-emblem {
-          height: 48px;
+          height: clamp(52px, 7vw, 70px);
           width: auto;
+          max-width: 220px;
+          object-fit: contain;
           filter: drop-shadow(0 0 16px rgba(138, 43, 226, 0.4));
         }
         .footer-monument-title {

@@ -36,7 +36,7 @@ export default function Events() {
                 <span className="text-purple-highlight">CONFERENCE EVENTS</span>
               </h1>
               <p className="events-hero-sub">
-                Seven technical and professional experiences organized chronologically across Day 1 (14 October) and Day 2 (15 October 2026).
+                Seven technical and professional experiences organized chronologically across Day 1 (13 October) and Day 2 (14 October 2026).
               </p>
 
               {/* Quick Day Navigation / Jump Anchors */}
@@ -51,13 +51,13 @@ export default function Events() {
                   onClick={() => setSelectedDayTab('day1')}
                   className={`day-nav-btn ${selectedDayTab === 'day1' ? 'day-nav-active' : ''}`}
                 >
-                  DAY 01 // 14 OCTOBER
+                  DAY 01 // 13 OCTOBER
                 </button>
                 <button
                   onClick={() => setSelectedDayTab('day2')}
                   className={`day-nav-btn ${selectedDayTab === 'day2' ? 'day-nav-active' : ''}`}
                 >
-                  DAY 02 // 15 OCTOBER
+                  DAY 02 // 14 OCTOBER
                 </button>
                 <a href="#pricing-section" className="day-nav-btn day-nav-pricing">
                   TICKET PRICING ↓
@@ -91,14 +91,14 @@ export default function Events() {
       {/* Events List Organized by Day */}
       <div className="container events-program-container">
         {/* ============================================================
-            DAY 01 — 14 OCTOBER 2026
+            DAY 01 — 13 OCTOBER 2026
         ============================================================ */}
         {(selectedDayTab === 'all' || selectedDayTab === 'day1') && (
           <section className="day-program-section" id="day1-section">
             <Reveal variant="header" className="day-program-header">
               <div className="day-header-meta">
                 <span className="day-badge-large">DAY 01</span>
-                <span className="day-date-text">WEDNESDAY, 14 OCTOBER 2026</span>
+                <span className="day-date-text">TUESDAY, 13 OCTOBER 2026</span>
               </div>
               <h2 className="day-header-title">INAUGURATION, MENTORSHIP & 24-HOUR HACKATHON</h2>
               
@@ -116,7 +116,7 @@ export default function Events() {
                 <span className="flow-arrow">→</span>
                 <div className="flow-step flow-step-highlight">
                   <span className="flow-time">01:30 PM</span>
-                  <span className="flow-title">VerdictX Hackathon Begins (Overnight)</span>
+                  <span className="flow-title">VerdictX Hackathon Begins</span>
                 </div>
               </div>
             </Reveal>
@@ -126,7 +126,6 @@ export default function Events() {
                 <article key={evt.id} className={`event-program-card ${evt.id === 'verdictx' ? 'card-overnight-highlight' : ''} reveal-card`}>
                   <div className="card-top-row">
                     <div className="card-number-badge">
-                      <span className="evt-num">{evt.number}</span>
                       <span className="badge-tech">{evt.badge}</span>
                     </div>
                     <div className="card-timing-pill">
@@ -193,14 +192,14 @@ export default function Events() {
         )}
 
         {/* ============================================================
-            DAY 02 — 15 OCTOBER 2026
+            DAY 02 — 14 OCTOBER 2026
         ============================================================ */}
         {(selectedDayTab === 'all' || selectedDayTab === 'day2') && (
           <section className="day-program-section" id="day2-section">
             <Reveal variant="header" className="day-program-header">
               <div className="day-header-meta">
                 <span className="day-badge-large">DAY 02</span>
-                <span className="day-date-text">THURSDAY, 15 OCTOBER 2026</span>
+                <span className="day-date-text">WEDNESDAY, 14 OCTOBER 2026</span>
               </div>
               <h2 className="day-header-title">CYBERSECURITY CTF, TINYML WORKSHOP, PITCH & CODING</h2>
               
@@ -234,7 +233,6 @@ export default function Events() {
                 <article key={evt.id} className="event-program-card reveal-card">
                   <div className="card-top-row">
                     <div className="card-number-badge">
-                      <span className="evt-num">{evt.number}</span>
                       <span className="badge-tech">{evt.badge}</span>
                     </div>
                     <div className="card-timing-pill">
@@ -312,7 +310,6 @@ export default function Events() {
                   <article key={evt.id} className="event-program-card parallel-child-card reveal-card">
                     <div className="card-top-row">
                       <div className="card-number-badge">
-                        <span className="evt-num">{evt.number}</span>
                         <span className="badge-tech">{evt.badge}</span>
                         {evt.id === 'idea-alchemy' && (
                           <span className="badge-tech" style={{ background: 'rgba(138, 43, 226, 0.25)', borderColor: 'var(--purple-light)' }}>

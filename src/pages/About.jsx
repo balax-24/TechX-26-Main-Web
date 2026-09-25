@@ -32,21 +32,27 @@ export default function About() {
         <div className="container">
           <div className="overview-editorial-grid">
             <Reveal variant="pop" className="editorial-copy">
-              <span className="section-eyebrow">THE FOUNDATION</span>
-              <h2 className="overview-heading">WHAT IS TECHX?</h2>
+              <span className="section-eyebrow">INTERNATIONAL & REGIONAL CHARTER</span>
+              <h2 className="overview-heading">GLOBAL TECHX & TECHX MADRAS</h2>
 
-              <p className="overview-lead">
-                TECHX MADRAS is a flagship technology conference organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology.
-              </p>
+              <div className="about-charter-block">
+                <h3 className="about-tier-title">GLOBAL TECHX</h3>
+                <p className="about-tier-text">
+                  Global TechX is an international technical initiative led by the IEEE Computer Society. Operating as a worldwide collaborative framework, it unites student branch chapters, professional mentors, and computing communities globally to promote applied technical competence, standards-driven engineering, and student innovation across international frontiers.
+                </p>
+              </div>
 
-              <p className="overview-body">
-                Designed as an arena of genuine engineering capability, TechX brings together technical competition, hands-on learning, innovation, and professional IEEE mentorship across two high-impact days in Chennai.
-              </p>
+              <div className="about-charter-block" style={{ marginTop: '1.75rem' }}>
+                <h3 className="about-tier-title">TECHX MADRAS</h3>
+                <p className="about-tier-text">
+                  TechX Madras is the premier regional edition organized by the IEEE Computer Society Student Branch Chapter at Sri Sai Ram Institute of Technology in Chennai. It grounds the global IEEE mission into an intensive two-day technical gathering—bringing together competitive engineering championships, cybersecurity investigation, on-device machine learning, and venture mentoring.
+                </p>
+              </div>
 
-              <div className="overview-pillars">
+              <div className="overview-pillars" style={{ marginTop: '2rem' }}>
                 <div className="pillar-item">
                   <CheckCircle2 size={16} color="var(--purple-light)" />
-                  <span>Hands-on Engineering & 24H Championship</span>
+                  <span>24-Hour Continuous Software Engineering</span>
                 </div>
                 <div className="pillar-item">
                   <CheckCircle2 size={16} color="var(--purple-light)" />
@@ -58,7 +64,7 @@ export default function About() {
                 </div>
                 <div className="pillar-item">
                   <CheckCircle2 size={16} color="var(--purple-light)" />
-                  <span>Direct Industry Mentorship Roster</span>
+                  <span>Direct Industry Mentorship & Venture Validation</span>
                 </div>
               </div>
             </Reveal>
@@ -147,11 +153,11 @@ export default function About() {
               </div>
               <h3 className="milestone-event">TECHX'26</h3>
               <p className="milestone-summary">
-                The next chapter. 14 — 15 OCTOBER 2026. TechX'26 expands into a premier 24-hour engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas.
+                The next chapter. 13 — 14 OCTOBER 2026. TechX'26 expands into a premier 24-hour engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas.
               </p>
               <div className="current-chapter-badge">
                 <Sparkles size={14} color="var(--purple-light)" />
-                <span>THE NEXT CHAPTER BEGINS • 14 — 15 OCT 2026</span>
+                <span>THE NEXT CHAPTER BEGINS • 13 — 14 OCT 2026</span>
               </div>
             </div>
           </Reveal>
@@ -258,6 +264,30 @@ export default function About() {
         /* Overview Editorial */
         .about-overview-section {
           padding: 5.5rem 0;
+        }
+        .about-tier-title {
+          font-family: var(--font-display);
+          font-size: 1.4rem;
+          letter-spacing: 0.05em;
+          color: var(--white);
+          margin-bottom: 0.5rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .about-tier-title::before {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          background: var(--purple-light);
+          border-radius: 50%;
+        }
+        .about-tier-text {
+          font-size: 1rem;
+          color: #D1C7E0;
+          line-height: 1.7;
+          margin: 0;
         }
         .overview-editorial-grid {
           display: grid;
