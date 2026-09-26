@@ -14,6 +14,7 @@ import { useRegistrationPricing } from '../hooks/useRegistrationPricing';
 
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 import csSypLogoWhite from '../assets/logo/CS SYP 80yrs White.svg';
+import techxLogoWhite from '../assets/logo/TechX White New.png';
 
 export default function Home() {
   const { isOfferActive, hasEnded, isUpcoming, offerConfig } = useRegistrationPricing();
@@ -57,15 +58,14 @@ export default function Home() {
               </span>
             </div>
 
-            {/* 2. TECHX'26 Monumental Typography (Single Clean Brand Mark, No Stacked Duplicate Logos) */}
-            <h1 className="hero-monument-title">
-              TECHX'26
+            {/* 2. Official TechX'26 Hero Brand Logo (Replaces text heading & duplicate tagline) */}
+            <h1 className="hero-brand-logo-wrap">
+              <img
+                src={techxLogoWhite}
+                alt="TechX Madras 2026 - Ignite the Code. Own the Future."
+                className="hero-official-logo"
+              />
             </h1>
-
-            {/* 3. Primary Tagline */}
-            <p className="hero-tagline-statement">
-              IGNITE THE CODE. OWN THE FUTURE.
-            </p>
 
             {/* 4. Editorial Information Strip */}
             <div className="hero-editorial-strip">
@@ -603,26 +603,51 @@ export default function Home() {
           color: var(--off-white);
         }
 
-        .hero-monument-title {
-          font-family: var(--font-display);
-          font-size: clamp(5.5rem, 15vw, 13rem);
-          letter-spacing: 0.04em;
-          line-height: 0.85;
-          text-transform: uppercase;
-          color: #FFFFFF;
-          margin: 0.25rem 0 1rem;
-          text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+        .hero-brand-logo-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto;
+          padding: 0;
+          width: 100%;
+          line-height: 1;
         }
 
-        .hero-tagline-statement {
-          font-family: var(--font-mono);
-          font-size: clamp(0.9rem, 1.8vw, 1.35rem);
-          font-weight: 700;
-          letter-spacing: 0.2em;
-          color: var(--purple-light);
-          text-transform: uppercase;
-          margin-bottom: 1.75rem;
-          text-shadow: 0 2px 15px rgba(184, 108, 255, 0.3);
+        .hero-official-logo {
+          width: clamp(460px, 44vw, 560px);
+          max-width: 50vw;
+          height: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 0 35px rgba(138, 43, 226, 0.45));
+          margin: -4rem 0 -3.75rem;
+          pointer-events: none;
+          user-select: none;
+          transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-official-logo {
+            width: clamp(380px, 62vw, 480px);
+            max-width: 70vw;
+            margin: -3.25rem 0 -3rem;
+            filter: drop-shadow(0 0 28px rgba(138, 43, 226, 0.4));
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-official-logo {
+            width: clamp(280px, 82vw, 360px);
+            max-width: 85vw;
+            margin: -2.25rem 0 -2rem;
+            filter: drop-shadow(0 0 22px rgba(138, 43, 226, 0.35));
+          }
+        }
+
+        @media (max-width: 390px) {
+          .hero-official-logo {
+            width: clamp(250px, 86vw, 300px);
+            margin: -1.75rem 0 -1.5rem;
+          }
         }
 
         .hero-editorial-strip {
