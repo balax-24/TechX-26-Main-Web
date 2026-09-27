@@ -8,7 +8,6 @@ import {
   Clock, 
   MapPin, 
   Shield, 
-  AlertCircle, 
   User, 
   Mail, 
   Phone, 
@@ -432,19 +431,6 @@ export default function Register() {
               </Reveal>
             </section>
 
-            {/* Official Payment Information Notice */}
-            <Reveal variant="pop" className="register-footnote-box" role="note">
-              <AlertCircle size={18} className="footnote-alert-icon" />
-              <div className="footnote-content">
-                <span className="footnote-notice-title">PAYMENT INFORMATION</span>
-                <p className="footnote-main-text">
-                  {registrationMeta.footnote}
-                </p>
-                <p className="footnote-sub-text">
-                  Payment portals will be opened following formal institutional sanction. KKonfHub registration links will be published directly on this portal.
-                </p>
-              </div>
-            </Reveal>
           </div>
         )}
         {/* ============================================================
@@ -1388,53 +1374,8 @@ export default function Register() {
           letter-spacing: 0.08em;
         }
 
-        /* Footnote / Payment Notice */
-        .register-footnote-box {
-          margin-top: 3.5rem;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-left: 3px solid var(--purple-light, #c084fc);
-          border-radius: 6px;
-          padding: 1.5rem 1.75rem;
-          display: flex;
-          align-items: flex-start;
-          gap: 1rem;
-        }
-
-        .footnote-alert-icon {
-          color: var(--purple-light, #c084fc);
-          flex-shrink: 0;
-          margin-top: 0.15rem;
-        }
-
-        .footnote-content {
-          flex: 1;
-        }
-
-        .footnote-notice-title {
-          font-family: var(--font-mono, monospace);
-          font-size: 0.72rem;
-          letter-spacing: 0.16em;
-          color: var(--purple-light, #c084fc);
-          display: block;
-          font-weight: 700;
-          margin-bottom: 0.35rem;
-        }
-
-        .footnote-main-text {
-          font-family: var(--font-mono, monospace);
-          font-size: 0.78rem;
-          color: var(--text-secondary, #d1d5db);
-          line-height: 1.5;
-          margin: 0 0 0.4rem 0;
-        }
-
-        .footnote-sub-text {
-          font-family: var(--font-sans, sans-serif);
-          font-size: 0.84rem;
-          color: var(--text-secondary, #a3a3a3);
-          line-height: 1.5;
-          margin: 0;
+        .day-2-section {
+          margin-bottom: 0;
         }
         /* ============================================================
            STEP 2: PARTICIPANT DETAILS FLOW
