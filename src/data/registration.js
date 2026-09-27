@@ -82,6 +82,21 @@ export const passSharedInfo = {
 };
 
 // ----------------------------------------------------
+// KONFHUB TICKET-SPECIFIC CHECKOUT URLS
+// ----------------------------------------------------
+export const KONFHUB_TICKET_URLS = {
+  // Full Event Passes (13–14 October 2026)
+  IEEE_CS_FULL: "https://konfhub.com/checkout/techx-madras-2k26-f7e41aab?ticketId=122120%7C1%3B&selectedCode=EARLYBIRD100",
+  IEEE_NON_CS_FULL: "https://konfhub.com/checkout/techx-madras-2k26-f7e41aab?ticketId=122122%7C1%3B&selectedCode=EARLYBIRD100",
+  NON_IEEE_FULL: "https://konfhub.com/checkout/techx-madras-2k26-f7e41aab?ticketId=122123%7C1%3B&selectedCode=EARLYBIRD100",
+
+  // Day 2 Passes (14 October 2026)
+  IEEE_CS_DAY2: "https://konfhub.com/checkout/techx-madras-2k26-f7e41aab?ticketId=122124%7C1%3B&selectedCode=EARLYBIRD100",
+  IEEE_NON_CS_DAY2: "https://konfhub.com/checkout/techx-madras-2k26-f7e41aab?ticketId=122125%7C1%3B&selectedCode=EARLYBIRD100",
+  NON_IEEE_DAY2: "https://konfhub.com/checkout/techx-madras-2k26-f7e41aab?ticketId=122127%7C1%3B&selectedCode=EARLYBIRD100"
+};
+
+// ----------------------------------------------------
 // CENTRALIZED REGISTRATION PRICING OPTIONS
 // (Cards contain ONLY: category, price, offer indicator, register button)
 // ----------------------------------------------------
@@ -104,7 +119,7 @@ export const registrationOptions = [
     displayPrice: "₹399*",
     label: "Full Event Pass",
     description: "Active IEEE Computer Society student members with valid membership ID.",
-    paymentUrl: "", // Ready for KKonfHub registration link
+    paymentUrl: KONFHUB_TICKET_URLS.IEEE_CS_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
   },
   {
@@ -122,7 +137,7 @@ export const registrationOptions = [
     displayPrice: "₹499*",
     label: "Full Event Pass",
     description: "Active IEEE student members from other society chapters.",
-    paymentUrl: "", // Ready for KKonfHub registration link
+    paymentUrl: KONFHUB_TICKET_URLS.IEEE_NON_CS_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
   },
   {
@@ -140,7 +155,7 @@ export const registrationOptions = [
     displayPrice: "₹599*",
     label: "Full Event Pass",
     description: "Student technologists, engineers, and delegates from all institutions.",
-    paymentUrl: "", // Ready for KKonfHub registration link
+    paymentUrl: KONFHUB_TICKET_URLS.NON_IEEE_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
   },
 
@@ -162,7 +177,7 @@ export const registrationOptions = [
     displayPrice: "₹299*",
     label: "Day 2 Pass",
     description: "Active IEEE Computer Society student members with valid membership ID.",
-    paymentUrl: "", // Ready for KKonfHub registration link
+    paymentUrl: KONFHUB_TICKET_URLS.IEEE_CS_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
   },
   {
@@ -180,7 +195,7 @@ export const registrationOptions = [
     displayPrice: "₹399*",
     label: "Day 2 Pass",
     description: "Active IEEE student members from other society chapters.",
-    paymentUrl: "", // Ready for KKonfHub registration link
+    paymentUrl: KONFHUB_TICKET_URLS.IEEE_NON_CS_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
   },
   {
@@ -198,7 +213,7 @@ export const registrationOptions = [
     displayPrice: "₹499*",
     label: "Day 2 Pass",
     description: "Student technologists, engineers, and delegates from all institutions.",
-    paymentUrl: "", // Ready for KKonfHub registration link
+    paymentUrl: KONFHUB_TICKET_URLS.NON_IEEE_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
   }
 ];

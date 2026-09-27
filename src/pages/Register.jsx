@@ -47,8 +47,12 @@ export default function Register() {
     if (passParam) {
       const found = registrationOptions.find(p => p.id.toLowerCase() === passParam.toLowerCase());
       if (found) {
-        setSelectedPass(found);
-        setStep('details');
+        if (found.paymentUrl && found.paymentUrl.trim() !== '') {
+          window.location.href = found.paymentUrl;
+        } else {
+          setSelectedPass(found);
+          setStep('details');
+        }
       }
     }
   }, [passParam]);
@@ -72,6 +76,10 @@ export default function Register() {
 
   // Handle clicking "REGISTER & PAY" on any pass card
   const handleSelectPass = (pass) => {
+    if (pass && pass.paymentUrl && pass.paymentUrl.trim() !== '') {
+      window.location.href = pass.paymentUrl;
+      return;
+    }
     setSelectedPass(pass);
     setStep('details');
   };
@@ -278,14 +286,16 @@ export default function Register() {
                       </div>
 
                       <div className="pass-card-footer">
-                        <button 
-                          onClick={() => handleSelectPass(pass)} 
+                        <a 
+                          href={pass.paymentUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="btn btn-primary pass-action-btn"
                           aria-label={`Register & Pay for Full Event Pass ${pass.category} at ${pInfo.displayPrice}`}
                         >
                           <span>REGISTER & PAY</span>
                           <ArrowRight size={16} />
-                        </button>
+                        </a>
                       </div>
                     </article>
                   );
@@ -405,14 +415,16 @@ export default function Register() {
                       </div>
 
                       <div className="pass-card-footer">
-                        <button 
-                          onClick={() => handleSelectPass(pass)} 
+                        <a 
+                          href={pass.paymentUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="btn btn-primary pass-action-btn"
                           aria-label={`Register & Pay for Day 2 ${pass.category} at ${pInfo.displayPrice}`}
                         >
                           <span>REGISTER & PAY</span>
                           <ArrowRight size={16} />
-                        </button>
+                        </a>
                       </div>
                     </article>
                   );
