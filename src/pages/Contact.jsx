@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Calendar, Send, CheckCircle2, MessageSquare, Clock, ArrowRight, Compass, Navigation } from 'lucide-react';
+import { Mail, MapPin, Calendar, Send, CheckCircle2, MessageSquare, ArrowRight, Compass, Navigation } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
 import { eventMeta } from '../data/contacts';
@@ -112,19 +112,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Registration Desk Status */}
-            <div className="channel-card reveal-card">
-              <div className="channel-icon-wrap">
-                <Clock size={26} color="var(--purple-light)" />
-              </div>
-              <div className="channel-info">
-                <span className="channel-label">REGISTRATION DESK</span>
-                <strong className="channel-strong">Registration details coming soon</strong>
-                <p className="channel-note">
-                  Official track passes, eligibility requirements, and category confirmations will be published here.
-                </p>
-              </div>
-            </div>
 
             {/* Host Institution */}
             <div className="channel-card reveal-card">
@@ -482,10 +469,10 @@ export default function Contact() {
         }
         .official-channel-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 1.75rem;
         }
-        @media (max-width: 990px) {
+        @media (max-width: 768px) {
           .official-channel-grid {
             grid-template-columns: 1fr;
           }
