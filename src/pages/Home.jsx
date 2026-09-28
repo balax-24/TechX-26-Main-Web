@@ -177,7 +177,7 @@ export default function Home() {
                     </div>
                     <h4 className="edition-title">THE NEXT CHAPTER</h4>
                     <p className="edition-desc">
-                      Expanding technical frontiers with the 24-hour VerdictX hackathon, Sherlock & Syntax CTF, Edge AI & TinyML masterclass, and competitive programming.
+                      Expanding technical frontiers with the 24-hour VerdictX hackathon, Sherlock & Syntax CTF, Edge AI & TinyML workshop, Idea Alchemy, CodeNomics, Nano Mentoring, and IEEE Computer Society membership experiences.
                     </p>
                   </div>
                 </div>

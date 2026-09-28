@@ -153,7 +153,7 @@ export default function About() {
               </div>
               <h3 className="milestone-event">TECHX'26</h3>
               <p className="milestone-summary">
-                The next chapter. 13 — 14 OCTOBER 2026. TechX'26 expands into a premier 24-hour engineering championship, cybersecurity investigation, on-device TinyML, and innovation arenas.
+                The next chapter. 13 — 14 OCTOBER 2026. Expanding technical frontiers with the 24-hour VerdictX hackathon, Sherlock & Syntax CTF, Edge AI & TinyML workshop, Idea Alchemy, CodeNomics, Nano Mentoring, and IEEE Computer Society membership experiences.
               </p>
               <div className="current-chapter-badge">
                 <Sparkles size={14} color="var(--purple-light)" />

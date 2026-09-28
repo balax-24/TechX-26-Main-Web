@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, ChevronRight, Clock, Users, MapPin, Calendar, Mail, CheckCircle2,
+  ArrowRight, ChevronRight, Clock, Users, MapPin, Calendar, Mail, Phone, CheckCircle2,
   Award, Sparkles, Terminal, Code, Shield, Cpu, Lightbulb, Coins,
   Navigation, ExternalLink, ArrowUp
 } from 'lucide-react';
@@ -277,7 +277,7 @@ export default function SingleScroll() {
               </div>
               <h3 className="ss-j-title">THE NEXT CHAPTER</h3>
               <p className="ss-j-desc">
-                The 2026 edition expands technical frontiers with the 24-hour VerdictX software championship, Sherlock & Syntax cybersecurity CTF, on-device Edge AI masterclass, startup pitching, and algorithmic competitions.
+                Expanding technical frontiers with the 24-hour VerdictX hackathon, Sherlock & Syntax CTF, Edge AI & TinyML workshop, Idea Alchemy, CodeNomics, Nano Mentoring, and IEEE Computer Society membership experiences.
               </p>
             </div>
           </Reveal>
@@ -754,6 +754,20 @@ export default function SingleScroll() {
                   <a href={`mailto:${eventMeta.email}`} className="ss-c-link">
                     {eventMeta.email}
                   </a>
+                </div>
+              </div>
+
+              <div className="ss-c-item">
+                <div className="ss-c-icon">
+                  <Phone size={22} color="var(--purple-light)" />
+                </div>
+                <div className="ss-c-info">
+                  <span className="ss-c-label">CONTACT</span>
+                  <div className="ss-c-contacts-mini">
+                    <span>Shruthi C S: <a href="tel:7904350659" className="ss-c-link">79043 50659</a></span>
+                    <span>Shivani Ananya: <a href="tel:7904350659" className="ss-c-link">79043 50659</a></span>
+                    <span>Balaharish: <a href="tel:9150316901" className="ss-c-link">9150316901</a></span>
+                  </div>
                 </div>
               </div>
 
@@ -2020,6 +2034,17 @@ export default function SingleScroll() {
           flex-shrink: 0;
         }
 
+        .ss-c-contacts-mini {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          margin-top: 0.2rem;
+        }
+        .ss-c-contacts-mini span {
+          color: var(--off-white);
+        }
         .ss-c-info {
           display: flex;
           flex-direction: column;

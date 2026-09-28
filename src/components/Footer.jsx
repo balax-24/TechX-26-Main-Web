@@ -104,11 +104,11 @@ export default function Footer() {
           margin-bottom: 0.75rem;
         }
         .footer-logo-emblem {
-          height: clamp(90px, 13vw, 126px);
+          height: clamp(120px, 17vw, 168px);
           width: auto;
-          max-width: 280px;
+          max-width: 380px;
           object-fit: contain;
-          filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.45));
+          filter: drop-shadow(0 0 24px rgba(138, 43, 226, 0.5));
         }
         .footer-monument-title {
           font-family: var(--font-display);

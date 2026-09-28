@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Calendar, Send, CheckCircle2, MessageSquare, ArrowRight, Compass, Navigation } from 'lucide-react';
+import { Mail, Phone, MapPin, Calendar, Send, CheckCircle2, MessageSquare, ArrowRight, Compass, Navigation } from 'lucide-react';
 import TechAtmosphere from '../components/TechAtmosphere';
 import Reveal from '../components/Reveal';
-import { eventMeta } from '../data/contacts';
+import { eventMeta, contactPersons } from '../data/contacts';
 import campusFacadeImg from '../assets/architecture/sairam-campus-facade.png';
 
 export default function Contact() {
@@ -112,6 +112,28 @@ export default function Contact() {
               </div>
             </div>
 
+            {/* Official Contact Persons */}
+            <div className="channel-card highlight-channel reveal-card">
+              <div className="channel-icon-wrap">
+                <Phone size={26} color="var(--purple-light)" />
+              </div>
+              <div className="channel-info">
+                <span className="channel-label">CONTACT</span>
+                <div className="contact-persons-list">
+                  {contactPersons.map((person) => (
+                    <div key={person.name} className="contact-person-entry">
+                      <span className="contact-person-name">{person.name}</span>
+                      <a href={person.tel} className="contact-person-phone">
+                        {person.phone}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <p className="channel-note">
+                  Official student coordinator contact lines for delegate assistance and inquiries.
+                </p>
+              </div>
+            </div>
 
             {/* Host Institution */}
             <div className="channel-card reveal-card">
@@ -121,8 +143,9 @@ export default function Contact() {
               <div className="channel-info">
                 <span className="channel-label">ORGANIZING CHAPTER</span>
                 <strong className="channel-strong">IEEE Computer Society SBC</strong>
+                <p className="channel-inst-sub">Sri Sai Ram Institute of Technology</p>
                 <p className="channel-note">
-                  Department of Computer Science & Engineering, Sri Sai Ram Institute of Technology.
+                  Department of Computer Science & Engineering.
                 </p>
               </div>
             </div>
@@ -469,14 +492,55 @@ export default function Contact() {
         }
         .official-channel-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.75rem;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 990px) {
           .official-channel-grid {
             grid-template-columns: 1fr;
           }
         }
+        .contact-persons-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+          margin: 0.35rem 0 0.5rem;
+        }
+        .contact-person-entry {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 0.45rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          gap: 0.75rem;
+        }
+        .contact-person-entry:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+        .contact-person-name {
+          font-weight: 700;
+          color: var(--white);
+          font-size: 0.95rem;
+        }
+        .contact-person-phone {
+          font-family: var(--font-mono);
+          font-size: 0.88rem;
+          color: var(--purple-light);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .contact-person-phone:hover {
+          color: var(--white);
+          text-decoration: underline;
+        }
+        .channel-inst-sub {
+          font-size: 0.92rem;
+          color: var(--off-white);
+          margin-top: 0.2rem;
+          font-weight: 500;
+        }
+        
         .channel-card {
           background: #0B0714;
           border: 1px solid var(--border);

@@ -35,3 +35,9 @@ export const participantBreakdown = [
   { label: "IEEE Members (Other Societies)", count: 60, percent: "24%" },
   { label: "Non-IEEE Engineering Delegates", count: 100, percent: "40%" }
 ];
+
+export const contactPersons = [
+  { name: "Shruthi C S", phone: "79043 50659", tel: "tel:7904350659" },
+  { name: "Shivani Ananya", phone: "79043 50659", tel: "tel:7904350659" },
+  { name: "Balaharish", phone: "9150316901", tel: "tel:9150316901" }
+];
