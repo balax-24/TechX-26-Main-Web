@@ -37,7 +37,7 @@ export const participantBreakdown = [
 ];
 
 export const contactPersons = [
-  { name: "Shruthi C S", phone: "79043 50659", tel: "tel:7904350659" },
-  { name: "Shivani Ananya", phone: "79043 50659", tel: "tel:7904350659" },
-  { name: "Balaharish", phone: "9150316901", tel: "tel:9150316901" }
+  { name: "Vishal Bharath V", phone: "+91 93639 10227", tel: "tel:+919363910227" },
+  { name: "Shruthi C S", phone: "+91 79043 50659", tel: "tel:+917904350659" },
+  { name: "Balaharish", phone: "+91 91503 16901", tel: "tel:+919150316901" }
 ];

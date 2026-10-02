@@ -764,9 +764,9 @@ export default function SingleScroll() {
                 <div className="ss-c-info">
                   <span className="ss-c-label">CONTACT</span>
                   <div className="ss-c-contacts-mini">
-                    <span>Shruthi C S: <a href="tel:7904350659" className="ss-c-link">79043 50659</a></span>
-                    <span>Shivani Ananya: <a href="tel:7904350659" className="ss-c-link">79043 50659</a></span>
-                    <span>Balaharish: <a href="tel:9150316901" className="ss-c-link">9150316901</a></span>
+                    <span>Vishal Bharath V: <a href="tel:+919363910227" className="ss-c-link">+91 93639 10227</a></span>
+                    <span>Shruthi C S: <a href="tel:+917904350659" className="ss-c-link">+91 79043 50659</a></span>
+                    <span>Balaharish: <a href="tel:+919150316901" className="ss-c-link">+91 91503 16901</a></span>
                   </div>
                 </div>
               </div>

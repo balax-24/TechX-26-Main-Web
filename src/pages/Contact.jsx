@@ -513,6 +513,7 @@ export default function Contact() {
           padding-bottom: 0.45rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           gap: 0.75rem;
+          flex-wrap: wrap;
         }
         .contact-person-entry:last-child {
           border-bottom: none;
@@ -541,6 +542,11 @@ export default function Contact() {
           font-weight: 500;
         }
         
+        @media (max-width: 480px) {
+          .channel-card {
+            padding: 1.75rem 1.25rem;
+          }
+        }
         .channel-card {
           background: #0B0714;
           border: 1px solid var(--border);
