@@ -47,8 +47,8 @@ const boundaryCases = [
   },
   {
     id: "BOUNDARY 1",
-    timestamp: "2026-10-04T23:59:59+05:30",
-    description: "2026-10-04 23:59:59 IST → DISCOUNT ACTIVE",
+    timestamp: "2026-10-08T23:59:00+05:30",
+    description: "2026-10-08 23:59:00 IST → DISCOUNT ACTIVE",
     expectedOfferActive: true,
     expectedOfferEnded: false,
     expectedDay1Prices: [299, 399, 499],
@@ -56,17 +56,26 @@ const boundaryCases = [
   },
   {
     id: "BOUNDARY 2",
-    timestamp: "2026-10-05T00:00:00+05:30",
-    description: "2026-10-05 00:00:00 IST → STANDARD PRICE (Resumes automatically)",
+    timestamp: "2026-10-08T23:59:59+05:30",
+    description: "2026-10-08 23:59:59 IST → DISCOUNT ACTIVE",
+    expectedOfferActive: true,
+    expectedOfferEnded: false,
+    expectedDay1Prices: [299, 399, 499],
+    expectedDay2Prices: [199, 299, 399]
+  },
+  {
+    id: "BOUNDARY 3",
+    timestamp: "2026-10-09T00:00:00+05:30",
+    description: "2026-10-09 00:00:00 IST → STANDARD PRICE (Resumes automatically)",
     expectedOfferActive: false,
     expectedOfferEnded: true,
     expectedDay1Prices: [399, 499, 599],
     expectedDay2Prices: [299, 399, 499]
   },
   {
-    id: "BOUNDARY 3",
-    timestamp: "2026-10-05T00:00:01+05:30",
-    description: "2026-10-05 00:00:01 IST → STANDARD PRICE",
+    id: "BOUNDARY 4",
+    timestamp: "2026-10-09T00:00:01+05:30",
+    description: "2026-10-09 00:00:01 IST → STANDARD PRICE",
     expectedOfferActive: false,
     expectedOfferEnded: true,
     expectedDay1Prices: [399, 499, 599],
@@ -98,14 +107,14 @@ boundaryCases.forEach((tc) => {
 });
 
 // 3. Timezone Invariance Test
-// Changing browser timezone should not change the cutoff at 2026-10-05 00:00:00 Asia/Kolkata
+// Changing browser timezone should not change the cutoff at 2026-10-08 23:59:59 Asia/Kolkata
 console.log("\nCHECK 3: TIMEZONE INVARIANCE TESTS (Asia/Kolkata cutoff vs UTC)");
-// 2026-10-04 23:59:59 IST = 2026-10-04 18:29:59 UTC
-const utcLastSecond = "2026-10-04T18:29:59.000Z";
-// 2026-10-05 00:00:00 IST = 2026-10-04 18:30:00 UTC
-const utcCutoff = "2026-10-04T18:30:00.000Z";
-// 2026-10-05 00:00:01 IST = 2026-10-04 18:30:01 UTC
-const utcAfter = "2026-10-04T18:30:01.000Z";
+// 2026-10-08 23:59:59 IST = 2026-10-08 18:29:59 UTC
+const utcLastSecond = "2026-10-08T18:29:59.000Z";
+// 2026-10-09 00:00:00 IST = 2026-10-08 18:30:00 UTC
+const utcCutoff = "2026-10-08T18:30:00.000Z";
+// 2026-10-09 00:00:01 IST = 2026-10-08 18:30:01 UTC
+const utcAfter = "2026-10-08T18:30:01.000Z";
 
 const utcLastActive = isEarlyOfferActive(utcLastSecond);
 const utcCutoffActive = isEarlyOfferActive(utcCutoff);
@@ -122,8 +131,8 @@ if (utcLastActive && !utcCutoffActive && utcCutoffEnded && utcAfterEnded) {
 // 4. Struck-Through Price Logic Test
 console.log("\nCHECK 4: STRUCK-THROUGH PRICE LOGIC");
 const samplePass = day1Passes[0]; // IEEE CS (Normal 399, Offer 299)
-const activeInfo = getRegistrationPricingInfo(samplePass, "2026-10-04T23:59:59+05:30");
-const endedInfo = getRegistrationPricingInfo(samplePass, "2026-10-05T00:00:00+05:30");
+const activeInfo = getRegistrationPricingInfo(samplePass, "2026-10-08T23:59:59+05:30");
+const endedInfo = getRegistrationPricingInfo(samplePass, "2026-10-09T00:00:00+05:30");
 
 if (activeInfo.effectivePrice === 299 && activeInfo.isOfferActive) {
   console.log("[PASS] During offer: effectivePrice is ₹299 (offer) and isOfferActive is true.");
@@ -141,7 +150,7 @@ if (endedInfo.effectivePrice === 399 && !endedInfo.isOfferActive && endedInfo.ha
 
 // 5. Verify NO visible end dates or deadlines in OFFER_CONFIG
 console.log("\nCHECK 5: NO VISIBLE DATES IN OFFER_CONFIG");
-const dateKeywords = ["23 SEP", "04 OCT", "2026-10-05", "5 OCTOBER", "DEADLINE", "COUNTDOWN"];
+const dateKeywords = ["23 SEP", "04 OCT", "2026-10-08", "8 OCTOBER", "DEADLINE", "COUNTDOWN"];
 let exposedForbiddenText = false;
 [OFFER_CONFIG.title, OFFER_CONFIG.savingsHeading, OFFER_CONFIG.bodyText, OFFER_CONFIG.endedHeading, OFFER_CONFIG.endedMessage].forEach(text => {
   if (text) {

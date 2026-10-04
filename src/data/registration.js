@@ -4,10 +4,10 @@
 // ----------------------------------------------------
 // OFFER WINDOW CONFIGURATION (Asia/Kolkata / IST)
 // ----------------------------------------------------
-// Authoritative cutoff: 5 October 2026 at 00:00:00 IST (2026-10-05 00:00:00 Asia/Kolkata)
-// The early registration offer is ACTIVE FROM NOW until 5 October 2026 00:00:00 IST.
-// At exactly 5 October 2026 00:00:00 IST, website switches back to standard pricing.
-export const OFFER_END_DATE_IST = "2026-10-05T00:00:00+05:30";
+// Authoritative cutoff: 8 October 2026 at 23:59:59 IST (2026-10-08 23:59:59 Asia/Kolkata)
+// The early registration offer is ACTIVE FROM NOW through 8 October 2026 23:59:59 IST.
+// After 8 October 2026 23:59:59 IST, website switches back to standard pricing.
+export const OFFER_END_DATE_IST = "2026-10-08T23:59:59+05:30";
 export const OFFER_END_MS = new Date(OFFER_END_DATE_IST).getTime();
 
 // ----------------------------------------------------
@@ -271,19 +271,19 @@ function resolveTimestamp(timestamp) {
 
 /**
  * Returns true if the offer is active:
- * currentTime < 2026-10-05 00:00:00 Asia/Kolkata
+ * currentTime <= 2026-10-08 23:59:59 Asia/Kolkata
  */
 export function isEarlyOfferActive(timestamp = Date.now()) {
   const currentMs = resolveTimestamp(timestamp);
-  return currentMs < OFFER_END_MS;
+  return currentMs <= OFFER_END_MS;
 }
 
 /**
- * Returns true if current time is on or after 5 October 2026 00:00:00 IST.
+ * Returns true if current time is after 8 October 2026 23:59:59 IST.
  */
 export function hasEarlyOfferEnded(timestamp = Date.now()) {
   const currentMs = resolveTimestamp(timestamp);
-  return currentMs >= OFFER_END_MS;
+  return currentMs > OFFER_END_MS;
 }
 
 /**
@@ -324,13 +324,13 @@ export function getRegistrationPricingInfo(option, timestamp = Date.now()) {
 }
 
 /**
- * Calculates countdown time remaining to 5 October 2026 00:00:00 IST.
+ * Calculates countdown time remaining to 8 October 2026 23:59:59 IST.
  */
 export function getOfferTimeRemaining(timestamp = Date.now()) {
   const currentMs = resolveTimestamp(timestamp);
   const difference = OFFER_END_MS - currentMs;
 
-  if (difference <= 0) {
+  if (difference < 0) {
     return {
       days: 0,
       hours: 0,

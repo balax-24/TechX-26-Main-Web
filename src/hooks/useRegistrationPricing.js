@@ -10,7 +10,7 @@ import {
 /**
  * Custom React hook for centralized TechX'26 registration pricing.
  * Subscribes to a 1-second interval to automatically transition pricing
- * at exactly 5 October 2026 00:00:00 IST without requiring a page reload.
+ * after 8 October 2026 23:59:59 IST without requiring a page reload.
  */
 export function useRegistrationPricing() {
   const [currentMs, setCurrentMs] = useState(() => Date.now());

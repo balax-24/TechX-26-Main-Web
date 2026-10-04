@@ -11,7 +11,7 @@ export default function RegistrationOffer() {
       <Reveal variant="card" className={`registration-offer-card ${hasEnded ? 'offer-ended-card' : ''}`}>
         {hasEnded ? (
           /* ============================================================
-             STATE: STANDARD REGISTRATION (Active from 5 Oct 00:00:00 IST)
+             STATE: STANDARD REGISTRATION (Active after 8 Oct 23:59:59 IST)
           ============================================================ */
           <div className="offer-ended-content">
             <div className="offer-header-row">
