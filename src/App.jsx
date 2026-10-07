@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
+import SecretOfferModal from './components/SecretOfferModal';
 
 // Pages
 import Home from './pages/Home';
@@ -39,6 +40,9 @@ export default function App() {
 
       {/* Auto Scroll To Top on Route Changes */}
       <ScrollToTop />
+
+      {/* Limited-Time Secret Offer Popup */}
+      <SecretOfferModal isLoading={loading} />
 
       {/* Global Navbar */}
       <Navbar />

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { 
   ArrowRight, 
   ArrowLeft, 
+  AlertCircle, 
   CheckCircle2, 
   Calendar, 
   Clock, 
@@ -430,6 +431,17 @@ export default function Register() {
                 })}
               </Reveal>
             </section>
+
+            {/* Registration Policy -- Non-Refundable Notice */}
+            <div className="registration-policy-notice" role="note" aria-label="Registration refund policy">
+              <div className="policy-notice-badge">
+                <AlertCircle size={14} className="policy-notice-icon" />
+                <span>IMPORTANT</span>
+              </div>
+              <p className="policy-notice-text">
+                Registration fees and tickets are non-refundable once payment has been completed.
+              </p>
+            </div>
 
           </div>
         )}
@@ -1831,6 +1843,62 @@ export default function Register() {
           line-height: 1.4;
           text-align: center;
           justify-content: center;
+        }
+
+        /* ============================================================
+           REGISTRATION POLICY / NON-REFUNDABLE NOTICE
+           ============================================================ */
+        .registration-policy-notice {
+          margin: 3.5rem auto 1.5rem;
+          max-width: 680px;
+          background: rgba(138, 43, 226, 0.04);
+          border: 1px solid rgba(138, 43, 226, 0.22);
+          border-radius: var(--radius-md, 8px);
+          padding: 1.15rem 1.6rem;
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .policy-notice-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-family: var(--font-mono, monospace);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: var(--purple-light, #B86CFF);
+          background: rgba(138, 43, 226, 0.14);
+          border: 1px solid rgba(138, 43, 226, 0.35);
+          padding: 0.3rem 0.65rem;
+          border-radius: 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .policy-notice-icon {
+          color: var(--purple-light, #B86CFF);
+          flex-shrink: 0;
+        }
+
+        .policy-notice-text {
+          margin: 0;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          color: #D1C7E0;
+          font-weight: 400;
+        }
+
+        @media (max-width: 640px) {
+          .registration-policy-notice {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1.15rem 1.25rem;
+            margin: 2.5rem 0 1rem;
+          }
         }
       `}</style>
     </div>
