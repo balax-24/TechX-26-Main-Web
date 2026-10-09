@@ -551,8 +551,8 @@ export default function SingleScroll() {
               {isOfferActive ? 'SAVE ₹100 ON EVERY REGISTRATION' : 'STANDARD REGISTRATION'}
             </h2>
             <p className="ss-section-sub">
-              {isOfferActive 
-                ? 'Register now and save ₹100 on every registration.' 
+              {isOfferActive
+                ? 'Register now and save ₹100 on every registration.'
                 : 'Standard registration fees apply for all conference delegates.'}
             </p>
           </Reveal>
@@ -565,10 +565,11 @@ export default function SingleScroll() {
                 <div className="ss-day-pill-row">
                   <span className="ss-day-pill">{passSharedInfo.fullPass.title}</span>
                   <span className="ss-access-pill-primary">{passSharedInfo.fullPass.accessLabel}</span>
+                  <span className="ss-sold-out-pill">SOLD OUT</span>
                 </div>
                 <h3>{passSharedInfo.fullPass.dates}</h3>
                 <p className="ss-day-col-desc">{passSharedInfo.fullPass.description}</p>
-                
+
                 <div className="ss-shared-summary-box">
                   <span className="ss-shared-title">{passSharedInfo.fullPass.inclusionsTitle}:</span>
                   <p className="ss-shared-events-text">{passSharedInfo.fullPass.compactSummary}</p>
@@ -585,15 +586,19 @@ export default function SingleScroll() {
 
               <div className="ss-pricing-list-heading">
                 <span>{passSharedInfo.fullPass.pricingSectionLabel}</span>
+                <span className="ss-heading-sold-out-badge">SOLD OUT</span>
               </div>
 
               <div className="ss-pass-cards-list">
                 {day1Passes.map((pass) => {
                   const pInfo = getPassInfo(pass);
                   return (
-                    <div key={pass.id} className="ss-pricing-tier-card">
+                    <div key={pass.id} className="ss-pricing-tier-card ss-pricing-tier-sold-out">
                       <div className="ss-pt-top">
-                        <span className="ss-pt-category">{pass.shortCategory}</span>
+                        <div className="ss-pt-category-group">
+                          <span className="ss-pt-category">{pass.shortCategory}</span>
+                          <span className="ss-sold-out-badge">SOLD OUT</span>
+                        </div>
                         <div className="ss-pt-price-cluster">
                           <span className="ss-pt-price">{pInfo.displayPrice}</span>
                           {isOfferActive && (
@@ -604,10 +609,15 @@ export default function SingleScroll() {
                         </div>
                       </div>
                       <p className="ss-pt-desc">{pass.description}</p>
-                      <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
-                        <span>REGISTER & PAY</span>
-                        <ArrowRight size={14} />
-                      </Link>
+                      <button
+                        type="button"
+                        disabled
+                        className="btn btn-secondary ss-pt-btn ss-pt-btn-soldout"
+                        aria-disabled="true"
+                        aria-label={`Full Event Pass for ${pass.category} is sold out`}
+                      >
+                        <span>SOLD OUT</span>
+                      </button>
                     </div>
                   );
                 })}
@@ -623,7 +633,7 @@ export default function SingleScroll() {
                 </div>
                 <h3>{passSharedInfo.day2Pass.dates}</h3>
                 <p className="ss-day-col-sub">{passSharedInfo.day2Pass.description}</p>
-                
+
                 <div className="ss-shared-summary-box">
                   <span className="ss-shared-title">{passSharedInfo.day2Pass.inclusionsTitle}:</span>
                   <p className="ss-shared-events-text">{passSharedInfo.day2Pass.compactSummary}</p>
@@ -883,7 +893,7 @@ export default function SingleScroll() {
         .ss-blueprint-grid {
           position: absolute;
           inset: 0;
-          background-image: 
+          background-image:
             linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
           background-size: 48px 48px;
@@ -1160,7 +1170,7 @@ export default function SingleScroll() {
           transform: rotate(-90deg);
         }
 
-        
+
           .ss-syp-logo-wrap {
             margin-top: 1rem;
             padding-top: 0.75rem;
@@ -1694,7 +1704,7 @@ export default function SingleScroll() {
           margin-bottom: 0.3rem;
         }
 
-        
+
         .ss-day-pill-row {
           display: flex;
           align-items: center;
@@ -1900,6 +1910,71 @@ export default function SingleScroll() {
           padding: 0.55rem;
           font-size: 0.78rem;
         }
+        .ss-sold-out-pill {
+          display: inline-flex;
+          align-items: center;
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #E2D9F3;
+          background: rgba(138, 43, 226, 0.22);
+          border: 1px solid rgba(138, 43, 226, 0.5);
+          padding: 0.2rem 0.6rem;
+          border-radius: 999px;
+          text-transform: uppercase;
+        }
+
+        .ss-heading-sold-out-badge {
+          display: inline-flex;
+          align-items: center;
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: #E2D9F3;
+          background: rgba(138, 43, 226, 0.18);
+          border: 1px solid rgba(138, 43, 226, 0.45);
+          padding: 0.15rem 0.5rem;
+          border-radius: 4px;
+          margin-left: 0.65rem;
+        }
+
+        .ss-pt-category-group {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .ss-sold-out-badge {
+          font-family: var(--font-mono);
+          font-size: 0.62rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: #E2D9F3;
+          background: rgba(138, 43, 226, 0.22);
+          border: 1px solid rgba(138, 43, 226, 0.45);
+          padding: 0.12rem 0.45rem;
+          border-radius: 4px;
+          text-transform: uppercase;
+        }
+
+        .ss-pt-btn-soldout {
+          background: rgba(255, 255, 255, 0.04) !important;
+          border-color: rgba(138, 43, 226, 0.3) !important;
+          color: #9CA3AF !important;
+          cursor: not-allowed !important;
+          opacity: 0.85;
+        }
+
+        .ss-pt-btn-soldout:hover,
+        .ss-pt-btn-soldout:focus {
+          background: rgba(255, 255, 255, 0.04) !important;
+          border-color: rgba(138, 43, 226, 0.3) !important;
+          color: #9CA3AF !important;
+          transform: none !important;
+        }
+
 
         .ss-pricing-foot-row {
           max-width: 860px;

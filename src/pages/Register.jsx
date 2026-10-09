@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  ArrowLeft, 
-  AlertCircle, 
-  CheckCircle2, 
-  Calendar, 
-  Clock, 
-  MapPin, 
-  Shield, 
-  User, 
-  Mail, 
-  Phone, 
-  Building, 
+import {
+  ArrowRight,
+  ArrowLeft,
+  AlertCircle,
+  CheckCircle2,
+  Calendar,
+  Clock,
+  MapPin,
+  Shield,
+  User,
+  Mail,
+  Phone,
+  Building,
   Award,
   ExternalLink,
   ChevronRight,
@@ -34,8 +34,8 @@ export default function Register() {
   const passParam = searchParams.get('pass');
 
   // Find referenced event if provided via query param
-  const matchedEvent = eventParam 
-    ? eventsData.find(e => e.id.toLowerCase() === eventParam.toLowerCase()) 
+  const matchedEvent = eventParam
+    ? eventsData.find(e => e.id.toLowerCase() === eventParam.toLowerCase())
     : null;
 
   // Selected pass for details / checkout flow
@@ -47,6 +47,9 @@ export default function Register() {
     if (passParam) {
       const found = registrationOptions.find(p => p.id.toLowerCase() === passParam.toLowerCase());
       if (found) {
+        if (found.isSoldOut) {
+          return;
+        }
         if (found.paymentUrl && found.paymentUrl.trim() !== '') {
           window.location.href = found.paymentUrl;
         } else {
@@ -76,6 +79,7 @@ export default function Register() {
 
   // Handle clicking "REGISTER & PAY" on any pass card
   const handleSelectPass = (pass) => {
+    if (!pass || pass.isSoldOut) return;
     if (pass && pass.paymentUrl && pass.paymentUrl.trim() !== '') {
       window.location.href = pass.paymentUrl;
       return;
@@ -88,7 +92,7 @@ export default function Register() {
   const handleProceedToPayment = (e) => {
     if (e && e.preventDefault) e.preventDefault();
 
-    if (!selectedPass) return;
+    if (!selectedPass || selectedPass.isSoldOut) return;
 
     // IF real paymentUrl exists: redirect to the configured KKonfHub payment URL
     if (selectedPass.paymentUrl && selectedPass.paymentUrl.trim() !== '') {
@@ -155,14 +159,14 @@ export default function Register() {
                   REGISTER FOR {matchedEvent ? matchedEvent.publicTitle || matchedEvent.title : eventParam.replace(/-/g, ' ').toUpperCase()}
                 </h2>
                 <p className="context-desc">
-                  {matchedEvent 
+                  {matchedEvent
                     ? `This event is scheduled on ${matchedEvent.eventDate} (${matchedEvent.dayLabel}). Entry is included with any ${matchedEvent.dayLabel === 'Day 1' ? 'Full Event' : 'Day 2'} Pass below.`
                     : `Please select the appropriate Pass below to register for this track.`
                   }
                 </p>
               </div>
-              <button 
-                onClick={() => setSearchParams({})} 
+              <button
+                onClick={() => setSearchParams({})}
                 className="context-clear-btn"
                 aria-label="View all passes without event filter"
               >
@@ -183,7 +187,7 @@ export default function Register() {
                 1. FULL EVENT PASS SECTION (13–14 OCTOBER 2026)
                 DAY 1 + DAY 2 ACCESS
             -------------------------------------------------- */}
-            <section 
+            <section
               className={`day-section full-event-section ${matchedEvent && matchedEvent.day === 1 ? 'day-section-highlighted' : ''}`}
               aria-labelledby="full-event-heading"
             >
@@ -193,6 +197,7 @@ export default function Register() {
                   <div className="pass-badge-row">
                     <span className="pass-phase-badge">PHASE 01</span>
                     <span className="pass-access-pill-primary">DAY 1 + DAY 2 ACCESS</span>
+                    <span className="pass-status-pill-soldout">CAPACITY REACHED • SOLD OUT</span>
                   </div>
                   <h2 id="full-event-heading" className="pass-main-heading">
                     {fullPassShared.title}
@@ -247,8 +252,11 @@ export default function Register() {
 
               {/* Day 1 Pricing Sub-Header */}
               <div className="pricing-sub-header">
-                <h3 className="pricing-sub-title">{fullPassShared.pricingSectionLabel}</h3>
-                <span className="pricing-sub-note">Select your delegate category below to proceed to registration.</span>
+                <div className="pricing-sub-title-row">
+                  <h3 className="pricing-sub-title">{fullPassShared.pricingSectionLabel}</h3>
+                  <span className="pass-status-pill-soldout">SOLD OUT</span>
+                </div>
+                <span className="pricing-sub-note">Registration capacity reached. All Full Event categories are currently sold out.</span>
               </div>
 
               {/* Day 1 Pricing Cards (ONLY: category, price, offer indicator, register button) */}
@@ -260,6 +268,7 @@ export default function Register() {
                       <div className="pass-card-top">
                         <div className="pass-label-strip">
                           <span className="pass-label-tag">{pass.label}</span>
+                          <span className="pass-sold-out-badge">SOLD OUT</span>
                           <span className="pass-day-indicator">13–14 OCT</span>
                         </div>
                         <h4 className="pass-category-title">{pass.category}</h4>
@@ -286,16 +295,15 @@ export default function Register() {
                       </div>
 
                       <div className="pass-card-footer">
-                        <a 
-                          href={pass.paymentUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-primary pass-action-btn"
-                          aria-label={`Register & Pay for Full Event Pass ${pass.category} at ${pInfo.displayPrice}`}
+                        <button
+                          type="button"
+                          disabled
+                          className="btn pass-action-btn pass-btn-sold-out"
+                          aria-disabled="true"
+                          aria-label={`Full Event Pass for ${pass.category} is Sold Out`}
                         >
-                          <span>REGISTER & PAY</span>
-                          <ArrowRight size={16} />
-                        </a>
+                          <span>SOLD OUT</span>
+                        </button>
                       </div>
                     </article>
                   );
@@ -313,7 +321,7 @@ export default function Register() {
                 2. DAY 2 PASS SECTION (14 OCTOBER 2026)
                 DAY 2 ACCESS ONLY
             -------------------------------------------------- */}
-            <section 
+            <section
               className={`day-section day-2-section ${matchedEvent && matchedEvent.day === 2 ? 'day-section-highlighted' : ''}`}
               aria-labelledby="day-2-heading"
             >
@@ -415,7 +423,7 @@ export default function Register() {
                       </div>
 
                       <div className="pass-card-footer">
-                        <a 
+                        <a
                           href={pass.paymentUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -451,8 +459,8 @@ export default function Register() {
         {step === 'details' && selectedPass && (
           <Reveal variant="card" className="details-flow-wrapper" role="region" aria-labelledby="details-heading">
             <div className="details-header-bar">
-              <button 
-                onClick={handleResetToPasses} 
+              <button
+                onClick={handleResetToPasses}
                 className="details-back-nav-btn"
                 aria-label="Back to pass categories"
               >
@@ -480,9 +488,9 @@ export default function Register() {
                       <span>Full Name</span>
                       <span className="field-hint">(Optional)</span>
                     </label>
-                    <input 
+                    <input
                       id="reg-fullName"
-                      type="text" 
+                      type="text"
                       className="field-input"
                       placeholder="e.g. Alex Henderson"
                       value={formData.fullName}
@@ -498,9 +506,9 @@ export default function Register() {
                         <span>Email Address</span>
                         <span className="field-hint">(Optional)</span>
                       </label>
-                      <input 
+                      <input
                         id="reg-email"
-                        type="email" 
+                        type="email"
                         className="field-input"
                         placeholder="alex@example.com"
                         value={formData.email}
@@ -514,9 +522,9 @@ export default function Register() {
                         <span>Mobile Number</span>
                         <span className="field-hint">(Optional)</span>
                       </label>
-                      <input 
+                      <input
                         id="reg-phone"
-                        type="tel" 
+                        type="tel"
                         className="field-input"
                         placeholder="+91 98765 43210"
                         value={formData.phone}
@@ -532,9 +540,9 @@ export default function Register() {
                       <span>College / Institution</span>
                       <span className="field-hint">(Optional)</span>
                     </label>
-                    <input 
+                    <input
                       id="reg-institution"
-                      type="text" 
+                      type="text"
                       className="field-input"
                       placeholder="e.g. Sri Sai Ram Institute of Technology"
                       value={formData.institution}
@@ -550,9 +558,9 @@ export default function Register() {
                         <span>IEEE Membership Number</span>
                         <span className="field-required-note">Required for member verification</span>
                       </label>
-                      <input 
+                      <input
                         id="reg-ieeeNumber"
-                        type="text" 
+                        type="text"
                         className="field-input"
                         placeholder="e.g. 98765432"
                         value={formData.ieeeNumber}
@@ -568,7 +576,7 @@ export default function Register() {
                       <span>Preferred Track / Experience</span>
                       <span className="field-hint">(Where applicable)</span>
                     </label>
-                    <select 
+                    <select
                       id="reg-track"
                       className="field-input field-select"
                       value={formData.selectedTrack}
@@ -586,19 +594,19 @@ export default function Register() {
                   </div>
 
                   <div className="form-action-row">
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       className="btn btn-primary form-submit-btn"
                     >
                       <span>CONTINUE TO PAYMENT</span>
                       <ArrowRight size={16} />
                     </button>
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       onClick={handleProceedToPayment}
                       className="form-skip-btn"
                     >
-                      Skip details & continue directly  
+                      Skip details & continue directly
                     </button>
                   </div>
                 </form>
@@ -697,8 +705,8 @@ export default function Register() {
               })()}
 
               <div className="coming-soon-actions">
-                <button 
-                  onClick={handleResetToPasses} 
+                <button
+                  onClick={handleResetToPasses}
                   className="btn btn-primary coming-soon-back-btn"
                   aria-label="Back to registration passes"
                 >
@@ -732,7 +740,7 @@ export default function Register() {
         .register-grid-bg {
           position: absolute;
           inset: 0;
-          background-image: 
+          background-image:
             linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
           background-size: 40px 40px;
@@ -1385,6 +1393,65 @@ export default function Register() {
           font-weight: 600;
           letter-spacing: 0.08em;
         }
+        /* Sold Out Enhancements */
+        .pricing-sub-title-row {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+
+        .pass-status-pill-soldout {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #E2D9F3;
+          background: rgba(138, 43, 226, 0.22);
+          border: 1px solid rgba(138, 43, 226, 0.5);
+          padding: 0.22rem 0.6rem;
+          border-radius: 999px;
+          text-transform: uppercase;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .pass-sold-out-badge {
+          font-family: var(--font-mono, monospace);
+          font-size: 0.66rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #E2D9F3;
+          background: rgba(138, 43, 226, 0.2);
+          border: 1px solid rgba(138, 43, 226, 0.45);
+          padding: 0.18rem 0.5rem;
+          border-radius: 4px;
+          text-transform: uppercase;
+        }
+
+        .pass-btn-sold-out {
+          background: rgba(255, 255, 255, 0.04) !important;
+          color: #9CA3AF !important;
+          border: 1px solid rgba(138, 43, 226, 0.3) !important;
+          cursor: not-allowed !important;
+          opacity: 0.85;
+          box-shadow: none !important;
+        }
+
+        .pass-btn-sold-out:hover,
+        .pass-btn-sold-out:focus,
+        .pass-btn-sold-out:active {
+          background: rgba(255, 255, 255, 0.04) !important;
+          color: #9CA3AF !important;
+          border-color: rgba(138, 43, 226, 0.3) !important;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
+        .pass-card-sold-out {
+          border-top-color: rgba(138, 43, 226, 0.35);
+        }
+
 
         .day-2-section {
           margin-bottom: 0;

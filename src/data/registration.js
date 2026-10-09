@@ -21,7 +21,8 @@ export const passSharedInfo = {
     dates: "13–14 OCTOBER 2026",
     accessLabel: "DAY 1 + DAY 2 ACCESS",
     pricingSectionLabel: "FULL EVENT REGISTRATION",
-    pricingSectionSub: "Full Event Pass — Gives access to both Day 1 and Day 2 of TECHX'26.",
+    pricingSectionSub: "Full Event Pass — Gives access to both Day 1 and Day 2 of TECHX'26. Registration capacity reached (Sold Out).",
+    isSoldOut: true,
     description: "Your pass gives access to both Day 1 and Day 2 of TECHX'26.",
     inclusionsTitle: "PASS INCLUDES",
     scheduleGroups: [
@@ -59,6 +60,7 @@ export const passSharedInfo = {
     accessLabel: "DAY 2 ACCESS ONLY",
     pricingSectionLabel: "DAY 2 REGISTRATION",
     pricingSectionSub: "Day 2 Pass — Access to Day 2 of TECHX'26.",
+    isSoldOut: false,
     description: "Access to Day 2 of TECHX'26.",
     inclusionsTitle: "DAY 2 INCLUDES",
     scheduleGroups: [
@@ -121,6 +123,8 @@ export const registrationOptions = [
     description: "Active IEEE Computer Society student members with valid membership ID.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_CS_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
+    isSoldOut: false,
+    isSoldOut: true,
   },
   {
     id: "day1-ieee-non-cs",
@@ -139,6 +143,7 @@ export const registrationOptions = [
     description: "Active IEEE student members from other society chapters.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_NON_CS_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
+    isSoldOut: true,
   },
   {
     id: "day1-non-ieee",
@@ -157,6 +162,7 @@ export const registrationOptions = [
     description: "Student technologists, engineers, and delegates from all institutions.",
     paymentUrl: KONFHUB_TICKET_URLS.NON_IEEE_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
+    isSoldOut: true,
   },
 
   // --------------------------------------------------
@@ -179,6 +185,7 @@ export const registrationOptions = [
     description: "Active IEEE Computer Society student members with valid membership ID.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_CS_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
+    isSoldOut: false,
   },
   {
     id: "day2-ieee-non-cs",
@@ -197,6 +204,7 @@ export const registrationOptions = [
     description: "Active IEEE student members from other society chapters.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_NON_CS_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
+    isSoldOut: false,
   },
   {
     id: "day2-non-ieee",
@@ -215,6 +223,7 @@ export const registrationOptions = [
     description: "Student technologists, engineers, and delegates from all institutions.",
     paymentUrl: KONFHUB_TICKET_URLS.NON_IEEE_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
+    isSoldOut: false,
   }
 ];
 
@@ -354,4 +363,37 @@ export function getOfferTimeRemaining(timestamp = Date.now()) {
     totalSeconds: Math.floor(difference / 1000),
     isExpired: false
   };
+}
+
+// ----------------------------------------------------
+// SECRET OFFER CONFIGURATION (Asia/Kolkata / IST)
+// ----------------------------------------------------
+// Authoritative coupon: SECRETCODE26 (₹200 discount)
+// Authoritative cutoff: 9 October 2026 at 11:59 PM IST (2026-10-09T23:59:00+05:30)
+// The secret offer popup is ACTIVE until 9 October 2026 11:59 PM IST.
+// At or after 11:59 PM IST on 9 October 2026, the offer is expired and the popup must not appear.
+export const SECRET_OFFER_CONFIG = {
+  code: "SECRETCODE26",
+  discountAmount: 200,
+  discountLabel: "₹200 OFF",
+  expiryDateIST: "2026-10-09T23:59:00+05:30",
+  timezone: "Asia/Kolkata (IST)",
+};
+export const SECRET_OFFER_EXPIRY_MS = new Date(SECRET_OFFER_CONFIG.expiryDateIST).getTime();
+
+/**
+ * Returns true if the SECRETCODE26 offer is active:
+ * currentTime < 2026-10-09 23:59:00 Asia/Kolkata (11:59 PM IST)
+ */
+export function isSecretOfferActive(timestamp = Date.now()) {
+  const currentMs = resolveTimestamp(timestamp);
+  return currentMs < SECRET_OFFER_EXPIRY_MS;
+}
+
+/**
+ * Returns true if the SECRETCODE26 offer has expired (at or after 9 Oct 2026 11:59 PM IST).
+ */
+export function hasSecretOfferExpired(timestamp = Date.now()) {
+  const currentMs = resolveTimestamp(timestamp);
+  return currentMs >= SECRET_OFFER_EXPIRY_MS;
 }

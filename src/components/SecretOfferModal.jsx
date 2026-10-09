@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { X, Copy, Check, Sparkles, ArrowRight } from 'lucide-react';
+import { SECRET_OFFER_CONFIG, isSecretOfferActive, hasSecretOfferExpired, SECRET_OFFER_EXPIRY_MS } from '../data/registration';
 
 const STORAGE_KEY = 'techx_secret_offer_dismissed';
-const DISCOUNT_CODE = 'SECRETCODE26';
+const DISCOUNT_CODE = SECRET_OFFER_CONFIG.code;
+const DISCOUNT_LABEL = SECRET_OFFER_CONFIG.discountLabel;
 
 export default function SecretOfferModal({ isLoading = false }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +13,39 @@ export default function SecretOfferModal({ isLoading = false }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Real-time expiry monitor: closes modal immediately if expiry timestamp is reached
+  useEffect(() => {
+    if (!isSecretOfferActive()) {
+      setIsOpen(false);
+      return;
+    }
+
+    const msUntilExpiry = SECRET_OFFER_EXPIRY_MS - Date.now();
+    let expiryTimerId = null;
+    if (msUntilExpiry > 0) {
+      expiryTimerId = setTimeout(() => {
+        setIsOpen(false);
+      }, msUntilExpiry);
+    }
+
+    const intervalId = setInterval(() => {
+      if (hasSecretOfferExpired()) {
+        setIsOpen(false);
+      }
+    }, 1000);
+
+    return () => {
+      if (expiryTimerId) clearTimeout(expiryTimerId);
+      clearInterval(intervalId);
+    };
+  }, []);
+
   useEffect(() => {
     // If site is still on the initial loading screen, wait until complete
     if (isLoading) return;
+
+    // Strict expiry check: If expired, never open
+    if (!isSecretOfferActive()) return;
 
     // Show once per browsing session
     const isDismissed = sessionStorage.getItem(STORAGE_KEY);
@@ -21,7 +53,9 @@ export default function SecretOfferModal({ isLoading = false }) {
 
     // Small delay for smooth, polished entry after page settles
     const timer = setTimeout(() => {
-      setIsOpen(true);
+      if (isSecretOfferActive()) {
+        setIsOpen(true);
+      }
     }, 850);
 
     return () => clearTimeout(timer);
@@ -84,10 +118,10 @@ export default function SecretOfferModal({ isLoading = false }) {
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !isSecretOfferActive()) return null;
 
   return (
-    <div 
+    <div
       className="secret-modal-backdrop"
       onClick={handleBackdropClick}
       role="dialog"
@@ -96,8 +130,8 @@ export default function SecretOfferModal({ isLoading = false }) {
     >
       <div className="secret-modal-card" onClick={(e) => e.stopPropagation()}>
         {/* Dismiss Button "?" */}
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="secret-modal-close-btn"
           onClick={handleClose}
           aria-label="Close secret offer popup"
@@ -120,7 +154,7 @@ export default function SecretOfferModal({ isLoading = false }) {
 
         {/* 3. Hierarchy 2: ?200 OFF */}
         <div className="secret-discount-row">
-          <span className="secret-discount-badge">?200 OFF</span>
+          <span className="secret-discount-badge">{DISCOUNT_LABEL}</span>
           <span className="secret-discount-caption">YOUR TECHX'26 REGISTRATION</span>
         </div>
 
@@ -130,7 +164,7 @@ export default function SecretOfferModal({ isLoading = false }) {
             <span className="secret-code-sublabel">USE CODE</span>
             <code className="secret-code-display">{DISCOUNT_CODE}</code>
           </div>
-          <button 
+          <button
             type="button"
             className={`secret-copy-action-btn ${copied ? 'is-copied' : ''}`}
             onClick={handleCopyCode}
@@ -153,7 +187,7 @@ export default function SecretOfferModal({ isLoading = false }) {
 
         {/* 6. Hierarchy 5: REGISTER NOW CTA */}
         <div className="secret-cta-wrapper">
-          <button 
+          <button
             type="button"
             className="btn btn-primary secret-action-btn"
             onClick={handleRegisterClick}
@@ -185,7 +219,7 @@ export default function SecretOfferModal({ isLoading = false }) {
 
         .secret-modal-card {
           background: #090514;
-          background-image: 
+          background-image:
             radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.18) 0%, transparent 65%),
             linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -383,13 +417,13 @@ export default function SecretOfferModal({ isLoading = false }) {
         }
 
         @keyframes secretScaleUp {
-          from { 
-            opacity: 0; 
-            transform: scale(0.94) translateY(8px); 
+          from {
+            opacity: 0;
+            transform: scale(0.94) translateY(8px);
           }
-          to { 
-            opacity: 1; 
-            transform: scale(1) translateY(0); 
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
           }
         }
 
