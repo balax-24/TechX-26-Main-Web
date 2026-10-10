@@ -630,6 +630,7 @@ export default function SingleScroll() {
                 <div className="ss-day-pill-row">
                   <span className="ss-day-pill ss-day-pill-alt">{passSharedInfo.day2Pass.title}</span>
                   <span className="ss-access-pill-secondary">{passSharedInfo.day2Pass.accessLabel}</span>
+                  <span className="ss-sold-out-pill">SOLD OUT</span>
                 </div>
                 <h3>{passSharedInfo.day2Pass.dates}</h3>
                 <p className="ss-day-col-sub">{passSharedInfo.day2Pass.description}</p>
@@ -650,15 +651,19 @@ export default function SingleScroll() {
 
               <div className="ss-pricing-list-heading">
                 <span>{passSharedInfo.day2Pass.pricingSectionLabel}</span>
+                <span className="ss-heading-sold-out-badge">SOLD OUT</span>
               </div>
 
               <div className="ss-pass-cards-list">
                 {day2Passes.map((pass) => {
                   const pInfo = getPassInfo(pass);
                   return (
-                    <div key={pass.id} className="ss-pricing-tier-card">
+                    <div key={pass.id} className="ss-pricing-tier-card ss-pricing-tier-sold-out">
                       <div className="ss-pt-top">
-                        <span className="ss-pt-category">{pass.shortCategory}</span>
+                        <div className="ss-pt-category-group">
+                          <span className="ss-pt-category">{pass.shortCategory}</span>
+                          <span className="ss-sold-out-badge">SOLD OUT</span>
+                        </div>
                         <div className="ss-pt-price-cluster">
                           <span className="ss-pt-price">{pInfo.displayPrice}</span>
                           {isOfferActive && (
@@ -669,10 +674,15 @@ export default function SingleScroll() {
                         </div>
                       </div>
                       <p className="ss-pt-desc">{pass.description}</p>
-                      <Link to={`/register?pass=${pass.id}`} className="btn btn-secondary ss-pt-btn">
-                        <span>REGISTER & PAY</span>
-                        <ArrowRight size={14} />
-                      </Link>
+                      <button
+                        type="button"
+                        disabled
+                        className="btn btn-secondary ss-pt-btn ss-pt-btn-soldout"
+                        aria-disabled="true"
+                        aria-label={`Day 2 Pass for ${pass.category} is sold out`}
+                      >
+                        <span>SOLD OUT</span>
+                      </button>
                     </div>
                   );
                 })}

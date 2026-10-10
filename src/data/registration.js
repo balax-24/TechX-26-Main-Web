@@ -59,8 +59,8 @@ export const passSharedInfo = {
     dates: "14 OCTOBER 2026",
     accessLabel: "DAY 2 ACCESS ONLY",
     pricingSectionLabel: "DAY 2 REGISTRATION",
-    pricingSectionSub: "Day 2 Pass — Access to Day 2 of TECHX'26.",
-    isSoldOut: false,
+    pricingSectionSub: "Day 2 Pass — Access to Day 2 of TECHX'26. Registration capacity reached (Sold Out).",
+    isSoldOut: true,
     description: "Access to Day 2 of TECHX'26.",
     inclusionsTitle: "DAY 2 INCLUDES",
     scheduleGroups: [
@@ -123,7 +123,6 @@ export const registrationOptions = [
     description: "Active IEEE Computer Society student members with valid membership ID.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_CS_FULL, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    isSoldOut: false,
     isSoldOut: true,
   },
   {
@@ -185,7 +184,7 @@ export const registrationOptions = [
     description: "Active IEEE Computer Society student members with valid membership ID.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_CS_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    isSoldOut: false,
+    isSoldOut: true,
   },
   {
     id: "day2-ieee-non-cs",
@@ -204,7 +203,7 @@ export const registrationOptions = [
     description: "Active IEEE student members from other society chapters.",
     paymentUrl: KONFHUB_TICKET_URLS.IEEE_NON_CS_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: true,
-    isSoldOut: false,
+    isSoldOut: true,
   },
   {
     id: "day2-non-ieee",
@@ -223,7 +222,7 @@ export const registrationOptions = [
     description: "Student technologists, engineers, and delegates from all institutions.",
     paymentUrl: KONFHUB_TICKET_URLS.NON_IEEE_DAY2, // Ready for KKonfHub registration link
     requiresIeeeNumber: false,
-    isSoldOut: false,
+    isSoldOut: true,
   }
 ];
 

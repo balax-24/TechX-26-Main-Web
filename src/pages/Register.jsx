@@ -331,6 +331,7 @@ export default function Register() {
                   <div className="pass-badge-row">
                     <span className="pass-phase-badge day-badge-alt">PHASE 02</span>
                     <span className="pass-access-pill-secondary">DAY 2 ACCESS ONLY</span>
+                    <span className="pass-status-pill-soldout">CAPACITY REACHED • SOLD OUT</span>
                   </div>
                   <h2 id="day-2-heading" className="pass-main-heading">
                     {day2PassShared.title}
@@ -384,8 +385,11 @@ export default function Register() {
 
               {/* Day 2 Pricing Sub-Header */}
               <div className="pricing-sub-header">
-                <h3 className="pricing-sub-title">{day2PassShared.pricingSectionLabel}</h3>
-                <span className="pricing-sub-note">Select your delegate category below to proceed to registration.</span>
+                <div className="pricing-sub-title-row">
+                  <h3 className="pricing-sub-title">{day2PassShared.pricingSectionLabel}</h3>
+                  <span className="pass-status-pill-soldout">SOLD OUT</span>
+                </div>
+                <span className="pricing-sub-note">Registration capacity reached. All Day 2 categories are currently sold out.</span>
               </div>
 
               {/* Day 2 Pricing Cards (ONLY: category, price, offer indicator, register button) */}
@@ -397,6 +401,7 @@ export default function Register() {
                       <div className="pass-card-top">
                         <div className="pass-label-strip">
                           <span className="pass-label-tag pass-label-alt">{pass.label}</span>
+                          <span className="pass-sold-out-badge">SOLD OUT</span>
                           <span className="pass-day-indicator">14 OCT</span>
                         </div>
                         <h4 className="pass-category-title">{pass.category}</h4>
@@ -423,16 +428,15 @@ export default function Register() {
                       </div>
 
                       <div className="pass-card-footer">
-                        <a
-                          href={pass.paymentUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-primary pass-action-btn"
-                          aria-label={`Register & Pay for Day 2 ${pass.category} at ${pInfo.displayPrice}`}
+                        <button
+                          type="button"
+                          disabled
+                          className="btn pass-action-btn pass-btn-sold-out"
+                          aria-disabled="true"
+                          aria-label={`Day 2 Pass for ${pass.category} is Sold Out`}
                         >
-                          <span>REGISTER & PAY</span>
-                          <ArrowRight size={16} />
-                        </a>
+                          <span>SOLD OUT</span>
+                        </button>
                       </div>
                     </article>
                   );

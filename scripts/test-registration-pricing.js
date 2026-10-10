@@ -3,6 +3,7 @@
 
 import {
   registrationOptions,
+  passSharedInfo,
   isEarlyOfferActive,
   hasEarlyOfferEnded,
   getRegistrationPrice,
@@ -178,8 +179,8 @@ if (!exposedForbiddenText) {
   console.log("[PASS] No visible end dates, start dates, deadlines, or countdowns found in user-facing offer copy.");
 }
 
-// 6. Check Full Event Pass Sold Out Status
-console.log("\nCHECK 6: VERIFY FULL EVENT PASSES SOLD OUT & DAY 2 PASSES AVAILABLE");
+// 6. Check All Six Passes are Marked Sold Out
+console.log("\nCHECK 6: VERIFY ALL SIX REGISTRATION CATEGORIES ARE MARKED SOLD OUT");
 const fullEventPasses = registrationOptions.filter(p => p.dayNumber === 1);
 const day2PassesList = registrationOptions.filter(p => p.dayNumber === 2);
 
@@ -193,13 +194,20 @@ fullEventPasses.forEach(pass => {
 });
 
 day2PassesList.forEach(pass => {
-  if (pass.isSoldOut === false) {
-    console.log(`[PASS] Day 2 Pass ${pass.id} (${pass.category}): ACTIVE & AVAILABLE (isSoldOut === false)`);
+  if (pass.isSoldOut === true) {
+    console.log(`[PASS] Day 2 Pass ${pass.id} (${pass.category}): MARKED SOLD OUT (isSoldOut === true)`);
   } else {
     failed = true;
-    console.error(`[FAIL] Day 2 Pass ${pass.id}: Expected isSoldOut === false, got ${pass.isSoldOut}`);
+    console.error(`[FAIL] Day 2 Pass ${pass.id}: Expected isSoldOut === true, got ${pass.isSoldOut}`);
   }
 });
+
+if (passSharedInfo.fullPass.isSoldOut === true && passSharedInfo.day2Pass.isSoldOut === true) {
+  console.log("[PASS] passSharedInfo fullPass and day2Pass both marked isSoldOut === true");
+} else {
+  failed = true;
+  console.error("[FAIL] passSharedInfo sold out flag mismatch");
+}
 
 // 7. Check SECRETCODE26 Expiry Boundaries
 console.log("\nCHECK 7: SECRET OFFER (SECRETCODE26) EXPIRY BOUNDARIES (9 OCT 2026 11:59 PM IST)");
